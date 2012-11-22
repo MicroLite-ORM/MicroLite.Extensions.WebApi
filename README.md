@@ -1,5 +1,5 @@
-MicroLite.Extensions.Mvc
-========================
+MicroLite.Extensions.WebApi
+===========================
 
 An extension project for MicroLite ORM to integrate with ASP.NET WebApi
 
