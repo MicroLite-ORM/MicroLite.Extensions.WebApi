@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MicroLite.Extensions.WebApi</id>
+    <version>0.0.0</version>
+    <authors>Trevor Pilley</authors>
+    <owners>Trevor Pilley</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MicroLite ORM Framework extension to integrate with ASP.NET WebApi</description>
+    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/wiki/Release-Notes for a summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>Micro ORM Framework POCO Database ASP.NET WebApi</tags>
+    <dependencies>
+      <dependency id="MicroLite" version="2.1.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\build\4.0\MicroLite.Extensions.WebApi.dll" target="lib\net40" />
+    <file src="..\build\4.0\MicroLite.Extensions.WebApi.xml" target="lib\net40" />
+  </files>
+</package>
