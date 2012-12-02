@@ -6,41 +6,40 @@
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
     using Moq;
-    using NUnit.Framework;
+    using Xunit;
 
     /// <summary>
     /// Unit Tests for the <see cref="MicroLiteSessionAttribute"/> class.
     /// </summary>
-    [TestFixture]
     public class MicroLiteSessionAttributeTests
     {
-        [Test]
+        [Fact]
         public void ConnectionNameConstructorSetsAutoManageTransactionToTrue()
         {
             var attribute = new MicroLiteSessionAttribute("Northwind");
 
-            Assert.IsTrue(attribute.AutoManageTransaction);
+            Assert.True(attribute.AutoManageTransaction);
         }
 
-        [Test]
+        [Fact]
         public void ConstructorSetsConnectionName()
         {
             var connectionName = "Northwind";
 
             var attribute = new MicroLiteSessionAttribute(connectionName);
 
-            Assert.AreEqual(connectionName, attribute.ConnectionName);
+            Assert.Equal(connectionName, attribute.ConnectionName);
         }
 
-        [Test]
+        [Fact]
         public void DefaultConstructorSetsAutoManageTransactionToTrue()
         {
             var attribute = new MicroLiteSessionAttribute();
 
-            Assert.IsTrue(attribute.AutoManageTransaction);
+            Assert.True(attribute.AutoManageTransaction);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutedCommitsTransactionIfActionExecutedContextHasNoExceptionAndTransactionIsActive()
         {
             var mockSession = new Mock<ISession>();
@@ -67,7 +66,7 @@
             mockSession.VerifyAll();
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutedDoesNotCommitTransactionIfActionExecutedHasNoExceptionAndTransactionIsNotActive()
         {
             var mockSession = new Mock<ISession>();
@@ -95,7 +94,7 @@
             mockSession.Verify(x => x.Dispose(), "The session should still be disposed");
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutedDoesNotCommitTransactionIfAutoManageTransactionIsFalse()
         {
             var mockSession = new Mock<ISession>();
@@ -126,7 +125,7 @@
             mockSession.Verify(x => x.Dispose(), "The session should still be disposed");
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutedDoesNotRollbackTransactionIfActionExecutedContextHasExceptionAndTransactionWasRolledBack()
         {
             var mockSession = new Mock<ISession>();
@@ -154,7 +153,7 @@
             mockSession.Verify(x => x.Dispose(), "The session should still be disposed");
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutedDoesNotRollbackTransactionIfAutoManageTransactionIsFalse()
         {
             var mockSession = new Mock<ISession>();
@@ -185,7 +184,7 @@
             mockSession.Verify(x => x.Dispose(), "The session should still be disposed");
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutedRollsBackTransactionIfActionExecutedContextHasExceptionAndTransactionNotRolledBack()
         {
             var mockSession = new Mock<ISession>();
@@ -213,7 +212,7 @@
             mockSession.VerifyAll();
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingOpensSessionAndBeginsTransaction()
         {
             var mockSession = new Mock<ISession>();
@@ -244,10 +243,10 @@
             mockSessionFactory.VerifyAll();
             mockSession.VerifyAll();
 
-            Assert.AreSame(session, controller.Session);
+            Assert.Same(session, controller.Session);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingOpensSessionAndBeginsTransactionWithSpecifiedIsolationLevel()
         {
             var isolationLevel = IsolationLevel.Chaos;
@@ -283,10 +282,10 @@
             mockSessionFactory.VerifyAll();
             mockSession.VerifyAll();
 
-            Assert.AreSame(session, controller.Session);
+            Assert.Same(session, controller.Session);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingOpensSessionButDoesNotBeginTransactionIfAutoManageTransactionIsSetToFalse()
         {
             var mockSession = new Mock<ISession>();
@@ -320,10 +319,10 @@
             mockSessionFactory.VerifyAll();
             mockSession.Verify(x => x.BeginTransaction(), Times.Never());
 
-            Assert.AreSame(session, controller.Session);
+            Assert.Same(session, controller.Session);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingThrowsMicroLiteExceptionIfNoConnectionNameAndMultipleSessionFactories()
         {
             MicroLiteSessionAttribute.SessionFactories = new[]
@@ -344,10 +343,10 @@
 
             var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
-            Assert.AreEqual(ExceptionMessages.NoConnectionNameMultipleSessionFactories, exception.Message);
+            Assert.Equal(ExceptionMessages.NoConnectionNameMultipleSessionFactories, exception.Message);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingThrowsMicroLiteExceptionIfNoSessionFactories()
         {
             MicroLiteSessionAttribute.SessionFactories = null;
@@ -364,10 +363,10 @@
 
             var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
-            Assert.AreEqual(ExceptionMessages.NoSessionFactoriesSet, exception.Message);
+            Assert.Equal(ExceptionMessages.NoSessionFactoriesSet, exception.Message);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingThrowsMicroLiteExceptionIfNoSessionFactoryFoundForConnectionName()
         {
             MicroLiteSessionAttribute.SessionFactories = new[]
@@ -388,10 +387,10 @@
 
             var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
-            Assert.AreEqual(string.Format(ExceptionMessages.NoSessionFactoryFoundForConnectionName, "Northwind"), exception.Message);
+            Assert.Equal(string.Format(ExceptionMessages.NoSessionFactoryFoundForConnectionName, "Northwind"), exception.Message);
         }
 
-        [Test]
+        [Fact]
         public void OnActionExecutingThrowsNotSupportedExceptionIfControllerIsNotMicroLiteController()
         {
             var context = new HttpActionContext
@@ -406,10 +405,10 @@
 
             var exception = Assert.Throws<NotSupportedException>(() => attribute.OnActionExecuting(context));
 
-            Assert.AreEqual(ExceptionMessages.ControllerNotMicroLiteController, exception.Message);
+            Assert.Equal(ExceptionMessages.ControllerNotMicroLiteController, exception.Message);
         }
 
-        [Test]
+        [Fact]
         public void OnActionOpensSessionAndBeginsTransactionForNamedConnection()
         {
             var mockSession = new Mock<ISession>();
@@ -441,7 +440,7 @@
             mockSessionFactory.VerifyAll();
             mockSession.VerifyAll();
 
-            Assert.AreSame(session, controller.Session);
+            Assert.Same(session, controller.Session);
         }
     }
 }
