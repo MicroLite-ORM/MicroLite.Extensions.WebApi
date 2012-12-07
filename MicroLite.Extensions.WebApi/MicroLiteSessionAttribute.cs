@@ -28,6 +28,7 @@ namespace MicroLite.Extensions.WebApi
     public sealed class MicroLiteSessionAttribute : ActionFilterAttribute
     {
         private readonly string connectionName;
+        private readonly ISessionManager sessionManager;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteSessionAttribute"/> class.
@@ -42,9 +43,15 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         /// <param name="connectionName">Name of the connection to manage the session for.</param>
         public MicroLiteSessionAttribute(string connectionName)
+            : this(connectionName, new SessionManager())
+        {
+        }
+
+        internal MicroLiteSessionAttribute(string connectionName, ISessionManager sessionManager)
         {
             this.AutoManageTransaction = true;
             this.connectionName = connectionName;
+            this.sessionManager = sessionManager;
         }
 
         /// <summary>
@@ -93,29 +100,19 @@ namespace MicroLite.Extensions.WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is only called the WebApi framework & the ActionExecutingContext should never be null.")]
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            var controller = (MicroLiteApiController)actionExecutedContext.ActionContext.ControllerContext.Controller;
+            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as MicroLiteApiController;
 
-            if (controller.Session != null)
+            if (controller != null)
             {
-                if (this.AutoManageTransaction && controller.Session.Transaction != null)
-                {
-                    if (actionExecutedContext.Exception != null)
-                    {
-                        if (!controller.Session.Transaction.WasRolledBack)
-                        {
-                            controller.Session.Transaction.Rollback();
-                        }
-                    }
-                    else
-                    {
-                        if (controller.Session.Transaction.IsActive)
-                        {
-                            controller.Session.Transaction.Commit();
-                        }
-                    }
-                }
+                this.sessionManager.OnActionExecuted(controller.Session, this.AutoManageTransaction, actionExecutedContext.Exception != null);
+                return;
+            }
 
-                controller.Session.Dispose();
+            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as MicroLiteReadOnlyApiController;
+
+            if (readOnlyController != null)
+            {
+                this.sessionManager.OnActionExecuted(readOnlyController.Session, this.AutoManageTransaction, actionExecutedContext.Exception != null);
             }
         }
 
@@ -126,28 +123,29 @@ namespace MicroLite.Extensions.WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is only called the WebApi framework & the ActionExecutingContext should never be null.")]
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var controller = actionContext.ControllerContext.Controller as MicroLiteApiController;
-
-            if (controller == null)
-            {
-                throw new NotSupportedException(ExceptionMessages.ControllerNotMicroLiteController);
-            }
-
             var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
 
-            controller.Session = sessionFactory.OpenSession();
+            var controller = actionContext.ControllerContext.Controller as MicroLiteApiController;
 
-            if (this.AutoManageTransaction)
+            if (controller != null)
             {
-                if (this.IsolationLevel.HasValue)
-                {
-                    controller.Session.BeginTransaction(this.IsolationLevel.Value);
-                }
-                else
-                {
-                    controller.Session.BeginTransaction();
-                }
+                controller.Session = sessionFactory.OpenSession();
+
+                this.sessionManager.OnActionExecuting(controller.Session, this.AutoManageTransaction, this.IsolationLevel);
+                return;
             }
+
+            var readOnlyController = actionContext.ControllerContext.Controller as MicroLiteReadOnlyApiController;
+
+            if (readOnlyController != null)
+            {
+                readOnlyController.Session = sessionFactory.OpenReadOnlySession();
+
+                this.sessionManager.OnActionExecuting(readOnlyController.Session, this.AutoManageTransaction, this.IsolationLevel);
+                return;
+            }
+
+            throw new NotSupportedException(ExceptionMessages.ControllerNotMicroLiteController);
         }
 
         private ISessionFactory FindSessionFactoryForSpecifiedConnection()
