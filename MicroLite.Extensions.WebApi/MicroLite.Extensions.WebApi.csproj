@@ -51,7 +51,7 @@
   <ItemGroup>
     <Reference Include="MicroLite, Version=3.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MicroLite.3.0.0-alpha3\lib\net45\MicroLite.dll</HintPath>
+      <HintPath>..\packages\MicroLite.3.0.0-beta\lib\net45\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
