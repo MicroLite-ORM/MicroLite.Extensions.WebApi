@@ -5,6 +5,7 @@
     using System.Web.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+    using MicroLite.Infrastructure.Web;
     using Moq;
     using Xunit;
 

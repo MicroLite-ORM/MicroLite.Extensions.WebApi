@@ -19,6 +19,8 @@ namespace MicroLite.Extensions.WebApi
     using System.Linq;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
+    using MicroLite.Infrastructure;
+    using MicroLite.Infrastructure.Web;
 
     /// <summary>
     /// An action filter attribute which can be applied to a class or method to supply a <see cref="MicroLiteApiController"/>
@@ -100,7 +102,7 @@ namespace MicroLite.Extensions.WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is only called the WebApi framework & the ActionExecutingContext should never be null.")]
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as MicroLiteApiController;
+            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveSession;
 
             if (controller != null)
             {
@@ -108,7 +110,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as MicroLiteReadOnlyApiController;
+            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveReadOnlySession;
 
             if (readOnlyController != null)
             {
@@ -125,7 +127,7 @@ namespace MicroLite.Extensions.WebApi
         {
             var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
 
-            var controller = actionContext.ControllerContext.Controller as MicroLiteApiController;
+            var controller = actionContext.ControllerContext.Controller as IHaveSession;
 
             if (controller != null)
             {
@@ -135,7 +137,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-            var readOnlyController = actionContext.ControllerContext.Controller as MicroLiteReadOnlyApiController;
+            var readOnlyController = actionContext.ControllerContext.Controller as IHaveReadOnlySession;
 
             if (readOnlyController != null)
             {

@@ -44,7 +44,10 @@
   <ItemGroup>
     <Reference Include="MicroLite, Version=3.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MicroLite.3.0.0-beta\lib\net45\MicroLite.dll</HintPath>
+      <HintPath>..\packages\MicroLite.3.0.0-rc\lib\net45\MicroLite.dll</HintPath>
+    </Reference>
+    <Reference Include="MicroLite.Infrastructure.Web">
+      <HintPath>..\packages\MicroLite.Infrastructure.Web.1.0.0\lib\net45\MicroLite.Infrastructure.Web.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -87,7 +90,6 @@
   <ItemGroup>
     <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">

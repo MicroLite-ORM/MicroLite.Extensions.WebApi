@@ -13,11 +13,12 @@
 namespace MicroLite.Extensions.WebApi
 {
     using System.Web.Http;
+    using MicroLite.Infrastructure;
 
     /// <summary>
     /// Provides access to a MicroLite IReadOnlySession in addition to the base ASP.NET WebApi controller.
     /// </summary>
-    public abstract class MicroLiteReadOnlyApiController : ApiController
+    public abstract class MicroLiteReadOnlyApiController : ApiController, IHaveReadOnlySession
     {
         /// <summary>
         /// Gets or sets the <see cref="IReadOnlySession"/> for the current HTTP request.

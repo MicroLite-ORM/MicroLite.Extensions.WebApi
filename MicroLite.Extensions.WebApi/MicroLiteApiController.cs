@@ -13,11 +13,12 @@
 namespace MicroLite.Extensions.WebApi
 {
     using System.Web.Http;
+    using MicroLite.Infrastructure;
 
     /// <summary>
     /// Provides access to a MicroLite ISession in addition to the base ASP.NET WebApi controller.
     /// </summary>
-    public abstract class MicroLiteApiController : ApiController
+    public abstract class MicroLiteApiController : ApiController, IHaveSession
     {
         /// <summary>
         /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
