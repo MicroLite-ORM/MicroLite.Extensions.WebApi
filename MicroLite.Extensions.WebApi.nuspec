@@ -13,7 +13,8 @@
     <copyright>Copyright 2012</copyright>
     <tags>Micro ORM Framework POCO Database ASP.NET WebApi</tags>
     <dependencies>
-      <dependency id="MicroLite" version="2.1.0" />
+      <dependency id="MicroLite" version="3.0.0" />
+      <dependency id="MicroLite.Infrastructure.Web" version="1.0.0" />
     </dependencies>
   </metadata>
   <files>
