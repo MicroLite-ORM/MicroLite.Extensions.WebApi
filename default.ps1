@@ -3,15 +3,23 @@ properties {
   $baseDir = Resolve-Path .
   $buildDir = "$baseDir\build"
   $buildDir40 = "$buildDir\4.0\"
+  $buildDir45 = "$buildDir\4.5\"
 }
 
-Task Default -depends RunTests, Build40
+Task Default -depends RunTests, Build40, Build45
 
 Task Build40 {
   Remove-Item -force -recurse $buildDir40 -ErrorAction SilentlyContinue
   
   Write-Host "Building $projectName.csproj for .net 4.0" -ForegroundColor Green
-  Exec { msbuild "$projectName\$projectName.csproj" /target:Rebuild "/property:Configuration=Release;OutDir=$buildDir40;TargetFrameworkVersion=v4.0" /verbosity:quiet }
+  Exec { msbuild "$projectName\$projectName.csproj" /target:Rebuild "/property:Configuration=Release;DefineConstants=NET_4_0;OutDir=$buildDir40;TargetFrameworkVersion=v4.0" /verbosity:quiet }
+}
+
+Task Build45 {
+  Remove-Item -force -recurse $buildDir45 -ErrorAction SilentlyContinue
+  
+  Write-Host "Building $projectName.csproj for .net 4.5" -ForegroundColor Green
+  Exec { msbuild "$projectName\$projectName.csproj" /target:Rebuild "/property:Configuration=Release;DefineConstants=NET_4_5;OutDir=$buildDir45;TargetFrameworkVersion=v4.0" /verbosity:quiet }
 }
 
 Task RunTests -Depends Build {
