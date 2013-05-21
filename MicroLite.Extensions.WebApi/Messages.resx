@@ -120,4 +120,7 @@
   <data name="LoadingExtension" xml:space="preserve">
     <value>Loading the MicroLite extension for ASP.NET WebApi</value>
   </data>
+  <data name="RegisteringDefaultActionFilter" xml:space="preserve">
+    <value>Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters</value>
+  </data>
 </root>
