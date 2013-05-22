@@ -146,8 +146,6 @@ namespace MicroLite.Extensions.WebApi
                 this.sessionManager.OnActionExecuting(readOnlyController.Session, this.AutoManageTransaction, this.IsolationLevel);
                 return;
             }
-
-            throw new NotSupportedException(ExceptionMessages.ControllerNotMicroLiteController);
         }
 
         private ISessionFactory FindSessionFactoryForSpecifiedConnection()

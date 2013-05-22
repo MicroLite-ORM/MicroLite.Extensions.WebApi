@@ -193,12 +193,13 @@
 
         public class WhenCallingOnActionExecutingAndTheControllerIsNotAMicroLiteApiController
         {
-            [Fact]
-            public void ANotSupportedExceptionShouldBeThrown()
+            private readonly Mock<ISessionFactory> mockSessionFactory = new Mock<ISessionFactory>();
+
+            public WhenCallingOnActionExecutingAndTheControllerIsNotAMicroLiteApiController()
             {
                 MicroLiteSessionAttribute.SessionFactories = new[]
                 {
-                    new Mock<ISessionFactory>().Object
+                    this.mockSessionFactory.Object
                 };
 
                 var context = new HttpActionContext
@@ -211,9 +212,19 @@
 
                 var attribute = new MicroLiteSessionAttribute();
 
-                var exception = Assert.Throws<NotSupportedException>(() => attribute.OnActionExecuting(context));
+                attribute.OnActionExecuting(context);
+            }
 
-                Assert.Equal(ExceptionMessages.ControllerNotMicroLiteController, exception.Message);
+            [Fact]
+            public void NoReadOnlySessionShouldBeOpened()
+            {
+                this.mockSessionFactory.Verify(x => x.OpenReadOnlySession(), Times.Never());
+            }
+
+            [Fact]
+            public void NoSessionShouldBeOpened()
+            {
+                this.mockSessionFactory.Verify(x => x.OpenSession(), Times.Never());
             }
         }
 

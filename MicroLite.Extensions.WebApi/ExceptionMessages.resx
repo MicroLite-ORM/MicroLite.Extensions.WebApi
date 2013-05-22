@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ControllerNotMicroLiteController" xml:space="preserve">
-    <value>The MicroLiteSessionAttribute can only be applied to a controller or controller action which inherits from the MicroLiteApiController base class.</value>
-  </data>
   <data name="NoConnectionNameMultipleSessionFactories" xml:space="preserve">
     <value>MicroLite has been configured for multiple connections, therefore the connection name must be specified in the MicroLiteSessionAttribute (e.g. [MicroLiteSession("MyConnection")]).</value>
   </data>
