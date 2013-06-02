@@ -61,6 +61,15 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The argument must not be null.
+        /// </summary>
+        internal static string ArgumentMustNotBeNull {
+            get {
+                return ResourceManager.GetString("ArgumentMustNotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the MicroLite extension for ASP.NET WebApi.
         /// </summary>
         internal static string LoadingExtension {

@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\MicroLite.Extensions.WebApi.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\MicroLite.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -39,6 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\MicroLite.Extensions.WebApi.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\MicroLite.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -50,10 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MicroLite">
-      <HintPath>..\packages\MicroLite.3.1.1\lib\net45\MicroLite.dll</HintPath>
-    </Reference>
-    <Reference Include="MicroLite.Infrastructure.Web">
-      <HintPath>..\packages\MicroLite.Infrastructure.Web.1.1.0\lib\net45\MicroLite.Infrastructure.Web.dll</HintPath>
+      <HintPath>..\packages\MicroLite.4.0.0-alpha2\lib\net45\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -81,6 +80,7 @@
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationExtensions.cs" />
@@ -95,9 +95,13 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="MicroLiteApiController.cs" />
+    <Compile Include="MicroLiteApiController{T}.cs" />
     <Compile Include="MicroLiteReadOnlyApiController.cs" />
     <Compile Include="MicroLiteSessionAttribute.cs" />
+    <Compile Include="ObjectInfoExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
+    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">
