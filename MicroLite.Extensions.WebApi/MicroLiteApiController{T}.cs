@@ -59,7 +59,10 @@ namespace MicroLite.Extensions.WebApi
         /// Deletes the <typeparamref name="TEntity"/> with the specified id.
         /// </summary>
         /// <param name="id">The id of the <typeparamref name="TEntity"/> to be deleted.</param>
-        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
+        /// <returns>The an <see cref="HttpResponseMessage"/> with
+        /// 204 (No Content) if the entity is deleted successfully,
+        /// or 404 (Not Found) if there is no entity with the specified Id.</returns>
+        /// <remarks>http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1034_Delete_an_Entity</remarks>
         public virtual HttpResponseMessage Delete(TId id)
         {
             HttpResponseMessage response;
@@ -106,7 +109,8 @@ namespace MicroLite.Extensions.WebApi
         /// Creates a new <typeparamref name="TEntity"/> based upon the values in the specified entity.
         /// </summary>
         /// <param name="entity">The entity containing the values to be created.</param>
-        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
+        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result 201 (Created) if the entity is successfully created.</returns>
+        /// <remarks>http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1032_Create_an_Entity</remarks>
         [ValidateModelNotNull]
         [ValidateModelState]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The method is returning the response, the framework will be responsible for its disposal")]
@@ -127,7 +131,11 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         /// <param name="id">The identifier of the entity to update.</param>
         /// <param name="entity">The entity containing the values to be updated.</param>
-        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
+        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result
+        /// 404 (Not Found) if no entity was found with the specified Id to update,
+        /// 304 (Not Modified) if there were no changes or
+        /// 200 (OK) if the entity was updated successfully.</returns>
+        /// <remarks>http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1033_Update_an_Entity</remarks>
         [ValidateModelNotNull]
         [ValidateModelState]
         public virtual HttpResponseMessage Put(TId id, TEntity entity)
