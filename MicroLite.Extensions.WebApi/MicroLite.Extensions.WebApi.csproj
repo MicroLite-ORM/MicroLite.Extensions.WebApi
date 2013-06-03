@@ -109,6 +109,7 @@
     <Compile Include="Query\ODataRawQueryOptions.cs" />
     <Compile Include="Query\SelectQueryOption.cs" />
     <Compile Include="Query\SkipQueryOption.cs" />
+    <Compile Include="Query\TopQueryOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">
