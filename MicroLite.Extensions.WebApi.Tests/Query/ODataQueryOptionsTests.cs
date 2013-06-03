@@ -15,9 +15,15 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$select=Name,Id&$skip=10&$top=25");
+                    "http://localhost/api?$orderby=Name&$select=Name,Id&$skip=10&$top=25");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheOrderByPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.OrderBy);
             }
 
             [Fact]
@@ -63,6 +69,12 @@
                     "http://localhost/api");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheOrderByPropertyShouldBeNotSet()
+            {
+                Assert.Null(this.option.OrderBy);
             }
 
             [Fact]

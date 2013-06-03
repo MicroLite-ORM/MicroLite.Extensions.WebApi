@@ -99,6 +99,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
     <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
+    <Compile Include="Query\OrderByPropertyTests.cs" />
+    <Compile Include="Query\OrderByQueryOptionTests.cs" />
     <Compile Include="Query\SelectQueryOptionTests.cs" />
     <Compile Include="Query\SkipQueryOptionTests.cs" />
     <Compile Include="Query\TopQueryOptionTests.cs" />

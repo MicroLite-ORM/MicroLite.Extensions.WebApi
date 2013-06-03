@@ -44,6 +44,11 @@ namespace MicroLite.Extensions.WebApi.Query
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
 
+            if (this.rawValues.OrderBy != null)
+            {
+                this.OrderBy = new OrderByQueryOption(this.rawValues.OrderBy);
+            }
+
             if (this.rawValues.Select != null)
             {
                 this.Select = new SelectQueryOption(this.rawValues.Select);
@@ -58,6 +63,15 @@ namespace MicroLite.Extensions.WebApi.Query
             {
                 this.Top = new SkipQueryOption(this.rawValues.Top);
             }
+        }
+
+        /// <summary>
+        /// Gets the order by query option.
+        /// </summary>
+        public OrderByQueryOption OrderBy
+        {
+            get;
+            private set;
         }
 
         /// <summary>
