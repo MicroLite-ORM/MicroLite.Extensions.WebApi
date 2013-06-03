@@ -106,6 +106,7 @@
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />
     <Compile Include="Query\ODataQueryOptionsParameterBindingAttribute.cs" />
     <Compile Include="Query\ODataRawQueryOptions.cs" />
+    <Compile Include="Query\SelectQueryOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">

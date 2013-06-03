@@ -43,6 +43,11 @@ namespace MicroLite.Extensions.WebApi.Query
 
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
+
+            if (this.rawValues.Select != null)
+            {
+                this.Select = new SelectQueryOption(this.rawValues.Select);
+            }
         }
 
         /// <summary>
@@ -65,6 +70,15 @@ namespace MicroLite.Extensions.WebApi.Query
             {
                 return this.request;
             }
+        }
+
+        /// <summary>
+        /// Gets the select query option.
+        /// </summary>
+        public SelectQueryOption Select
+        {
+            get;
+            private set;
         }
     }
 }

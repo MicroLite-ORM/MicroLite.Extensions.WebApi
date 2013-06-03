@@ -6,12 +6,39 @@
 
     public class ODataQueryOptionsTests
     {
-        public class WhenCreated
+        public class WhenCreatedWithAllQueryOptions
         {
             private readonly HttpRequestMessage httpRequestMessage;
             private readonly ODataQueryOptions option;
 
-            public WhenCreated()
+            public WhenCreatedWithAllQueryOptions()
+            {
+                this.httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://localhost/api?$select=Name,Id");
+
+                this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheRawValuesPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.RawValues);
+            }
+
+            [Fact]
+            public void TheRequestPropertyShouldReturnTheRequestMessage()
+            {
+                Assert.Equal(this.httpRequestMessage, this.option.Request);
+            }
+        }
+
+        public class WhenCreatedWithNoQueryOptions
+        {
+            private readonly HttpRequestMessage httpRequestMessage;
+            private readonly ODataQueryOptions option;
+
+            public WhenCreatedWithNoQueryOptions()
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
