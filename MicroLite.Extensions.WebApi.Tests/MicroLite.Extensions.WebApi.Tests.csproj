@@ -97,6 +97,8 @@
     <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="ObjectInfoExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\ODataQueryOptionsTests.cs" />
+    <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">
