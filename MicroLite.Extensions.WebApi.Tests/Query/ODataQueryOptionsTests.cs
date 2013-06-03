@@ -31,6 +31,12 @@
             {
                 Assert.Equal(this.httpRequestMessage, this.option.Request);
             }
+
+            [Fact]
+            public void TheSelectPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.Select);
+            }
         }
 
         public class WhenCreatedWithNoQueryOptions
@@ -57,6 +63,12 @@
             public void TheRequestPropertyShouldReturnTheRequestMessage()
             {
                 Assert.Equal(this.httpRequestMessage, this.option.Request);
+            }
+
+            [Fact]
+            public void TheSelectPropertyShouldBeNotSet()
+            {
+                Assert.Null(this.option.Select);
             }
         }
     }
