@@ -15,7 +15,7 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$select=Name,Id");
+                    "http://localhost/api?$select=Name,Id&$skip=10");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
             }
@@ -36,6 +36,12 @@
             public void TheSelectPropertyShouldBeSet()
             {
                 Assert.NotNull(this.option.Select);
+            }
+
+            [Fact]
+            public void TheSkipPropertyShouldBeSet()
+            {
+                Assert.NotNull(this.option.Skip);
             }
         }
 
@@ -69,6 +75,12 @@
             public void TheSelectPropertyShouldBeNotSet()
             {
                 Assert.Null(this.option.Select);
+            }
+
+            [Fact]
+            public void TheSkipPropertyShouldBeNotSet()
+            {
+                Assert.Null(this.option.Skip);
             }
         }
     }

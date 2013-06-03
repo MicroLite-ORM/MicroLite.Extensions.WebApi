@@ -48,6 +48,11 @@ namespace MicroLite.Extensions.WebApi.Query
             {
                 this.Select = new SelectQueryOption(this.rawValues.Select);
             }
+
+            if (this.rawValues.Skip != null)
+            {
+                this.Skip = new SkipQueryOption(this.rawValues.Skip);
+            }
         }
 
         /// <summary>
@@ -76,6 +81,15 @@ namespace MicroLite.Extensions.WebApi.Query
         /// Gets the select query option.
         /// </summary>
         public SelectQueryOption Select
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the skip query option.
+        /// </summary>
+        public SkipQueryOption Skip
         {
             get;
             private set;

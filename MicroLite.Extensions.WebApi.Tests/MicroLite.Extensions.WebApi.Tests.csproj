@@ -100,6 +100,7 @@
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
     <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
     <Compile Include="Query\SelectQueryOptionTests.cs" />
+    <Compile Include="Query\SkipQueryOptionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">
