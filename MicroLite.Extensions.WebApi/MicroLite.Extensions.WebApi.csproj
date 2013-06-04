@@ -103,6 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Query\FormatQueryOption.cs" />
     <Compile Include="Query\InlineCount.cs" />
     <Compile Include="Query\InlineCountQueryOption.cs" />
     <Compile Include="Query\ODataException.cs" />
