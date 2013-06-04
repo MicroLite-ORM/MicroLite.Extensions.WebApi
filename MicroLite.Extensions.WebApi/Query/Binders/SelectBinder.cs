@@ -18,7 +18,7 @@ namespace MicroLite.Extensions.WebApi.Query.Binders
 
     internal static class SelectBinder
     {
-        public static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
+        internal static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
         {
             string[] columnNames;
 
