@@ -120,6 +120,7 @@
     <Compile Include="Query\SelectQueryOption.cs" />
     <Compile Include="Query\SkipQueryOption.cs" />
     <Compile Include="Query\TopQueryOption.cs" />
+    <Compile Include="Query\ODataValidationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">
