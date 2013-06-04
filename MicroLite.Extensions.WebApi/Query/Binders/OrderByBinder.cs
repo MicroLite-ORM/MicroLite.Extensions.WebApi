@@ -20,19 +20,22 @@ namespace MicroLite.Extensions.WebApi.Query.Binders
     {
         internal static IOrderBy BindOrderBy<T>(IOrderBy orderBySqlBuilder, OrderByQueryOption orderByQuery)
         {
-            var objectInfo = ObjectInfo.For(typeof(T));
-
-            foreach (var orderByProperty in orderByQuery.Properties)
+            if (orderByQuery != null)
             {
-                var columnName = objectInfo.TableInfo.Columns.Single(c => c.PropertyInfo.Name == orderByProperty.Name).ColumnName;
+                var objectInfo = ObjectInfo.For(typeof(T));
 
-                if (orderByProperty.Direction == OrderByDirection.Ascending)
+                foreach (var orderByProperty in orderByQuery.Properties)
                 {
-                    orderBySqlBuilder.OrderByAscending(columnName);
-                }
-                else
-                {
-                    orderBySqlBuilder.OrderByDescending(columnName);
+                    var columnName = objectInfo.TableInfo.Columns.Single(c => c.PropertyInfo.Name == orderByProperty.Name).ColumnName;
+
+                    if (orderByProperty.Direction == OrderByDirection.Ascending)
+                    {
+                        orderBySqlBuilder.OrderByAscending(columnName);
+                    }
+                    else
+                    {
+                        orderBySqlBuilder.OrderByDescending(columnName);
+                    }
                 }
             }
 
