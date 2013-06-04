@@ -34,7 +34,7 @@
             [Fact]
             public void TheTopValueShouldEqualTheValueFromTheRawValue()
             {
-                Assert.Equal(25, this.option.Top);
+                Assert.Equal(25, this.option.Value);
             }
         }
     }

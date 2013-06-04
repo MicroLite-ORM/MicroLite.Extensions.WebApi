@@ -32,7 +32,7 @@ namespace MicroLite.Extensions.WebApi.Query
 
             if (int.TryParse(pieces[1], out top))
             {
-                this.Top = top;
+                this.Value = top;
             }
             else
             {
@@ -52,7 +52,7 @@ namespace MicroLite.Extensions.WebApi.Query
         /// <summary>
         /// Gets the integer value of the $top query option.
         /// </summary>
-        public int Top
+        public int Value
         {
             get;
             private set;

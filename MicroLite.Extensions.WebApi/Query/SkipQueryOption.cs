@@ -32,7 +32,7 @@ namespace MicroLite.Extensions.WebApi.Query
 
             if (int.TryParse(pieces[1], out skip))
             {
-                this.Skip = skip;
+                this.Value = skip;
             }
             else
             {
@@ -52,7 +52,7 @@ namespace MicroLite.Extensions.WebApi.Query
         /// <summary>
         /// Gets the integer value of the $skip query option.
         /// </summary>
-        public int Skip
+        public int Value
         {
             get;
             private set;

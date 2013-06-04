@@ -34,7 +34,7 @@
             [Fact]
             public void TheSkipValueShouldEqualTheValueFromTheRawValue()
             {
-                Assert.Equal(25, this.option.Skip);
+                Assert.Equal(25, this.option.Value);
             }
         }
     }
