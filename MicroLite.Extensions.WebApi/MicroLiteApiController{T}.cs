@@ -85,7 +85,9 @@ namespace MicroLite.Extensions.WebApi
         /// Gets the <typeparamref name="TEntity"/> with the specified id.
         /// </summary>
         /// <param name="id">The id of the <typeparamref name="TEntity"/> to be retrieved.</param>
-        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
+        /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result
+        /// 404 (Not Found) if no entity exists with the specified Identifier or
+        /// 200 (OK) if an entity is found.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "In WebApi the convention is to use the HTTP Verb as the method name")]
         public virtual HttpResponseMessage Get(TId id)
         {
