@@ -41,7 +41,7 @@ namespace MicroLite.Extensions.WebApi.Query
                 {
                     this.Format = piece;
                 }
-                else if (piece.StartsWith("$inlineCount=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$inlinecount=", StringComparison.OrdinalIgnoreCase))
                 {
                     this.InlineCount = piece;
                 }
@@ -96,7 +96,7 @@ namespace MicroLite.Extensions.WebApi.Query
         }
 
         /// <summary>
-        /// Gets the raw $inlineCount query value from the incoming request Uri if specified.
+        /// Gets the raw $inlinecount query value from the incoming request Uri if specified.
         /// </summary>
         public string InlineCount
         {
