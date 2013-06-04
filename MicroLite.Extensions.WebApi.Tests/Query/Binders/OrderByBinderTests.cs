@@ -1,7 +1,5 @@
 ﻿namespace MicroLite.Extensions.WebApi.Tests.Query.Binders
 {
-    using System;
-    using System.Net.Http;
     using MicroLite.Extensions.WebApi.Query;
     using MicroLite.Extensions.WebApi.Query.Binders;
     using MicroLite.Query;
