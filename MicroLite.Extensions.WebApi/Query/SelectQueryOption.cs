@@ -36,7 +36,7 @@ namespace MicroLite.Extensions.WebApi.Query
         /// <summary>
         /// Gets the properties to be included in the query.
         /// </summary>
-        public ICollection<string> Properties
+        public IList<string> Properties
         {
             get;
             private set;
