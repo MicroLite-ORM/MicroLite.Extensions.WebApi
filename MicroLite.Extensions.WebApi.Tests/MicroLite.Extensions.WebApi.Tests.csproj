@@ -97,6 +97,7 @@
     <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="ObjectInfoExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\Binders\OrderByBinderTests.cs" />
     <Compile Include="Query\Binders\SelectBinderTests.cs" />
     <Compile Include="Query\FormatQueryOptionTests.cs" />
     <Compile Include="Query\InlineCountQueryOptionTests.cs" />
