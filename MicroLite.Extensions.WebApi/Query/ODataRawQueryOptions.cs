@@ -96,7 +96,7 @@ namespace MicroLite.Extensions.WebApi.Query
         }
 
         /// <summary>
-        /// Gets the raw $inlinecount query value from the incoming request Uri if specified.
+        /// Gets the raw $inline count query value from the incoming request Uri if specified.
         /// </summary>
         public string InlineCount
         {

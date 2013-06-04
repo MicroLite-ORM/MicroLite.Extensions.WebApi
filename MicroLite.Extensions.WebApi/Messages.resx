@@ -120,6 +120,9 @@
   <data name="ArgumentMustNotBeNull" xml:space="preserve">
     <value>The argument must not be null</value>
   </data>
+  <data name="InlineCountRawValueInvalid" xml:space="preserve">
+    <value>If supplied, the $inlinecount value should be either 'allpages' or 'none'.</value>
+  </data>
   <data name="LoadingExtension" xml:space="preserve">
     <value>Loading the MicroLite extension for ASP.NET WebApi</value>
   </data>

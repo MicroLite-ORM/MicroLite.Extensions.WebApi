@@ -89,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +103,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Query\InlineCount.cs" />
+    <Compile Include="Query\InlineCountQueryOption.cs" />
     <Compile Include="Query\ODataException.cs" />
     <Compile Include="Query\ODataQueryOptions.cs" />
     <Compile Include="Query\ODataQueryOptionsHttpParameterBinding.cs" />

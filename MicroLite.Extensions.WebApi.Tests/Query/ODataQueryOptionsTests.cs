@@ -15,9 +15,15 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$orderby=Name&$select=Name,Id&$skip=10&$top=25");
+                    "http://localhost/api?$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheInlineCountOptionShouldBeSet()
+            {
+                Assert.NotNull(this.option.InlineCount);
             }
 
             [Fact]
@@ -69,6 +75,12 @@
                     "http://localhost/api");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheInlineCountOptionShouldNotBeSet()
+            {
+                Assert.Null(this.option.InlineCount);
             }
 
             [Fact]

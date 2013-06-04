@@ -70,6 +70,15 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If supplied, the $inlinecount value should be either &apos;allpages&apos; or &apos;none&apos;..
+        /// </summary>
+        internal static string InlineCountRawValueInvalid {
+            get {
+                return ResourceManager.GetString("InlineCountRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the MicroLite extension for ASP.NET WebApi.
         /// </summary>
         internal static string LoadingExtension {

@@ -44,6 +44,11 @@ namespace MicroLite.Extensions.WebApi.Query
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
 
+            if (this.rawValues.InlineCount != null)
+            {
+                this.InlineCount = new InlineCountQueryOption(this.rawValues.InlineCount);
+            }
+
             if (this.rawValues.OrderBy != null)
             {
                 this.OrderBy = new OrderByQueryOption(this.rawValues.OrderBy);
@@ -63,6 +68,15 @@ namespace MicroLite.Extensions.WebApi.Query
             {
                 this.Top = new SkipQueryOption(this.rawValues.Top);
             }
+        }
+
+        /// <summary>
+        /// Gets the inline count query option.
+        /// </summary>
+        public InlineCountQueryOption InlineCount
+        {
+            get;
+            private set;
         }
 
         /// <summary>
