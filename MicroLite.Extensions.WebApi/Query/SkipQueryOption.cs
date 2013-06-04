@@ -36,7 +36,7 @@ namespace MicroLite.Extensions.WebApi.Query
             }
             else
             {
-                throw new ODataException("If supplied, the $skip value should be an integer.");
+                throw new ODataException(Messages.SkipRawValueInvalid);
             }
         }
 

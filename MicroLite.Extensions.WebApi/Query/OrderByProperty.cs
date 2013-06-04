@@ -43,7 +43,7 @@ namespace MicroLite.Extensions.WebApi.Query
                         break;
 
                     default:
-                        throw new ODataException("If supplied, the direction should be either 'asc' or 'desc'.");
+                        throw new ODataException(Messages.OrderByPropertyRawValueInvalid);
                 }
             }
         }

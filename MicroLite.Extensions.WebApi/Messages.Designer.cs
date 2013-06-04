@@ -88,11 +88,38 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If supplied, the direction should be either &apos;asc&apos; or &apos;desc&apos;..
+        /// </summary>
+        internal static string OrderByPropertyRawValueInvalid {
+            get {
+                return ResourceManager.GetString("OrderByPropertyRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters.
         /// </summary>
         internal static string RegisteringDefaultActionFilter {
             get {
                 return ResourceManager.GetString("RegisteringDefaultActionFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If supplied, the $skip value should be an integer..
+        /// </summary>
+        internal static string SkipRawValueInvalid {
+            get {
+                return ResourceManager.GetString("SkipRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If supplied, the $top value should be an integer..
+        /// </summary>
+        internal static string TopRawValueInvalid {
+            get {
+                return ResourceManager.GetString("TopRawValueInvalid", resourceCulture);
             }
         }
     }
