@@ -6,7 +6,7 @@
 
     internal static class SelectBinder
     {
-        public static IWhereOrOrderBy BindSelectQueryOption<T>(this ODataQueryOptions queryOptions)
+        public static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
         {
             string[] columnNames;
 

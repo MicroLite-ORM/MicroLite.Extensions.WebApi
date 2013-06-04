@@ -27,7 +27,7 @@
 
                 var queryOptions = new ODataQueryOptions(httpRequestMessage);
 
-                this.sqlQuery = queryOptions.BindSelectQueryOption<Customer>().ToSqlQuery();
+                this.sqlQuery = SelectBinder.BindSelectQueryOption<Customer>(queryOptions).ToSqlQuery();
             }
 
             [Fact]
@@ -51,7 +51,7 @@
 
                 var queryOptions = new ODataQueryOptions(httpRequestMessage);
 
-                this.sqlQuery = queryOptions.BindSelectQueryOption<Customer>().ToSqlQuery();
+                this.sqlQuery = SelectBinder.BindSelectQueryOption<Customer>(queryOptions).ToSqlQuery();
             }
 
             [Fact]
@@ -75,7 +75,7 @@
 
                 var queryOptions = new ODataQueryOptions(httpRequestMessage);
 
-                this.sqlQuery = queryOptions.BindSelectQueryOption<Customer>().ToSqlQuery();
+                this.sqlQuery = SelectBinder.BindSelectQueryOption<Customer>(queryOptions).ToSqlQuery();
             }
 
             [Fact]
