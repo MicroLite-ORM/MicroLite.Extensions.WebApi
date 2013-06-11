@@ -121,13 +121,13 @@
     <value>The argument must not be null</value>
   </data>
   <data name="InlineCountRawValueInvalid" xml:space="preserve">
-    <value>If supplied, the $inlinecount value should be either 'allpages' or 'none'.</value>
+    <value>If specified, the $inlinecount value must be either 'allpages' or 'none'.</value>
   </data>
   <data name="LoadingExtension" xml:space="preserve">
     <value>Loading the MicroLite extension for ASP.NET WebApi</value>
   </data>
   <data name="OrderByPropertyRawValueInvalid" xml:space="preserve">
-    <value>If supplied, the direction should be either 'asc' or 'desc'.</value>
+    <value>If specified, the $order by direction must be either 'asc' or 'desc'.</value>
   </data>
   <data name="RegisteringDefaultActionFilter" xml:space="preserve">
     <value>Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters</value>

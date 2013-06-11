@@ -70,7 +70,7 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If supplied, the $inlinecount value should be either &apos;allpages&apos; or &apos;none&apos;..
+        ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
         /// </summary>
         internal static string InlineCountRawValueInvalid {
             get {
@@ -88,7 +88,7 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If supplied, the direction should be either &apos;asc&apos; or &apos;desc&apos;..
+        ///   Looks up a localized string similar to If specified, the $order by direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
         internal static string OrderByPropertyRawValueInvalid {
             get {
