@@ -122,5 +122,14 @@ namespace MicroLite.Extensions.WebApi {
                 return ResourceManager.GetString("TopRawValueInvalid", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified $top value exceeds the maximum allowed value of &apos;{0}&apos;.
+        /// </summary>
+        internal static string TopValueExceedsMaxAllowed {
+            get {
+                return ResourceManager.GetString("TopValueExceedsMaxAllowed", resourceCulture);
+            }
+        }
     }
 }

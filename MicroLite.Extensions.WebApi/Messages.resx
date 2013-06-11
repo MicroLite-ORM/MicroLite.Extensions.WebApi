@@ -138,4 +138,7 @@
   <data name="TopRawValueInvalid" xml:space="preserve">
     <value>If specified, the $top value must be a positive integer.</value>
   </data>
+  <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
+    <value>The specified $top value exceeds the maximum allowed value of '{0}'</value>
+  </data>
 </root>

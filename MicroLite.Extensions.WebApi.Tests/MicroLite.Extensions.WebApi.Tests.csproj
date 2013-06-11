@@ -103,7 +103,8 @@
     <Compile Include="Query\InlineCountQueryOptionTests.cs" />
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
     <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
-    <Compile Include="Query\ODataValidationSettingsTests.cs" />
+    <Compile Include="Query\Validators\ODataQueryValidatorTests.cs" />
+    <Compile Include="Query\Validators\TopQueryValidatorTests.cs" />
     <Compile Include="Query\OrderByPropertyTests.cs" />
     <Compile Include="Query\OrderByQueryOptionTests.cs" />
     <Compile Include="Query\SelectQueryOptionTests.cs" />

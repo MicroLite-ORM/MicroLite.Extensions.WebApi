@@ -1,11 +1,12 @@
-﻿namespace MicroLite.Extensions.WebApi.Tests.Query
+﻿namespace MicroLite.Extensions.WebApi.Tests.Query.Validation
 {
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.Query;
-    using MicroLite.Extensions.WebApi.Query.Validation;
+    using MicroLite.Extensions.WebApi.Query.Validators;
+    using MicroLite.FrameworkExtensions;
     using Xunit;
 
-    public class ODataValidationSettingsTests
+    public class TopQueryValidatorTests
     {
         public class WhenValidatingAndAMaxTopIsSetButTheQueryOptionDoesNotSpecifyATopValue
         {
@@ -20,7 +21,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => this.validationSettings.Validate(this.queryOptions));
+                Assert.DoesNotThrow(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -37,7 +38,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => this.validationSettings.Validate(this.queryOptions));
+                Assert.DoesNotThrow(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -54,7 +55,8 @@
             [Fact]
             public void AnExceptionIsThrown()
             {
-                Assert.Throws<ODataException>(() => this.validationSettings.Validate(this.queryOptions));
+                var exception = Assert.Throws<ODataException>(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                Assert.Equal(string.Format(Messages.TopValueExceedsMaxAllowed, 100), exception.Message);
             }
         }
 
@@ -71,7 +73,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => this.validationSettings.Validate(this.queryOptions));
+                Assert.DoesNotThrow(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
             }
         }
     }

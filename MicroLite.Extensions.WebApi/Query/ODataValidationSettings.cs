@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace MicroLite.Extensions.WebApi.Query.Validation
+namespace MicroLite.Extensions.WebApi.Query
 {
     /// <summary>
     /// A class which validates the values in <see cref="ODataQueryOptions"/>.
@@ -18,27 +18,29 @@ namespace MicroLite.Extensions.WebApi.Query.Validation
     public sealed class ODataValidationSettings
     {
         /// <summary>
-        /// Gets or sets the max value allowed in the $top query option.
+        /// Initialises a new instance of the <see cref="ODataValidationSettings"/> class.
         /// </summary>
-        public int? MaxTop
+        public ODataValidationSettings()
+        {
+            this.AllowedQueryOptions = AllowedQueryOptions.Supported;
+        }
+
+        /// <summary>
+        /// Gets or sets the allowed query options.
+        /// </summary>
+        public AllowedQueryOptions AllowedQueryOptions
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Validates the specified query options.
+        /// Gets or sets the max value allowed in the $top query option.
         /// </summary>
-        /// <param name="queryOptions">The query options.</param>
-        public void Validate(ODataQueryOptions queryOptions)
+        public int? MaxTop
         {
-            if (this.MaxTop.HasValue && queryOptions.Top != null)
-            {
-                if (queryOptions.Top.Value > this.MaxTop.Value)
-                {
-                    throw new ODataException();
-                }
-            }
+            get;
+            set;
         }
     }
 }
