@@ -16,10 +16,10 @@ namespace MicroLite.Extensions.WebApi.Query.Binders
     {
         internal static SqlQuery CreateSqlQuery<T>(this ODataQueryOptions queryOptions)
         {
-            var sqlBuilder = SelectBinder.BindSelectQueryOption<T>(queryOptions);
-            OrderByBinder.BindOrderBy<T>(sqlBuilder, queryOptions.OrderBy);
+            var selectFrom = SelectBinder.BindSelectQueryOption<T>(queryOptions);
+            var ordered = OrderByBinder.BindOrderBy<T>(queryOptions.OrderBy, selectFrom);
 
-            return sqlBuilder.ToSqlQuery();
+            return ordered.ToSqlQuery();
         }
     }
 }

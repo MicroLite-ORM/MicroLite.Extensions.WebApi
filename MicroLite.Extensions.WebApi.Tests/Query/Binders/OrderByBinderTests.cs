@@ -19,9 +19,7 @@
 
             public WhenCallingBindOrderBy()
             {
-                this.sqlQuery = OrderByBinder.BindOrderBy<Customer>(
-                    SqlBuilder.Select("*").From(typeof(Customer)),
-                    new OrderByQueryOption("$orderby=Status desc,Name")).ToSqlQuery();
+                this.sqlQuery = OrderByBinder.BindOrderBy<Customer>(new OrderByQueryOption("$orderby=Status desc,Name"), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]

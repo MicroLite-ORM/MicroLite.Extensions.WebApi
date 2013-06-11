@@ -18,7 +18,7 @@ namespace MicroLite.Extensions.WebApi.Query.Binders
 
     internal static class OrderByBinder
     {
-        internal static IOrderBy BindOrderBy<T>(IOrderBy orderBySqlBuilder, OrderByQueryOption orderByQuery)
+        internal static IOrderBy BindOrderBy<T>(OrderByQueryOption orderByQuery, IOrderBy orderBySqlBuilder)
         {
             if (orderByQuery != null)
             {
