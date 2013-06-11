@@ -106,7 +106,7 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If supplied, the $skip value should be an integer..
+        ///   Looks up a localized string similar to If specified, the $skip value must be a positive integer..
         /// </summary>
         internal static string SkipRawValueInvalid {
             get {
@@ -115,7 +115,7 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If supplied, the $top value should be an integer..
+        ///   Looks up a localized string similar to If specified, the $top value must be a positive integer..
         /// </summary>
         internal static string TopRawValueInvalid {
             get {

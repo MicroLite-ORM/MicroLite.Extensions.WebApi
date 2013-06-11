@@ -33,6 +33,11 @@ namespace MicroLite.Extensions.WebApi.Query
             if (int.TryParse(pieces[1], out skip))
             {
                 this.Value = skip;
+
+                if (this.Value < 0)
+                {
+                    throw new ODataException(Messages.SkipRawValueInvalid);
+                }
             }
             else
             {

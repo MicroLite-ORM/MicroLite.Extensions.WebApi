@@ -37,5 +37,15 @@
                 Assert.Equal(25, this.option.Value);
             }
         }
+
+        public class WhenConstructedWithAValueBelowZero
+        {
+            [Fact]
+            public void AnODataExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new SkipQueryOption("$skip=-1"));
+                Assert.Equal(Messages.SkipRawValueInvalid, exception.Message);
+            }
+        }
     }
 }

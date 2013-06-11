@@ -133,9 +133,9 @@
     <value>Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters</value>
   </data>
   <data name="SkipRawValueInvalid" xml:space="preserve">
-    <value>If supplied, the $skip value should be an integer.</value>
+    <value>If specified, the $skip value must be a positive integer.</value>
   </data>
   <data name="TopRawValueInvalid" xml:space="preserve">
-    <value>If supplied, the $top value should be an integer.</value>
+    <value>If specified, the $top value must be a positive integer.</value>
   </data>
 </root>
