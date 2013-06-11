@@ -29,39 +29,39 @@ namespace MicroLite.Extensions.WebApi.Query
 
             foreach (var piece in pieces)
             {
-                if (piece.StartsWith("$expand=", StringComparison.OrdinalIgnoreCase))
+                if (piece.StartsWith("$expand=", StringComparison.Ordinal))
                 {
                     this.Expand = piece;
                 }
-                else if (piece.StartsWith("$filter=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$filter=", StringComparison.Ordinal))
                 {
                     this.Filter = piece;
                 }
-                else if (piece.StartsWith("$format=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$format=", StringComparison.Ordinal))
                 {
                     this.Format = piece;
                 }
-                else if (piece.StartsWith("$inlinecount=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$inlinecount=", StringComparison.Ordinal))
                 {
                     this.InlineCount = piece;
                 }
-                else if (piece.StartsWith("$orderby=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$orderby=", StringComparison.Ordinal))
                 {
                     this.OrderBy = piece;
                 }
-                else if (piece.StartsWith("$select=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$select=", StringComparison.Ordinal))
                 {
                     this.Select = piece;
                 }
-                else if (piece.StartsWith("$skip=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$skip=", StringComparison.Ordinal))
                 {
                     this.Skip = piece;
                 }
-                else if (piece.StartsWith("$skiptoken=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$skiptoken=", StringComparison.Ordinal))
                 {
                     this.SkipToken = piece;
                 }
-                else if (piece.StartsWith("$top=", StringComparison.OrdinalIgnoreCase))
+                else if (piece.StartsWith("$top=", StringComparison.Ordinal))
                 {
                     this.Top = piece;
                 }

@@ -70,6 +70,71 @@
             }
         }
 
+        public class WhenCallingConstructorWithAllQueryOptionsButIncorrectlyCased
+        {
+            private readonly ODataRawQueryOptions rawQueryOptions;
+
+            public WhenCallingConstructorWithAllQueryOptionsButIncorrectlyCased()
+            {
+                this.rawQueryOptions = new ODataRawQueryOptions(
+                    "$Expand=*&$Filter=Name eq 'Fred'&$Format=json&$InlineCount=allpages&$OrderBy=Name&$Select=Name,Id&$Skip=10&$Skiptoken=5&$Top=25");
+            }
+
+            [Fact]
+            public void ExpandShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Expand);
+            }
+
+            [Fact]
+            public void FilterShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Filter);
+            }
+
+            [Fact]
+            public void FormatShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Format);
+            }
+
+            [Fact]
+            public void InlineCountShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.InlineCount);
+            }
+
+            [Fact]
+            public void OrderByShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.OrderBy);
+            }
+
+            [Fact]
+            public void SelectShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Select);
+            }
+
+            [Fact]
+            public void SkipShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Skip);
+            }
+
+            [Fact]
+            public void SkipTokenShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.SkipToken);
+            }
+
+            [Fact]
+            public void TopShouldBeNull()
+            {
+                Assert.Null(this.rawQueryOptions.Top);
+            }
+        }
+
         public class WhenCallingConstructorWithNoQueryOptions
         {
             private readonly ODataRawQueryOptions rawQueryOptions;

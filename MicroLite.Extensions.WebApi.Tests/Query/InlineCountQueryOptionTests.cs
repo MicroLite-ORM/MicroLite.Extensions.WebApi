@@ -5,12 +5,23 @@
 
     public class InlineCountQueryOptionTests
     {
+        public class WhenConstructedWithAnIncorrectlyCasedValue
+        {
+            [Fact]
+            public void AnODataExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new InlineCountQueryOption("$inlinecount=AllPages"));
+                Assert.Equal(Messages.InlineCountRawValueInvalid, exception.Message);
+            }
+        }
+
         public class WhenConstructedWithAnInvalidValue
         {
             [Fact]
             public void AnODataExceptionShouldBeThrown()
             {
-                Assert.Throws<ODataException>(() => new InlineCountQueryOption("$inlinecount=wibble"));
+                var exception = Assert.Throws<ODataException>(() => new InlineCountQueryOption("$inlinecount=wibble"));
+                Assert.Equal(Messages.InlineCountRawValueInvalid, exception.Message);
             }
         }
 

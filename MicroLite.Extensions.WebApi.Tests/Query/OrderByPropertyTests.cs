@@ -5,12 +5,23 @@
 
     public class OrderByPropertyTests
     {
+        public class WhenConstructedWithAnIncorrectlyCasedValue
+        {
+            [Fact]
+            public void AnODataExceptionShouldBeThrown()
+            {
+                var exception = Assert.Throws<ODataException>(() => new OrderByProperty("Name ASC"));
+                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
+            }
+        }
+
         public class WhenConstructedWithAnInvalidValue
         {
             [Fact]
             public void AnODataExceptionShouldBeThrown()
             {
-                Assert.Throws<ODataException>(() => new OrderByProperty("$orderby=Name wibble"));
+                var exception = Assert.Throws<ODataException>(() => new OrderByProperty("Name wibble"));
+                Assert.Equal(Messages.OrderByPropertyRawValueInvalid, exception.Message);
             }
         }
 

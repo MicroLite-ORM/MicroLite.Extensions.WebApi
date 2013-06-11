@@ -32,13 +32,13 @@ namespace MicroLite.Extensions.WebApi.Query
 
             if (pieces.Length == 2)
             {
-                switch (pieces[1].ToUpperInvariant())
+                switch (pieces[1])
                 {
-                    case "ASC":
+                    case "asc":
                         this.Direction = OrderByDirection.Ascending;
                         break;
 
-                    case "DESC":
+                    case "desc":
                         this.Direction = OrderByDirection.Descending;
                         break;
 

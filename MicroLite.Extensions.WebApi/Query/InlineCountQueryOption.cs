@@ -29,13 +29,13 @@ namespace MicroLite.Extensions.WebApi.Query
 
             var pieces = rawValue.Split('=');
 
-            switch (pieces[1].ToUpperInvariant())
+            switch (pieces[1])
             {
-                case "ALLPAGES":
+                case "allpages":
                     this.InlineCount = InlineCount.AllPages;
                     break;
 
-                case "NONE":
+                case "none":
                     this.InlineCount = InlineCount.None;
                     break;
 

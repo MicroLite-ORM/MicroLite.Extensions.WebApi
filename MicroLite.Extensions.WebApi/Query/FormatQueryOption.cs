@@ -31,17 +31,17 @@ namespace MicroLite.Extensions.WebApi.Query
 
             var pieces = rawValue.Split('=');
 
-            switch (pieces[1].ToUpperInvariant())
+            switch (pieces[1])
             {
-                case "ATOM":
+                case "atom":
                     this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/atom+xml");
                     break;
 
-                case "JSON":
+                case "json":
                     this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/json");
                     break;
 
-                case "XML":
+                case "xml":
                     this.MediaTypeHeaderValue = new MediaTypeHeaderValue("application/xml");
                     break;
 
