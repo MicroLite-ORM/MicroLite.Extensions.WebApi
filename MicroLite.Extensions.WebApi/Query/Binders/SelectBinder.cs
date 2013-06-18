@@ -16,9 +16,19 @@ namespace MicroLite.Extensions.WebApi.Query.Binders
     using MicroLite.Mapping;
     using MicroLite.Query;
 
-    internal static class SelectBinder
+    /// <summary>
+    /// The binder class which can append the $select query option.
+    /// </summary>
+    public static class SelectBinder
     {
-        internal static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
+        /// <summary>
+        /// Binds the select query option to the SqlBuilder.
+        /// </summary>
+        /// <typeparam name="T">The type of class being queried.</typeparam>
+        /// <param name="queryOptions">The query options.</param>
+        /// <returns>The SqlBuilder after the select and from clauses have been added.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
+        public static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
         {
             string[] columnNames;
 
