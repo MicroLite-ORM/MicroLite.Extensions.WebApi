@@ -303,6 +303,26 @@
                     return new Uri("http://localhost/api/Customers/" + id.ToString());
                 };
             }
+
+            public HttpResponseMessage Delete(int id)
+            {
+                return this.DeleteEntityResponse(id);
+            }
+
+            public HttpResponseMessage Get(int id)
+            {
+                return this.GetEntityResponse(id);
+            }
+
+            public virtual HttpResponseMessage Post(Customer entity)
+            {
+                return this.PostEntityResponse(entity);
+            }
+
+            public HttpResponseMessage Put(int id, Customer entity)
+            {
+                return this.PutEntityResponse(id, entity);
+            }
         }
     }
 }

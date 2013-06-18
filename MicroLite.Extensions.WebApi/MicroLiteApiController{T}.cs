@@ -63,7 +63,7 @@ namespace MicroLite.Extensions.WebApi
         /// 204 (No Content) if the entity is deleted successfully,
         /// or 404 (Not Found) if there is no entity with the specified Id.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1034_Delete_an_Entity]]></remarks>
-        public virtual HttpResponseMessage Delete(TId id)
+        protected virtual HttpResponseMessage DeleteEntityResponse(TId id)
         {
             HttpResponseMessage response;
 
@@ -89,7 +89,7 @@ namespace MicroLite.Extensions.WebApi
         /// 404 (Not Found) if no entity exists with the specified Identifier or
         /// 200 (OK) if an entity is found.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "In WebApi the convention is to use the HTTP Verb as the method name")]
-        public virtual HttpResponseMessage Get(TId id)
+        protected virtual HttpResponseMessage GetEntityResponse(TId id)
         {
             HttpResponseMessage response;
 
@@ -113,10 +113,8 @@ namespace MicroLite.Extensions.WebApi
         /// <param name="entity">The entity containing the values to be created.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result 201 (Created) if the entity is successfully created.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1032_Create_an_Entity]]></remarks>
-        [ValidateModelNotNull]
-        [ValidateModelState]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The method is returning the response, the framework will be responsible for its disposal")]
-        public virtual HttpResponseMessage Post(TEntity entity)
+        protected virtual HttpResponseMessage PostEntityResponse(TEntity entity)
         {
             this.Session.Insert(entity);
 
@@ -138,9 +136,7 @@ namespace MicroLite.Extensions.WebApi
         /// 304 (Not Modified) if there were no changes or
         /// 200 (OK) if the entity was updated successfully.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1033_Update_an_Entity]]></remarks>
-        [ValidateModelNotNull]
-        [ValidateModelState]
-        public virtual HttpResponseMessage Put(TId id, TEntity entity)
+        protected virtual HttpResponseMessage PutEntityResponse(TId id, TEntity entity)
         {
             HttpResponseMessage response;
 
