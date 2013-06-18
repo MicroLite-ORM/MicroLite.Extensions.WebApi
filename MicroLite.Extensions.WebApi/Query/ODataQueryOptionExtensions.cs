@@ -10,8 +10,10 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace MicroLite.Extensions.WebApi.Query.Binders
+namespace MicroLite.Extensions.WebApi.Query
 {
+    using MicroLite.Extensions.WebApi.Query.Binders;
+
     internal static class ODataQueryOptionExtensions
     {
         internal static SqlQuery CreateSqlQuery<T>(this ODataQueryOptions queryOptions)

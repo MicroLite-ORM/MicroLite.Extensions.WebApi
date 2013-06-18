@@ -105,7 +105,7 @@
     <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Query\AllowedQueryOptions.cs" />
-    <Compile Include="Query\Binders\ODataQueryOptionExtensions.cs" />
+    <Compile Include="Query\ODataQueryOptionExtensions.cs" />
     <Compile Include="Query\Binders\OrderByBinder.cs" />
     <Compile Include="Query\Binders\SelectBinder.cs" />
     <Compile Include="Query\FormatQueryOption.cs" />
