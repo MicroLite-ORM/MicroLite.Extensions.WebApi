@@ -13,9 +13,7 @@
 
             public ParseEndswithFunctionExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("endswith(Name, 'yes') eq true");
+                var queryNode = FilterExpressionParser.Parse("endswith(Name, 'yes') eq true");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -97,9 +95,7 @@
 
             public ParsePropertyEqDateHourMinuteValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Created eq datetime'2013-06-18T09:30'");
+                var queryNode = FilterExpressionParser.Parse("Created eq datetime'2013-06-18T09:30'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -129,9 +125,7 @@
 
             public ParsePropertyEqDateOnlyValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Created eq datetime'2013-06-18'");
+                var queryNode = FilterExpressionParser.Parse("Created eq datetime'2013-06-18'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -161,9 +155,7 @@
 
             public ParsePropertyEqDateTimeSFormatValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Created eq datetime'2013-06-18T09:30:20'");
+                var queryNode = FilterExpressionParser.Parse("Created eq datetime'2013-06-18T09:30:20'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -193,9 +185,7 @@
 
             public ParsePropertyEqDecimalValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Amount eq 1234.567M");
+                var queryNode = FilterExpressionParser.Parse("Amount eq 1234.567M");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -225,9 +215,7 @@
 
             public ParsePropertyEqDoubleValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Amount eq 1234.567D");
+                var queryNode = FilterExpressionParser.Parse("Amount eq 1234.567D");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -257,9 +245,7 @@
 
             public ParsePropertyEqFalseValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Deleted eq false");
+                var queryNode = FilterExpressionParser.Parse("Deleted eq false");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -289,9 +275,7 @@
 
             public ParsePropertyEqGuidValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("TxID eq guid'0D01B09B-38CD-4C53-AA04-181371087A00'");
+                var queryNode = FilterExpressionParser.Parse("TxID eq guid'0D01B09B-38CD-4C53-AA04-181371087A00'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -321,9 +305,7 @@
 
             public ParsePropertyEqIntValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Amount eq 1234");
+                var queryNode = FilterExpressionParser.Parse("Amount eq 1234");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -353,9 +335,7 @@
 
             public ParsePropertyEqSingleValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Amount eq 1234.567F");
+                var queryNode = FilterExpressionParser.Parse("Amount eq 1234.567F");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -385,9 +365,7 @@
 
             public ParsePropertyEqStringValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename eq 'John'");
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -447,9 +425,7 @@
 
             public ParsePropertyEqTrueValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Enabled eq true");
+                var queryNode = FilterExpressionParser.Parse("Enabled eq true");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -479,9 +455,7 @@
 
             public ParsePropertyEqValueAndPropertyEqValueAndPropertyEqValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename eq 'John' and Middlename eq 'Albert' and Surname eq 'Smith'");
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Middlename eq 'Albert' and Surname eq 'Smith'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -529,9 +503,7 @@
 
             public ParsePropertyEqValueAndPropertyEqValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename eq 'John' and Surname eq 'Smith'");
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Surname eq 'Smith'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -591,9 +563,7 @@
 
             public ParsePropertyEqValueAndPropertyEqValueOrPropertyEqValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename eq 'John' and Middlename eq 'Albert' or Surname eq 'Smith'");
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' and Middlename eq 'Albert' or Surname eq 'Smith'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -641,9 +611,7 @@
 
             public ParsePropertyEqValueOrPropertyEqValueAndPropertyEqValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename eq 'John' or Middlename eq 'Albert' and Surname eq 'Smith'");
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Middlename eq 'Albert' and Surname eq 'Smith'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -691,9 +659,7 @@
 
             public ParsePropertyEqValueOrPropertyEqValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename eq 'John' or Surname eq 'Smith'");
+                var queryNode = FilterExpressionParser.Parse("Forename eq 'John' or Surname eq 'Smith'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -753,9 +719,7 @@
 
             public ParsePropertyNeValueExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("Forename ne 'John'");
+                var queryNode = FilterExpressionParser.Parse("Forename ne 'John'");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -809,9 +773,7 @@
 
             public ParseStartswithFunctionExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("startswith(Name, 'Hay') eq true");
+                var queryNode = FilterExpressionParser.Parse("startswith(Name, 'Hay') eq true");
 
                 this.node = queryNode as BinaryOperatorNode;
             }
@@ -893,9 +855,7 @@
 
             public ParseSubstringofFunctionExpression()
             {
-                var parser = new FilterExpressionParser();
-
-                var queryNode = parser.Parse("substringof('Hayes', Name) eq true");
+                var queryNode = FilterExpressionParser.Parse("substringof('Hayes', Name) eq true");
 
                 this.node = queryNode as BinaryOperatorNode;
             }

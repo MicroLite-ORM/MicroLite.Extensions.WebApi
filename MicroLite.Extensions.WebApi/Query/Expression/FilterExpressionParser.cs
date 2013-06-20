@@ -16,7 +16,7 @@ namespace MicroLite.Extensions.WebApi.Query.Expression
     using System.Globalization;
     using System.Text.RegularExpressions;
 
-    internal sealed class FilterExpressionParser
+    internal static class FilterExpressionParser
     {
         private static readonly Regex DecimalRegex = new Regex(@"^\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex DoubleRegex = new Regex(@"^\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
@@ -24,7 +24,7 @@ namespace MicroLite.Extensions.WebApi.Query.Expression
         private static readonly Regex PropertyAccessRegex = new Regex("^(?<Property>[A-Za-z/]*) (?<Operator>eq|ne|gt|ge|lt|le) (?<DataType>datetime|guid)?(?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex SingleRegex = new Regex(@"^\d+.\d+(f|F)$", RegexOptions.Compiled | RegexOptions.Singleline);
 
-        internal QueryNode Parse(string filterValue)
+        internal static QueryNode Parse(string filterValue)
         {
             QueryNode parent = null;
 
@@ -52,7 +52,7 @@ namespace MicroLite.Extensions.WebApi.Query.Expression
                 {
                     var singleValueNode = ParseSingleValueNode(filterValue.Substring(i, workingEndPosition - i));
 
-                    this.UpdateExpressionTree(ref parent, BinaryOperatorKind.And, singleValueNode);
+                    UpdateExpressionTree(ref parent, BinaryOperatorKind.And, singleValueNode);
 
                     workingEndPosition = i - 5;
                 }
@@ -60,7 +60,7 @@ namespace MicroLite.Extensions.WebApi.Query.Expression
                 {
                     var singleValueNode = ParseSingleValueNode(filterValue.Substring(i, workingEndPosition - i));
 
-                    this.UpdateExpressionTree(ref parent, BinaryOperatorKind.Or, singleValueNode);
+                    UpdateExpressionTree(ref parent, BinaryOperatorKind.Or, singleValueNode);
 
                     workingEndPosition = i - 4;
                 }
@@ -210,7 +210,7 @@ namespace MicroLite.Extensions.WebApi.Query.Expression
             }
         }
 
-        private void UpdateExpressionTree(ref QueryNode parent, BinaryOperatorKind binaryOperatorKind, SingleValueNode singleValueNode)
+        private static void UpdateExpressionTree(ref QueryNode parent, BinaryOperatorKind binaryOperatorKind, SingleValueNode singleValueNode)
         {
             var binaryParent = parent as BinaryOperatorNode;
 
