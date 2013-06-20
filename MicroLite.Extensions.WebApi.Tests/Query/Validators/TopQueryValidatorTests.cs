@@ -3,7 +3,6 @@
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.Query;
     using MicroLite.Extensions.WebApi.Query.Validators;
-    using MicroLite.FrameworkExtensions;
     using Xunit;
 
     public class TopQueryValidatorTests

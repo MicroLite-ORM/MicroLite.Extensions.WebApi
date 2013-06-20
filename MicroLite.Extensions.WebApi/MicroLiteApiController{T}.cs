@@ -15,7 +15,6 @@ namespace MicroLite.Extensions.WebApi
     using System;
     using System.Net;
     using System.Net.Http;
-    using MicroLite.Extensions.WebApi.Filters;
     using MicroLite.Mapping;
 
     /// <summary>
