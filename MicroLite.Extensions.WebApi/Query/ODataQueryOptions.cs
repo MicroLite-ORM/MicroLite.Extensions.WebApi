@@ -44,6 +44,11 @@ namespace MicroLite.Extensions.WebApi.Query
             this.request = request;
             this.rawValues = new ODataRawQueryOptions(rawQuery);
 
+            if (this.rawValues.Filter != null)
+            {
+                this.Filter = new FilterQueryOption(this.rawValues.Filter);
+            }
+
             if (this.rawValues.Format != null)
             {
                 this.Format = new FormatQueryOption(this.rawValues.Format);
@@ -73,6 +78,15 @@ namespace MicroLite.Extensions.WebApi.Query
             {
                 this.Top = new SkipQueryOption(this.rawValues.Top);
             }
+        }
+
+        /// <summary>
+        /// Gets the filter query option.
+        /// </summary>
+        public FilterQueryOption Filter
+        {
+            get;
+            private set;
         }
 
         /// <summary>

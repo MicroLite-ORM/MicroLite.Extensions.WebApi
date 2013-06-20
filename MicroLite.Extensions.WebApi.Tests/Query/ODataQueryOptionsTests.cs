@@ -15,9 +15,15 @@
             {
                 this.httpRequestMessage = new HttpRequestMessage(
                     HttpMethod.Get,
-                    "http://localhost/api?$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25");
+                    "http://localhost/api?$filter=Name eq 'John'&$format=json&$inlinecount=allpages&$orderby=Name&$select=Name,Id&$skip=10&$top=25");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheFilterOptionShouldBeSet()
+            {
+                Assert.NotNull(this.option.Filter);
             }
 
             [Fact]
@@ -81,6 +87,12 @@
                     "http://localhost/api");
 
                 this.option = new ODataQueryOptions(this.httpRequestMessage);
+            }
+
+            [Fact]
+            public void TheFilterOptionShouldNotBeSet()
+            {
+                Assert.Null(this.option.Filter);
             }
 
             [Fact]

@@ -101,6 +101,7 @@
     <Compile Include="Query\Binders\OrderByBinderTests.cs" />
     <Compile Include="Query\Binders\SelectBinderTests.cs" />
     <Compile Include="Query\Expression\FilterExpressionParserTests.cs" />
+    <Compile Include="Query\FilterQueryOptionTests.cs" />
     <Compile Include="Query\FormatQueryOptionTests.cs" />
     <Compile Include="Query\InlineCountQueryOptionTests.cs" />
     <Compile Include="Query\ODataQueryOptionsTests.cs" />
