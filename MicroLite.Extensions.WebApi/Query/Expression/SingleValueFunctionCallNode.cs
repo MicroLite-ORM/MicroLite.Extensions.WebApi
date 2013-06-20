@@ -47,7 +47,7 @@ namespace MicroLite.Extensions.WebApi.Query.Expression
         {
             get
             {
-                return QueryNodeKind.SingleValuePropertyAccess;
+                return QueryNodeKind.SingleValueFunctionCall;
             }
         }
 

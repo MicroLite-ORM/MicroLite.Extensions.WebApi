@@ -105,6 +105,8 @@
     <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Query\AllowedQueryOptions.cs" />
+    <Compile Include="Query\Binders\BinaryOperatorKindExtensions.cs" />
+    <Compile Include="Query\Binders\FilterBinder.cs" />
     <Compile Include="Query\Expression\BinaryOperatorKind.cs" />
     <Compile Include="Query\Expression\BinaryOperatorNode.cs" />
     <Compile Include="Query\Expression\ConstantNode.cs" />

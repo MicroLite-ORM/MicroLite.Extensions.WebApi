@@ -19,7 +19,8 @@ namespace MicroLite.Extensions.WebApi.Query
         internal static SqlQuery CreateSqlQuery<T>(this ODataQueryOptions queryOptions)
         {
             var selectFrom = SelectBinder.BindSelectQueryOption<T>(queryOptions);
-            var ordered = OrderByBinder.BindOrderBy<T>(queryOptions.OrderBy, selectFrom);
+            var where = FilterBinder.BindFilter<T>(queryOptions.Filter, selectFrom);
+            var ordered = OrderByBinder.BindOrderBy<T>(queryOptions.OrderBy, where);
 
             return ordered.ToSqlQuery();
         }
