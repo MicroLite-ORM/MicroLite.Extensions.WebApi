@@ -105,6 +105,15 @@
     <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Query\AllowedQueryOptions.cs" />
+    <Compile Include="Query\Expression\BinaryOperatorKind.cs" />
+    <Compile Include="Query\Expression\BinaryOperatorNode.cs" />
+    <Compile Include="Query\Expression\ConstantNode.cs" />
+    <Compile Include="Query\Expression\FilterExpressionParser.cs" />
+    <Compile Include="Query\Expression\QueryNode.cs" />
+    <Compile Include="Query\Expression\QueryNodeKind.cs" />
+    <Compile Include="Query\Expression\SingleValueFunctionCallNode.cs" />
+    <Compile Include="Query\Expression\SingleValueNode.cs" />
+    <Compile Include="Query\Expression\SingleValuePropertyAccessNode.cs" />
     <Compile Include="Query\ODataQueryOptionExtensions.cs" />
     <Compile Include="Query\Binders\OrderByBinder.cs" />
     <Compile Include="Query\Binders\SelectBinder.cs" />
@@ -131,6 +140,7 @@
       <Link>MicroLite.snk</Link>
     </None>
     <None Include="packages.config" />
+    <None Include="Query\Expression\_QueryNodes.cd" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
