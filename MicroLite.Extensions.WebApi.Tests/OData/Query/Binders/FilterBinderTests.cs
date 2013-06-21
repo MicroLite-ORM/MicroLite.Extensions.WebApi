@@ -17,6 +17,17 @@
             Closed = 3
         }
 
+        [Fact]
+        public void BindFilterThrowsODataExceptionForUnspportedFunctionName()
+        {
+            var queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=indexof(Name, 'ayes') eq 1"));
+
+            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))));
+
+            Assert.Equal("The function 'indexof' is not supported", exception.Message);
+        }
+
         public class WhenCallingApplyToWithAComplexQuery
         {
             private readonly SqlQuery sqlQuery;

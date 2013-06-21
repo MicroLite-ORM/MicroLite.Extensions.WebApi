@@ -2,11 +2,20 @@
 {
     using System;
     using System.Linq;
+    using MicroLite.Extensions.WebApi.OData.Query;
     using MicroLite.Extensions.WebApi.OData.Query.Expression;
     using Xunit;
 
     public class FilterExpressionParserTests
     {
+        [Fact]
+        public void BindFilterThrowsODataExceptionForUnspportedExpression()
+        {
+            var exception = Assert.Throws<ODataException>(() => FilterExpressionParser.Parse("length(trim(CompanyName)) eq length(CompanyName)"));
+
+            Assert.Equal("The expression 'length(trim(CompanyName)) eq length(CompanyName)' is not currently supported.", exception.Message);
+        }
+
         public class ParseEndswithFunctionExpression
         {
             private readonly BinaryOperatorNode node;

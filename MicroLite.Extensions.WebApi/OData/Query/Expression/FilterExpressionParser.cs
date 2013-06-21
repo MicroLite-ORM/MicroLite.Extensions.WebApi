@@ -127,7 +127,7 @@ namespace MicroLite.Extensions.WebApi.OData.Query.Expression
                 var value = propertyAccessMatch.Groups["Value"].Value;
 
                 var propertyNode = new SingleValuePropertyAccessNode(propertyName);
-                var operatorKind = ResolveBinaryOperatorKind(operatorType);
+                var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
                 var valueConstantNode = new ConstantNode(value, GetValue(dataType, value));
 
                 return new BinaryOperatorNode(propertyNode, operatorKind, valueConstantNode);
@@ -151,13 +151,13 @@ namespace MicroLite.Extensions.WebApi.OData.Query.Expression
                     : new QueryNode[] { propertyNode, argumentConstantNode };
 
                 var functionNode = new SingleValueFunctionCallNode(function, arguments);
-                var operatorKind = ResolveBinaryOperatorKind(operatorType);
+                var operatorKind = BinaryOperatorKindParser.ToBinaryOperatorKind(operatorType);
                 var valueConstantNode = new ConstantNode(valueLiteral, GetValue(string.Empty, valueLiteral));
 
                 return new BinaryOperatorNode(functionNode, operatorKind, valueConstantNode);
             }
 
-            throw new NotSupportedException(expression);
+            throw new ODataException("The expression '" + expression + "' is not currently supported.");
         }
 
         private static bool PreceededByAnd(string filterValue, int position)
@@ -175,39 +175,6 @@ namespace MicroLite.Extensions.WebApi.OData.Query.Expression
                     && filterValue[position - 2] == 'r'
                     && filterValue[position - 3] == 'o'
                     && filterValue[position - 4] == ' ';
-        }
-
-        private static BinaryOperatorKind ResolveBinaryOperatorKind(string operatorType)
-        {
-            switch (operatorType)
-            {
-                case "and":
-                    return BinaryOperatorKind.And;
-
-                case "eq":
-                    return BinaryOperatorKind.Equal;
-
-                case "ge":
-                    return BinaryOperatorKind.GreaterThanOrEqual;
-
-                case "gt":
-                    return BinaryOperatorKind.GreaterThan;
-
-                case "le":
-                    return BinaryOperatorKind.LessThanOrEqual;
-
-                case "lt":
-                    return BinaryOperatorKind.LessThan;
-
-                case "ne":
-                    return BinaryOperatorKind.NotEqual;
-
-                case "or":
-                    return BinaryOperatorKind.Or;
-
-                default:
-                    throw new NotSupportedException(operatorType);
-            }
         }
 
         private static void UpdateExpressionTree(ref QueryNode parent, BinaryOperatorKind binaryOperatorKind, SingleValueNode singleValueNode)

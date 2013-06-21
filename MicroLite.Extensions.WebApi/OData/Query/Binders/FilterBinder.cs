@@ -138,7 +138,7 @@ namespace MicroLite.Extensions.WebApi.OData.Query.Binders
                         break;
 
                     default:
-                        throw new NotSupportedException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
+                        throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
                 }
             }
         }

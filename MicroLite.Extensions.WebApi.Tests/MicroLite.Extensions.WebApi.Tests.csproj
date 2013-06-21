@@ -97,6 +97,12 @@
     <Compile Include="MicroLiteApiController{T}Tests.cs" />
     <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="ObjectInfoExtensionsTests.cs" />
+    <Compile Include="OData\Query\Binders\BinaryOperatorKindExtensionsTests.cs" />
+    <Compile Include="OData\Query\Expression\BinaryOperatorKindParserTests.cs" />
+    <Compile Include="OData\Query\Expression\BinaryOperatorNodeTests.cs" />
+    <Compile Include="OData\Query\Expression\ConstantNodeTests.cs" />
+    <Compile Include="OData\Query\Expression\SingleValueFunctionCallNodeTests.cs" />
+    <Compile Include="OData\Query\Expression\SingleValuePropertyAccessNodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OData\Query\Binders\FilterBinderTests.cs" />
     <Compile Include="OData\Query\Binders\OrderByBinderTests.cs" />
