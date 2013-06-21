@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     /// <summary>
     /// An enumeration which represents the query options allowed by an OData query.
     /// </summary>
-    [FlagsAttribute]
+    [Flags]
     public enum AllowedQueryOptions
     {
         /// <summary>
