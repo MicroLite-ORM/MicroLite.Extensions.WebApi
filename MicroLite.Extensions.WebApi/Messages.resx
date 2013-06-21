@@ -120,25 +120,10 @@
   <data name="ArgumentMustNotBeNull" xml:space="preserve">
     <value>The argument must not be null</value>
   </data>
-  <data name="InlineCountRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $inlinecount value must be either 'allpages' or 'none'.</value>
-  </data>
   <data name="LoadingExtension" xml:space="preserve">
     <value>Loading the MicroLite extension for ASP.NET WebApi</value>
   </data>
-  <data name="OrderByPropertyRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $order by direction must be either 'asc' or 'desc'.</value>
-  </data>
   <data name="RegisteringDefaultActionFilter" xml:space="preserve">
     <value>Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters</value>
-  </data>
-  <data name="SkipRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $skip value must be a positive integer.</value>
-  </data>
-  <data name="TopRawValueInvalid" xml:space="preserve">
-    <value>If specified, the $top value must be a positive integer.</value>
-  </data>
-  <data name="TopValueExceedsMaxAllowed" xml:space="preserve">
-    <value>The specified $top value exceeds the maximum allowed value of '{0}'</value>
   </data>
 </root>

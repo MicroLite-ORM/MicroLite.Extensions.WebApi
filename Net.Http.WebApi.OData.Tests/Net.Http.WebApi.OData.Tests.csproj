@@ -1,20 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}</ProjectGuid>
+    <ProjectGuid>{0BDC1EA9-0521-49C7-A0DF-199395419476}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MicroLite.Extensions.WebApi.Tests</RootNamespace>
-    <AssemblyName>MicroLite.Extensions.WebApi.Tests</AssemblyName>
+    <RootNamespace>Net.Http.WebApi.OData.Tests</RootNamespace>
+    <AssemblyName>Net.Http.WebApi.OData.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -42,75 +38,55 @@
     <AssemblyOriginatorKeyFile>..\MicroLite.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MicroLite, Version=4.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MicroLite.4.0.0-alpha3\lib\net45\MicroLite.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Extensions">
+    <Reference Include="System.Net.Http.Extensions, Version=2.1.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
+    <Reference Include="System.Net.Http.Primitives, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.runner.msbuild">
-      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.runner.msbuild.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.runner.tdnet">
-      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.runner.tdnet.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.runner.utility">
-      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.runner.utility.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationExtensionsTests.cs" />
-    <Compile Include="MicroLiteApiController{T}Tests.cs" />
-    <Compile Include="MicroLiteSessionAttributeTests.cs" />
-    <Compile Include="ObjectInfoExtensionsTests.cs" />
-    <Compile Include="OData\Binders\BinaryOperatorKindExtensionsTests.cs" />
-    <Compile Include="OData\Binders\ODataQueryOptionExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OData\Binders\FilterBinderTests.cs" />
-    <Compile Include="OData\Binders\OrderByBinderTests.cs" />
-    <Compile Include="OData\Binders\SelectBinderTests.cs" />
+    <Compile Include="Query\Expression\BinaryOperatorKindParserTests.cs" />
+    <Compile Include="Query\Expression\BinaryOperatorNodeTests.cs" />
+    <Compile Include="Query\Expression\ConstantNodeTests.cs" />
+    <Compile Include="Query\Expression\FilterExpressionParserTests.cs" />
+    <Compile Include="Query\Expression\SingleValueFunctionCallNodeTests.cs" />
+    <Compile Include="Query\Expression\SingleValuePropertyAccessNodeTests.cs" />
+    <Compile Include="Query\FilterQueryOptionTests.cs" />
+    <Compile Include="Query\FormatQueryOptionTests.cs" />
+    <Compile Include="Query\InlineCountQueryOptionTests.cs" />
+    <Compile Include="Query\ODataQueryOptionsTests.cs" />
+    <Compile Include="Query\ODataRawQueryOptionsTests.cs" />
+    <Compile Include="Query\OrderByPropertyTests.cs" />
+    <Compile Include="Query\OrderByQueryOptionTests.cs" />
+    <Compile Include="Query\SelectQueryOptionTests.cs" />
+    <Compile Include="Query\SkipQueryOptionTests.cs" />
+    <Compile Include="Query\TopQueryOptionTests.cs" />
+    <Compile Include="Query\Validation\ODataQueryValidatorTests.cs" />
+    <Compile Include="Query\Validation\TopQueryValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">
-      <Project>{48714FD3-E87A-4A49-B8FB-2644BD1C577B}</Project>
-      <Name>MicroLite.Extensions.WebApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj">
       <Project>{67fbeb32-944e-4022-8b80-5589762b2b05}</Project>
       <Name>Net.Http.WebApi.OData</Name>
@@ -123,7 +99,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

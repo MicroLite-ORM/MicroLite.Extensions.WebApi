@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MicroLite.Extensions.WebApi {
+namespace Net.Http.WebApi.OData {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MicroLite.Extensions.WebApi {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MicroLite.Extensions.WebApi.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Net.Http.WebApi.OData.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,47 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The argument must not be null.
+        ///   Looks up a localized string similar to If specified, the $inlinecount value must be either &apos;allpages&apos; or &apos;none&apos;..
         /// </summary>
-        internal static string ArgumentMustNotBeNull {
+        internal static string InlineCountRawValueInvalid {
             get {
-                return ResourceManager.GetString("ArgumentMustNotBeNull", resourceCulture);
+                return ResourceManager.GetString("InlineCountRawValueInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading the MicroLite extension for ASP.NET WebApi.
+        ///   Looks up a localized string similar to If specified, the $order by direction must be either &apos;asc&apos; or &apos;desc&apos;..
         /// </summary>
-        internal static string LoadingExtension {
+        internal static string OrderByPropertyRawValueInvalid {
             get {
-                return ResourceManager.GetString("LoadingExtension", resourceCulture);
+                return ResourceManager.GetString("OrderByPropertyRawValueInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters.
+        ///   Looks up a localized string similar to If specified, the $skip value must be a positive integer..
         /// </summary>
-        internal static string RegisteringDefaultActionFilter {
+        internal static string SkipRawValueInvalid {
             get {
-                return ResourceManager.GetString("RegisteringDefaultActionFilter", resourceCulture);
+                return ResourceManager.GetString("SkipRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If specified, the $top value must be a positive integer..
+        /// </summary>
+        internal static string TopRawValueInvalid {
+            get {
+                return ResourceManager.GetString("TopRawValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified $top value exceeds the maximum allowed value of &apos;{0}&apos;.
+        /// </summary>
+        internal static string TopValueExceedsMaxAllowed {
+            get {
+                return ResourceManager.GetString("TopValueExceedsMaxAllowed", resourceCulture);
             }
         }
     }
