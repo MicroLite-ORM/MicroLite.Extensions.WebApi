@@ -98,6 +98,7 @@
     <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="ObjectInfoExtensionsTests.cs" />
     <Compile Include="OData\Query\Binders\BinaryOperatorKindExtensionsTests.cs" />
+    <Compile Include="OData\Query\Binders\ODataQueryOptionExtensionsTests.cs" />
     <Compile Include="OData\Query\Expression\BinaryOperatorKindParserTests.cs" />
     <Compile Include="OData\Query\Expression\BinaryOperatorNodeTests.cs" />
     <Compile Include="OData\Query\Expression\ConstantNodeTests.cs" />
