@@ -18,43 +18,48 @@ namespace MicroLite.Extensions.WebApi.OData.Query.Expression
     public enum BinaryOperatorKind
     {
         /// <summary>
+        /// The binary kind is none.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// The binary operator is or.
         /// </summary>
-        Or = 0,
+        Or = 1,
 
         /// <summary>
         /// The binary operator is and.
         /// </summary>
-        And = 1,
+        And = 2,
 
         /// <summary>
         /// The binary operator is equal.
         /// </summary>
-        Equal = 2,
+        Equal = 3,
 
         /// <summary>
         /// The binary operator is not equal.
         /// </summary>
-        NotEqual = 3,
+        NotEqual = 4,
 
         /// <summary>
         /// The binary operator is greater than.
         /// </summary>
-        GreaterThan = 4,
+        GreaterThan = 5,
 
         /// <summary>
         /// The binary operator is greater than or equal.
         /// </summary>
-        GreaterThanOrEqual = 5,
+        GreaterThanOrEqual = 6,
 
         /// <summary>
         /// The binary operator is less than.
         /// </summary>
-        LessThan = 6,
+        LessThan = 7,
 
         /// <summary>
         /// The binary operator is less than or equal.
         /// </summary>
-        LessThanOrEqual = 7,
+        LessThanOrEqual = 8,
     }
 }
