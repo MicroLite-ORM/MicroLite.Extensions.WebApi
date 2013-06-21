@@ -20,7 +20,11 @@
   <files>
     <file src="..\build\4.0\MicroLite.Extensions.WebApi.dll" target="lib\net40" />
     <file src="..\build\4.0\MicroLite.Extensions.WebApi.xml" target="lib\net40" />
+    <file src="..\build\4.0\Net.Http.WebApi.OData.dll" target="lib\net40" />
+    <file src="..\build\4.0\Net.Http.WebApi.OData.xml" target="lib\net40" />
     <file src="..\build\4.5\MicroLite.Extensions.WebApi.dll" target="lib\net45" />
     <file src="..\build\4.5\MicroLite.Extensions.WebApi.xml" target="lib\net45" />
+    <file src="..\build\4.5\Net.Http.WebApi.OData.dll" target="lib\net45" />
+    <file src="..\build\4.5\Net.Http.WebApi.OData.xml" target="lib\net45" />
   </files>
 </package>
