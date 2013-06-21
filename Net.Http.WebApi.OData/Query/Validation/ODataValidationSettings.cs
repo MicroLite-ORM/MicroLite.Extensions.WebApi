@@ -18,14 +18,6 @@ namespace Net.Http.WebApi.OData.Query.Validation
     public sealed class ODataValidationSettings
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="ODataValidationSettings"/> class.
-        /// </summary>
-        public ODataValidationSettings()
-        {
-            this.AllowedQueryOptions = AllowedQueryOptions.Filter | AllowedQueryOptions.Format | AllowedQueryOptions.InlineCount | AllowedQueryOptions.OrderBy | AllowedQueryOptions.Select | AllowedQueryOptions.Skip | AllowedQueryOptions.Top;
-        }
-
-        /// <summary>
         /// Gets or sets the allowed query options.
         /// </summary>
         public AllowedQueryOptions AllowedQueryOptions
