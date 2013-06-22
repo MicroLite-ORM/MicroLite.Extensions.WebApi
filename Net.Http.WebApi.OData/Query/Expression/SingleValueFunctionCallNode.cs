@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query.Expression
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="arguments">The arguments.</param>
-        public SingleValueFunctionCallNode(string name, IEnumerable<QueryNode> arguments)
+        public SingleValueFunctionCallNode(string name, IList<QueryNode> arguments)
         {
             this.Name = name;
             this.Arguments = arguments;
@@ -34,7 +34,7 @@ namespace Net.Http.WebApi.OData.Query.Expression
         /// <summary>
         /// Gets the arguments for the function call.
         /// </summary>
-        public IEnumerable<QueryNode> Arguments
+        public IList<QueryNode> Arguments
         {
             get;
             private set;

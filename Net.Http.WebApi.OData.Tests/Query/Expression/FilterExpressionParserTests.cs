@@ -31,13 +31,13 @@
             [Fact]
             public void TheLeftNodeFirstArgumentShouldBeThePropertyNode()
             {
-                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[0]);
+                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[0]);
             }
 
             [Fact]
             public void TheLeftNodeFirstArgumentShouldContainThePropertyName()
             {
-                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[0];
+                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[0];
 
                 Assert.Equal("Name", queryNode.PropertyName);
             }
@@ -45,13 +45,13 @@
             [Fact]
             public void TheLeftNodeSecondArgumentShouldBeTheConstantNode()
             {
-                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[1]);
+                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[1]);
             }
 
             [Fact]
             public void TheLeftNodeSecondArgumentShouldContainTheConstantValue()
             {
-                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[1];
+                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[1];
 
                 Assert.Equal("yes", queryNode.Value);
             }
@@ -791,13 +791,13 @@
             [Fact]
             public void TheLeftNodeFirstArgumentShouldBeThePropertyNode()
             {
-                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[0]);
+                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[0]);
             }
 
             [Fact]
             public void TheLeftNodeFirstArgumentShouldContainThePropertyName()
             {
-                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[0];
+                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[0];
 
                 Assert.Equal("Name", queryNode.PropertyName);
             }
@@ -805,13 +805,13 @@
             [Fact]
             public void TheLeftNodeSecondArgumentShouldBeTheConstantNode()
             {
-                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[1]);
+                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[1]);
             }
 
             [Fact]
             public void TheLeftNodeSecondArgumentShouldContainTheConstantValue()
             {
-                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[1];
+                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[1];
 
                 Assert.Equal("Hay", queryNode.Value);
             }
@@ -873,13 +873,13 @@
             [Fact]
             public void TheLeftNodeFirstArgumentShouldBeTheConstantNode()
             {
-                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[0]);
+                Assert.IsType<ConstantNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[0]);
             }
 
             [Fact]
             public void TheLeftNodeFirstArgumentShouldContainTheConstantValue()
             {
-                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[0];
+                var queryNode = (ConstantNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[0];
 
                 Assert.Equal("Hayes", queryNode.Value);
             }
@@ -887,13 +887,13 @@
             [Fact]
             public void TheLeftNodeSecondArgumentShouldBeThePropertyNode()
             {
-                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[1]);
+                Assert.IsType<SingleValuePropertyAccessNode>(((SingleValueFunctionCallNode)this.node.Left).Arguments[1]);
             }
 
             [Fact]
             public void TheLeftNodeSecondArgumentShouldContainThePropertyName()
             {
-                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments.ToArray()[1];
+                var queryNode = (SingleValuePropertyAccessNode)((SingleValueFunctionCallNode)this.node.Left).Arguments[1];
 
                 Assert.Equal("Name", queryNode.PropertyName);
             }

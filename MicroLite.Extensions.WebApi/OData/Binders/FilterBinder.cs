@@ -120,7 +120,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             private void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode)
             {
-                var arguments = singleValueFunctionCallNode.Arguments.ToArray();
+                var arguments = singleValueFunctionCallNode.Arguments;
 
                 switch (singleValueFunctionCallNode.Name)
                 {
