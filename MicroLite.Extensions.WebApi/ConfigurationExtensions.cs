@@ -32,26 +32,40 @@ namespace MicroLite.Configuration
         /// <returns>The configure extensions.</returns>
         public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions)
         {
-            return WithWebApi(configureExtensions, true);
+            return WithWebApi(configureExtensions, WebApiConfigurationSettings.Default);
         }
 
         /// <summary>
         /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi optionally registering a MicroLiteSessionAttribute configured with default values in GlobalConfiguration.Configuration.Filters if one has not already been registered.
         /// </summary>
         /// <param name="configureExtensions">The interface to configure extensions.</param>
-        /// <param name="registerGlobalFilter">If set to true and the MicroLiteSessionAttribute is not already registered in GlobalConfiguration.Configuration.Filters, registers a new MicroLiteSessionAttribute with the default settings.</param>
+        /// <param name="webApiConfig">The settings used for configuration.</param>
         /// <returns>The configure extensions.</returns>
-        public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, bool registerGlobalFilter)
+        public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings webApiConfig)
         {
             System.Diagnostics.Trace.TraceInformation(Messages.LoadingExtension);
             log.TryLogInfo(Messages.LoadingExtension);
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
-            if (registerGlobalFilter
+            if (webApiConfig.RegisterGlobalMicroLiteSessionAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
             {
-                log.TryLogInfo(Messages.RegisteringDefaultActionFilter);
+                log.TryLogInfo(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
                 GlobalConfiguration.Configuration.Filters.Add(new MicroLiteSessionAttribute());
+            }
+
+            if (webApiConfig.RegisterGlobalValidateModelNotNullAttribute
+                && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
+            {
+                log.TryLogInfo(Messages.RegisteringValidateModelNotNullActionFilter);
+                GlobalConfiguration.Configuration.Filters.Add(new ValidateModelNotNullAttribute());
+            }
+
+            if (webApiConfig.RegisterGlobalValidateModelStateAttribute
+                && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
+            {
+                log.TryLogInfo(Messages.RegisteringValidateModelStateActionFilter);
+                GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
             }
 
             return configureExtensions;

@@ -108,6 +108,7 @@
     <Compile Include="OData\Binders\ODataQueryOptionExtensions.cs" />
     <Compile Include="OData\Binders\OrderByBinder.cs" />
     <Compile Include="OData\Binders\SelectBinder.cs" />
+    <Compile Include="WebApiConfigurationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">

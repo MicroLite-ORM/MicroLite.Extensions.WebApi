@@ -9,15 +9,56 @@
 
     public class ConfigurationExtensionsTests
     {
-        public class WhenCallingWithWebApiAndRegisterGlobalFilterFalse
+        public class WhenCallingWithWebApiAndThereAreNoFiltersRegistered
         {
-            public WhenCallingWithWebApiAndRegisterGlobalFilterFalse()
+            public WhenCallingWithWebApiAndThereAreNoFiltersRegistered()
             {
                 GlobalConfiguration.Configuration.Filters.Clear();
 
                 var configureExtensions = new Mock<IConfigureExtensions>().Object;
 
-                configureExtensions.WithWebApi(registerGlobalFilter: false);
+                configureExtensions.WithWebApi(WebApiConfigurationSettings.Default);
+            }
+
+            [Fact]
+            public void AMicroLiteSessionAttributeShouldBeRegistered()
+            {
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))).SingleOrDefault();
+
+                Assert.NotNull(filter);
+            }
+
+            [Fact]
+            public void AValidateModelNotNullAttributeShouldBeRegistered()
+            {
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))).SingleOrDefault();
+
+                Assert.NotNull(filter);
+            }
+
+            [Fact]
+            public void AValidateModelStateAttributeShouldBeRegistered()
+            {
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))).SingleOrDefault();
+
+                Assert.NotNull(filter);
+            }
+        }
+
+        public class WhenCallingWithWebApiWithConfigurationSettingsDisabled
+        {
+            public WhenCallingWithWebApiWithConfigurationSettingsDisabled()
+            {
+                GlobalConfiguration.Configuration.Filters.Clear();
+
+                var configureExtensions = new Mock<IConfigureExtensions>().Object;
+
+                configureExtensions.WithWebApi(new WebApiConfigurationSettings
+                {
+                    RegisterGlobalMicroLiteSessionAttribute = false,
+                    RegisterGlobalValidateModelNotNullAttribute = false,
+                    RegisterGlobalValidateModelStateAttribute = false
+                });
             }
 
             [Fact]
@@ -27,48 +68,64 @@
 
                 Assert.Null(filter);
             }
-        }
 
-        public class WhenCallingWithWebApiAndThereIsAMicroLiteSessionAttributeRegistered
-        {
-            private readonly MicroLiteSessionAttribute attribute = new MicroLiteSessionAttribute();
-
-            public WhenCallingWithWebApiAndThereIsAMicroLiteSessionAttributeRegistered()
+            [Fact]
+            public void NoValidateModelNotNullAttributeShouldBeRegistered()
             {
-                GlobalConfiguration.Configuration.Filters.Clear();
-                GlobalConfiguration.Configuration.Filters.Add(this.attribute);
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))).SingleOrDefault();
 
-                var configureExtensions = new Mock<IConfigureExtensions>().Object;
-
-                configureExtensions.WithWebApi(registerGlobalFilter: true);
+                Assert.Null(filter);
             }
 
             [Fact]
-            public void TheOriginalFilterShouldNotBeReplaced()
+            public void NoValidateModelStateAttributeShouldBeRegistered()
             {
-                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))).SingleOrDefault();
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))).SingleOrDefault();
 
-                Assert.Same(attribute, filter.Instance);
+                Assert.Null(filter);
             }
         }
 
-        public class WhenCallingWithWebApiAndThereIsNoMicroLiteSessionAttributeRegistered
+        public class WhenCallingWithWebApiWithDefaultSettingsButFiltersAreAlreadyRegistered
         {
-            public WhenCallingWithWebApiAndThereIsNoMicroLiteSessionAttributeRegistered()
+            private readonly MicroLiteSessionAttribute microLiteSessionAttribute = new MicroLiteSessionAttribute();
+            private readonly ValidateModelNotNullAttribute validateModelNotNullAttribute = new ValidateModelNotNullAttribute();
+            private readonly ValidateModelStateAttribute validateModelStateAttribute = new ValidateModelStateAttribute();
+
+            public WhenCallingWithWebApiWithDefaultSettingsButFiltersAreAlreadyRegistered()
             {
                 GlobalConfiguration.Configuration.Filters.Clear();
+                GlobalConfiguration.Configuration.Filters.Add(this.microLiteSessionAttribute);
+                GlobalConfiguration.Configuration.Filters.Add(this.validateModelNotNullAttribute);
+                GlobalConfiguration.Configuration.Filters.Add(this.validateModelStateAttribute);
 
                 var configureExtensions = new Mock<IConfigureExtensions>().Object;
 
-                configureExtensions.WithWebApi(registerGlobalFilter: true);
+                configureExtensions.WithWebApi(WebApiConfigurationSettings.Default);
             }
 
             [Fact]
-            public void AMicroLiteSessionAttributeShouldBeRegistered()
+            public void TheOriginalMicroLiteSessionAttributeShouldNotBeReplaced()
             {
                 var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))).SingleOrDefault();
 
-                Assert.NotNull(filter);
+                Assert.Same(microLiteSessionAttribute, filter.Instance);
+            }
+
+            [Fact]
+            public void TheOriginalValidateModelNotNullAttributeShouldNotBeReplaced()
+            {
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))).SingleOrDefault();
+
+                Assert.Same(validateModelNotNullAttribute, filter.Instance);
+            }
+
+            [Fact]
+            public void TheOriginalValidateModelStateAttributeShouldNotBeReplaced()
+            {
+                var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))).SingleOrDefault();
+
+                Assert.Same(validateModelStateAttribute, filter.Instance);
             }
         }
     }

@@ -81,9 +81,27 @@ namespace MicroLite.Extensions.WebApi {
         /// <summary>
         ///   Looks up a localized string similar to Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters.
         /// </summary>
-        internal static string RegisteringDefaultActionFilter {
+        internal static string RegisteringDefaultMicroLiteSessionActionFilter {
             get {
-                return ResourceManager.GetString("RegisteringDefaultActionFilter", resourceCulture);
+                return ResourceManager.GetString("RegisteringDefaultMicroLiteSessionActionFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading a ValidateModelNotNullAttribute in GlobalFilters.Filters.
+        /// </summary>
+        internal static string RegisteringValidateModelNotNullActionFilter {
+            get {
+                return ResourceManager.GetString("RegisteringValidateModelNotNullActionFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading a ValidateModelStateAttribute in GlobalFilters.Filters.
+        /// </summary>
+        internal static string RegisteringValidateModelStateActionFilter {
+            get {
+                return ResourceManager.GetString("RegisteringValidateModelStateActionFilter", resourceCulture);
             }
         }
     }
