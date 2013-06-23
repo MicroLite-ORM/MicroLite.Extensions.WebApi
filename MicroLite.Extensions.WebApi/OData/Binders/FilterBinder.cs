@@ -14,6 +14,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
     using System.Linq;
+    using MicroLite.Dialect;
     using MicroLite.Query;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
@@ -46,6 +47,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         private class FilterBinderImpl
         {
             private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
+            private readonly SqlCharacters sqlCharacters = SqlBuilder.SqlCharacters ?? SqlCharacters.Empty;
 
             internal IAndOrOrderBy BindFilter(FilterQueryOption filterQuery, IWhereOrOrderBy selectFromSqlBuilder)
             {
@@ -105,7 +107,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             private void BindConstantNode(ConstantNode constantNode)
             {
-                this.predicateBuilder.Append("@p0", constantNode.Value);
+                this.predicateBuilder.Append(this.sqlCharacters.GetParameterName(0), constantNode.Value);
             }
 
             private void BindFilter(FilterQueryOption filterQuery)
@@ -126,17 +128,17 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 {
                     case "endswith":
                         this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(" LIKE @p0", "%" + ((ConstantNode)arguments[1]).Value);
+                        this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[1]).LiteralText);
                         break;
 
                     case "startswith":
                         this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(" LIKE @p0", ((ConstantNode)arguments[1]).Value + "%");
+                        this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[1]).LiteralText + this.sqlCharacters.LikeWildcard);
                         break;
 
                     case "substringof":
                         this.Bind(arguments[1]);
-                        this.predicateBuilder.Append(" LIKE @p0", "%" + ((ConstantNode)arguments[0]).Value + "%");
+                        this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).LiteralText + this.sqlCharacters.LikeWildcard);
                         break;
 
                     default:

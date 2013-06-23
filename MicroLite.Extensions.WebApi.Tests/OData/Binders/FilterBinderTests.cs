@@ -71,7 +71,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Created >= @p0) AND ((Created <= @p1) AND ((Reference = @p2) AND (Name LIKE @p3))))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "%Hayes")
+                    .Where("((Created >= ?) AND ((Created <= ?) AND ((Reference = ?) AND (Name LIKE ?))))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "%Hayes")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -120,7 +120,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Name = @p0) AND ((Created > @p1) AND (Created < @p2)))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
+                    .Where("((Name = ?) AND ((Created > ?) AND (Created < ?)))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -169,7 +169,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Name = @p0) AND ((Created > @p1) OR (Created < @p2)))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
+                    .Where("((Name = ?) AND ((Created > ?) OR (Created < ?)))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -212,7 +212,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Created > @p0) AND (Created < @p1))", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
+                    .Where("((Created > ?) AND (Created < ?))", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -255,7 +255,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Created > @p0) OR (Created < @p1))", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
+                    .Where("((Created > ?) OR (Created < ?))", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -292,7 +292,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Name LIKE @p0)", "%Bloggs")
+                    .Where("(Name LIKE ?)", "%Bloggs")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -329,7 +329,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Name = @p0)", "Fred Bloggs")
+                    .Where("(Name = ?)", "Fred Bloggs")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -366,7 +366,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Created > @p0)", new DateTime(2013, 4, 1))
+                    .Where("(Created > ?)", new DateTime(2013, 4, 1))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -403,7 +403,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Created >= @p0)", new DateTime(2013, 4, 1))
+                    .Where("(Created >= ?)", new DateTime(2013, 4, 1))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -440,7 +440,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Created < @p0)", new DateTime(2013, 4, 1))
+                    .Where("(Created < ?)", new DateTime(2013, 4, 1))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -477,7 +477,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Created <= @p0)", new DateTime(2013, 4, 1))
+                    .Where("(Created <= ?)", new DateTime(2013, 4, 1))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -514,7 +514,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Name <> @p0)", "Fred Bloggs")
+                    .Where("(Name <> ?)", "Fred Bloggs")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -551,7 +551,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Name LIKE @p0)", "Fred%")
+                    .Where("(Name LIKE ?)", "Fred%")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -588,7 +588,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Name LIKE @p0)", "%Bloggs%")
+                    .Where("(Name LIKE ?)", "%Bloggs%")
                     .ToSqlQuery()
                     .CommandText;
 

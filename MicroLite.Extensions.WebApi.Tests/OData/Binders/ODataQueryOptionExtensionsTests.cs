@@ -24,7 +24,7 @@
 
             var sqlQuery = option.CreateSqlQuery<Customer>();
 
-            var expected = SqlBuilder.Select("*").From(typeof(Customer)).Where("(Forename = @p0)", "John").OrderByAscending("Surname").ToSqlQuery();
+            var expected = SqlBuilder.Select("*").From(typeof(Customer)).Where("(Forename = ?)", "John").OrderByAscending("Surname").ToSqlQuery();
 
             Assert.Equal(expected, sqlQuery);
         }
