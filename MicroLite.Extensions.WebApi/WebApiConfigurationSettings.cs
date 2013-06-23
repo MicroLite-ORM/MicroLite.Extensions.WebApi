@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace MicroLite.Extensions.WebApi
+namespace MicroLite.Configuration
 {
     /// <summary>
     /// A class containing configuration options for the MicroLite WebApi extension.
