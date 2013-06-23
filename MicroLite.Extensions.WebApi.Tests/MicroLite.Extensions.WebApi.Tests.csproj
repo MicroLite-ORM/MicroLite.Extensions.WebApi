@@ -91,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationExtensionsTests.cs" />
+    <Compile Include="Filters\ValidateModelNotNullAttributeTests.cs" />
+    <Compile Include="Filters\ValidateModelStateAttributeTests.cs" />
     <Compile Include="MicroLiteApiController{T}Tests.cs" />
     <Compile Include="Filters\MicroLiteSessionAttributeTests.cs" />
     <Compile Include="ObjectInfoExtensionsTests.cs" />
