@@ -15,6 +15,7 @@ namespace MicroLite.Configuration
     using System.Linq;
     using System.Web.Http;
     using MicroLite.Extensions.WebApi;
+    using MicroLite.Extensions.WebApi.Filters;
     using MicroLite.Logging;
 
     /// <summary>

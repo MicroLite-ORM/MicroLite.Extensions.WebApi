@@ -92,7 +92,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationExtensionsTests.cs" />
     <Compile Include="MicroLiteApiController{T}Tests.cs" />
-    <Compile Include="MicroLiteSessionAttributeTests.cs" />
+    <Compile Include="Filters\MicroLiteSessionAttributeTests.cs" />
     <Compile Include="ObjectInfoExtensionsTests.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensionsTests.cs" />
     <Compile Include="OData\Binders\ODataQueryOptionExtensionsTests.cs" />

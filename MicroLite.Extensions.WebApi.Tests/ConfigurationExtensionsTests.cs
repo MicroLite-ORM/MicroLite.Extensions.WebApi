@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Web.Http;
     using MicroLite.Configuration;
+    using MicroLite.Extensions.WebApi.Filters;
     using Moq;
     using Xunit;
 
