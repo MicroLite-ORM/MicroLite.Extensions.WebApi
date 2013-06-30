@@ -105,7 +105,7 @@
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensions.cs" />
     <Compile Include="OData\Binders\FilterBinder.cs" />
-    <Compile Include="OData\Binders\ODataQueryOptionExtensions.cs" />
+    <Compile Include="OData\Binders\ODataQueryOptionsExtensions.cs" />
     <Compile Include="OData\Binders\OrderByBinder.cs" />
     <Compile Include="OData\Binders\SelectBinder.cs" />
     <Compile Include="WebApiConfigurationSettings.cs" />

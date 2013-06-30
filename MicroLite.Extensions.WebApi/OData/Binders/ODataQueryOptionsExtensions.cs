@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataQueryOptionExtensions.cs" company="MicroLite">
+// <copyright file="ODataQueryOptionsExtensions.cs" company="MicroLite">
 // Copyright 2012-2013 Trevor Pilley
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using Net.Http.WebApi.OData.Query;
 
-    internal static class ODataQueryOptionExtensions
+    internal static class ODataQueryOptionsExtensions
     {
         internal static SqlQuery CreateSqlQuery<T>(this ODataQueryOptions queryOptions)
         {
