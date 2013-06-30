@@ -22,6 +22,8 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     /// </summary>
     public static class SelectBinder
     {
+        private static readonly string[] AllColumnNames = new string[] { "*" };
+
         /// <summary>
         /// Binds the select query option to the SqlBuilder.
         /// </summary>
@@ -35,7 +37,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             if (queryOptions.Select == null || (queryOptions.Select.Properties.Count == 1 && queryOptions.Select.Properties[0] == "*"))
             {
-                columnNames = new string[] { "*" };
+                columnNames = AllColumnNames;
             }
             else
             {
@@ -48,7 +50,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     .ToArray();
             }
 
-            return SqlBuilder.Select(string.Join(", ", columnNames)).From(typeof(T));
+            return SqlBuilder.Select(columnNames).From(typeof(T));
         }
     }
 }

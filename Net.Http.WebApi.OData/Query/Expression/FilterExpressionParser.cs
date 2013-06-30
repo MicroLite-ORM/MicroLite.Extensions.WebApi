@@ -18,6 +18,7 @@ namespace Net.Http.WebApi.OData.Query.Expression
 
     internal static class FilterExpressionParser
     {
+        private static readonly string[] DateTimeFormats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
         private static readonly Regex DecimalRegex = new Regex(@"^\d+.\d+(m|M)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex DoubleRegex = new Regex(@"^\d+.\d+(d|D)$", RegexOptions.Compiled | RegexOptions.Singleline);
         private static readonly Regex FunctionCallRegex = new Regex(@"^(?<Function>[a-z/]*)\(((?<Property>[A-Za-z/]*)(, '?(?<Argument>[^'\(\)]*)'?)?\)|('(?<Argument>[^'\(\)]*)')?, (?<Property>[A-Za-z/]*)\)) (?<Operator>eq|ne|gt|ge|lt|le) (?:'?)(?<Value>[^']*)(?:'?)$", RegexOptions.Compiled | RegexOptions.Singleline);
@@ -74,8 +75,7 @@ namespace Net.Http.WebApi.OData.Query.Expression
             switch (dataType)
             {
                 case "datetime":
-                    var formats = new[] { "yyyy-MM-dd", "yyyy-MM-ddTHH:mm", "s", "o" };
-                    return DateTime.ParseExact(literalValue, formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    return DateTime.ParseExact(literalValue, DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
 
                 case "guid":
                     return Guid.ParseExact(literalValue, "D");

@@ -19,13 +19,15 @@ namespace Net.Http.WebApi.OData.Query
     /// </summary>
     public sealed class ODataRawQueryOptions
     {
+        private static readonly char[] QuerySeparators = new[] { '&' };
+
         /// <summary>
         /// Initialises a new instance of the <see cref="ODataRawQueryOptions"/> class.
         /// </summary>
         /// <param name="rawQuery">The raw query.</param>
         public ODataRawQueryOptions(string rawQuery)
         {
-            var pieces = rawQuery.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+            var pieces = rawQuery.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var piece in pieces)
             {
