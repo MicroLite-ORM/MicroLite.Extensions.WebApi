@@ -6,7 +6,7 @@
     using Net.Http.WebApi.OData.Query.Validation;
     using Xunit;
 
-    public class ODataQueryValidatorTests
+    public class ODataQueryOptionsValidatorTests
     {
         public class WhenTheFormatQueryOptionIsSetAndItIsNotSpecifiedInAllowedQueryOptions
         {
@@ -21,7 +21,7 @@
             [Fact]
             public void AnODataExceptionIsThrown()
             {
-                Assert.Throws<ODataException>(() => ODataQueryValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.Throws<ODataException>(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -38,7 +38,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => ODataQueryValidator.Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => ODataQueryOptionsValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
     }

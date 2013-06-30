@@ -80,7 +80,7 @@
     <Compile Include="Query\SelectQueryOptionTests.cs" />
     <Compile Include="Query\SkipQueryOptionTests.cs" />
     <Compile Include="Query\TopQueryOptionTests.cs" />
-    <Compile Include="Query\Validation\ODataQueryValidatorTests.cs" />
+    <Compile Include="Query\Validation\ODataQueryOptionsValidatorTests.cs" />
     <Compile Include="Query\Validation\SkipQueryOptionValidatorTests.cs" />
     <Compile Include="Query\Validation\TopQueryOptionValidatorTests.cs" />
   </ItemGroup>

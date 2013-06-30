@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataQueryValidator.cs" company="MicroLite">
+// <copyright file="ODataQueryOptionsValidator.cs" company="MicroLite">
 // Copyright 2012-2013 Trevor Pilley
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     /// <summary>
     /// A class which validates ODataQueryOptions based upon the ODataValidationSettings.
     /// </summary>
-    public static class ODataQueryValidator
+    public static class ODataQueryOptionsValidator
     {
         /// <summary>
         /// Validates the specified query options.
