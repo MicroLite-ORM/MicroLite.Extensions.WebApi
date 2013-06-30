@@ -70,11 +70,47 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type {0} does not have a property called {1}.
+        /// </summary>
+        internal static string InvalidPropertyName {
+            get {
+                return ResourceManager.GetString("InvalidPropertyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the MicroLite extension for ASP.NET WebApi.
         /// </summary>
         internal static string LoadingExtension {
             get {
                 return ResourceManager.GetString("LoadingExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MicroLite has been configured for multiple connections, therefore the connection name must be specified in the MicroLiteSessionAttribute (e.g. [MicroLiteSession(&quot;MyConnection&quot;)])..
+        /// </summary>
+        internal static string NoConnectionNameMultipleSessionFactories {
+            get {
+                return ResourceManager.GetString("NoConnectionNameMultipleSessionFactories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to find the session factory, check that Configure.Extensions().WithWebApi() has been called in your application start up..
+        /// </summary>
+        internal static string NoSessionFactoriesSet {
+            get {
+                return ResourceManager.GetString("NoSessionFactoriesSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MicroLite has not been configured for the connection named {0}, either the connection name in the MicroLiteSessionAttribute is incorrect or Configure.Fluently().ForConnection({0}) has not been called..
+        /// </summary>
+        internal static string NoSessionFactoryFoundForConnectionName {
+            get {
+                return ResourceManager.GetString("NoSessionFactoryFoundForConnectionName", resourceCulture);
             }
         }
         

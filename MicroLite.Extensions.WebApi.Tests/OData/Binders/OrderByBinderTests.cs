@@ -2,6 +2,7 @@
 {
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Query;
+    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -11,6 +12,14 @@
         {
             Pending = 0,
             Active = 1
+        }
+
+        [Fact]
+        public void BindOrderByThrowsODataExceptionForUnspportedPropertyName()
+        {
+            var exception = Assert.Throws<ODataException>(() => OrderByBinder.BindOrderBy<Customer>(new OrderByQueryOption("$orderby=FirstName"), SqlBuilder.Select("*").From(typeof(Customer))));
+
+            Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
         }
 
         public class WhenCallingBindOrderBy

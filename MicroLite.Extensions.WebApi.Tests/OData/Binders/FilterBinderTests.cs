@@ -2,7 +2,6 @@
 {
     using System;
     using System.Net.Http;
-    using MicroLite.Extensions.WebApi.OData;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Query;
     using Net.Http.WebApi.OData;
@@ -11,14 +10,6 @@
 
     public class FilterBinderTests
     {
-        private enum CustomerStatus
-        {
-            New = 0,
-            Current = 1,
-            Migrated = 2,
-            Closed = 3
-        }
-
         [Fact]
         public void BindFilterThrowsODataExceptionForUnspportedFunctionName()
         {
@@ -28,6 +19,17 @@
             var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))));
 
             Assert.Equal("The function 'indexof' is not supported", exception.Message);
+        }
+
+        [Fact]
+        public void BindFilterThrowsODataExceptionForUnspportedPropertyName()
+        {
+            var queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=FirstName eq 'Fred'"));
+
+            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))));
+
+            Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
         }
 
         public class WhenCallingApplyToWithAComplexQuery
@@ -623,12 +625,6 @@
             }
 
             public string Reference
-            {
-                get;
-                set;
-            }
-
-            public CustomerStatus Status
             {
                 get;
                 set;

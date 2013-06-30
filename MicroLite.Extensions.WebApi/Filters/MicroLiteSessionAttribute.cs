@@ -152,12 +152,12 @@ namespace MicroLite.Extensions.WebApi.Filters
         {
             if (SessionFactories == null)
             {
-                throw new MicroLiteException(ExceptionMessages.NoSessionFactoriesSet);
+                throw new MicroLiteException(Messages.NoSessionFactoriesSet);
             }
 
             if (this.connectionName == null && SessionFactories.Count() > 1)
             {
-                throw new MicroLiteException(ExceptionMessages.NoConnectionNameMultipleSessionFactories);
+                throw new MicroLiteException(Messages.NoConnectionNameMultipleSessionFactories);
             }
 
             var sessionFactory =
@@ -165,7 +165,7 @@ namespace MicroLite.Extensions.WebApi.Filters
 
             if (sessionFactory == null)
             {
-                throw new MicroLiteException(string.Format(CultureInfo.InvariantCulture, ExceptionMessages.NoSessionFactoryFoundForConnectionName, this.connectionName));
+                throw new MicroLiteException(string.Format(CultureInfo.InvariantCulture, Messages.NoSessionFactoryFoundForConnectionName, this.connectionName));
             }
 
             return sessionFactory;

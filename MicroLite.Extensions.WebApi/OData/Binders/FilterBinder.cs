@@ -13,7 +13,10 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
+    using System.Globalization;
+    using System.Linq;
     using MicroLite.Dialect;
+    using MicroLite.Mapping;
     using MicroLite.Query;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
@@ -36,7 +39,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (filterQuery != null)
             {
-                var filterBinder = new FilterBinderImpl();
+                var filterBinder = new FilterBinderImpl(ObjectInfo.For(typeof(T)));
                 filterBinder.BindFilter(filterQuery, selectFromSqlBuilder);
             }
 
@@ -45,8 +48,14 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
         private class FilterBinderImpl
         {
+            private readonly IObjectInfo objectInfo;
             private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
             private readonly SqlCharacters sqlCharacters = SqlBuilder.SqlCharacters ?? SqlCharacters.Empty;
+
+            internal FilterBinderImpl(IObjectInfo objectInfo)
+            {
+                this.objectInfo = objectInfo;
+            }
 
             internal IAndOrOrderBy BindFilter(FilterQueryOption filterQuery, IWhereOrOrderBy selectFromSqlBuilder)
             {
@@ -116,7 +125,14 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             private void BindPropertyAccessQueryNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
             {
-                this.predicateBuilder.Append(singleValuePropertyAccessNode.PropertyName);
+                var column = this.objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == singleValuePropertyAccessNode.PropertyName);
+
+                if (column == null)
+                {
+                    throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, this.objectInfo.ForType.Name, singleValuePropertyAccessNode.PropertyName));
+                }
+
+                this.predicateBuilder.Append(column.ColumnName);
             }
 
             private void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode)

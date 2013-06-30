@@ -12,9 +12,11 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
+    using System.Globalization;
     using System.Linq;
     using MicroLite.Mapping;
     using MicroLite.Query;
+    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
 
     /// <summary>
@@ -43,11 +45,20 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             {
                 var objectInfo = ObjectInfo.For(typeof(T));
 
-                columnNames = queryOptions
-                    .Select
-                    .Properties
-                    .Select(s => objectInfo.TableInfo.Columns.Single(c => c.PropertyInfo.Name == s).ColumnName)
-                    .ToArray();
+                columnNames = new string[queryOptions.Select.Properties.Count];
+                int columnCount = 0;
+
+                foreach (var property in queryOptions.Select.Properties)
+                {
+                    var column = objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == property);
+
+                    if (column == null)
+                    {
+                        throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, objectInfo.ForType.Name, property));
+                    }
+
+                    columnNames[columnCount++] = column.ColumnName;
+                }
             }
 
             return SqlBuilder.Select(columnNames).From(typeof(T));

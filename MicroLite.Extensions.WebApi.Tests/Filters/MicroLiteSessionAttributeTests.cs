@@ -110,7 +110,7 @@
 
                 var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
-                Assert.Equal(string.Format(ExceptionMessages.NoSessionFactoryFoundForConnectionName, "Northwind"), exception.Message);
+                Assert.Equal(string.Format(Messages.NoSessionFactoryFoundForConnectionName, "Northwind"), exception.Message);
             }
         }
 
@@ -248,7 +248,7 @@
 
                 var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
-                Assert.Equal(ExceptionMessages.NoSessionFactoriesSet, exception.Message);
+                Assert.Equal(Messages.NoSessionFactoriesSet, exception.Message);
             }
         }
 
@@ -275,7 +275,7 @@
 
                 var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
-                Assert.Equal(ExceptionMessages.NoConnectionNameMultipleSessionFactories, exception.Message);
+                Assert.Equal(Messages.NoConnectionNameMultipleSessionFactories, exception.Message);
             }
         }
 
