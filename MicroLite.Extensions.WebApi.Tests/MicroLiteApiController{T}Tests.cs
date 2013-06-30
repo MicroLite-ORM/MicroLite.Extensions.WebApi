@@ -28,7 +28,7 @@
             }
 
             [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeNotFound()
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeNoContent()
             {
                 Assert.Equal(HttpStatusCode.NoContent, this.response.StatusCode);
             }
