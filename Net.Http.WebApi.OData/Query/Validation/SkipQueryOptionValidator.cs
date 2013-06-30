@@ -12,8 +12,6 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validation
 {
-    using System.Globalization;
-
     /// <summary>
     /// A class which validates the $skip query option based upon the ODataValidationSettings.
     /// </summary>
