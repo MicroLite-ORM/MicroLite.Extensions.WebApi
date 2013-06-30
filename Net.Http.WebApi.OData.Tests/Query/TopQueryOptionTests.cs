@@ -38,15 +38,5 @@
                 Assert.Equal(25, this.option.Value);
             }
         }
-
-        public class WhenConstructedWithAValueBelowZero
-        {
-            [Fact]
-            public void AnODataExceptionShouldBeThrown()
-            {
-                var exception = Assert.Throws<ODataException>(() => new TopQueryOption("$top=-1"));
-                Assert.Equal(Messages.TopRawValueInvalid, exception.Message);
-            }
-        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TopQueryValidator.cs" company="MicroLite">
+// <copyright file="SkipQueryOptionValidator.cs" company="MicroLite">
 // Copyright 2012-2013 Trevor Pilley
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +15,9 @@ namespace Net.Http.WebApi.OData.Query.Validation
     using System.Globalization;
 
     /// <summary>
-    /// A class which validates the $top query option based upon the ODataValidationSettings.
+    /// A class which validates the $skip query option based upon the ODataValidationSettings.
     /// </summary>
-    public class TopQueryValidator
+    public static class SkipQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -25,14 +25,13 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
-        public void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
+        public static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Top != null && validationSettings.MaxTop.HasValue)
+            if (queryOptions.Skip != null)
             {
-                if (queryOptions.Top.Value > validationSettings.MaxTop.Value)
+                if (queryOptions.Skip.Value < 0)
                 {
-                    var message = string.Format(CultureInfo.InvariantCulture, Messages.TopValueExceedsMaxAllowed, validationSettings.MaxTop.Value.ToString(CultureInfo.InvariantCulture));
-                    throw new ODataException(message);
+                    throw new ODataException(Messages.SkipRawValueInvalid);
                 }
             }
         }

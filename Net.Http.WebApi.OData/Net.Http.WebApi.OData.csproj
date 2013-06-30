@@ -101,7 +101,8 @@
     <Compile Include="Query\Validation\AllowedQueryOptions.cs" />
     <Compile Include="Query\Validation\ODataQueryValidator.cs" />
     <Compile Include="Query\Validation\ODataValidationSettings.cs" />
-    <Compile Include="Query\Validation\TopQueryValidator.cs" />
+    <Compile Include="Query\Validation\SkipQueryOptionValidator.cs" />
+    <Compile Include="Query\Validation\TopQueryOptionValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">

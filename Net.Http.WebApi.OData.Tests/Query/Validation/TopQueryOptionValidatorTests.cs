@@ -21,7 +21,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -38,7 +38,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -55,7 +55,7 @@
             [Fact]
             public void AnExceptionIsThrown()
             {
-                var exception = Assert.Throws<ODataException>(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                var exception = Assert.Throws<ODataException>(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
                 Assert.Equal(string.Format(Messages.TopValueExceedsMaxAllowed, 100), exception.Message);
             }
         }
@@ -73,7 +73,24 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => new TopQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
+            }
+        }
+
+        public class WhenValidatingAndNoMaxTopIsSetButTheValueIsBelowZero
+        {
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=-10"));
+
+            private readonly ODataValidationSettings validationSettings = new ODataValidationSettings
+            {
+                MaxTop = null
+            };
+
+            [Fact]
+            public void AnExceptionIsThrown()
+            {
+                Assert.Throws<ODataException>(() => TopQueryOptionValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
     }

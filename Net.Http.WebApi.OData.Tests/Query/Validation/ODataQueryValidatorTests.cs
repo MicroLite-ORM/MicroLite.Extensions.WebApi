@@ -21,7 +21,7 @@
             [Fact]
             public void AnODataExceptionIsThrown()
             {
-                Assert.Throws<ODataException>(() => new ODataQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                Assert.Throws<ODataException>(() => ODataQueryValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
 
@@ -38,7 +38,7 @@
             [Fact]
             public void AnODataExceptionIsNotThrown()
             {
-                Assert.DoesNotThrow(() => new ODataQueryValidator().Validate(this.queryOptions, this.validationSettings));
+                Assert.DoesNotThrow(() => ODataQueryValidator.Validate(this.queryOptions, this.validationSettings));
             }
         }
     }

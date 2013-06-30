@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ODataQueryValidator.cs" company="MicroLite">
+// <copyright file="TopQueryOptionValidator.cs" company="MicroLite">
 // Copyright 2012-2013 Trevor Pilley
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +15,9 @@ namespace Net.Http.WebApi.OData.Query.Validation
     using System.Globalization;
 
     /// <summary>
-    /// A class which validates ODataQueryOptions based upon the ODataValidationSettings.
+    /// A class which validates the $top query option based upon the ODataValidationSettings.
     /// </summary>
-    public static class ODataQueryValidator
+    public static class TopQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
@@ -27,9 +27,22 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
         public static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Format != null && (validationSettings.AllowedQueryOptions & AllowedQueryOptions.Format) != AllowedQueryOptions.Format)
+            if (queryOptions.Top != null)
             {
-                throw new ODataException();
+                if (queryOptions.Top.Value < 0)
+                {
+                    throw new ODataException(Messages.TopRawValueInvalid);
+                }
+
+                if (validationSettings.MaxTop.HasValue && queryOptions.Top.Value > validationSettings.MaxTop.Value)
+                {
+                    var message = string.Format(
+                        CultureInfo.InvariantCulture,
+                        Messages.TopValueExceedsMaxAllowed,
+                        validationSettings.MaxTop.Value.ToString(CultureInfo.InvariantCulture));
+
+                    throw new ODataException(message);
+                }
             }
         }
     }

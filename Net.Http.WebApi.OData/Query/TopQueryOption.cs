@@ -33,11 +33,6 @@ namespace Net.Http.WebApi.OData.Query
             if (int.TryParse(pieces[1], out top))
             {
                 this.Value = top;
-
-                if (this.Value < 0)
-                {
-                    throw new ODataException(Messages.TopRawValueInvalid);
-                }
             }
             else
             {
