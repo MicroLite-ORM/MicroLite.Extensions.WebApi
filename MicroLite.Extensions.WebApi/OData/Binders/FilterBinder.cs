@@ -13,7 +13,6 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
-    using System.Linq;
     using MicroLite.Dialect;
     using MicroLite.Query;
     using Net.Http.WebApi.OData;
