@@ -1,11 +1,6 @@
 ﻿namespace MicroLite.Extensions.WebApi.Tests.OData.Binders
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Query;
     using Net.Http.WebApi.OData.Query;

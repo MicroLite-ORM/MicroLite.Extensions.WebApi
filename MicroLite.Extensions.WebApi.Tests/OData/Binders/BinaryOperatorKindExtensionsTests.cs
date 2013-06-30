@@ -1,9 +1,7 @@
 ﻿namespace MicroLite.Extensions.WebApi.Tests.OData.Binders
 {
-    using MicroLite.Extensions.WebApi.OData;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using Net.Http.WebApi.OData;
-    using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Expression;
     using Xunit;
 

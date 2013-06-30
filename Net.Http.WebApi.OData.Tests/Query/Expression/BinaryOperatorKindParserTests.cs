@@ -1,7 +1,6 @@
 ﻿namespace Net.Http.WebApi.Tests.OData.Query.Expression
 {
     using Net.Http.WebApi.OData;
-    using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Expression;
     using Xunit;
 
