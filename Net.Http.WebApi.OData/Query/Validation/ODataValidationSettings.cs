@@ -28,8 +28,9 @@ namespace Net.Http.WebApi.OData.Query.Validation
 
         /// <summary>
         /// Gets or sets the max value allowed in the $top query option.
+        /// This is used to ensure that 'paged' queries do not return excessive results on each call.
         /// </summary>
-        public int? MaxTop
+        public int MaxTop
         {
             get;
             set;

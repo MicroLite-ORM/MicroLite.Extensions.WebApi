@@ -34,12 +34,12 @@ namespace Net.Http.WebApi.OData.Query.Validation
                     throw new ODataException(Messages.TopRawValueInvalid);
                 }
 
-                if (validationSettings.MaxTop.HasValue && queryOptions.Top.Value > validationSettings.MaxTop.Value)
+                if (queryOptions.Top.Value > validationSettings.MaxTop)
                 {
                     var message = string.Format(
                         CultureInfo.InvariantCulture,
                         Messages.TopValueExceedsMaxAllowed,
-                        validationSettings.MaxTop.Value.ToString(CultureInfo.InvariantCulture));
+                        validationSettings.MaxTop.ToString(CultureInfo.InvariantCulture));
 
                     throw new ODataException(message);
                 }
