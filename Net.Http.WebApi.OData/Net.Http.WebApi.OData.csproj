@@ -99,6 +99,7 @@
     <Compile Include="Query\SkipQueryOption.cs" />
     <Compile Include="Query\TopQueryOption.cs" />
     <Compile Include="Query\Validation\AllowedQueryOptions.cs" />
+    <Compile Include="Query\Validation\ODataQueryOptionsExtensions.cs" />
     <Compile Include="Query\Validation\ODataQueryOptionsValidator.cs" />
     <Compile Include="Query\Validation\ODataValidationSettings.cs" />
     <Compile Include="Query\Validation\SkipQueryOptionValidator.cs" />

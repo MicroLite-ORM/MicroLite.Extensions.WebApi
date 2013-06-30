@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SkipQueryOptionValidator.cs" company="MicroLite">
+// <copyright file="ODataQueryOptionsExtensions.cs" company="MicroLite">
 // Copyright 2012-2013 Trevor Pilley
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,28 +12,23 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query.Validation
 {
-    using System.Globalization;
+    using Net.Http.WebApi.OData.Query;
 
     /// <summary>
-    /// A class which validates the $skip query option based upon the ODataValidationSettings.
+    /// Extension methods for validating the <see cref="ODataQueryOptions"/>
     /// </summary>
-    internal static class SkipQueryOptionValidator
+    public static class ODataQueryOptionsExtensions
     {
         /// <summary>
         /// Validates the specified query options.
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
-        /// <exception cref="ODataException">Thrown if the validation fails.</exception>
-        public static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
+        public static void Validate(this ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
-            if (queryOptions.Skip != null)
-            {
-                if (queryOptions.Skip.Value < 0)
-                {
-                    throw new ODataException(Messages.SkipRawValueInvalid);
-                }
-            }
+            ODataQueryOptionsValidator.Validate(queryOptions, validationSettings);
+            SkipQueryOptionValidator.Validate(queryOptions, validationSettings);
+            TopQueryOptionValidator.Validate(queryOptions, validationSettings);
         }
     }
 }

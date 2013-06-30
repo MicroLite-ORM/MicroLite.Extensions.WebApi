@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     /// <summary>
     /// A class which validates ODataQueryOptions based upon the ODataValidationSettings.
     /// </summary>
-    public static class ODataQueryOptionsValidator
+    internal static class ODataQueryOptionsValidator
     {
         /// <summary>
         /// Validates the specified query options.

@@ -17,7 +17,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
     /// <summary>
     /// A class which validates the $top query option based upon the ODataValidationSettings.
     /// </summary>
-    public static class TopQueryOptionValidator
+    internal static class TopQueryOptionValidator
     {
         /// <summary>
         /// Validates the specified query options.
