@@ -267,9 +267,9 @@
             }
 
             [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeNoContent()
             {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NoContent, this.response.StatusCode);
             }
 
             [Fact]

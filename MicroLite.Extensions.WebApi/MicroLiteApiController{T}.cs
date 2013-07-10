@@ -133,7 +133,7 @@ namespace MicroLite.Extensions.WebApi
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result
         /// 404 (Not Found) if no entity was found with the specified Id to update,
         /// 304 (Not Modified) if there were no changes or
-        /// 200 (OK) if the entity was updated successfully.</returns>
+        /// 204 (NoContent) if the entity was updated successfully.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1033_Update_an_Entity]]></remarks>
         protected virtual HttpResponseMessage PutEntityResponse(TId id, TEntity entity)
         {
@@ -157,7 +157,7 @@ namespace MicroLite.Extensions.WebApi
                 }
                 else
                 {
-                    response = this.Request.CreateResponse(HttpStatusCode.OK);
+                    response = this.Request.CreateResponse(HttpStatusCode.NoContent);
                 }
             }
 
