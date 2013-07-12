@@ -76,7 +76,7 @@ namespace Net.Http.WebApi.OData.Query
 
             if (this.rawValues.Top != null)
             {
-                this.Top = new SkipQueryOption(this.rawValues.Top);
+                this.Top = new TopQueryOption(this.rawValues.Top);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Net.Http.WebApi.OData.Query
         /// <summary>
         /// Gets the top query option.
         /// </summary>
-        public SkipQueryOption Top
+        public TopQueryOption Top
         {
             get;
             private set;

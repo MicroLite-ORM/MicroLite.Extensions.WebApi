@@ -46,7 +46,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             return selectFromSqlBuilder;
         }
 
-        private class FilterBinderImpl
+        private sealed class FilterBinderImpl
         {
             private readonly IObjectInfo objectInfo;
             private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();

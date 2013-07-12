@@ -23,7 +23,7 @@ namespace MicroLite.Configuration
     /// </summary>
     public static class ConfigurationExtensions
     {
-        private static ILog log = LogManager.GetCurrentClassLog();
+        private static readonly ILog Log = LogManager.GetCurrentClassLog();
 
         /// <summary>
         /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi registering a MicroLiteSessionAttribute configured with default values in GlobalConfiguration.Configuration.Filters if one has not already been registered.
@@ -44,27 +44,27 @@ namespace MicroLite.Configuration
         public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings webApiConfig)
         {
             System.Diagnostics.Trace.TraceInformation(Messages.LoadingExtension);
-            log.TryLogInfo(Messages.LoadingExtension);
+            Log.TryLogInfo(Messages.LoadingExtension);
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
             if (webApiConfig.RegisterGlobalMicroLiteSessionAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
             {
-                log.TryLogInfo(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
+                Log.TryLogInfo(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
                 GlobalConfiguration.Configuration.Filters.Add(new MicroLiteSessionAttribute());
             }
 
             if (webApiConfig.RegisterGlobalValidateModelNotNullAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
             {
-                log.TryLogInfo(Messages.RegisteringValidateModelNotNullActionFilter);
+                Log.TryLogInfo(Messages.RegisteringValidateModelNotNullActionFilter);
                 GlobalConfiguration.Configuration.Filters.Add(new ValidateModelNotNullAttribute());
             }
 
             if (webApiConfig.RegisterGlobalValidateModelStateAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
             {
-                log.TryLogInfo(Messages.RegisteringValidateModelStateActionFilter);
+                Log.TryLogInfo(Messages.RegisteringValidateModelStateActionFilter);
                 GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
             }
 

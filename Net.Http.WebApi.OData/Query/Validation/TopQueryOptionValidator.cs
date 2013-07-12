@@ -25,7 +25,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
         /// <param name="queryOptions">The query options.</param>
         /// <param name="validationSettings">The validation settings.</param>
         /// <exception cref="ODataException">Thrown if the validation fails.</exception>
-        public static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
+        internal static void Validate(ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             if (queryOptions.Top != null)
             {

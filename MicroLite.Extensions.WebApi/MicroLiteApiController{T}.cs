@@ -25,7 +25,7 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteApiController<TEntity, TId> : MicroLiteApiController
         where TEntity : class, new()
     {
-        private static IObjectInfo objectInfo = ObjectInfo.For(typeof(TEntity));
+        private static readonly IObjectInfo ObjectInfo = MicroLite.Mapping.ObjectInfo.For(typeof(TEntity));
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class.
@@ -66,7 +66,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-            var deleted = this.Session.Advanced.Delete(objectInfo.ForType, id);
+            var deleted = this.Session.Advanced.Delete(ObjectInfo.ForType, id);
 
             if (!deleted)
             {
@@ -117,7 +117,7 @@ namespace MicroLite.Extensions.WebApi
         {
             this.Session.Insert(entity);
 
-            var identifier = (TId)objectInfo.GetIdentifierValue(entity);
+            var identifier = (TId)ObjectInfo.GetIdentifierValue(entity);
 
             var response = this.Request.CreateResponse(HttpStatusCode.Created, entity);
             response.Headers.Location = this.GetEntityResourceUri(identifier);
@@ -147,7 +147,7 @@ namespace MicroLite.Extensions.WebApi
             }
             else
             {
-                objectInfo.Map(entity, existing, includeId: false);
+                ObjectInfo.Map(entity, existing, includeId: false);
 
                 var updated = this.Session.Update(existing);
 
