@@ -98,6 +98,7 @@
     <Compile Include="ObjectInfoExtensionsTests.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensionsTests.cs" />
     <Compile Include="OData\Binders\ODataQueryOptionExtensionsTests.cs" />
+    <Compile Include="OData\MicroLiteODataApiControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OData\Binders\FilterBinderTests.cs" />
     <Compile Include="OData\Binders\OrderByBinderTests.cs" />
