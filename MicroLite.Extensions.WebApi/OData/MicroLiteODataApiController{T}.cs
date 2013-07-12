@@ -75,7 +75,6 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <param name="queryOptions">The query options.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The whole point to this method is that it returns the object!")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "In WebApi the convention is to use the HTTP Verb as the method name")]
         protected virtual HttpResponseMessage GetEntityResponse(ODataQueryOptions queryOptions)
         {
             if (queryOptions == null)
