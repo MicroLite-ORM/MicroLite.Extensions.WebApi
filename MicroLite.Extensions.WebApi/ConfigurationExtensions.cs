@@ -27,17 +27,7 @@ namespace MicroLite.Configuration
         private static readonly ILog Log = LogManager.GetCurrentClassLog();
 
         /// <summary>
-        /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi registering a MicroLiteSessionAttribute configured with default values in GlobalConfiguration.Configuration.Filters if one has not already been registered.
-        /// </summary>
-        /// <param name="configureExtensions">The interface to configure extensions.</param>
-        /// <returns>The configure extensions.</returns>
-        public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions)
-        {
-            return WithWebApi(configureExtensions, WebApiConfigurationSettings.Default);
-        }
-
-        /// <summary>
-        /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi optionally registering a MicroLiteSessionAttribute configured with default values in GlobalConfiguration.Configuration.Filters if one has not already been registered.
+        /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi using the specified configuration settings.
         /// </summary>
         /// <param name="configureExtensions">The interface to configure extensions.</param>
         /// <param name="webApiConfig">The settings used for configuration.</param>
