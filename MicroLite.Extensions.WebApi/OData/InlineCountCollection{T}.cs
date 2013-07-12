@@ -17,7 +17,7 @@ namespace MicroLite.Extensions.WebApi.OData
     /// <summary>
     /// A class which is used to return results with an inline count.
     /// </summary>
-    /// <typeparam name="T">The type of item.</typeparam>
+    /// <typeparam name="T">The type of item contained in the collection.</typeparam>
     public sealed class InlineCountCollection<T> : IEnumerable<T>
     {
         private readonly IList<T> items;

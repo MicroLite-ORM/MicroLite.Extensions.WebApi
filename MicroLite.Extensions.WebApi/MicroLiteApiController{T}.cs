@@ -18,7 +18,7 @@ namespace MicroLite.Extensions.WebApi
     using MicroLite.Mapping;
 
     /// <summary>
-    /// Provides access to a MicroLite ISession in addition to the base ASP.NET WebApi controller.
+    /// Provides opt-in CRUD operations in addition to the base ASP.NET WebApi controller.
     /// </summary>
     /// <typeparam name="TEntity">The type of object that the controller deals with.</typeparam>
     /// <typeparam name="TId">The type of identifier for the <typeparamref name="TEntity"/>.</typeparam>
@@ -87,7 +87,6 @@ namespace MicroLite.Extensions.WebApi
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result
         /// 404 (Not Found) if no entity exists with the specified Identifier or
         /// 200 (OK) if an entity is found.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "In WebApi the convention is to use the HTTP Verb as the method name")]
         protected virtual HttpResponseMessage GetEntityResponse(TId id)
         {
             HttpResponseMessage response;
