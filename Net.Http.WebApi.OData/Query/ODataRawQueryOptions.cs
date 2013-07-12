@@ -27,6 +27,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <param name="rawQuery">The raw query.</param>
         public ODataRawQueryOptions(string rawQuery)
         {
+            if (rawQuery == null)
+            {
+                throw new ArgumentNullException("rawQuery");
+            }
+
             var pieces = rawQuery.Split(QuerySeparators, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var piece in pieces)

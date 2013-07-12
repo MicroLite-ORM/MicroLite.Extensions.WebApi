@@ -27,7 +27,7 @@ namespace Net.Http.WebApi.OData.Query.Validation
         public static void Validate(this ODataQueryOptions queryOptions, ODataValidationSettings validationSettings)
         {
             ODataQueryOptionsValidator.Validate(queryOptions, validationSettings);
-            SkipQueryOptionValidator.Validate(queryOptions, validationSettings);
+            SkipQueryOptionValidator.Validate(queryOptions);
             TopQueryOptionValidator.Validate(queryOptions, validationSettings);
         }
     }

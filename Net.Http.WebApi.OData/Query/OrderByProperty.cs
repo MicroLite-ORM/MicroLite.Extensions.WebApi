@@ -12,6 +12,8 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
+
     /// <summary>
     /// A class containing deserialised values from the $order by query option.
     /// </summary>
@@ -25,6 +27,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ODataException">If supplied, the direction should be either 'asc' or 'desc'.</exception>
         public OrderByProperty(string rawValue)
         {
+            if (rawValue == null)
+            {
+                throw new ArgumentNullException("rawValue");
+            }
+
             this.RawValue = rawValue;
 
             var pieces = rawValue.Split(' ');

@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -27,6 +28,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <param name="rawValue">The raw request value.</param>
         public OrderByQueryOption(string rawValue)
         {
+            if (rawValue == null)
+            {
+                throw new ArgumentNullException("rawValue");
+            }
+
             this.RawValue = rawValue;
 
             var pieces = rawValue.Split('=');

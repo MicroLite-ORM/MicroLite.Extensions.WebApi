@@ -16,7 +16,7 @@
             [Fact]
             public void NoExceptionIsThrown()
             {
-                Assert.DoesNotThrow(() => SkipQueryOptionValidator.Validate(this.queryOptions, new ODataValidationSettings()));
+                Assert.DoesNotThrow(() => SkipQueryOptionValidator.Validate(this.queryOptions));
             }
         }
 
@@ -28,7 +28,7 @@
             [Fact]
             public void AnExceptionIsThrown()
             {
-                Assert.Throws<ODataException>(() => SkipQueryOptionValidator.Validate(this.queryOptions, new ODataValidationSettings()));
+                Assert.Throws<ODataException>(() => SkipQueryOptionValidator.Validate(this.queryOptions));
             }
         }
     }

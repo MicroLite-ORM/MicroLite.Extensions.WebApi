@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
+    using System;
     using System.Globalization;
     using System.Linq;
     using MicroLite.Mapping;
@@ -36,6 +37,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (orderByQuery != null)
             {
+                if (orderBySqlBuilder == null)
+                {
+                    throw new ArgumentNullException("orderBySqlBuilder");
+                }
+
                 var objectInfo = ObjectInfo.For(typeof(T));
 
                 foreach (var property in orderByQuery.Properties)

@@ -30,7 +30,7 @@ namespace MicroLite.Extensions.WebApi.Filters
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (!actionContext.ModelState.IsValid)
+            if (actionContext != null && !actionContext.ModelState.IsValid)
             {
                 actionContext.Response = actionContext.Request.CreateErrorResponse(
                     HttpStatusCode.BadRequest,

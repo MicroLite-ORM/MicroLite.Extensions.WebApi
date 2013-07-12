@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
     using Net.Http.WebApi.OData.Query.Expression;
 
     /// <summary>
@@ -26,6 +27,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <param name="rawValue">The raw request value.</param>
         public FilterQueryOption(string rawValue)
         {
+            if (rawValue == null)
+            {
+                throw new ArgumentNullException("rawValue");
+            }
+
             this.RawValue = rawValue;
 
             var equals = rawValue.IndexOf('=') + 1;

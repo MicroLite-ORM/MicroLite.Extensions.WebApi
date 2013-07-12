@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace Net.Http.WebApi.OData.Query
 {
+    using System;
     using System.Net.Http.Headers;
 
     /// <summary>
@@ -27,6 +28,11 @@ namespace Net.Http.WebApi.OData.Query
         /// <exception cref="ODataException">Thrown if the raw value is invalid.</exception>
         public FormatQueryOption(string rawValue)
         {
+            if (rawValue == null)
+            {
+                throw new ArgumentNullException("rawValue");
+            }
+
             this.RawValue = rawValue;
 
             var pieces = rawValue.Split('=');

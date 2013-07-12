@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Configuration
 {
+    using System;
     using System.Linq;
     using System.Web.Http;
     using MicroLite.Extensions.WebApi;
@@ -43,6 +44,11 @@ namespace MicroLite.Configuration
         /// <returns>The configure extensions.</returns>
         public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings webApiConfig)
         {
+            if (webApiConfig == null)
+            {
+                throw new ArgumentNullException("webApiConfig");
+            }
+
             System.Diagnostics.Trace.TraceInformation(Messages.LoadingExtension);
             Log.TryLogInfo(Messages.LoadingExtension);
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;

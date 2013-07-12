@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
+    using System;
     using System.Globalization;
     using System.Linq;
     using MicroLite.Mapping;
@@ -35,6 +36,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
         public static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
         {
+            if (queryOptions == null)
+            {
+                throw new ArgumentNullException("queryOptions");
+            }
+
             string[] columnNames;
 
             if (queryOptions.Select == null || (queryOptions.Select.Properties.Count == 1 && queryOptions.Select.Properties[0] == "*"))

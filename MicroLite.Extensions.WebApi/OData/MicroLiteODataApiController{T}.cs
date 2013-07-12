@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi.OData
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.OData.Binders;
@@ -78,6 +79,11 @@ namespace MicroLite.Extensions.WebApi.OData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "In WebApi the convention is to use the HTTP Verb as the method name")]
         protected virtual HttpResponseMessage GetEntityResponse(ODataQueryOptions queryOptions)
         {
+            if (queryOptions == null)
+            {
+                throw new ArgumentNullException("queryOptions");
+            }
+
             queryOptions.Validate(this.validationSettings);
 
             var sqlQuery = this.CreateSqlQuery(queryOptions);
