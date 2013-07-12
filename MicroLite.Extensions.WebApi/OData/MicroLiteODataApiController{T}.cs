@@ -27,24 +27,13 @@ namespace MicroLite.Extensions.WebApi.OData
     public abstract class MicroLiteODataApiController<TEntity, TId> : MicroLiteApiController<TEntity, TId>
         where TEntity : class, new()
     {
-        private readonly ODataValidationSettings validationSettings;
+        private ODataValidationSettings validationSettings;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
         /// </summary>
         protected MicroLiteODataApiController()
         {
-            this.validationSettings = new ODataValidationSettings
-            {
-                AllowedQueryOptions = AllowedQueryOptions.Filter
-                    | AllowedQueryOptions.Format
-                    | AllowedQueryOptions.InlineCount
-                    | AllowedQueryOptions.OrderBy
-                    | AllowedQueryOptions.Select
-                    | AllowedQueryOptions.Skip
-                    | AllowedQueryOptions.Top,
-                MaxTop = 50
-            };
         }
 
         /// <summary>
@@ -54,7 +43,17 @@ namespace MicroLite.Extensions.WebApi.OData
         {
             get
             {
-                return this.validationSettings;
+                return this.validationSettings ?? (this.validationSettings = new ODataValidationSettings
+                {
+                    AllowedQueryOptions = AllowedQueryOptions.Filter
+                        | AllowedQueryOptions.Format
+                        | AllowedQueryOptions.InlineCount
+                        | AllowedQueryOptions.OrderBy
+                        | AllowedQueryOptions.Select
+                        | AllowedQueryOptions.Skip
+                        | AllowedQueryOptions.Top,
+                    MaxTop = 50
+                });
             }
         }
 
@@ -84,12 +83,12 @@ namespace MicroLite.Extensions.WebApi.OData
                 throw new ArgumentNullException("queryOptions");
             }
 
-            queryOptions.Validate(this.validationSettings);
+            queryOptions.Validate(this.ValidationSettings);
 
             var sqlQuery = this.CreateSqlQuery(queryOptions);
 
             var skip = queryOptions.Skip != null ? queryOptions.Skip.Value : 0;
-            var top = queryOptions.Top != null ? queryOptions.Top.Value : this.validationSettings.MaxTop;
+            var top = queryOptions.Top != null ? queryOptions.Top.Value : this.ValidationSettings.MaxTop;
 
             var paged = this.Session.Paged<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 
