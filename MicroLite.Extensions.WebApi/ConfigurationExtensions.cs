@@ -30,34 +30,34 @@ namespace MicroLite.Configuration
         /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi using the specified configuration settings.
         /// </summary>
         /// <param name="configureExtensions">The interface to configure extensions.</param>
-        /// <param name="webApiConfig">The settings used for configuration.</param>
+        /// <param name="settings">The settings used for configuration.</param>
         /// <returns>The configure extensions.</returns>
-        public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings webApiConfig)
+        public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings settings)
         {
-            if (webApiConfig == null)
+            if (settings == null)
             {
-                throw new ArgumentNullException("webApiConfig");
+                throw new ArgumentNullException("settings");
             }
 
             System.Diagnostics.Trace.TraceInformation(Messages.LoadingExtension);
             Log.TryLogInfo(Messages.LoadingExtension);
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
-            if (webApiConfig.RegisterGlobalMicroLiteSessionAttribute
+            if (settings.RegisterGlobalMicroLiteSessionAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
             {
                 Log.TryLogInfo(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
                 GlobalConfiguration.Configuration.Filters.Add(new MicroLiteSessionAttribute());
             }
 
-            if (webApiConfig.RegisterGlobalValidateModelNotNullAttribute
+            if (settings.RegisterGlobalValidateModelNotNullAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
             {
                 Log.TryLogInfo(Messages.RegisteringValidateModelNotNullActionFilter);
                 GlobalConfiguration.Configuration.Filters.Add(new ValidateModelNotNullAttribute());
             }
 
-            if (webApiConfig.RegisterGlobalValidateModelStateAttribute
+            if (settings.RegisterGlobalValidateModelStateAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
             {
                 Log.TryLogInfo(Messages.RegisteringValidateModelStateActionFilter);
