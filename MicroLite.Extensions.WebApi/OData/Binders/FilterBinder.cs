@@ -15,7 +15,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     using System;
     using System.Globalization;
     using System.Linq;
-    using MicroLite.Dialect;
     using MicroLite.Mapping;
     using MicroLite.Query;
     using Net.Http.WebApi.OData;
