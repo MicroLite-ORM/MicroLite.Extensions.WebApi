@@ -12,10 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6EEBEA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi.Tests", "MicroLite.Extensions.WebApi.Tests\MicroLite.Extensions.WebApi.Tests.csproj", "{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData", "Net.Http.WebApi.OData\Net.Http.WebApi.OData.csproj", "{67FBEB32-944E-4022-8B80-5589762B2B05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Http.WebApi.OData.Tests", "Net.Http.WebApi.OData.Tests\Net.Http.WebApi.OData.Tests.csproj", "{0BDC1EA9-0521-49C7-A0DF-199395419476}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,14 +26,6 @@ Global
 		{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67FBEB32-944E-4022-8B80-5589762B2B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67FBEB32-944E-4022-8B80-5589762B2B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67FBEB32-944E-4022-8B80-5589762B2B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67FBEB32-944E-4022-8B80-5589762B2B05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BDC1EA9-0521-49C7-A0DF-199395419476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BDC1EA9-0521-49C7-A0DF-199395419476}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BDC1EA9-0521-49C7-A0DF-199395419476}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BDC1EA9-0521-49C7-A0DF-199395419476}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
