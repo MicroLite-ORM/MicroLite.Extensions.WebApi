@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NamespacesMetrics>
+  <Namespace Namespace="" NTypes="1" NILInstruction="68" NbLinesOfCode="0" NbLinesOfComment="-" PercentageComment="-" PercentageCoverage="-" AfferentCoupling="1" EfferentCoupling="5" />
+  <Namespace Namespace="MicroLite.Extensions.WebApi.dll::MicroLite.Configuration" NTypes="2" NILInstruction="216" NbLinesOfCode="24" NbLinesOfComment="30" PercentageComment="55" PercentageCoverage="-" AfferentCoupling="0" EfferentCoupling="13" />
+  <Namespace Namespace="MicroLite.Extensions.WebApi" NTypes="5" NILInstruction="435" NbLinesOfCode="54" NbLinesOfComment="95" PercentageComment="63" PercentageCoverage="-" AfferentCoupling="4" EfferentCoupling="23" />
+  <Namespace Namespace="MicroLite.Extensions.WebApi.Filters" NTypes="3" NILInstruction="339" NbLinesOfCode="40" NbLinesOfComment="46" PercentageComment="53" PercentageCoverage="-" AfferentCoupling="1" EfferentCoupling="16" />
+  <Namespace Namespace="MicroLite.Extensions.WebApi.OData" NTypes="2" NILInstruction="192" NbLinesOfCode="22" NbLinesOfComment="45" PercentageComment="67" PercentageCoverage="-" AfferentCoupling="0" EfferentCoupling="15" />
+  <Namespace Namespace="MicroLite.Extensions.WebApi.OData.Binders" NTypes="9" NILInstruction="788" NbLinesOfCode="98" NbLinesOfComment="29" PercentageComment="22" PercentageCoverage="-" AfferentCoupling="1" EfferentCoupling="15" />
+</NamespacesMetrics>

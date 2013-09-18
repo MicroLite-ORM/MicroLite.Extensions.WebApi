@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<RuleResult NbQueries="130" NbErrors="0" NbWarns="15">
+  <Group Name="Code Quality" FullName="Code Quality" GroupId="GroupOfRules1650634298" NbQueries="13" NbErrors="0" NbWarns="0" Status="Ok" />
+  <Group Name="Code Quality Regression" FullName="Code Quality Regression" GroupId="GroupOfRules-294074117" NbQueries="12" NbErrors="0" NbWarns="0" Status="Ok" />
+  <Group Name="Object Oriented Design" FullName="Object Oriented Design" GroupId="GroupOfRules-243333263" NbQueries="13" NbErrors="0" NbWarns="2" Status="Warn">
+    <Query Status="Warn" Name="Class with no descendant should be sealed if possible" ContentTruncatedThreshold="100" FullName="Object Oriented Design \ Class with no descendant should be sealed if possible" QueryId="Query1781656879" NbNodeMatched="2" NbNodeTested="159" KindOfNode=" types">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Class&amp;#0160;with&amp;#0160;no&amp;#0160;descendant&amp;#0160;should&amp;#0160;be&amp;#0160;sealed&amp;#0160;if&amp;#0160;possible&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsClass&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbChildren&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsSealed&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;amp;&amp;amp;&amp;#0160;!t.IsPublic&amp;#0160;&amp;lt;--&amp;#0160;You&amp;#0160;might&amp;#0160;want&amp;#0160;to&amp;#0160;add&amp;#0160;this&amp;#0160;condition&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;if&amp;#0160;you&amp;#0160;are&amp;#0160;developping&amp;#0160;a&amp;#0160;framework&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;with&amp;#0160;classes&amp;#0160;that&amp;#0160;are&amp;#0160;intended&amp;#0160;to&amp;#0160;be&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;sub-classed&amp;#0160;by&amp;#0160;your&amp;#0160;clients.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;orderby&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbLinesOfCode&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;descending&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbLinesOfCode&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>types</Column>
+        <Column># lines of code (LOC)</Column>
+      </Columns>
+      <Rows>
+        <Row Name="MicroLiteODataApiController&lt;TEntity,TId&gt;" FullName="MicroLite.Extensions.WebApi.OData.MicroLiteODataApiController&lt;TEntity ,TId&gt;">
+          <Val>17</Val>
+        </Row>
+        <Row Name="MicroLiteReadOnlyApiController" FullName="MicroLite.Extensions.WebApi.MicroLiteReadOnlyApiController">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>17</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>8.5</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>17</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>8.5</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>72.25</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Non-static classes should be instantiated or turned to static" ContentTruncatedThreshold="100" FullName="Object Oriented Design \ Non-static classes should be instantiated or turned to static" QueryId="Query295029024" NbNodeMatched="2" NbNodeTested="159" KindOfNode=" types">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Non-static&amp;#0160;classes&amp;#0160;should&amp;#0160;be&amp;#0160;instantiated&amp;#0160;or&amp;#0160;turned&amp;#0160;to&amp;#0160;static&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Notice&amp;#0160;that&amp;#0160;classes&amp;#0160;only&amp;#0160;instantiated&amp;#0160;through&amp;#0160;reflection,&amp;#0160;like&amp;#0160;plug-in&amp;#0160;root&amp;#0160;classes&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;are&amp;#0160;matched&amp;#0160;by&amp;#0160;this&amp;#0160;rules.&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsClass&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//!t.IsPublic&amp;#0160;&amp;amp;&amp;amp;&amp;#0160;&amp;#0160;&amp;#0160;//&amp;#0160;if&amp;#0160;you&amp;#0160;are&amp;#0160;developping&amp;#0160;a&amp;#0160;framework,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;you&amp;#0160;might&amp;#0160;not&amp;#0160;want&amp;#0160;to&amp;#0160;match&amp;#0160;public&amp;#0160;classes&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsAttributeClass&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#008000'&gt;//&amp;#0160;Attributes&amp;#0160;class&amp;#0160;are&amp;#0160;never&amp;#0160;seen&amp;#0160;as&amp;#0160;instantiated&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;DeriveFrom&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;"System.MarshalByRefObject"&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;AllowNoMatch&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#008000'&gt;//&amp;#0160;Types&amp;#0160;instantiated&amp;#0160;through&amp;#0160;remoting&amp;#0160;infrstructure&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;find&amp;#0160;the&amp;#0160;first&amp;#0160;constructor&amp;#0160;of&amp;#0160;t&amp;#0160;called&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;ctorCalled&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Constructors&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;FirstOrDefault&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;ctor&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;ctor&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbMethodsCallingMe&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;match&amp;#0160;t&amp;#0160;if&amp;#0160;none&amp;#0160;of&amp;#0160;its&amp;#0160;constructors&amp;#0160;is&amp;#0160;called.&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;ctorCalled&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;null&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Visibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>types</Column>
+        <Column>Visibility</Column>
+      </Columns>
+      <Rows>
+        <Row Name="MicroLiteReadOnlyApiController" FullName="MicroLite.Extensions.WebApi.MicroLiteReadOnlyApiController">
+          <Val>Public</Val>
+        </Row>
+        <Row Name="MicroLiteODataApiController&lt;TEntity,TId&gt;" FullName="MicroLite.Extensions.WebApi.OData.MicroLiteODataApiController&lt;TEntity ,TId&gt;">
+          <Val>Public</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name="Design" FullName="Design" GroupId="GroupOfRules-1945036360" NbQueries="14" NbErrors="0" NbWarns="3" Status="Warn">
+    <Query Status="Warn" Name="Classes that are candidate to be turned into structures" ContentTruncatedThreshold="100" FullName="Design \ Classes that are candidate to be turned into structures" QueryId="Query1642870586" NbNodeMatched="3" NbNodeTested="159" KindOfNode=" types">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Classes&amp;#0160;that&amp;#0160;are&amp;#0160;candidate&amp;#0160;to&amp;#0160;be&amp;#0160;turned&amp;#0160;into&amp;#0160;structures&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;CAUTION:&amp;#0160;Before&amp;#0160;applying&amp;#0160;this&amp;#0160;rule,&amp;#0160;make&amp;#0160;sure&amp;#0160;to&amp;#0160;understand&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;the&amp;#0160;implication&amp;#0160;of&amp;#0160;transforming&amp;#0160;a&amp;#0160;class&amp;#0160;into&amp;#0160;a&amp;#0160;structure.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/aa664471(v=vs.71).aspx" target="_blank"&gt;http://msdn.microsoft.com/en-us/library/aa664471(v=vs.71).aspx&lt;/a&gt;&lt;/font&gt;&lt;font color='#008000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Int32,&amp;#0160;Double&amp;#0160;or&amp;#0160;Boolean&amp;#0160;are&amp;#0160;structures&amp;#0160;and&amp;#0160;not&amp;#0160;classes.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Structure&amp;#0160;are&amp;#0160;particularly&amp;#0160;suited&amp;#0160;to&amp;#0160;implement&amp;#0160;lightweight&amp;#0160;values.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Hence&amp;#0160;a&amp;#0160;class&amp;#0160;is&amp;#0160;candidate&amp;#0160;to&amp;#0160;be&amp;#0160;turned&amp;#0160;into&amp;#0160;a&amp;#0160;structure&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;when&amp;#0160;its&amp;#0160;instances&amp;#0160;are&amp;#0160;lightweight&amp;#0160;values.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsClass&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsGeneratedByCompiler&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SizeOfInst&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SizeOfInst&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;lt;=&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;16&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Structure&amp;#0160;instance&amp;#0160;must&amp;#0160;not&amp;#0160;be&amp;#0160;too&amp;#0160;big,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;else&amp;#0160;it&amp;#0160;degrades&amp;#0160;performance.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbChildren&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Must&amp;#0160;not&amp;#0160;have&amp;#0160;children&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Must&amp;#0160;have&amp;#0160;no&amp;#0160;base&amp;#0160;class&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;DepthOfDeriveFrom&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;"System.Object"&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;AllowNoMatch&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;1&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SizeOfInst&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;InstanceFields&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&amp;#0160;&lt;font color='#008000'&gt;//&amp;#0160;Must&amp;#0160;derive&amp;#0160;directly&amp;#0160;from&amp;#0160;System.Object&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;amp;&amp;amp;&amp;#0160;t.IsSealed&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;lt;--&amp;#0160;You&amp;#0160;might&amp;#0160;want&amp;#0160;to&amp;#0160;add&amp;#0160;this&amp;#0160;condition&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;to&amp;#0160;restraint&amp;#0160;the&amp;#0160;set.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;amp;&amp;amp;&amp;#0160;t.IsImmutable&amp;#0160;&amp;lt;--&amp;#0160;Structures&amp;#0160;should&amp;#0160;be&amp;#0160;immutable&amp;#0160;type.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;amp;&amp;amp;&amp;#0160;t.!IsPublic&amp;#0160;&amp;#0160;&amp;#0160;&amp;lt;--&amp;#0160;You&amp;#0160;might&amp;#0160;want&amp;#0160;to&amp;#0160;add&amp;#0160;this&amp;#0160;condition&amp;#0160;if&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;you&amp;#0160;are&amp;#0160;developping&amp;#0160;a&amp;#0160;framework&amp;#0160;with&amp;#0160;classes&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;that&amp;#0160;are&amp;#0160;intended&amp;#0160;to&amp;#0160;be&amp;#0160;sub-classed&amp;#0160;by&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;your&amp;#0160;clients.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>types</Column>
+        <Column>Size of instance</Column>
+        <Column>InstanceFields</Column>
+      </Columns>
+      <Rows>
+        <Row Name="WebApiConfigurationSettings" FullName="MicroLite.Configuration.WebApiConfigurationSettings">
+          <Val>3</Val>
+          <Val>3 fields</Val>
+        </Row>
+        <Row Name="InlineCountCollection&lt;T&gt;" FullName="MicroLite.Extensions.WebApi.OData.InlineCountCollection&lt;T&gt;">
+          <Val>8</Val>
+          <Val>2 fields</Val>
+        </Row>
+        <Row Name="FilterBinder+FilterBinderImpl" FullName="MicroLite.Extensions.WebApi.OData.Binders .FilterBinder+FilterBinderImpl">
+          <Val>12</Val>
+          <Val>3 fields</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>23</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>7.6667</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>3</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>12</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>3.6818</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>13.556</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Avoid namespaces with few types" ContentTruncatedThreshold="100" FullName="Design \ Avoid namespaces with few types" QueryId="Query4206118250" NbNodeMatched="4" NbNodeTested="44" KindOfNode=" namespaces">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Avoid&amp;#0160;namespaces&amp;#0160;with&amp;#0160;few&amp;#0160;types&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Namespaces&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ChildTypes&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Where&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsGeneratedByCompiler&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;lt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;5&lt;/b&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;orderby&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;ascending&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Make&amp;#0160;sure&amp;#0160;that&amp;#0160;there&amp;#0160;is&amp;#0160;a&amp;#0160;logical&amp;#0160;organization&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;to&amp;#0160;each&amp;#0160;of&amp;#0160;your&amp;#0160;namespaces,&amp;#0160;and&amp;#0160;that&amp;#0160;there&amp;#0160;is&amp;#0160;a&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;valid&amp;#0160;reason&amp;#0160;for&amp;#0160;putting&amp;#0160;types&amp;#0160;in&amp;#0160;a&amp;#0160;sparsely&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;populated&amp;#0160;namespace.&amp;#0160;Namespaces&amp;#0160;should&amp;#0160;contain&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;types&amp;#0160;that&amp;#0160;are&amp;#0160;used&amp;#0160;together&amp;#0160;in&amp;#0160;most&amp;#0160;scenarios.&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;When&amp;#0160;their&amp;#0160;applications&amp;#0160;are&amp;#0160;mutually&amp;#0160;exclusive,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;types&amp;#0160;should&amp;#0160;be&amp;#0160;located&amp;#0160;in&amp;#0160;separate&amp;#0160;namespaces&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>namespaces</Column>
+        <Column>types</Column>
+      </Columns>
+      <Rows>
+        <Row Name="" FullName="">
+          <Val>0 type</Val>
+        </Row>
+        <Row Name="MicroLite.Configuration" FullName="MicroLite.Configuration">
+          <Val>2 types</Val>
+        </Row>
+        <Row Name="MicroLite.Extensions.WebApi.OData" FullName="MicroLite.Extensions.WebApi.OData">
+          <Val>2 types</Val>
+        </Row>
+        <Row Name="MicroLite.Extensions.WebApi.Filters" FullName="MicroLite.Extensions.WebApi.Filters">
+          <Val>3 types</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Declare types in namespaces" ContentTruncatedThreshold="100" FullName="Design \ Declare types in namespaces" QueryId="Query3464577236" NbNodeMatched="1" NbNodeTested="44" KindOfNode=" namespaces">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Declare&amp;#0160;types&amp;#0160;in&amp;#0160;namespaces&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Namespaces&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Name&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;font color='#A31515'&gt;""&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ChildTypes&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbLinesOfCode&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Types&amp;#0160;are&amp;#0160;declared&amp;#0160;within&amp;#0160;namespaces&amp;#0160;to&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;prevent&amp;#0160;name&amp;#0160;collisions,&amp;#0160;and&amp;#0160;as&amp;#0160;a&amp;#0160;way&amp;#0160;of&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;organizing&amp;#0160;related&amp;#0160;types&amp;#0160;in&amp;#0160;an&amp;#0160;object&amp;#0160;hierarchy.&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Types&amp;#0160;outside&amp;#0160;any&amp;#0160;named&amp;#0160;namespace&amp;#0160;are&amp;#0160;in&amp;#0160;a&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;global&amp;#0160;namespace&amp;#0160;that&amp;#0160;cannot&amp;#0160;be&amp;#0160;referenced&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;in&amp;#0160;code.&amp;#0160;If&amp;#0160;an&amp;#0160;anonymous&amp;#0160;namespace&amp;#0160;can&amp;#0160;be&amp;#0160;found,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;it&amp;#0160;means&amp;#0160;that&amp;#0160;it&amp;#0160;contains&amp;#0160;types&amp;#0160;outside&amp;#0160;of&amp;#0160;namespaces.&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>namespace</Column>
+        <Column>ChildTypes</Column>
+        <Column># lines of code (LOC)</Column>
+      </Columns>
+      <Rows>
+        <Row Name="" FullName="">
+          <Val>1 type</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name="Architecture and Layering" FullName="Architecture and Layering" GroupId="GroupOfRules-990269139" NbQueries="9" NbErrors="0" NbWarns="1" Status="Warn">
+    <Query Status="Warn" Name="Assemblies with poor cohesion (RelationalCohesion)" ContentTruncatedThreshold="100" FullName="Architecture and Layering \ Assemblies with poor cohesion (RelationalCohesion)" QueryId="Query1624298228" NbNodeMatched="1" NbNodeTested="10" KindOfNode=" assemblies">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Assemblies&amp;#0160;with&amp;#0160;poor&amp;#0160;cohesion&amp;#0160;(RelationalCohesion)&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;a&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Assemblies&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;a&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbTypes&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;20&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#008000'&gt;//&amp;#0160;Relational&amp;#0160;Cohesion&amp;#0160;metrics&amp;#0160;is&amp;#0160;relevant&amp;#0160;only&amp;#0160;if&amp;#0160;there&amp;#0160;are&amp;#0160;several&amp;#0160;types&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;a&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;RelationalCohesion&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;lt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;1.5&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;||&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;a&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;RelationalCohesion&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;4.0&lt;/b&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;a&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;a&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbTypes&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;a&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;RelationalCohesion&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;As&amp;#0160;classes&amp;#0160;inside&amp;#0160;an&amp;#0160;assembly&amp;#0160;should&amp;#0160;be&amp;#0160;strongly&amp;#0160;related,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;the&amp;#0160;cohesion&amp;#0160;should&amp;#0160;be&amp;#0160;high.&amp;#0160;On&amp;#0160;the&amp;#0160;other&amp;#0160;hand,&amp;#0160;a&amp;#0160;value&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;which&amp;#0160;is&amp;#0160;too&amp;#0160;high&amp;#0160;may&amp;#0160;indicate&amp;#0160;over-coupling.&amp;#0160;A&amp;#0160;good&amp;#0160;range&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;for&amp;#0160;RelationalCohesion&amp;#0160;is&amp;#0160;1.5&amp;#0160;to&amp;#0160;4.0.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;See&amp;#0160;the&amp;#0160;definition&amp;#0160;of&amp;#0160;the&amp;#0160;RelationalCohesion&amp;#0160;metric&amp;#0160;here&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;&lt;a href="http://www.ndepend.com/Metrics.aspx#RelationalCohesion" target="_blank"&gt;http://www.ndepend.com/Metrics.aspx#RelationalCohesion&lt;/a&gt;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>assembly</Column>
+        <Column># Types</Column>
+        <Column>Relational cohesion</Column>
+      </Columns>
+      <Rows>
+        <Row Name="MicroLite.Extensions.WebApi" FullName="MicroLite.Extensions.WebApi">
+          <Val>22</Val>
+          <Val>1.2273</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>22</Val>
+          <Val>1.2273</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>22</Val>
+          <Val>1.2273</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>22</Val>
+          <Val>1.2273</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>22</Val>
+          <Val>1.2273</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name="API Breaking Changes" FullName="API Breaking Changes" GroupId="GroupOfRules184218658" NbQueries="9" NbErrors="0" NbWarns="0" Status="Ok" />
+  <Group Name="Code Diff Summary" FullName="Code Diff Summary" GroupId="GroupOfRules1752346574" NbQueries="25" NbErrors="0" NbWarns="0" Status="Ok" />
+  <Group Name="Dead Code" FullName="Dead Code" GroupId="GroupOfRules1664296505" NbQueries="4" NbErrors="0" NbWarns="0" Status="Ok" />
+  <Group Name="Visibility" FullName="Visibility" GroupId="GroupOfRules-844618394" NbQueries="9" NbErrors="0" NbWarns="2" Status="Warn">
+    <Query Status="Warn" Name="Methods that could have a lower visibility" ContentTruncatedThreshold="100" FullName="Visibility \ Methods that could have a lower visibility" QueryId="Query1889459446" NbNodeMatched="25" NbNodeTested="233" KindOfNode=" methods">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Methods&amp;#0160;that&amp;#0160;could&amp;#0160;have&amp;#0160;a&amp;#0160;lower&amp;#0160;visibility&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Methods&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Visibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;OptimalVisibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;HasAttribute&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;"NDepend.Attributes.CannotDecreaseVisibilityAttribute"&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;AllowNoMatch&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;HasAttribute&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;"NDepend.Attributes.IsNotDeadCodeAttribute"&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;AllowNoMatch&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;If&amp;#0160;you&amp;#0160;don't&amp;#0160;want&amp;#0160;to&amp;#0160;link&amp;#0160;NDepend.API.dll,&amp;#0160;you&amp;#0160;can&amp;#0160;use&amp;#0160;your&amp;#0160;own&amp;#0160;attributes&amp;#0160;and&amp;#0160;adapt&amp;#0160;this&amp;#0160;rule.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Eliminate&amp;#0160;default&amp;#0160;constructor&amp;#0160;from&amp;#0160;the&amp;#0160;result.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Whatever&amp;#0160;the&amp;#0160;visibility&amp;#0160;of&amp;#0160;the&amp;#0160;declaring&amp;#0160;class,&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;default&amp;#0160;constructors&amp;#0160;are&amp;#0160;public&amp;#0160;and&amp;#0160;introduce&amp;#0160;noise&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;in&amp;#0160;the&amp;#0160;current&amp;#0160;rule.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsConstructor&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsPublic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbParameters&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Don't&amp;#0160;decrease&amp;#0160;the&amp;#0160;visibility&amp;#0160;of&amp;#0160;Main()&amp;#0160;methods.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsEntryPoint&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Visibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;CouldBeDeclared&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;OptimalVisibility&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;MethodsCallingMe&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>methods</Column>
+        <Column>Visibility</Column>
+        <Column>CouldBeDeclared</Column>
+        <Column>MethodsCallingMe</Column>
+      </Columns>
+      <Rows>
+        <Row Name="WithWebApi(IConfigureExtensions,WebApiConfigurationSettings)" FullName="MicroLite.Configuration.ConfigurationExtensions.WithWebApi (IConfigureExtensions,WebApiConfigurationSettings)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name="get_Default()" FullName="MicroLite.Configuration.WebApiConfigurationSettings.get_Default()">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name="get_RegisterGlobalMicroLiteSessionAttribute()" FullName="MicroLite.Configuration.WebApiConfigurationSettings .get_RegisterGlobalMicroLiteSessionAttribute()">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="set_RegisterGlobalMicroLiteSessionAttribute(Boolean)" FullName="MicroLite.Configuration.WebApiConfigurationSettings .set_RegisterGlobalMicroLiteSessionAttribute(Boolean)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="get_RegisterGlobalValidateModelNotNullAttribute()" FullName="MicroLite.Configuration.WebApiConfigurationSettings .get_RegisterGlobalValidateModelNotNullAttribute()">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="set_RegisterGlobalValidateModelNotNullAttribute(Boolean)" FullName="MicroLite.Configuration.WebApiConfigurationSettings .set_RegisterGlobalValidateModelNotNullAttribute(Boolean)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="get_RegisterGlobalValidateModelStateAttribute()" FullName="MicroLite.Configuration.WebApiConfigurationSettings .get_RegisterGlobalValidateModelStateAttribute()">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="set_RegisterGlobalValidateModelStateAttribute(Boolean)" FullName="MicroLite.Configuration.WebApiConfigurationSettings .set_RegisterGlobalValidateModelStateAttribute(Boolean)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name=".ctor()" FullName="MicroLite.Extensions.WebApi.MicroLiteReadOnlyApiController..ctor()">
+          <Val>Protected</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name=".ctor(String)" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute..ctor (String)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name=".ctor(String,ISessionManager)" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute..ctor (String,ISessionManager)">
+          <Val>Internal</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="get_AutoManageTransaction()" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .get_AutoManageTransaction()">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>2 methods</Val>
+        </Row>
+        <Row Name="set_AutoManageTransaction(Boolean)" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .set_AutoManageTransaction(Boolean)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="get_ConnectionName()" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .get_ConnectionName()">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name="get_IsolationLevel()" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .get_IsolationLevel()">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="set_IsolationLevel(Nullable&lt;IsolationLevel&gt;)" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .set_IsolationLevel(Nullable&lt;IsolationLevel&gt;)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name="get_SessionFactories()" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .get_SessionFactories()">
+          <Val>Internal</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name=".ctor(IList&lt;T&gt;,Int32)" FullName="MicroLite.Extensions.WebApi.OData.InlineCountCollection&lt;T&gt;..ctor(IList &lt;T&gt;,Int32)">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="get_Count()" FullName="MicroLite.Extensions.WebApi.OData.InlineCountCollection&lt;T&gt;.get_Count()">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name="set_Count(Int32)" FullName="MicroLite.Extensions.WebApi.OData.InlineCountCollection&lt;T&gt;.set_Count (Int32)">
+          <Val>Public</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name=".ctor()" FullName="MicroLite.Extensions.WebApi.OData.MicroLiteODataApiController&lt;TEntity ,TId&gt;..ctor()">
+          <Val>Protected</Val>
+          <Val>Private</Val>
+          <Val>0 method</Val>
+        </Row>
+        <Row Name="get_ValidationSettings()" FullName="MicroLite.Extensions.WebApi.OData.MicroLiteODataApiController&lt;TEntity ,TId&gt;.get_ValidationSettings()">
+          <Val>Protected</Val>
+          <Val>Private</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="BindFilter&lt;T&gt;(FilterQueryOption,IWhereOrOrderBy)" FullName="MicroLite.Extensions.WebApi.OData.Binders.FilterBinder.BindFilter&lt;T&gt; (FilterQueryOption,IWhereOrOrderBy)">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="BindOrderBy&lt;T&gt;(OrderByQueryOption,IOrderBy)" FullName="MicroLite.Extensions.WebApi.OData.Binders.OrderByBinder.BindOrderBy&lt;T&gt; (OrderByQueryOption,IOrderBy)">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="BindSelectQueryOption&lt;T&gt;(ODataQueryOptions)" FullName="MicroLite.Extensions.WebApi.OData.Binders.SelectBinder .BindSelectQueryOption&lt;T&gt;(ODataQueryOptions)">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 method</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Types that could have a lower visibility" ContentTruncatedThreshold="100" FullName="Visibility \ Types that could have a lower visibility" QueryId="Query617058051" NbNodeMatched="11" NbNodeTested="159" KindOfNode=" types">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Types&amp;#0160;that&amp;#0160;could&amp;#0160;have&amp;#0160;a&amp;#0160;lower&amp;#0160;visibility&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Visibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;OptimalVisibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;If&amp;#0160;you&amp;#0160;don't&amp;#0160;want&amp;#0160;to&amp;#0160;link&amp;#0160;NDepend.API.dll,&amp;#0160;you&amp;#0160;can&amp;#0160;use&amp;#0160;your&amp;#0160;own&amp;#0160;attributes&amp;#0160;and&amp;#0160;adapt&amp;#0160;this&amp;#0160;rule.&lt;br/&gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;HasAttribute&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;"NDepend.Attributes.CannotDecreaseVisibilityAttribute"&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;AllowNoMatch&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;HasAttribute&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;"NDepend.Attributes.IsNotDeadCodeAttribute"&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;AllowNoMatch&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Static&amp;#0160;types&amp;#0160;that&amp;#0160;define&amp;#0160;only&amp;#0160;const&amp;#0160;fields&amp;#0160;cannot&amp;#0160;be&amp;#0160;seen&amp;#0160;as&amp;#0160;used&amp;#0160;in&amp;#0160;IL&amp;#0160;code.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;They&amp;#0160;don't&amp;#0160;have&amp;#0160;&amp;#0160;to&amp;#0160;be&amp;#0160;tagged&amp;#0160;with&amp;#0160;CannotDecreaseVisibilityAttribute.&lt;br/&gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbMethods&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Fields&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Where&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsLiteral&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Any&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Visibility&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;CouldBeDeclared&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;OptimalVisibility&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;TypesUsingMe&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>types</Column>
+        <Column>Visibility</Column>
+        <Column>CouldBeDeclared</Column>
+        <Column>TypesUsingMe</Column>
+      </Columns>
+      <Rows>
+        <Row Name="ConfigurationExtensions" FullName="MicroLite.Configuration.ConfigurationExtensions">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>0 type</Val>
+        </Row>
+        <Row Name="WebApiConfigurationSettings" FullName="MicroLite.Configuration.WebApiConfigurationSettings">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="MicroLiteReadOnlyApiController" FullName="MicroLite.Extensions.WebApi.MicroLiteReadOnlyApiController">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>0 type</Val>
+        </Row>
+        <Row Name="MicroLiteSessionAttribute" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="ValidateModelNotNullAttribute" FullName="MicroLite.Extensions.WebApi.Filters.ValidateModelNotNullAttribute">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="ValidateModelStateAttribute" FullName="MicroLite.Extensions.WebApi.Filters.ValidateModelStateAttribute">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="InlineCountCollection&lt;T&gt;" FullName="MicroLite.Extensions.WebApi.OData.InlineCountCollection&lt;T&gt;">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="MicroLiteODataApiController&lt;TEntity,TId&gt;" FullName="MicroLite.Extensions.WebApi.OData.MicroLiteODataApiController&lt;TEntity ,TId&gt;">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>0 type</Val>
+        </Row>
+        <Row Name="FilterBinder" FullName="MicroLite.Extensions.WebApi.OData.Binders.FilterBinder">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="OrderByBinder" FullName="MicroLite.Extensions.WebApi.OData.Binders.OrderByBinder">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="SelectBinder" FullName="MicroLite.Extensions.WebApi.OData.Binders.SelectBinder">
+          <Val>Public</Val>
+          <Val>Internal</Val>
+          <Val>1 type</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name="Purity - Immutability - Side-Effects" FullName="Purity - Immutability - Side-Effects" GroupId="GroupOfRules-1580586165" NbQueries="9" NbErrors="0" NbWarns="1" Status="Warn">
+    <Query Status="Warn" Name="Property Getters should be immutable" ContentTruncatedThreshold="100" FullName="Purity - Immutability - Side-Effects \ Property Getters should be immutable" QueryId="Query1992668683" NbNodeMatched="1" NbNodeTested="233" KindOfNode=" methods">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Property&amp;#0160;Getters&amp;#0160;should&amp;#0160;be&amp;#0160;immutable&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Methods&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsPropertyGetter&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;(&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ChangesObjectState&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;||&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ChangesTypeState&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;fieldsAssigned&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;FieldsAssigned&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NbLinesOfCode&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;fieldsAssigned&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;This&amp;#0160;rule&amp;#0160;might&amp;#0160;be&amp;#0160;violated&amp;#0160;in&amp;#0160;the&amp;#0160;case&amp;#0160;of&amp;#0160;object&amp;#0160;lazy&amp;#0160;initialized&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;when&amp;#0160;the&amp;#0160;property&amp;#0160;getter&amp;#0160;is&amp;#0160;accessed&amp;#0160;the&amp;#0160;first&amp;#0160;time.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;But&amp;#0160;in&amp;#0160;general,&amp;#0160;the&amp;#0160;callers&amp;#0160;of&amp;#0160;a&amp;#0160;property&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;doesn't&amp;#0160;expect&amp;#0160;to&amp;#0160;change&amp;#0160;any&amp;#0160;state&amp;#0160;through&amp;#0160;the&amp;#0160;call.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>method</Column>
+        <Column># lines of code (LOC)</Column>
+        <Column>fieldsAssigned</Column>
+      </Columns>
+      <Rows>
+        <Row Name="get_ResourceManager()" FullName="MicroLite.Extensions.WebApi.Messages.get_ResourceManager()">
+          <Val>4</Val>
+          <Val>1 field</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>4</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>4</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>4</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>4</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name="Naming Conventions" FullName="Naming Conventions" GroupId="GroupOfRules1398865418" NbQueries="17" NbErrors="0" NbWarns="4" Status="Warn">
+    <Query Status="Warn" Name="Instance fields should be prefixed with a 'm_'" ContentTruncatedThreshold="100" FullName="Naming Conventions \ Instance fields should be prefixed with a 'm_'" QueryId="Query847309376" NbNodeMatched="7" NbNodeTested="39" KindOfNode=" fields">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Instance&amp;#0160;fields&amp;#0160;should&amp;#0160;be&amp;#0160;prefixed&amp;#0160;with&amp;#0160;a&amp;#0160;'m_'&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;f&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Fields&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NameLike&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;@"^m_"&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsLiteral&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsGeneratedByCompiler&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsSpecialName&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsEventDelegateObject&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SizeOfInst&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;This&amp;#0160;naming&amp;#0160;convention&amp;#0160;provokes&amp;#0160;debate.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Don't&amp;#0160;hesitate&amp;#0160;to&amp;#0160;customize&amp;#0160;the&amp;#0160;regex&amp;#0160;of&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;NameLike&amp;#0160;to&amp;#0160;your&amp;#0160;preference.&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>fields</Column>
+        <Column>Size of instance</Column>
+      </Columns>
+      <Rows>
+        <Row Name="connectionName" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .connectionName">
+          <Val>4</Val>
+        </Row>
+        <Row Name="sessionManager" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .sessionManager">
+          <Val>4</Val>
+        </Row>
+        <Row Name="items" FullName="MicroLite.Extensions.WebApi.OData.InlineCountCollection&lt;T&gt;.items">
+          <Val>4</Val>
+        </Row>
+        <Row Name="validationSettings" FullName="MicroLite.Extensions.WebApi.OData.MicroLiteODataApiController&lt;TEntity ,TId&gt;.validationSettings">
+          <Val>4</Val>
+        </Row>
+        <Row Name="objectInfo" FullName="MicroLite.Extensions.WebApi.OData.Binders .FilterBinder+FilterBinderImpl.objectInfo">
+          <Val>4</Val>
+        </Row>
+        <Row Name="predicateBuilder" FullName="MicroLite.Extensions.WebApi.OData.Binders .FilterBinder+FilterBinderImpl.predicateBuilder">
+          <Val>4</Val>
+        </Row>
+        <Row Name="sqlCharacters" FullName="MicroLite.Extensions.WebApi.OData.Binders .FilterBinder+FilterBinderImpl.sqlCharacters">
+          <Val>4</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>28</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>4</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>4</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>4</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Static fields should be prefixed with a 's_'" ContentTruncatedThreshold="100" FullName="Naming Conventions \ Static fields should be prefixed with a 's_'" QueryId="Query671052188" NbNodeMatched="6" NbNodeTested="39" KindOfNode=" fields">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Static&amp;#0160;fields&amp;#0160;should&amp;#0160;be&amp;#0160;prefixed&amp;#0160;with&amp;#0160;a&amp;#0160;'s_'&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;f&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Fields&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;NameLike&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;@"^s_"&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsStatic&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsLiteral&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsGeneratedByCompiler&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsSpecialName&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsEventDelegateObject&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;f&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SizeOfInst&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;This&amp;#0160;naming&amp;#0160;convention&amp;#0160;provokes&amp;#0160;debate.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Don't&amp;#0160;hesitate&amp;#0160;to&amp;#0160;customize&amp;#0160;the&amp;#0160;regex&amp;#0160;of&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;NameLike&amp;#0160;to&amp;#0160;your&amp;#0160;preference.&lt;br/&gt;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>fields</Column>
+        <Column>Size of instance</Column>
+      </Columns>
+      <Rows>
+        <Row Name="Log" FullName="MicroLite.Configuration.ConfigurationExtensions.Log">
+          <Val>N/A</Val>
+        </Row>
+        <Row Name="resourceMan" FullName="MicroLite.Extensions.WebApi.Messages.resourceMan">
+          <Val>N/A</Val>
+        </Row>
+        <Row Name="resourceCulture" FullName="MicroLite.Extensions.WebApi.Messages.resourceCulture">
+          <Val>N/A</Val>
+        </Row>
+        <Row Name="ObjectInfo" FullName="MicroLite.Extensions.WebApi.MicroLiteApiController&lt;TEntity,TId&gt; .ObjectInfo">
+          <Val>N/A</Val>
+        </Row>
+        <Row Name="ContainsNull" FullName="MicroLite.Extensions.WebApi.Filters.ValidateModelNotNullAttribute .ContainsNull">
+          <Val>N/A</Val>
+        </Row>
+        <Row Name="AllColumnNames" FullName="MicroLite.Extensions.WebApi.OData.Binders.SelectBinder.AllColumnNames">
+          <Val>N/A</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Avoid methods with name too long" ContentTruncatedThreshold="100" FullName="Naming Conventions \ Avoid methods with name too long" QueryId="Query3460729287" NbNodeMatched="12" NbNodeTested="233" KindOfNode=" methods">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Avoid&amp;#0160;methods&amp;#0160;with&amp;#0160;name&amp;#0160;too&amp;#0160;long&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&amp;#0160;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Methods&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsExplicitInterfaceImpl&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsGeneratedByCompiler&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsSpecialName&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SimpleName&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Length&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;35&lt;/b&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;||&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Property&amp;#0160;getter/setter&amp;#0160;are&amp;#0160;prefixed&amp;#0160;with&amp;#0160;"get_"&amp;#0160;"set_"&amp;#0160;of&amp;#0160;length&amp;#0160;4.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsSpecialName&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SimpleName&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Length&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;-&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;4&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;35&lt;/b&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SimpleName&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;The&amp;#0160;regex&amp;#0160;matches&amp;#0160;methods&amp;#0160;with&amp;#0160;name&amp;#0160;longer&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;than&amp;#0160;35&amp;#0160;characters.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Method&amp;#0160;Name&amp;#0160;doesn't&amp;#0160;contain&amp;#0160;the&amp;#0160;type&amp;#0160;and&amp;#0160;namespace&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;prefix,&amp;#0160;FullName&amp;#0160;does.&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;The&amp;#0160;regex&amp;#0160;computes&amp;#0160;the&amp;#0160;method&amp;#0160;name&amp;#0160;length&amp;#0160;from&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;the&amp;#0160;beginning&amp;#0160;until&amp;#0160;the&amp;#0160;first&amp;#0160;open&amp;#0160;parenthesis&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;or&amp;#0160;first&amp;#0160;lower&amp;#0160;than&amp;#0160;(for&amp;#0160;generic&amp;#0160;methods).&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Explicit&amp;#0160;Interface&amp;#0160;Implementation&amp;#0160;methods&amp;#0160;are&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;discarded&amp;#0160;because&amp;#0160;their&amp;#0160;names&amp;#0160;are&amp;#0160;prefixed&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;with&amp;#0160;the&amp;#0160;interface&amp;#0160;name.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>methods</Column>
+        <Column>SimpleName</Column>
+      </Columns>
+      <Rows>
+        <Row Name="get_RegisterGlobalMicroLiteSessionAttribute()" FullName="MicroLite.Configuration.WebApiConfigurationSettings .get_RegisterGlobalMicroLiteSessionAttribute()">
+          <Val>get_RegisterGlobalMicroLiteSessionAttribute</Val>
+        </Row>
+        <Row Name="set_RegisterGlobalMicroLiteSessionAttribute(Boolean)" FullName="MicroLite.Configuration.WebApiConfigurationSettings .set_RegisterGlobalMicroLiteSessionAttribute(Boolean)">
+          <Val>set_RegisterGlobalMicroLiteSessionAttribute</Val>
+        </Row>
+        <Row Name="get_RegisterGlobalValidateModelNotNullAttribute()" FullName="MicroLite.Configuration.WebApiConfigurationSettings .get_RegisterGlobalValidateModelNotNullAttribute()">
+          <Val>get_RegisterGlobalValidateModelNotNullAttribute</Val>
+        </Row>
+        <Row Name="set_RegisterGlobalValidateModelNotNullAttribute(Boolean)" FullName="MicroLite.Configuration.WebApiConfigurationSettings .set_RegisterGlobalValidateModelNotNullAttribute(Boolean)">
+          <Val>set_RegisterGlobalValidateModelNotNullAttribute</Val>
+        </Row>
+        <Row Name="get_RegisterGlobalValidateModelStateAttribute()" FullName="MicroLite.Configuration.WebApiConfigurationSettings .get_RegisterGlobalValidateModelStateAttribute()">
+          <Val>get_RegisterGlobalValidateModelStateAttribute</Val>
+        </Row>
+        <Row Name="set_RegisterGlobalValidateModelStateAttribute(Boolean)" FullName="MicroLite.Configuration.WebApiConfigurationSettings .set_RegisterGlobalValidateModelStateAttribute(Boolean)">
+          <Val>set_RegisterGlobalValidateModelStateAttribute</Val>
+        </Row>
+        <Row Name="get_NoConnectionNameMultipleSessionFactories()" FullName="MicroLite.Extensions.WebApi.Messages .get_NoConnectionNameMultipleSessionFactories()">
+          <Val>get_NoConnectionNameMultipleSessionFactories</Val>
+        </Row>
+        <Row Name="get_NoSessionFactoryFoundForConnectionName()" FullName="MicroLite.Extensions.WebApi.Messages .get_NoSessionFactoryFoundForConnectionName()">
+          <Val>get_NoSessionFactoryFoundForConnectionName</Val>
+        </Row>
+        <Row Name="get_RegisteringDefaultMicroLiteSessionActionFilter()" FullName="MicroLite.Extensions.WebApi.Messages .get_RegisteringDefaultMicroLiteSessionActionFilter()">
+          <Val>get_RegisteringDefaultMicroLiteSessionActionFilter</Val>
+        </Row>
+        <Row Name="get_RegisteringValidateModelNotNullActionFilter()" FullName="MicroLite.Extensions.WebApi.Messages .get_RegisteringValidateModelNotNullActionFilter()">
+          <Val>get_RegisteringValidateModelNotNullActionFilter</Val>
+        </Row>
+        <Row Name="get_RegisteringValidateModelStateActionFilter()" FullName="MicroLite.Extensions.WebApi.Messages .get_RegisteringValidateModelStateActionFilter()">
+          <Val>get_RegisteringValidateModelStateActionFilter</Val>
+        </Row>
+        <Row Name="FindSessionFactoryForSpecifiedConnection()" FullName="MicroLite.Extensions.WebApi.Filters.MicroLiteSessionAttribute .FindSessionFactoryForSpecifiedConnection()">
+          <Val>FindSessionFactoryForSpecifiedConnection</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Avoid having different types with same name" ContentTruncatedThreshold="100" FullName="Naming Conventions \ Avoid having different types with same name" QueryId="Query1798806433" NbNodeMatched="1" NbNodeTested="159" KindOfNode=" types">
+      <QueryHtml>&amp;#0160;&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Avoid&amp;#0160;having&amp;#0160;different&amp;#0160;types&amp;#0160;with&amp;#0160;same&amp;#0160;name&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Such&amp;#0160;practice&amp;#0160;typically&amp;#0160;creates&amp;#0160;confusion,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;and&amp;#0160;type&amp;#0160;naming&amp;#0160;collision&amp;#0160;inside&amp;#0160;a&amp;#0160;source&amp;#0160;file.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;This&amp;#0160;rule&amp;#0160;matches&amp;#0160;also&amp;#0160;collisions&amp;#0160;between&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;application&amp;#0160;and&amp;#0160;third-party&amp;#0160;types&amp;#0160;sharing&amp;#0160;a&amp;#0160;same&amp;#0160;name.&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groups&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Union&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;ThirdParty&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Discard&amp;#0160;nested&amp;#0160;types,&amp;#0160;whose&amp;#0160;name&amp;#0160;is&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;prefixed&amp;#0160;with&amp;#0160;the&amp;#0160;parent&amp;#0160;type&amp;#0160;name.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Where&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsNested&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Group&amp;#0160;types&amp;#0160;by&amp;#0160;name.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;GroupBy&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Name&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;@group&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groups&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;@group&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;1&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Let's&amp;#0160;see&amp;#0160;if&amp;#0160;types&amp;#0160;with&amp;#0160;the&amp;#0160;same&amp;#0160;name&amp;#0160;are&amp;#0160;declared&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;in&amp;#0160;different&amp;#0160;namespaces.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;(t.FullName&amp;#0160;is&amp;#0160;{namespaceName}.{typeName}&amp;#0160;)&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupsFullName&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;@group&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;GroupBy&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;FullName&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupsFullName&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;1&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;If&amp;#0160;several&amp;#0160;types&amp;#0160;with&amp;#0160;same&amp;#0160;name&amp;#0160;are&amp;#0160;declared&amp;#0160;in&amp;#0160;different&amp;#0160;namespaces&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;eliminate&amp;#0160;the&amp;#0160;case&amp;#0160;where&amp;#0160;all&amp;#0160;types&amp;#0160;are&amp;#0160;declared&amp;#0160;in&amp;#0160;third-party&amp;#0160;assemblies.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupsFullName&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SelectMany&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;g&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;g&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Any&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;IsThirdParty&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Uncomment&amp;#0160;this&amp;#0160;line,&amp;#0160;to&amp;#0160;only&amp;#0160;gets&amp;#0160;naming&amp;#0160;collision&amp;#0160;involving&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;both&amp;#0160;application&amp;#0160;adn&amp;#0160;third-party&amp;#0160;types.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;amp;&amp;amp;&amp;#0160;types.Any(t&amp;#0160;=&amp;gt;&amp;#0160;t.IsThirdParty)&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;orderby&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;descending&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;First&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;In&amp;#0160;the&amp;#0160;'types'&amp;#0160;column,&amp;#0160;make&amp;#0160;sure&amp;#0160;to&amp;#0160;group&amp;#0160;matched&amp;#0160;types&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;by&amp;#0160;parent&amp;#0160;assemblies&amp;#0160;and&amp;#0160;parent&amp;#0160;namespaces.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;types&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;}&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>type</Column>
+        <Column>types</Column>
+      </Columns>
+      <Rows>
+        <Row Name="ODataQueryOptionsExtensions" FullName="MicroLite.Extensions.WebApi.OData.Binders.ODataQueryOptionsExtensions">
+          <Val>2 types</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name="Source Files Organization" FullName="Source Files Organization" GroupId="GroupOfRules-1327291969" NbQueries="6" NbErrors="0" NbWarns="2" Status="Warn">
+    <Query Status="Warn" Name="Namespace name should correspond to file location" ContentTruncatedThreshold="100" FullName="Source Files Organization \ Namespace name should correspond to file location" QueryId="Query403511532" NbNodeMatched="2" NbNodeTested="159" KindOfNode=" types">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Namespace&amp;#0160;name&amp;#0160;should&amp;#0160;correspond&amp;#0160;to&amp;#0160;file&amp;#0160;location&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;For&amp;#0160;a&amp;#0160;good&amp;#0160;code&amp;#0160;organization,&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;do&amp;#0160;mirror&amp;#0160;the&amp;#0160;namespaces&amp;#0160;hierarchy&amp;#0160;and&amp;#0160;the&amp;#0160;source&amp;#0160;files&amp;#0160;directories&amp;#0160;tree.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;Application&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Namespaces&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Replace&amp;#0160;dots&amp;#0160;by&amp;#0160;spaces&amp;#0160;in&amp;#0160;namespace&amp;#0160;name&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;dirCorresponding&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Name&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Replace&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;'.'&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#A31515'&gt;'&amp;#0160;'&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Look&amp;#0160;at&amp;#0160;source&amp;#0160;file&amp;#0160;decl&amp;#0160;of&amp;#0160;JustMyCode&amp;#0160;type's&amp;#0160;declared&amp;#0160;in&amp;#0160;n&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;n&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ChildTypes&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Contains&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;amp;&amp;amp;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceFileDeclAvailable&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;decl&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceDecls&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;sourceFilePath&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;decl&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceFile&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;FilePath&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ToString&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Replace&amp;#0160;dots&amp;#0160;and&amp;#0160;path&amp;#0160;separators&amp;#0160;by&amp;#0160;spaces&amp;#0160;in&amp;#0160;source&amp;#0160;files&amp;#0160;names&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!&lt;/font&gt;&lt;font color='#000000'&gt;sourceFilePath&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Replace&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;'.'&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#A31515'&gt;'&amp;#0160;'&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Replace&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#A31515'&gt;'\\'&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#A31515'&gt;'&amp;#0160;'&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Contains&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;dirCorresponding&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;dirCorresponding&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;,&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;sourceFilePath&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;}&lt;/font&gt;&amp;#0160;</QueryHtml>
+      <Columns>
+        <Column>types</Column>
+        <Column>dirCorresponding</Column>
+        <Column>sourceFilePath</Column>
+      </Columns>
+      <Rows>
+        <Row Name="ConfigurationExtensions" FullName="MicroLite.Configuration.ConfigurationExtensions">
+          <Val>MicroLite Configuration</Val>
+          <Val>c:\Source\GitHub\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi\ConfigurationExtensions.cs</Val>
+        </Row>
+        <Row Name="WebApiConfigurationSettings" FullName="MicroLite.Configuration.WebApiConfigurationSettings">
+          <Val>MicroLite Configuration</Val>
+          <Val>c:\Source\GitHub\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi\WebApiConfigurationSettings.cs</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+    <Query Status="Warn" Name="Types with source files stored in the same directory, should be declared in the same namespace" ContentTruncatedThreshold="100" FullName="Source Files Organization \ Types with source files stored in the same directory, should be declared in the same namespace" QueryId="Query2913857207" NbNodeMatched="1" NbNodeTested="44" KindOfNode=" namespaces">
+      <QueryHtml>&lt;font color='#008000'&gt;//&amp;#0160;&amp;lt;Name&amp;gt;&lt;/font&gt;&lt;b style="color:#008000;background-color:#E6FFE6"&gt;Types&amp;#0160;with&amp;#0160;source&amp;#0160;files&amp;#0160;stored&amp;#0160;in&amp;#0160;the&amp;#0160;same&amp;#0160;directory,&amp;#0160;should&amp;#0160;be&amp;#0160;declared&amp;#0160;in&amp;#0160;the&amp;#0160;same&amp;#0160;namespace&lt;/b&gt;&lt;font color='#008000'&gt;&amp;lt;/Name&amp;gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;warnif&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;count&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Group&amp;#0160;JustMyCode&amp;#0160;types&amp;#0160;in&amp;#0160;a&amp;#0160;lookup&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;where&amp;#0160;groups&amp;#0160;are&amp;#0160;keyed&amp;#0160;with&amp;#0160;directories&amp;#0160;that&amp;#0160;contain&amp;#0160;the&amp;#0160;types'&amp;#0160;source&amp;#0160;file(s).&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Note&amp;#0160;that&amp;#0160;a&amp;#0160;type&amp;#0160;can&amp;#0160;be&amp;#0160;contained&amp;#0160;in&amp;#0160;several&amp;#0160;groups&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;if&amp;#0160;it&amp;#0160;is&amp;#0160;declared&amp;#0160;in&amp;#0160;several&amp;#0160;source&amp;#0160;files&amp;#0160;stored&amp;#0160;in&amp;#0160;different&amp;#0160;directories.&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;lookup&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Types&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Where&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceFileDeclAvailable&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ToMultiKeyLookup&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceDecls&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Select&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;decl&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;decl&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceFile&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;FilePath&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ParentDirectoryPath&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Distinct&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;from&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupOfTypes&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;in&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;lookup&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;parentNamespaces&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupOfTypes&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ParentNamespaces&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Select&amp;#0160;group&amp;#0160;of&amp;#0160;types&amp;#0160;(with&amp;#0160;source&amp;#0160;files&amp;#0160;stored&amp;#0160;in&amp;#0160;the&amp;#0160;same&amp;#0160;directory)&amp;#0160;...&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;...&amp;#0160;but&amp;#0160;contained&amp;#0160;in&amp;#0160;several&amp;#0160;namespaces&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;parentNamespaces&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;1&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;mainNamespaces&amp;#0160;is&amp;#0160;the&amp;#0160;namespace&amp;#0160;that&amp;#0160;contains&amp;#0160;many&amp;#0160;types&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;declared&amp;#0160;in&amp;#0160;the&amp;#0160;directory&amp;#0160;groupOfTypes&amp;#0160;.key&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;mainNamespace&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupOfTypes&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ToLookup&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ParentNamespace&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;OrderByDescending&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;g&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;g&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;First&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Key&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Select&amp;#0160;types&amp;#0160;with&amp;#0160;source&amp;#0160;files&amp;#0160;stored&amp;#0160;in&amp;#0160;the&amp;#0160;same&amp;#0160;directory,&lt;br/&gt;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;but&amp;#0160;contained&amp;#0160;in&amp;#0160;namespaces&amp;#0160;different&amp;#0160;than&amp;#0160;mainNamespace.&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;let&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;typesOutOfMainNamespace&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;groupOfTypes&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Where&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;ParentNamespace&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;!=&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;mainNamespace&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Filter&amp;#0160;types&amp;#0160;declared&amp;#0160;on&amp;#0160;several&amp;#0160;source&amp;#0160;files&amp;#0160;that&amp;#0160;contain&amp;#0160;generated&amp;#0160;methods&amp;#0160;&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;because&amp;#0160;typically&amp;#0160;such&amp;#0160;type&amp;#0160;contains&amp;#0160;one&amp;#0160;or&amp;#0160;several&amp;#0160;partial&amp;#0160;definitions&amp;#0160;generated.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;These&amp;#0160;partially&amp;#0160;generated&amp;#0160;types&amp;#0160;would&amp;#0160;be&amp;#0160;false&amp;#0160;positive&amp;#0160;for&amp;#0160;the&amp;#0160;present&amp;#0160;rule.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Where&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;SourceDecls&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;1&lt;/b&gt;&amp;#0160;&lt;font color='#000000'&gt;||&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;t&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Methods&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;=&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000064;background-color:#E8E8FF"&gt;JustMyCode&lt;/b&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Contains&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;m&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;==&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;where&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;typesOutOfMainNamespace&lt;/font&gt;&lt;font color='#000000'&gt;.&lt;/font&gt;&lt;font color='#000000'&gt;Count&lt;/font&gt;&lt;font color='#000000'&gt;(&lt;/font&gt;&lt;font color='#000000'&gt;)&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;&amp;gt;&lt;/font&gt;&amp;#0160;&lt;b style="color:#000000;background-color:#FFFF99"&gt;0&lt;/b&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;&lt;font color='#0000FF'&gt;select&lt;/font&gt;&amp;#0160;&lt;font color='#0000FF'&gt;new&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;{&lt;/font&gt;&amp;#0160;&lt;font color='#000000'&gt;mainNamespace&lt;/font&gt;&lt;font color='#000000'&gt;,&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&lt;br/&gt;&lt;br/&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;Typically&amp;#0160;a&amp;#0160;type&amp;#0160;in&amp;#0160;typesOutOfMainNamespace&amp;#0160;...&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;1)&amp;#0160;...&amp;#0160;is&amp;#0160;contained&amp;#0160;in&amp;#0160;the&amp;#0160;wrong&amp;#0160;namespace&amp;#0160;but&amp;#0160;its&amp;#0160;source&amp;#0160;file(s)&amp;#0160;is&amp;#0160;stored&amp;#0160;in&amp;#0160;the&amp;#0160;right&amp;#0160;directory.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;--&amp;gt;&amp;#0160;In&amp;#0160;such&amp;#0160;situation&amp;#0160;the&amp;#0160;type&amp;#0160;should&amp;#0160;be&amp;#0160;contained&amp;#0160;in&amp;#0160;mainNamespace.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;2)&amp;#0160;...&amp;#0160;is&amp;#0160;contained&amp;#0160;in&amp;#0160;the&amp;#0160;right&amp;#0160;namespace&amp;#0160;but&amp;#0160;its&amp;#0160;source&amp;#0160;file(s)&amp;#0160;is&amp;#0160;stored&amp;#0160;in&amp;#0160;the&amp;#0160;wrong&amp;#0160;directory&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;--&amp;gt;&amp;#0160;In&amp;#0160;such&amp;#0160;situation&amp;#0160;the&amp;#0160;source&amp;#0160;file&amp;#0160;of&amp;#0160;type&amp;#0160;must&amp;#0160;be&amp;#0160;moved&amp;#0160;to&amp;#0160;the&amp;#0160;parent&amp;#0160;namespace&amp;#0160;directory.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;3)&amp;#0160;...&amp;#0160;is&amp;#0160;declared&amp;#0160;in&amp;#0160;multiple&amp;#0160;source&amp;#0160;files,&amp;#0160;stored&amp;#0160;in&amp;#0160;different&amp;#0160;directories.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#008000'&gt;//&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;--&amp;gt;&amp;#0160;It&amp;#0160;would&amp;#0160;be&amp;#0160;preferable&amp;#0160;that&amp;#0160;all&amp;#0160;source&amp;#0160;files&amp;#0160;are&amp;#0160;stored&amp;#0160;in&amp;#0160;a&amp;#0160;single&amp;#0160;directory.&lt;br/&gt;&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;typesOutOfMainNamespace&lt;/font&gt;&lt;font color='#000000'&gt;&amp;#0160;&amp;#0160;&amp;#0160;&lt;/font&gt;&lt;font color='#000000'&gt;}&lt;/font&gt;&lt;font color='#000000'&gt;&lt;br/&gt;&lt;br/&gt;&lt;/font&gt;</QueryHtml>
+      <Columns>
+        <Column>namespace</Column>
+        <Column>typesOutOfMainNamespace</Column>
+      </Columns>
+      <Rows>
+        <Row Name="MicroLite.Extensions.WebApi" FullName="MicroLite.Extensions.WebApi">
+          <Val>2 types</Val>
+        </Row>
+        <Row Name="Sum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Average:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Minimum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Maximum:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Standard deviation:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+        <Row Name="Variance:" FullName="Stat">
+          <Val>0</Val>
+        </Row>
+      </Rows>
+    </Query>
+  </Group>
+  <Group Name=".NET Framework Usage" FullName=".NET Framework Usage" GroupId="GroupOfRules1219213928" NbQueries="0" NbErrors="0" NbWarns="0" Status="Ok">
+    <Group Name="System" FullName=".NET Framework Usage \ System" GroupId="GroupOfRules-1664150667" NbQueries="13" NbErrors="0" NbWarns="0" Status="Ok" />
+    <Group Name="System.Collection" FullName=".NET Framework Usage \ System.Collection" GroupId="GroupOfRules1560634537" NbQueries="2" NbErrors="0" NbWarns="0" Status="Ok" />
+    <Group Name="System.Runtime.InteropServices" FullName=".NET Framework Usage \ System.Runtime.InteropServices" GroupId="GroupOfRules-1971424400" NbQueries="3" NbErrors="0" NbWarns="0" Status="Ok" />
+    <Group Name="System.Threading" FullName=".NET Framework Usage \ System.Threading" GroupId="GroupOfRules-713045791" NbQueries="6" NbErrors="0" NbWarns="0" Status="Ok" />
+    <Group Name="System.Xml" FullName=".NET Framework Usage \ System.Xml" GroupId="GroupOfRules1660991502" NbQueries="2" NbErrors="0" NbWarns="0" Status="Ok" />
+    <Group Name="System.Globalization" FullName=".NET Framework Usage \ System.Globalization" GroupId="GroupOfRules-1645675342" NbQueries="1" NbErrors="0" NbWarns="0" Status="Ok" />
+    <Group Name="Microsoft.Contracts" FullName=".NET Framework Usage \ Microsoft.Contracts" GroupId="GroupOfRules17988531" NbQueries="1" NbErrors="0" NbWarns="0" Status="Ok" />
+  </Group>
+  <Group Name="Defining JustMyCode" FullName="Defining JustMyCode" GroupId="GroupOfRules-1894704231" NbQueries="4" NbErrors="0" NbWarns="0" Status="Ok" />
+  <Group Name="Rules extracted from Source Code" FullName="Rules extracted from Source Code" GroupId="GroupOfRules1206142379" NbQueries="0" NbErrors="0" NbWarns="0" Status="Not yet compiled" />
+</RuleResult>

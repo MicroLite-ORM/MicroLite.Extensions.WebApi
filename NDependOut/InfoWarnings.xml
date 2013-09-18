@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InfoWarnings>
+  <Info>09/18/2013 20:13:28 Begin full analysis with NDepend v4.1.0</Info>
+  <Info>No Baseline for Comparison loaded.</Info>
+  <Warning>Can't load the assembly {System.Net.Http}:
+Several .NET assemblies have the name {System.Net.Http} but they are different.
+ - C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Net.Http.dll   v0.0  193 472 bytes
+ - C:\Source\GitHub\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi\bin\Debug\System.Net.Http.dll   v0.0  180 832 bytes
+</Warning>
+  <Info>Concurrent mode</Info>
+  <Info>.NET Assemblies loaded from {C:\Windows\Microsoft.NET\Framework\v4.0.30319} 
+   mscorlib.dll   v4.0.0.0
+   System.Data.dll   v4.0.0.0
+   System.dll   v4.0.0.0
+   System.Core.dll   v4.0.0.0</Info>
+  <Warning>No application or third party assembly found in directory {C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF}</Warning>
+  <Info>.NET Assemblies loaded from {C:\Source\GitHub\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi\bin\Debug} 
+   MicroLite.Extensions.WebApi.dll   v3.0.0.0
+   System.Web.Http.WebHost.dll   v4.0.0.0
+   System.Web.Http.dll   v4.0.0.0
+   System.Net.Http.Formatting.dll   v4.0.0.0
+   Net.Http.WebApi.OData.dll   v1.0.0.0
+   MicroLite.dll   v4.0.0.0</Info>
+  <Warning>Assembly {System.Net.Http} is referenced by {MicroLite.Extensions.WebApi} but is not found.</Warning>
+  <Warning>The source file {c:\Source\GitHub\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi\Properties\AssemblyInfo.cs} (last modified 18/09/2013 19:47:32) and the PDB file of the assembly {MicroLite.Extensions.WebApi} (last modified 15/09/2013 11:37:50) are not in-sync.</Warning>
+  <Info>18 source files parsed ; all source files found ; 1 source file not in-sync with PDB</Info>
+  <Info>0 code rule has been extracted from code.</Info>
+  <Info>No dependency cycle detected in assemblies referencement graph.</Info>
+  <Info>09/18/2013 20:13:29 Analyse dependencies of your application.</Info>
+  <Info>09/18/2013 20:13:29 Building the report (standard).</Info>
+</InfoWarnings>
