@@ -1,5 +1,6 @@
 ﻿namespace MicroLite.Extensions.WebApi.Tests.OData.Binders
 {
+    using System;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Query;
     using Net.Http.WebApi.OData;
@@ -12,6 +13,15 @@
         {
             Pending = 0,
             Active = 1
+        }
+
+        [Fact]
+        public void BindOrderByThrowsArgumentNullExceptionForNullOrderBySqlBuilder()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => OrderByBinder.BindOrderBy<Customer>(new OrderByQueryOption("$orderby=FirstName"), null));
+
+            Assert.Equal("orderBySqlBuilder", exception.ParamName);
         }
 
         [Fact]

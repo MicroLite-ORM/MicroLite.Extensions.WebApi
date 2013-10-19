@@ -1,5 +1,6 @@
 ﻿namespace MicroLite.Extensions.WebApi.Tests
 {
+    using System;
     using System.Linq;
     using System.Web.Http;
     using MicroLite.Configuration;
@@ -9,6 +10,20 @@
 
     public class ConfigurationExtensionsTests
     {
+        public class WhenCallingWithWebApiAndConfigureExtensionsIsNull
+        {
+            [Fact]
+            public void AnArgumentNullExceptionIsThrown()
+            {
+                var configureExtensions = default(IConfigureExtensions);
+
+                var exception = Assert.Throws<ArgumentNullException>(
+                    () => configureExtensions.WithWebApi(new WebApiConfigurationSettings()));
+
+                Assert.Equal("configureExtensions", exception.ParamName);
+            }
+        }
+
         public class WhenCallingWithWebApiAndThereAreNoFiltersRegistered
         {
             public WhenCallingWithWebApiAndThereAreNoFiltersRegistered()
@@ -42,6 +57,20 @@
                 var filter = GlobalConfiguration.Configuration.Filters.Where(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))).SingleOrDefault();
 
                 Assert.NotNull(filter);
+            }
+        }
+
+        public class WhenCallingWithWebApiAndWebApiConfigurationSettingsIsNull
+        {
+            [Fact]
+            public void AnArgumentNullExceptionIsThrown()
+            {
+                var configureExtensions = new Mock<IConfigureExtensions>().Object;
+
+                var exception = Assert.Throws<ArgumentNullException>(
+                    () => configureExtensions.WithWebApi(null));
+
+                Assert.Equal("settings", exception.ParamName);
             }
         }
 

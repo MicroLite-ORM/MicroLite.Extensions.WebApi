@@ -34,6 +34,11 @@ namespace MicroLite.Configuration
         /// <returns>The configure extensions.</returns>
         public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings settings)
         {
+            if (configureExtensions == null)
+            {
+                throw new ArgumentNullException("configureExtensions");
+            }
+
             if (settings == null)
             {
                 throw new ArgumentNullException("settings");

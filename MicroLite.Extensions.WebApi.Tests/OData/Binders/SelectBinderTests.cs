@@ -1,5 +1,6 @@
 ﻿namespace MicroLite.Extensions.WebApi.Tests.OData.Binders
 {
+    using System;
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Query;
@@ -13,6 +14,15 @@
         {
             Pending = 0,
             Active = 1
+        }
+
+        [Fact]
+        public void BindBindSelectQueryOptionThrowsArgumentNullExceptionForNullODataQueryOptions()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => SelectBinder.BindSelectQueryOption<Customer>(null));
+
+            Assert.Equal("queryOptions", exception.ParamName);
         }
 
         [Fact]

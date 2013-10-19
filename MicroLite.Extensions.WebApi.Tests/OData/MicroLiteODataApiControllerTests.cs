@@ -166,6 +166,21 @@
             }
         }
 
+        public class WhenNullQueryOptionsAreSupplied
+        {
+            [Fact]
+            public void AnArgumentNullExceptionIsThrown()
+            {
+                var controller = new CustomerController();
+
+                var queryOptions = default(ODataQueryOptions);
+
+                var exception = Assert.Throws<ArgumentNullException>(() => controller.Get(queryOptions));
+
+                Assert.Equal("queryOptions", exception.ParamName);
+            }
+        }
+
         private class Customer
         {
             public int Id
