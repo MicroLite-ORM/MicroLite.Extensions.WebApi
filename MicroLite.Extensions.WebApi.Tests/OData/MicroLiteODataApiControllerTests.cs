@@ -10,6 +10,7 @@
     using Moq;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
+    using Net.Http.WebApi.OData.Query.Validation;
     using Xunit;
 
     public class MicroLiteODataApiControllerTests
@@ -23,6 +24,119 @@
 
             var exception = Assert.Throws<ODataException>(() => controller.Get(queryOptions));
             Assert.Contains("$skip", exception.Message);
+        }
+
+        public class TheDefaultValidatonSettings
+        {
+            private readonly CustomerController controller = new CustomerController();
+
+            [Fact]
+            public void DayFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Day, AllowedFunctions.Day);
+            }
+
+            [Fact]
+            public void EndsWithFunctionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.EndsWith, AllowedFunctions.EndsWith);
+            }
+
+            [Fact]
+            public void ExpandQueryOptionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Expand, AllowedQueryOptions.Expand);
+            }
+
+            [Fact]
+            public void FilterQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter, AllowedQueryOptions.Filter);
+            }
+
+            [Fact]
+            public void FormatCountQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Format, AllowedQueryOptions.Format);
+            }
+
+            [Fact]
+            public void InlineCountQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount, AllowedQueryOptions.InlineCount);
+            }
+
+            [Fact]
+            public void MaxTopIsSetTo50()
+            {
+                Assert.Equal(50, controller.ValidationSettings.MaxTop);
+            }
+
+            [Fact]
+            public void MonthFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Month, AllowedFunctions.Month);
+            }
+
+            [Fact]
+            public void OrderByQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy, AllowedQueryOptions.OrderBy);
+            }
+
+            [Fact]
+            public void SelectQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Select, AllowedQueryOptions.Select);
+            }
+
+            [Fact]
+            public void SkipQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip, AllowedQueryOptions.Skip);
+            }
+
+            [Fact]
+            public void SkipTokenQueryOptionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.SkipToken, AllowedQueryOptions.SkipToken);
+            }
+
+            [Fact]
+            public void StartsWithFunctionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.StartsWith, AllowedFunctions.StartsWith);
+            }
+
+            [Fact]
+            public void SubstringOfFunctionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.SubstringOf, AllowedFunctions.SubstringOf);
+            }
+
+            [Fact]
+            public void ToLowerFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToLower, AllowedFunctions.ToLower);
+            }
+
+            [Fact]
+            public void TopQueryOptionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Top, AllowedQueryOptions.Top);
+            }
+
+            [Fact]
+            public void ToUpperFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToUpper, AllowedFunctions.ToUpper);
+            }
+
+            [Fact]
+            public void YearFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year, AllowedFunctions.Year);
+            }
         }
 
         public class WhenAValidSkipValueIsSpecified
@@ -204,6 +318,14 @@
                 {
                     return new Uri("http://localhost/api/Customers/" + id.ToString());
                 };
+            }
+
+            public new ODataValidationSettings ValidationSettings
+            {
+                get
+                {
+                    return base.ValidationSettings;
+                }
             }
 
             public HttpResponseMessage Get(ODataQueryOptions queryOptions)

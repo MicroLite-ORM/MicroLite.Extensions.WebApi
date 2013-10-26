@@ -45,6 +45,9 @@ namespace MicroLite.Extensions.WebApi.OData
             {
                 return this.validationSettings ?? (this.validationSettings = new ODataValidationSettings
                 {
+                    AllowedFunctions = AllowedFunctions.EndsWith
+                        | AllowedFunctions.StartsWith
+                        | AllowedFunctions.SubstringOf,
                     AllowedQueryOptions = AllowedQueryOptions.Filter
                         | AllowedQueryOptions.Format
                         | AllowedQueryOptions.InlineCount
