@@ -47,6 +47,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
         private sealed class FilterBinderImpl
         {
+            private static readonly string[] ParameterisedFunctions = new[] { "startswith", "endswith", "substringof" };
             private readonly IObjectInfo objectInfo;
             private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
             private readonly SqlCharacters sqlCharacters = SqlBuilder.SqlCharacters ?? SqlCharacters.Empty;
@@ -103,7 +104,8 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
                 this.Bind(binaryOperatorNode.Left);
 
-                if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall)
+                if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall
+                    || (binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall && !ParameterisedFunctions.Contains(((SingleValueFunctionCallNode)binaryOperatorNode.Left).Name)))
                 {
                     this.predicateBuilder.Append(" " + binaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
                     this.Bind(binaryOperatorNode.Right);
@@ -153,6 +155,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     case "substringof":
                         this.Bind(arguments[1]);
                         this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).LiteralText + this.sqlCharacters.LikeWildcard);
+                        break;
+
+                    case "toupper":
+                        this.predicateBuilder.Append("UPPER(");
+                        this.Bind(arguments[0]);
+                        this.predicateBuilder.Append(")");
                         break;
 
                     default:

@@ -47,7 +47,8 @@ namespace MicroLite.Extensions.WebApi.OData
                 {
                     AllowedFunctions = AllowedFunctions.EndsWith
                         | AllowedFunctions.StartsWith
-                        | AllowedFunctions.SubstringOf,
+                        | AllowedFunctions.SubstringOf
+                        | AllowedFunctions.ToUpper,
                     AllowedQueryOptions = AllowedQueryOptions.Filter
                         | AllowedQueryOptions.Format
                         | AllowedQueryOptions.InlineCount

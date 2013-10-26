@@ -127,9 +127,9 @@
             }
 
             [Fact]
-            public void ToUpperFunctionIsNotAllowed()
+            public void ToUpperFunctionIsAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToUpper, AllowedFunctions.ToUpper);
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToUpper, AllowedFunctions.ToUpper);
             }
 
             [Fact]
