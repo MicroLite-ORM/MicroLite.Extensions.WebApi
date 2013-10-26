@@ -103,7 +103,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
                 this.Bind(binaryOperatorNode.Left);
 
-                if (!(binaryOperatorNode.Left is SingleValueFunctionCallNode))
+                if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall)
                 {
                     this.predicateBuilder.Append(" " + binaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
                     this.Bind(binaryOperatorNode.Right);
