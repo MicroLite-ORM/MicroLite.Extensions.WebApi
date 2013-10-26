@@ -163,6 +163,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         this.predicateBuilder.Append(")");
                         break;
 
+                    case "tolower":
+                        this.predicateBuilder.Append("LOWER(");
+                        this.Bind(arguments[0]);
+                        this.predicateBuilder.Append(")");
+                        break;
+
                     default:
                         throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
                 }

@@ -115,9 +115,9 @@
             }
 
             [Fact]
-            public void ToLowerFunctionIsNotAllowed()
+            public void ToLowerFunctionIsAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToLower, AllowedFunctions.ToLower);
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToLower, AllowedFunctions.ToLower);
             }
 
             [Fact]
