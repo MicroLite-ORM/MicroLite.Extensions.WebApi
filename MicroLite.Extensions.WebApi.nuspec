@@ -24,5 +24,6 @@
     <file src="..\build\4.0\MicroLite.Extensions.WebApi.xml" target="lib\net40" />
     <file src="..\build\4.5\MicroLite.Extensions.WebApi.dll" target="lib\net45" />
     <file src="..\build\4.5\MicroLite.Extensions.WebApi.xml" target="lib\net45" />
+    <file src="..\build\help\MicroLite.Extensions.WebApi.chm" target="" />
   </files>
 </package>
