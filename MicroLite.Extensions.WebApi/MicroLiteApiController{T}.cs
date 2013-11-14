@@ -15,6 +15,7 @@ namespace MicroLite.Extensions.WebApi
     using System;
     using System.Net;
     using System.Net.Http;
+    using MicroLite.Logging;
     using MicroLite.Mapping;
 
     /// <summary>
@@ -25,6 +26,7 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteApiController<TEntity, TId> : MicroLiteApiController
         where TEntity : class, new()
     {
+        private static readonly ILog Log = LogManager.GetCurrentClassLog();
         private static readonly IObjectInfo ObjectInfo = MicroLite.Mapping.ObjectInfo.For(typeof(TEntity));
 
         /// <summary>
@@ -70,10 +72,12 @@ namespace MicroLite.Extensions.WebApi
 
             if (!deleted)
             {
+                Log.TryLogDebug(Messages.DebugUriFormat, "DELETE", ObjectInfo.ForType.Name, id.ToString(), "404", "NotFound");
                 response = this.Request.CreateResponse(HttpStatusCode.NotFound);
             }
             else
             {
+                Log.TryLogDebug(Messages.DebugUriFormat, "DELETE", ObjectInfo.ForType.Name, id.ToString(), "204", "NoContent");
                 response = this.Request.CreateResponse(HttpStatusCode.NoContent);
             }
 
@@ -95,10 +99,12 @@ namespace MicroLite.Extensions.WebApi
 
             if (entity == null)
             {
+                Log.TryLogDebug(Messages.DebugUriFormat, "GET", ObjectInfo.ForType.Name, id.ToString(), "404", "NotFound");
                 response = this.Request.CreateResponse(HttpStatusCode.NotFound);
             }
             else
             {
+                Log.TryLogDebug(Messages.DebugUriFormat, "GET", ObjectInfo.ForType.Name, id.ToString(), "200", "OK");
                 response = this.Request.CreateResponse(HttpStatusCode.OK, entity);
             }
 
@@ -118,6 +124,7 @@ namespace MicroLite.Extensions.WebApi
 
             var identifier = (TId)ObjectInfo.GetIdentifierValue(entity);
 
+            Log.TryLogDebug(Messages.DebugUriFormat, "POST", ObjectInfo.ForType.Name, "201", "Created");
             var response = this.Request.CreateResponse(HttpStatusCode.Created, entity);
             response.Headers.Location = this.GetEntityResourceUri(identifier);
 
@@ -142,6 +149,7 @@ namespace MicroLite.Extensions.WebApi
 
             if (existing == null)
             {
+                Log.TryLogDebug(Messages.DebugUriFormat, "PUT", ObjectInfo.ForType.Name, id.ToString(), "404", "NotFound");
                 response = this.Request.CreateResponse(HttpStatusCode.NotFound);
             }
             else
@@ -152,10 +160,12 @@ namespace MicroLite.Extensions.WebApi
 
                 if (!updated)
                 {
+                    Log.TryLogDebug(Messages.DebugUriFormat, "PUT", ObjectInfo.ForType.Name, id.ToString(), "304", "NotModified");
                     response = this.Request.CreateResponse(HttpStatusCode.NotModified);
                 }
                 else
                 {
+                    Log.TryLogDebug(Messages.DebugUriFormat, "PUT", ObjectInfo.ForType.Name, id.ToString(), "204", "NoContent");
                     response = this.Request.CreateResponse(HttpStatusCode.NoContent);
                 }
             }
