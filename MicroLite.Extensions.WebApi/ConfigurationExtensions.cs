@@ -45,27 +45,43 @@ namespace MicroLite.Configuration
             }
 
             System.Diagnostics.Trace.TraceInformation(Messages.LoadingExtension);
-            Log.TryLogInfo(Messages.LoadingExtension);
+            if (Log.IsInfo)
+            {
+                Log.Info(Messages.LoadingExtension);
+            }
+
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
             if (settings.RegisterGlobalMicroLiteSessionAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
             {
-                Log.TryLogInfo(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
+                if (Log.IsInfo)
+                {
+                    Log.Info(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
+                }
+
                 GlobalConfiguration.Configuration.Filters.Add(new MicroLiteSessionAttribute());
             }
 
             if (settings.RegisterGlobalValidateModelNotNullAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
             {
-                Log.TryLogInfo(Messages.RegisteringValidateModelNotNullActionFilter);
+                if (Log.IsInfo)
+                {
+                    Log.Info(Messages.RegisteringValidateModelNotNullActionFilter);
+                }
+
                 GlobalConfiguration.Configuration.Filters.Add(new ValidateModelNotNullAttribute());
             }
 
             if (settings.RegisterGlobalValidateModelStateAttribute
                 && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
             {
-                Log.TryLogInfo(Messages.RegisteringValidateModelStateActionFilter);
+                if (Log.IsInfo)
+                {
+                    Log.Info(Messages.RegisteringValidateModelStateActionFilter);
+                }
+
                 GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
             }
 

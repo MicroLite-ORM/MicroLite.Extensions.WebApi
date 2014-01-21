@@ -114,7 +114,11 @@ namespace MicroLite.Extensions.WebApi.OData
                 response.Content.Headers.ContentType = queryOptions.Format.MediaTypeHeaderValue;
             }
 
-            Log.TryLogDebug(Messages.DebugUriFormat, "GET", typeof(TEntity).Name, queryOptions.RawValues.ToString(), "200", "OK");
+            if (Log.IsDebug)
+            {
+                Log.Debug(Messages.DebugUriFormat, "GET", typeof(TEntity).Name, queryOptions.RawValues.ToString(), "200", "OK");
+            }
+
             return response;
         }
     }

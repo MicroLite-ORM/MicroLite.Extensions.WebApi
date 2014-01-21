@@ -2,8 +2,8 @@
 {
     using System;
     using System.Net.Http;
+    using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
-    using MicroLite.Query;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;

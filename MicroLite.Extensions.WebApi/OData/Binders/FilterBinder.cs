@@ -15,8 +15,8 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     using System;
     using System.Globalization;
     using System.Linq;
+    using MicroLite.Builder;
     using MicroLite.Mapping;
-    using MicroLite.Query;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Expression;
@@ -50,7 +50,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             private static readonly string[] ParameterisedFunctions = new[] { "startswith", "endswith", "substringof" };
             private readonly IObjectInfo objectInfo;
             private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
-            private readonly SqlCharacters sqlCharacters = SqlBuilder.SqlCharacters ?? SqlCharacters.Empty;
+            private readonly SqlCharacters sqlCharacters = SqlCharacters.Current;
 
             internal FilterBinderImpl(IObjectInfo objectInfo)
             {
