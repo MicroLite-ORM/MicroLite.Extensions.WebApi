@@ -226,16 +226,8 @@
         public class WhenCallingPutAndAnEntityIsUpdated
         {
             private readonly CustomerController controller = new CustomerController();
-
-            private readonly Customer existingCustomer = new Customer
-            {
-                Id = 12345
-            };
-
             private readonly int identifier = 12345;
-
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
-
             private readonly HttpResponseMessage response;
 
             private readonly Customer updatedCustomer = new Customer
@@ -245,25 +237,13 @@
 
             public WhenCallingPutAndAnEntityIsUpdated()
             {
-                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(this.existingCustomer);
+                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
                 this.mockSession.Setup(x => x.Update(It.IsAny<object>())).Returns(true);
 
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Put(this.identifier, this.updatedCustomer);
-            }
-
-            [Fact]
-            public void TheExistingCustomerShouldBeUpdatedWithTheNewName()
-            {
-                Assert.Equal(this.updatedCustomer.Name, this.existingCustomer.Name);
-            }
-
-            [Fact]
-            public void TheExistingCustomerShouldMaintainTheSameIdentifier()
-            {
-                Assert.Equal(this.identifier, this.existingCustomer.Id);
             }
 
             [Fact]
@@ -276,6 +256,12 @@
             public void TheHttpResponseMessageShouldNotContainAnyContent()
             {
                 Assert.Null(this.response.Content);
+            }
+
+            [Fact]
+            public void TheUpdatedCustomerShouldHaveTheIdentifierSet()
+            {
+                Assert.Equal(this.identifier, this.updatedCustomer.Id);
             }
         }
 

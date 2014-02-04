@@ -178,9 +178,9 @@ namespace MicroLite.Extensions.WebApi
             }
             else
             {
-                ObjectInfo.Map(entity, existing, includeId: false);
+                ObjectInfo.SetIdentifierValue(entity, id);
 
-                var updated = this.Session.Update(existing);
+                var updated = this.Session.Update(entity);
 
                 if (!updated)
                 {

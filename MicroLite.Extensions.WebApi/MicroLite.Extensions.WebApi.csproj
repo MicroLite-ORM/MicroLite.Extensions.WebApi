@@ -52,14 +52,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MicroLite">
-      <HintPath>..\packages\MicroLite.5.0.0-alpha\lib\net40-client\MicroLite.dll</HintPath>
+      <HintPath>..\packages\MicroLite.5.0.0-alpha5\lib\net40-client\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Net.Http.WebApi.OData">
-      <HintPath>..\packages\Net.Http.WebApi.OData.1.0.4\lib\net40\Net.Http.WebApi.OData.dll</HintPath>
+    <Reference Include="Net.Http.WebApi.OData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Net.Http.WebApi.OData.1.0.5\lib\net40\Net.Http.WebApi.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -96,7 +97,6 @@
     <Compile Include="MicroLiteApiController{T}.cs" />
     <Compile Include="MicroLiteReadOnlyApiController.cs" />
     <Compile Include="Filters\MicroLiteSessionAttribute.cs" />
-    <Compile Include="ObjectInfoExtensions.cs" />
     <Compile Include="OData\InlineCountCollection{T}.cs" />
     <Compile Include="OData\MicroLiteODataApiController{T}.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
