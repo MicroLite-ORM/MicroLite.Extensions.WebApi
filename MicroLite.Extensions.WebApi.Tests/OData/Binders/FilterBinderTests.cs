@@ -4,6 +4,7 @@
     using System.Net.Http;
     using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
+    using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -675,33 +676,6 @@
             public void ThereShouldBe1ArgumentValue()
             {
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
-            }
-        }
-
-        private class Customer
-        {
-            public DateTime Created
-            {
-                get;
-                set;
-            }
-
-            public int Id
-            {
-                get;
-                set;
-            }
-
-            public string Name
-            {
-                get;
-                set;
-            }
-
-            public string Reference
-            {
-                get;
-                set;
             }
         }
     }

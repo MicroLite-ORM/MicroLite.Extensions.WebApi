@@ -42,8 +42,9 @@
     <AssemblyOriginatorKeyFile>..\MicroLite.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MicroLite">
-      <HintPath>..\packages\MicroLite.5.0.0-alpha5\lib\net40-client\MicroLite.dll</HintPath>
+    <Reference Include="MicroLite, Version=5.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MicroLite.5.0.0-beta\lib\net40-client\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.2.1312.1622, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,6 +101,8 @@
     <Compile Include="OData\Binders\FilterBinderTests.cs" />
     <Compile Include="OData\Binders\OrderByBinderTests.cs" />
     <Compile Include="OData\Binders\SelectBinderTests.cs" />
+    <Compile Include="TestEntities\Customer.cs" />
+    <Compile Include="TestEntities\CustomerStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">

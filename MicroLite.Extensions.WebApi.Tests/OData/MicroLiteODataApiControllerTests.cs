@@ -7,6 +7,7 @@
     using System.Web.Http;
     using System.Web.Http.Hosting;
     using MicroLite.Extensions.WebApi.OData;
+    using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using Moq;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
@@ -292,21 +293,6 @@
                 var exception = Assert.Throws<ArgumentNullException>(() => controller.Get(queryOptions));
 
                 Assert.Equal("queryOptions", exception.ParamName);
-            }
-        }
-
-        private class Customer
-        {
-            public int Id
-            {
-                get;
-                set;
-            }
-
-            public string Name
-            {
-                get;
-                set;
             }
         }
 

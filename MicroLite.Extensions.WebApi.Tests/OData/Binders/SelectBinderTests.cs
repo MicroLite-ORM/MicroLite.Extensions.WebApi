@@ -4,18 +4,13 @@
     using System.Net.Http;
     using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
+    using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
     public class SelectBinderTests
     {
-        private enum CustomerStatus
-        {
-            Pending = 0,
-            Active = 1
-        }
-
         [Fact]
         public void BindBindSelectQueryOptionThrowsArgumentNullExceptionForNullODataQueryOptions()
         {
@@ -105,27 +100,6 @@
                 var expected = SqlBuilder.Select("*").From(typeof(Customer)).ToSqlQuery();
 
                 Assert.Equal(expected, this.sqlQuery);
-            }
-        }
-
-        private class Customer
-        {
-            public int Id
-            {
-                get;
-                set;
-            }
-
-            public string Name
-            {
-                get;
-                set;
-            }
-
-            public CustomerStatus Status
-            {
-                get;
-                set;
             }
         }
     }

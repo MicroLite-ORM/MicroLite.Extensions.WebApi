@@ -3,6 +3,7 @@
     using System.Net.Http;
     using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
+    using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -22,27 +23,6 @@
             var expected = SqlBuilder.Select("*").From(typeof(Customer)).Where("(Forename = ?)", "John").OrderByAscending("Surname").ToSqlQuery();
 
             Assert.Equal(expected, sqlQuery);
-        }
-
-        public class Customer
-        {
-            public string Forename
-            {
-                get;
-                set;
-            }
-
-            public int Id
-            {
-                get;
-                set;
-            }
-
-            public string Surname
-            {
-                get;
-                set;
-            }
         }
     }
 }

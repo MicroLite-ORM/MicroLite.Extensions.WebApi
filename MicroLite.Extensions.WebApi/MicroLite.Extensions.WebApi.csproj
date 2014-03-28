@@ -51,8 +51,9 @@
     <AssemblyOriginatorKeyFile>..\MicroLite.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MicroLite">
-      <HintPath>..\packages\MicroLite.5.0.0-alpha5\lib\net40-client\MicroLite.dll</HintPath>
+    <Reference Include="MicroLite, Version=5.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MicroLite.5.0.0-beta\lib\net40-client\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Net.Http.WebApi.OData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -5,6 +5,7 @@
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Hosting;
+    using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using Moq;
     using Xunit;
 
@@ -262,21 +263,6 @@
             public void TheUpdatedCustomerShouldHaveTheIdentifierSet()
             {
                 Assert.Equal(this.identifier, this.updatedCustomer.Id);
-            }
-        }
-
-        private class Customer
-        {
-            public int Id
-            {
-                get;
-                set;
-            }
-
-            public string Name
-            {
-                get;
-                set;
             }
         }
 
