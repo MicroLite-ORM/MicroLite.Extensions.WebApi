@@ -30,9 +30,13 @@ namespace MicroLite.Configuration
         /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi using the specified configuration settings.
         /// </summary>
         /// <param name="configureExtensions">The interface to configure extensions.</param>
+        /// <param name="configuration">The HttpConfiguration (GlobalConfiguration.Configuration if using WebHost, or the HttpConfiguration created by SelfHost).</param>
         /// <param name="settings">The settings used for configuration.</param>
         /// <returns>The configure extensions.</returns>
-        public static IConfigureExtensions WithWebApi(this IConfigureExtensions configureExtensions, WebApiConfigurationSettings settings)
+        public static IConfigureExtensions WithWebApi(
+            this IConfigureExtensions configureExtensions,
+            HttpConfiguration configuration,
+            WebApiConfigurationSettings settings)
         {
             if (configureExtensions == null)
             {
@@ -53,36 +57,36 @@ namespace MicroLite.Configuration
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
             if (settings.RegisterGlobalMicroLiteSessionAttribute
-                && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
+                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
             {
                 if (Log.IsInfo)
                 {
                     Log.Info(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
                 }
 
-                GlobalConfiguration.Configuration.Filters.Add(new MicroLiteSessionAttribute());
+                configuration.Filters.Add(new MicroLiteSessionAttribute());
             }
 
             if (settings.RegisterGlobalValidateModelNotNullAttribute
-                && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
+                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
             {
                 if (Log.IsInfo)
                 {
                     Log.Info(Messages.RegisteringValidateModelNotNullActionFilter);
                 }
 
-                GlobalConfiguration.Configuration.Filters.Add(new ValidateModelNotNullAttribute());
+                configuration.Filters.Add(new ValidateModelNotNullAttribute());
             }
 
             if (settings.RegisterGlobalValidateModelStateAttribute
-                && !GlobalConfiguration.Configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
+                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
             {
                 if (Log.IsInfo)
                 {
                     Log.Info(Messages.RegisteringValidateModelStateActionFilter);
                 }
 
-                GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
+                configuration.Filters.Add(new ValidateModelStateAttribute());
             }
 
             return configureExtensions;
