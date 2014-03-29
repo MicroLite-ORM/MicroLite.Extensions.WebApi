@@ -16,7 +16,7 @@
     <dependencies>
       <dependency id="MicroLite" version="5.0.0-beta" />
       <dependency id="Microsoft.AspNet.WebApi.Client" version="4.0.20710" />
-      <dependency id="Net.Http.WebApi.OData" version="1.0.5" />
+      <dependency id="Net.Http.WebApi.OData" version="2.0.0-beta" />
     </dependencies>
   </metadata>
   <files>

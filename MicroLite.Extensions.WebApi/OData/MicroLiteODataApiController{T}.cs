@@ -29,39 +29,37 @@ namespace MicroLite.Extensions.WebApi.OData
         where TEntity : class, new()
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLog();
-        private ODataValidationSettings validationSettings;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
         /// </summary>
         protected MicroLiteODataApiController()
         {
+            this.ValidationSettings = new ODataValidationSettings
+            {
+                AllowedFunctions = AllowedFunctions.EndsWith
+                    | AllowedFunctions.StartsWith
+                    | AllowedFunctions.SubstringOf
+                    | AllowedFunctions.ToLower
+                    | AllowedFunctions.ToUpper,
+                AllowedQueryOptions = AllowedQueryOptions.Filter
+                    | AllowedQueryOptions.Format
+                    | AllowedQueryOptions.InlineCount
+                    | AllowedQueryOptions.OrderBy
+                    | AllowedQueryOptions.Select
+                    | AllowedQueryOptions.Skip
+                    | AllowedQueryOptions.Top,
+                MaxTop = 50
+            };
         }
 
         /// <summary>
-        /// Gets or the Validation Settings for the OData query.
+        /// Gets or sets the Validation Settings for the OData query.
         /// </summary>
         protected ODataValidationSettings ValidationSettings
         {
-            get
-            {
-                return this.validationSettings ?? (this.validationSettings = new ODataValidationSettings
-                {
-                    AllowedFunctions = AllowedFunctions.EndsWith
-                        | AllowedFunctions.StartsWith
-                        | AllowedFunctions.SubstringOf
-                        | AllowedFunctions.ToLower
-                        | AllowedFunctions.ToUpper,
-                    AllowedQueryOptions = AllowedQueryOptions.Filter
-                        | AllowedQueryOptions.Format
-                        | AllowedQueryOptions.InlineCount
-                        | AllowedQueryOptions.OrderBy
-                        | AllowedQueryOptions.Select
-                        | AllowedQueryOptions.Skip
-                        | AllowedQueryOptions.Top,
-                    MaxTop = 50
-                });
-            }
+            get;
+            set;
         }
 
         /// <summary>
