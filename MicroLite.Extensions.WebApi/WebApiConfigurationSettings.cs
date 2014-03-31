@@ -39,8 +39,8 @@ namespace MicroLite.Configuration
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to register a MicroLiteSessionAttribute in the GlobalConfiguration.Configuration.Filters
-        /// is one is not already registered (defaults to true).
+        /// Gets or sets a value indicating whether to register a MicroLiteSessionAttribute in the
+        /// HttpConfiguration.Filters is one is not already registered (defaults to true).
         /// </summary>
         public bool RegisterGlobalMicroLiteSessionAttribute
         {
@@ -49,8 +49,8 @@ namespace MicroLite.Configuration
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to register a ValidateModelNotNullAttribute in the GlobalConfiguration.Configuration.Filters
-        /// is one is not already registered (defaults to true).
+        /// Gets or sets a value indicating whether to register a ValidateModelNotNullAttribute in the
+        /// HttpConfiguration.Filters is one is not already registered (defaults to true).
         /// </summary>
         public bool RegisterGlobalValidateModelNotNullAttribute
         {
@@ -59,8 +59,8 @@ namespace MicroLite.Configuration
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to register a ValidateModelStateAttribute in the GlobalConfiguration.Configuration.Filters
-        /// is one is not already registered (defaults to true).
+        /// Gets or sets a value indicating whether to register a ValidateModelStateAttribute in the
+        /// HttpConfiguration.Filters is one is not already registered (defaults to true).
         /// </summary>
         public bool RegisterGlobalValidateModelStateAttribute
         {
