@@ -64,6 +64,30 @@
 
                 Assert.NotNull(filter);
             }
+
+            [Fact]
+            public void TheMicroLiteSessionAttributeShouldBeThird()
+            {
+                var filters = this.configuration.Filters.Select(f => f.Instance).ToArray();
+
+                Assert.IsType<MicroLiteSessionAttribute>(filters[2]);
+            }
+
+            [Fact]
+            public void TheValidateModelNotNullAttributeShouldBeFirst()
+            {
+                var filters = this.configuration.Filters.Select(f => f.Instance).ToArray();
+
+                Assert.IsType<ValidateModelNotNullAttribute>(filters[0]);
+            }
+
+            [Fact]
+            public void TheValidateModelStateAttributeShouldBeSecond()
+            {
+                var filters = this.configuration.Filters.Select(f => f.Instance).ToArray();
+
+                Assert.IsType<ValidateModelStateAttribute>(filters[1]);
+            }
         }
 
         public class WhenCallingWithWebApiAndWebApiConfigurationSettingsIsNull

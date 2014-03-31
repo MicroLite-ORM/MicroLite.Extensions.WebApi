@@ -56,17 +56,6 @@ namespace MicroLite.Configuration
 
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
-            if (settings.RegisterGlobalMicroLiteSessionAttribute
-                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
-            {
-                if (Log.IsInfo)
-                {
-                    Log.Info(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
-                }
-
-                configuration.Filters.Add(new MicroLiteSessionAttribute());
-            }
-
             if (settings.RegisterGlobalValidateModelNotNullAttribute
                 && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
             {
@@ -87,6 +76,17 @@ namespace MicroLite.Configuration
                 }
 
                 configuration.Filters.Add(new ValidateModelStateAttribute());
+            }
+
+            if (settings.RegisterGlobalMicroLiteSessionAttribute
+                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
+            {
+                if (Log.IsInfo)
+                {
+                    Log.Info(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
+                }
+
+                configuration.Filters.Add(new MicroLiteSessionAttribute());
             }
 
             return configureExtensions;
