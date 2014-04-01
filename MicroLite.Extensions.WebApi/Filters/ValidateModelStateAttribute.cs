@@ -25,11 +25,29 @@ namespace MicroLite.Extensions.WebApi.Filters
     public sealed class ValidateModelStateAttribute : ActionFilterAttribute
     {
         /// <summary>
+        /// Gets or sets a value indicating whether to skip validation (false by default).
+        /// </summary>
+        /// <remarks>
+        /// Allows overriding the default behaviour on an individual action/controller if an instance
+        /// is already registered in the global filters.
+        /// </remarks>
+        public bool SkipValidation
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Occurs before the action method is invoked.
         /// </summary>
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
+            if (this.SkipValidation)
+            {
+                return;
+            }
+
             if (actionContext != null && !actionContext.ModelState.IsValid)
             {
                 actionContext.Response = actionContext.Request.CreateErrorResponse(
