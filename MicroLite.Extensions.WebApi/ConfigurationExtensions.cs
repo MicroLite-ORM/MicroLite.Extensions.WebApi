@@ -34,6 +34,24 @@ namespace MicroLite.Configuration
         /// <param name="settings">The settings used for configuration.</param>
         /// <exception cref="ArgumentNullException">Thrown if any parameter is null.</exception>
         /// <returns>The configure extensions.</returns>
+        /// <example>
+        /// If hosted in IIS and using the default settings:
+        /// <code>
+        /// Configure
+        ///     .Extensions()
+        ///     .WithWebApi(GlobalConfiguration.Configuration, WebApiConfigurationSettings.Default);
+        /// </code>
+        /// </example>
+        /// <example>
+        /// If hosted in IIS and using custom settings:
+        /// <code>
+        /// Configure
+        ///     .Extensions()
+        ///     .WithWebApi(
+        ///         GlobalConfiguration.Configuration,
+        ///         new WebApiConfigurationSettings { ... });
+        /// </code>
+        /// </example>
         public static IConfigureExtensions WithWebApi(
             this IConfigureExtensions configureExtensions,
             HttpConfiguration httpConfiguration,
