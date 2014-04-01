@@ -107,7 +107,23 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall
                     || (binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall && !ParameterisedFunctions.Contains(((SingleValueFunctionCallNode)binaryOperatorNode.Left).Name)))
                 {
-                    this.predicateBuilder.Append(" " + binaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
+                    if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
+                        && ((ConstantNode)binaryOperatorNode.Right).Value == null)
+                    {
+                        if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
+                        {
+                            this.predicateBuilder.Append(" IS ");
+                        }
+                        else if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.NotEqual)
+                        {
+                            this.predicateBuilder.Append(" IS NOT ");
+                        }
+                    }
+                    else
+                    {
+                        this.predicateBuilder.Append(" " + binaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
+                    }
+
                     this.Bind(binaryOperatorNode.Right);
                 }
 
@@ -116,7 +132,14 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             private void BindConstantNode(ConstantNode constantNode)
             {
-                this.predicateBuilder.Append(this.sqlCharacters.GetParameterName(0), constantNode.Value);
+                if (constantNode.Value == null)
+                {
+                    this.predicateBuilder.Append("NULL");
+                }
+                else
+                {
+                    this.predicateBuilder.Append(this.sqlCharacters.GetParameterName(0), constantNode.Value);
+                }
             }
 
             private void BindFilter(FilterQueryOption filterQuery)

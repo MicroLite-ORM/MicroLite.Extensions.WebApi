@@ -346,6 +346,38 @@
             }
         }
 
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqualNull
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyEqualNull()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq null"));
+
+                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("Name").IsNull()
+                    .ToSqlQuery()
+                    .CommandText
+                    .Replace("(", "((").Replace(")", "))"); // HACK - Add an extra set of parenthesis, it's an unnecessary bug in FilterBuilder which hasn't been fixed yet.
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBeNoArgumentValues()
+            {
+                Assert.Equal(0, this.sqlQuery.Arguments.Count);
+            }
+        }
+
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyGreaterThan
         {
             private readonly SqlQuery sqlQuery;
@@ -528,6 +560,38 @@
             public void ThereShouldBe1ArgumentValue()
             {
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyNotEqualNull
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyNotEqualNull()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name ne null"));
+
+                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("Name").IsNotNull()
+                    .ToSqlQuery()
+                    .CommandText
+                    .Replace("(", "((").Replace(")", "))"); // HACK - Add an extra set of parenthesis, it's an unnecessary bug in FilterBuilder which hasn't been fixed yet.
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBeNoArgumentValues()
+            {
+                Assert.Equal(0, this.sqlQuery.Arguments.Count);
             }
         }
 
