@@ -24,7 +24,7 @@ namespace MicroLite.Extensions.WebApi.Filters
 
     /// <summary>
     /// An action filter attribute which can be applied to a class or method to supply a <see cref="MicroLiteApiController"/>
-    /// with a new <see cref="ISession"/> when an action is executed.
+    /// with a new <see cref="ISession"/> or <see cref="IReadOnlySession"/> before an action is executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class MicroLiteSessionAttribute : ActionFilterAttribute

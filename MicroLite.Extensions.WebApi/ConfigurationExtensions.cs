@@ -30,17 +30,23 @@ namespace MicroLite.Configuration
         /// Configures the MicroLite ORM Framework extensions for ASP.NET WebApi using the specified configuration settings.
         /// </summary>
         /// <param name="configureExtensions">The interface to configure extensions.</param>
-        /// <param name="configuration">The HttpConfiguration (GlobalConfiguration.Configuration if using WebHost, or the HttpConfiguration created by SelfHost).</param>
+        /// <param name="httpConfiguration">The HttpConfiguration (GlobalConfiguration.Configuration if using WebHost, or the HttpConfiguration created by SelfHost).</param>
         /// <param name="settings">The settings used for configuration.</param>
+        /// <exception cref="ArgumentNullException">Thrown if any parameter is null.</exception>
         /// <returns>The configure extensions.</returns>
         public static IConfigureExtensions WithWebApi(
             this IConfigureExtensions configureExtensions,
-            HttpConfiguration configuration,
+            HttpConfiguration httpConfiguration,
             WebApiConfigurationSettings settings)
         {
             if (configureExtensions == null)
             {
                 throw new ArgumentNullException("configureExtensions");
+            }
+
+            if (httpConfiguration == null)
+            {
+                throw new ArgumentNullException("httpConfiguration");
             }
 
             if (settings == null)
@@ -57,36 +63,36 @@ namespace MicroLite.Configuration
             MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
 
             if (settings.RegisterGlobalValidateModelNotNullAttribute
-                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
+                && !httpConfiguration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelNotNullAttribute))))
             {
                 if (Log.IsInfo)
                 {
-                    Log.Info(Messages.RegisteringValidateModelNotNullActionFilter);
+                    Log.Info(Messages.RegisteringValidateModelNotNullAttribute);
                 }
 
-                configuration.Filters.Add(new ValidateModelNotNullAttribute());
+                httpConfiguration.Filters.Add(new ValidateModelNotNullAttribute());
             }
 
             if (settings.RegisterGlobalValidateModelStateAttribute
-                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
+                && !httpConfiguration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(ValidateModelStateAttribute))))
             {
                 if (Log.IsInfo)
                 {
-                    Log.Info(Messages.RegisteringValidateModelStateActionFilter);
+                    Log.Info(Messages.RegisteringValidateModelStateAttribute);
                 }
 
-                configuration.Filters.Add(new ValidateModelStateAttribute());
+                httpConfiguration.Filters.Add(new ValidateModelStateAttribute());
             }
 
             if (settings.RegisterGlobalMicroLiteSessionAttribute
-                && !configuration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
+                && !httpConfiguration.Filters.Any(f => f.Instance.GetType().IsAssignableFrom(typeof(MicroLiteSessionAttribute))))
             {
                 if (Log.IsInfo)
                 {
-                    Log.Info(Messages.RegisteringDefaultMicroLiteSessionActionFilter);
+                    Log.Info(Messages.RegisteringMicroLiteSessionAttribute);
                 }
 
-                configuration.Filters.Add(new MicroLiteSessionAttribute());
+                httpConfiguration.Filters.Add(new MicroLiteSessionAttribute());
             }
 
             return configureExtensions;

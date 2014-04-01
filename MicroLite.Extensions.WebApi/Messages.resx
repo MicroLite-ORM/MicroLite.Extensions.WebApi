@@ -127,7 +127,7 @@
     <value>The type {0} does not have a property called {1}</value>
   </data>
   <data name="LoadingExtension" xml:space="preserve">
-    <value>Loading the MicroLite extension for ASP.NET WebApi</value>
+    <value>MicroLite: Loading the extension for ASP.NET WebApi</value>
   </data>
   <data name="NoConnectionNameMultipleSessionFactories" xml:space="preserve">
     <value>MicroLite has been configured for multiple connections, therefore the connection name must be specified in the MicroLiteSessionAttribute (e.g. [MicroLiteSession("MyConnection")]).</value>
@@ -138,13 +138,13 @@
   <data name="NoSessionFactoryFoundForConnectionName" xml:space="preserve">
     <value>MicroLite has not been configured for the connection named {0}, either the connection name in the MicroLiteSessionAttribute is incorrect or Configure.Fluently().ForConnection({0}) has not been called.</value>
   </data>
-  <data name="RegisteringDefaultMicroLiteSessionActionFilter" xml:space="preserve">
-    <value>Loading a default instance of MicroLiteSessionAttribute in GlobalFilters.Filters</value>
+  <data name="RegisteringMicroLiteSessionAttribute" xml:space="preserve">
+    <value>Loading a default instance of MicroLiteSessionAttribute in the specified HttpConfiguration.Filters</value>
   </data>
-  <data name="RegisteringValidateModelNotNullActionFilter" xml:space="preserve">
-    <value>Loading a ValidateModelNotNullAttribute in GlobalFilters.Filters</value>
+  <data name="RegisteringValidateModelNotNullAttribute" xml:space="preserve">
+    <value>Loading a ValidateModelNotNullAttribute in the specified HttpConfiguration.Filters</value>
   </data>
-  <data name="RegisteringValidateModelStateActionFilter" xml:space="preserve">
-    <value>Loading a ValidateModelStateAttribute in GlobalFilters.Filters</value>
+  <data name="RegisteringValidateModelStateAttribute" xml:space="preserve">
+    <value>Loading a ValidateModelStateAttribute in the specified HttpConfiguration.Filters</value>
   </data>
 </root>

@@ -10,7 +10,7 @@
 
     public class ConfigurationExtensionsTests
     {
-        public class WhenCallingWithWebApiAndConfigureExtensionsIsNull
+        public class WhenCallingWithWebApi_AndConfigureExtensionsIsNull
         {
             [Fact]
             public void AnArgumentNullExceptionIsThrown()
@@ -21,6 +21,34 @@
                     () => configureExtensions.WithWebApi(new HttpConfiguration(), new WebApiConfigurationSettings()));
 
                 Assert.Equal("configureExtensions", exception.ParamName);
+            }
+        }
+
+        public class WhenCallingWithWebApi_AndHttpConfigurationIsNull
+        {
+            [Fact]
+            public void AnArgumentNullExceptionIsThrown()
+            {
+                var configureExtensions = new Mock<IConfigureExtensions>().Object;
+
+                var exception = Assert.Throws<ArgumentNullException>(
+                    () => configureExtensions.WithWebApi(null, new WebApiConfigurationSettings()));
+
+                Assert.Equal("httpConfiguration", exception.ParamName);
+            }
+        }
+
+        public class WhenCallingWithWebApi_AndWebApiConfigurationSettingsIsNull
+        {
+            [Fact]
+            public void AnArgumentNullExceptionIsThrown()
+            {
+                var configureExtensions = new Mock<IConfigureExtensions>().Object;
+
+                var exception = Assert.Throws<ArgumentNullException>(
+                    () => configureExtensions.WithWebApi(new HttpConfiguration(), null));
+
+                Assert.Equal("settings", exception.ParamName);
             }
         }
 
@@ -90,20 +118,6 @@
             }
         }
 
-        public class WhenCallingWithWebApiAndWebApiConfigurationSettingsIsNull
-        {
-            [Fact]
-            public void AnArgumentNullExceptionIsThrown()
-            {
-                var configureExtensions = new Mock<IConfigureExtensions>().Object;
-
-                var exception = Assert.Throws<ArgumentNullException>(
-                    () => configureExtensions.WithWebApi(new HttpConfiguration(), null));
-
-                Assert.Equal("settings", exception.ParamName);
-            }
-        }
-
         public class WhenCallingWithWebApiWithConfigurationSettingsDisabled
         {
             private readonly HttpConfiguration configuration = new HttpConfiguration();
@@ -156,7 +170,6 @@
         public class WhenCallingWithWebApiWithDefaultSettingsButFiltersAreAlreadyRegistered
         {
             private readonly HttpConfiguration configuration = new HttpConfiguration();
-
             private readonly MicroLiteSessionAttribute microLiteSessionAttribute = new MicroLiteSessionAttribute();
             private readonly ValidateModelNotNullAttribute validateModelNotNullAttribute = new ValidateModelNotNullAttribute();
             private readonly ValidateModelStateAttribute validateModelStateAttribute = new ValidateModelStateAttribute();
