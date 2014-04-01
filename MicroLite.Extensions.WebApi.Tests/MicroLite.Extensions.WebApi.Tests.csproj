@@ -104,6 +104,7 @@
     <Compile Include="OData\Binders\SelectBinderTests.cs" />
     <Compile Include="TestEntities\Customer.cs" />
     <Compile Include="TestEntities\CustomerStatus.cs" />
+    <Compile Include="WebApiConfigurationSettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">
