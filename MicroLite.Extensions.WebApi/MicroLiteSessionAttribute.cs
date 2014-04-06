@@ -14,13 +14,11 @@ namespace MicroLite.Extensions.WebApi
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Globalization;
     using System.Linq;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
     using MicroLite.Infrastructure;
-    using MicroLite.Infrastructure.Web;
 
     /// <summary>
     /// An action filter attribute which can be applied to a class or method to supply a <see cref="MicroLiteApiController"/>
@@ -30,7 +28,6 @@ namespace MicroLite.Extensions.WebApi
     public sealed class MicroLiteSessionAttribute : ActionFilterAttribute
     {
         private readonly string connectionName;
-        private readonly ISessionManager sessionManager;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteSessionAttribute"/> class.
@@ -45,25 +42,8 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         /// <param name="connectionName">Name of the connection to manage the session for.</param>
         public MicroLiteSessionAttribute(string connectionName)
-            : this(connectionName, new SessionManager())
         {
-        }
-
-        internal MicroLiteSessionAttribute(string connectionName, ISessionManager sessionManager)
-        {
-            this.AutoManageTransaction = true;
             this.connectionName = connectionName;
-            this.sessionManager = sessionManager;
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to begin a transaction when OnActionExecuting is called
-        /// and either commit or roll it back when OnActionExecuted is called depending on whether the ActionExecutedContext has an exception.
-        /// </summary>
-        public bool AutoManageTransaction
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -75,15 +55,6 @@ namespace MicroLite.Extensions.WebApi
             {
                 return this.connectionName;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets the isolation level to be used when a transaction is started.
-        /// </summary>
-        public IsolationLevel? IsolationLevel
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -106,7 +77,7 @@ namespace MicroLite.Extensions.WebApi
 
             if (controller != null)
             {
-                this.sessionManager.OnActionExecuted(controller.Session, this.AutoManageTransaction, actionExecutedContext.Exception != null);
+                OnActionExecuted(controller.Session);
                 return;
             }
 
@@ -114,7 +85,8 @@ namespace MicroLite.Extensions.WebApi
 
             if (readOnlyController != null)
             {
-                this.sessionManager.OnActionExecuted(readOnlyController.Session, this.AutoManageTransaction, actionExecutedContext.Exception != null);
+                OnActionExecuted(readOnlyController.Session);
+                return;
             }
         }
 
@@ -132,8 +104,6 @@ namespace MicroLite.Extensions.WebApi
             if (controller != null)
             {
                 controller.Session = sessionFactory.OpenSession();
-
-                this.sessionManager.OnActionExecuting(controller.Session, this.AutoManageTransaction, this.IsolationLevel);
                 return;
             }
 
@@ -142,9 +112,15 @@ namespace MicroLite.Extensions.WebApi
             if (readOnlyController != null)
             {
                 readOnlyController.Session = sessionFactory.OpenReadOnlySession();
-
-                this.sessionManager.OnActionExecuting(readOnlyController.Session, this.AutoManageTransaction, this.IsolationLevel);
                 return;
+            }
+        }
+
+        private static void OnActionExecuted(IReadOnlySession session)
+        {
+            if (session != null)
+            {
+                session.Dispose();
             }
         }
 
