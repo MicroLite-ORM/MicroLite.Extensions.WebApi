@@ -5,6 +5,7 @@
     using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
+    using MicroLite.Mapping;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -12,12 +13,15 @@
     public class SelectBinderTests
     {
         [Fact]
-        public void BindBindSelectQueryOptionThrowsArgumentNullExceptionForNullODataQueryOptions()
+        public void BindBindSelectThrowsArgumentNullExceptionForNullObjectInfo()
         {
-            var exception = Assert.Throws<ArgumentNullException>(
-                () => SelectBinder.BindSelectQueryOption<Customer>(null));
+            var queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers"));
 
-            Assert.Equal("queryOptions", exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => SelectBinder.BindSelect(queryOptions.Select, null));
+
+            Assert.Equal("objectInfo", exception.ParamName);
         }
 
         [Fact]
@@ -26,7 +30,8 @@
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$select=FirstName"));
 
-            var exception = Assert.Throws<ODataException>(() => SelectBinder.BindSelectQueryOption<Customer>(queryOptions));
+            var exception = Assert.Throws<ODataException>(
+                () => SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))));
 
             Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
         }
@@ -43,7 +48,7 @@
 
                 var queryOptions = new ODataQueryOptions(httpRequestMessage);
 
-                this.sqlQuery = SelectBinder.BindSelectQueryOption<Customer>(queryOptions).ToSqlQuery();
+                this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -67,7 +72,7 @@
 
                 var queryOptions = new ODataQueryOptions(httpRequestMessage);
 
-                this.sqlQuery = SelectBinder.BindSelectQueryOption<Customer>(queryOptions).ToSqlQuery();
+                this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -91,7 +96,7 @@
 
                 var queryOptions = new ODataQueryOptions(httpRequestMessage);
 
-                this.sqlQuery = SelectBinder.BindSelectQueryOption<Customer>(queryOptions).ToSqlQuery();
+                this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]

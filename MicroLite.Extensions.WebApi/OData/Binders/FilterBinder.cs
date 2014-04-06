@@ -29,16 +29,26 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <summary>
         /// Binds the filter query option to the sql builder.
         /// </summary>
-        /// <typeparam name="T">The type of class being queried.</typeparam>
         /// <param name="filterQuery">The filter query.</param>
+        /// <param name="objectInfo">The IObjectInfo for the type to bind the filter list for.</param>
         /// <param name="selectFromSqlBuilder">The select from SQL builder.</param>
         /// <returns>The SqlBuilder after the where clause has been added.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
-        public static IOrderBy BindFilter<T>(FilterQueryOption filterQuery, IWhereOrOrderBy selectFromSqlBuilder)
+        public static IOrderBy BindFilter(FilterQueryOption filterQuery, IObjectInfo objectInfo, IWhereOrOrderBy selectFromSqlBuilder)
         {
+            if (objectInfo == null)
+            {
+                throw new ArgumentNullException("objectInfo");
+            }
+
+            if (selectFromSqlBuilder == null)
+            {
+                throw new ArgumentNullException("selectFromSqlBuilder");
+            }
+
             if (filterQuery != null)
             {
-                var filterBinder = new FilterBinderImpl(ObjectInfo.For(typeof(T)));
+                var filterBinder = new FilterBinderImpl(objectInfo);
                 filterBinder.BindFilter(filterQuery, selectFromSqlBuilder);
             }
 

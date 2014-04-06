@@ -28,22 +28,25 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <summary>
         /// Binds the order by query option to the sql builder.
         /// </summary>
-        /// <typeparam name="T">The type of class being queried.</typeparam>
         /// <param name="orderByQuery">The order by query.</param>
+        /// <param name="objectInfo">The IObjectInfo for the type to bind the order by list for.</param>
         /// <param name="orderBySqlBuilder">The order by SQL builder.</param>
         /// <returns>The SqlBuilder after the order by clause has been added.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
-        public static IOrderBy BindOrderBy<T>(OrderByQueryOption orderByQuery, IOrderBy orderBySqlBuilder)
+        public static IOrderBy BindOrderBy(OrderByQueryOption orderByQuery, IObjectInfo objectInfo, IOrderBy orderBySqlBuilder)
         {
+            if (objectInfo == null)
+            {
+                throw new ArgumentNullException("objectInfo");
+            }
+
+            if (orderBySqlBuilder == null)
+            {
+                throw new ArgumentNullException("orderBySqlBuilder");
+            }
+
             if (orderByQuery != null)
             {
-                if (orderBySqlBuilder == null)
-                {
-                    throw new ArgumentNullException("orderBySqlBuilder");
-                }
-
-                var objectInfo = ObjectInfo.For(typeof(T));
-
                 foreach (var property in orderByQuery.Properties)
                 {
                     var column = objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == property.Name);

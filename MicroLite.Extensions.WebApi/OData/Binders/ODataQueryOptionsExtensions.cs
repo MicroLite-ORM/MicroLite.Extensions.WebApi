@@ -12,15 +12,18 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
+    using MicroLite.Mapping;
     using Net.Http.WebApi.OData.Query;
 
     internal static class ODataQueryOptionsExtensions
     {
         internal static SqlQuery CreateSqlQuery<T>(this ODataQueryOptions queryOptions)
         {
-            var selectFrom = SelectBinder.BindSelectQueryOption<T>(queryOptions);
-            var where = FilterBinder.BindFilter<T>(queryOptions.Filter, selectFrom);
-            var ordered = OrderByBinder.BindOrderBy<T>(queryOptions.OrderBy, where);
+            var objectInfo = ObjectInfo.For(typeof(T));
+
+            var selectFrom = SelectBinder.BindSelect(queryOptions.Select, objectInfo);
+            var where = FilterBinder.BindFilter(queryOptions.Filter, objectInfo, selectFrom);
+            var ordered = OrderByBinder.BindOrderBy(queryOptions.OrderBy, objectInfo, where);
 
             return ordered.ToSqlQuery();
         }

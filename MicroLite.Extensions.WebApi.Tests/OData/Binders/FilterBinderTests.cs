@@ -5,6 +5,7 @@
     using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
+    using MicroLite.Mapping;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -17,7 +18,7 @@
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=indexof(Name, 'ayes') eq 1"));
 
-            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))));
+            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
             Assert.Equal("The function 'indexof' is not supported", exception.Message);
         }
@@ -28,7 +29,7 @@
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=FirstName eq 'Fred'"));
 
-            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))));
+            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
             Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
         }
@@ -42,7 +43,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A/0113334' and substringof('Hayes', Name) eq true"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -97,7 +98,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -146,7 +147,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -195,7 +196,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -238,7 +239,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -281,7 +282,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=endswith(Name, 'Bloggs') eq true"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -318,7 +319,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -355,7 +356,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq null"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -387,7 +388,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -424,7 +425,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created ge datetime'2013-04-01'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -461,7 +462,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created lt datetime'2013-04-01'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -498,7 +499,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created le datetime'2013-04-01'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -535,7 +536,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name ne 'Fred Bloggs'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -572,7 +573,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name ne null"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -604,7 +605,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=startswith(Name, 'Fred') eq true"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -641,7 +642,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=substringof(Name, 'Bloggs') eq true"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -678,7 +679,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=tolower(Name) eq 'fred bloggs'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]
@@ -715,7 +716,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=toupper(Name) eq 'FRED BLOGGS'"));
 
-                this.sqlQuery = FilterBinder.BindFilter<Customer>(queryOptions.Filter, SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
             [Fact]

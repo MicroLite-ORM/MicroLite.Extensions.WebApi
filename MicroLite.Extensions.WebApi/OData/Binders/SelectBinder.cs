@@ -25,49 +25,41 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     /// </summary>
     public static class SelectBinder
     {
-        private static readonly string[] AllColumnNames = new string[] { "*" };
-
         /// <summary>
         /// Binds the select query option to the SqlBuilder.
         /// </summary>
-        /// <typeparam name="T">The type of class being queried.</typeparam>
-        /// <param name="queryOptions">The query options.</param>
+        /// <param name="selectQueryOption">The select query option.</param>
+        /// <param name="objectInfo">The IObjectInfo for the type to bind the select list for.</param>
         /// <returns>The SqlBuilder after the select and from clauses have been added.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
-        public static IWhereOrOrderBy BindSelectQueryOption<T>(ODataQueryOptions queryOptions)
+        public static IWhereOrOrderBy BindSelect(SelectQueryOption selectQueryOption, IObjectInfo objectInfo)
         {
-            if (queryOptions == null)
+            if (objectInfo == null)
             {
-                throw new ArgumentNullException("queryOptions");
+                throw new ArgumentNullException("objectInfo");
             }
 
-            string[] columnNames;
-
-            if (queryOptions.Select == null || (queryOptions.Select.Properties.Count == 1 && queryOptions.Select.Properties[0] == "*"))
+            if (selectQueryOption == null || (selectQueryOption.Properties.Count == 1 && selectQueryOption.Properties[0] == "*"))
             {
-                columnNames = AllColumnNames;
+                return SqlBuilder.Select("*").From(objectInfo.ForType);
             }
-            else
+
+            var columnNames = new string[selectQueryOption.Properties.Count];
+            int columnCount = 0;
+
+            foreach (var property in selectQueryOption.Properties)
             {
-                var objectInfo = ObjectInfo.For(typeof(T));
+                var column = objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == property);
 
-                columnNames = new string[queryOptions.Select.Properties.Count];
-                int columnCount = 0;
-
-                foreach (var property in queryOptions.Select.Properties)
+                if (column == null)
                 {
-                    var column = objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == property);
-
-                    if (column == null)
-                    {
-                        throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, objectInfo.ForType.Name, property));
-                    }
-
-                    columnNames[columnCount++] = column.ColumnName;
+                    throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, objectInfo.ForType.Name, property));
                 }
+
+                columnNames[columnCount++] = column.ColumnName;
             }
 
-            return SqlBuilder.Select(columnNames).From(typeof(T));
+            return SqlBuilder.Select(columnNames).From(objectInfo.ForType);
         }
     }
 }

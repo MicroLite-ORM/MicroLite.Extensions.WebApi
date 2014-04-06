@@ -4,6 +4,7 @@
     using MicroLite.Builder;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
+    using MicroLite.Mapping;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
@@ -11,10 +12,19 @@
     public class OrderByBinderTests
     {
         [Fact]
+        public void BindOrderByThrowsArgumentNullExceptionForNullObjectInfo()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => OrderByBinder.BindOrderBy(new OrderByQueryOption("$orderby=FirstName"), null, SqlBuilder.Select("*").From(typeof(Customer))));
+
+            Assert.Equal("objectInfo", exception.ParamName);
+        }
+
+        [Fact]
         public void BindOrderByThrowsArgumentNullExceptionForNullOrderBySqlBuilder()
         {
             var exception = Assert.Throws<ArgumentNullException>(
-                () => OrderByBinder.BindOrderBy<Customer>(new OrderByQueryOption("$orderby=FirstName"), null));
+                () => OrderByBinder.BindOrderBy(new OrderByQueryOption("$orderby=FirstName"), ObjectInfo.For(typeof(Customer)), null));
 
             Assert.Equal("orderBySqlBuilder", exception.ParamName);
         }
@@ -23,7 +33,7 @@
         public void BindOrderByThrowsODataExceptionForUnspportedPropertyName()
         {
             var exception = Assert.Throws<ODataException>(
-                () => OrderByBinder.BindOrderBy<Customer>(new OrderByQueryOption("$orderby=FirstName"), SqlBuilder.Select("*").From(typeof(Customer))));
+                () => OrderByBinder.BindOrderBy(new OrderByQueryOption("$orderby=FirstName"), ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
             Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
         }
@@ -34,8 +44,9 @@
 
             public WhenCallingBindOrderBy()
             {
-                this.sqlQuery = OrderByBinder.BindOrderBy<Customer>(
+                this.sqlQuery = OrderByBinder.BindOrderBy(
                     new OrderByQueryOption("$orderby=Status desc,Name"),
+                    ObjectInfo.For(typeof(Customer)),
                     SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
