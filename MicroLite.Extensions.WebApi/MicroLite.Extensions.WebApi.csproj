@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoManageTransactionAttribute.cs" />
-    <Compile Include="ConfigurationExtensions.cs" />
+    <Compile Include="WebApiConfigurationExtensions.cs" />
     <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

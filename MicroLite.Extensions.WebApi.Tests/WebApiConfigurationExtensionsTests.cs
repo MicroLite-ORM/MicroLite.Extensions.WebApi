@@ -5,7 +5,7 @@
     using Moq;
     using Xunit;
 
-    public class ConfigurationExtensionsTests
+    public class WebApiConfigurationExtensionsTests
     {
         public class WhenCallingWithWebApi : IDisposable
         {

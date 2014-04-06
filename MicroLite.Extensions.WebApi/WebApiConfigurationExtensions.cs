@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ConfigurationExtensions.cs" company="MicroLite">
+// <copyright file="WebApiConfigurationExtensions.cs" company="MicroLite">
 // Copyright 2012 - 2014 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ namespace MicroLite.Configuration
     /// <summary>
     /// Extensions for the MicroLite configuration.
     /// </summary>
-    public static class ConfigurationExtensions
+    public static class WebApiConfigurationExtensions
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLog();
 

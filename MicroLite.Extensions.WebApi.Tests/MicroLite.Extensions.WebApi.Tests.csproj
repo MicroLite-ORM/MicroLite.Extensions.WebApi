@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoManageTransactionAttributeTests.cs" />
-    <Compile Include="ConfigurationExtensionsTests.cs" />
+    <Compile Include="WebApiConfigurationExtensionsTests.cs" />
     <Compile Include="ValidateModelNotNullAttributeTests.cs" />
     <Compile Include="ValidateModelStateAttributeTests.cs" />
     <Compile Include="MicroLiteApiController{T}Tests.cs" />
