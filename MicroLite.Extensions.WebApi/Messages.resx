@@ -121,7 +121,7 @@
     <value>The argument must not be null</value>
   </data>
   <data name="DebugUriFormat" xml:space="preserve">
-    <value>{0} /{1}/{2} - HTTP {3} ({4})</value>
+    <value>{0}/{1}/{2} - HTTP {3} ({4})</value>
   </data>
   <data name="InvalidPropertyName" xml:space="preserve">
     <value>The type {0} does not have a property called {1}</value>
