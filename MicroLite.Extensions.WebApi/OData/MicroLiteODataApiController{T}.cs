@@ -16,7 +16,6 @@ namespace MicroLite.Extensions.WebApi.OData
     using System.Net;
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.OData.Binders;
-    using MicroLite.Logging;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validation;
 
@@ -28,8 +27,6 @@ namespace MicroLite.Extensions.WebApi.OData
     public abstract class MicroLiteODataApiController<TEntity, TId> : MicroLiteApiController<TEntity, TId>
         where TEntity : class, new()
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLog();
-
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
         /// </summary>
@@ -110,11 +107,6 @@ namespace MicroLite.Extensions.WebApi.OData
             if (queryOptions.Format != null)
             {
                 response.Content.Headers.ContentType = queryOptions.Format.MediaTypeHeaderValue;
-            }
-
-            if (Log.IsDebug)
-            {
-                Log.Debug(Messages.DebugUriFormat, "GET", typeof(TEntity).Name, queryOptions.RawValues.ToString(), "200", "OK");
             }
 
             return response;

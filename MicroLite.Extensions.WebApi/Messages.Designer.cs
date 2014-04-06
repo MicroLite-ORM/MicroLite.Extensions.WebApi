@@ -70,15 +70,6 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}/{1}/{2} - HTTP {3} ({4}).
-        /// </summary>
-        internal static string DebugUriFormat {
-            get {
-                return ResourceManager.GetString("DebugUriFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The type {0} does not have a property called {1}.
         /// </summary>
         internal static string InvalidPropertyName {
