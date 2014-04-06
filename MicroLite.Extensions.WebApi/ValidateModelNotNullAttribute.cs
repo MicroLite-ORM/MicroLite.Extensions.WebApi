@@ -22,6 +22,29 @@ namespace MicroLite.Extensions.WebApi
     /// <summary>
     /// An <see cref="ActionFilterAttribute"/> which verifies the parameters passed to the controller action are not null.
     /// </summary>
+    /// <example>
+    /// Add to the global filters list for it to apply to every action on every controller unless opted out:
+    /// <code>
+    /// static void Register(HttpConfiguration config)
+    /// {
+    ///     config.Filters.Add(new ValidateModelNotNullAttribute());
+    /// }
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Add to a controller to opt out all actions in a controller:
+    /// <code>
+    /// [ValidateModelNotNullAttribute(SkipValidation = true)]
+    /// public class CustomerController : MicroLiteApiController { ... }
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Add to an individual action to opt out that particular action:
+    /// <code>
+    /// [ValidateModelNotNullAttribute(SkipValidation = true)]
+    /// public HttpResponseMessage Put(int id, Model model)
+    /// </code>
+    /// </example>
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class ValidateModelNotNullAttribute : ActionFilterAttribute
     {

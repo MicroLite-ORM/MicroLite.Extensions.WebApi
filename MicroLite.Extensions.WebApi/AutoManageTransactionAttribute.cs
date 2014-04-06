@@ -22,6 +22,36 @@ namespace MicroLite.Extensions.WebApi
     /// An action filter attribute which can be applied to a class or method to automatically begin an <see cref="ITransaction"/>
     /// before an action is executed and either commit or roll it back after the action is executed depending on whether an exception occurred.
     /// </summary>
+    /// <example>
+    /// Add to the global filters list for it to apply to every action on every controller unless opted out:
+    /// <code>
+    /// static void Register(HttpConfiguration config)
+    /// {
+    ///     config.Filters.Add(new AutoManageTransactionAttribute());
+    /// }
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Add to a controller to opt out all actions in a controller:
+    /// <code>
+    /// [AutoManageTransactionAttribute(AutoManageTransaction = false)]
+    /// public class CustomerController : MicroLiteApiController { ... }
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Add to an individual action to opt out that particular action:
+    /// <code>
+    /// [AutoManageTransactionAttribute(AutoManageTransaction = false)]
+    /// public HttpResponseMessage Put(int id, Model model)
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Override the IsolationLevel of the transaction for a specific method (could also be done at controller level)
+    /// <code>
+    /// [AutoManageTransactionAttribute(IsolationLevel = IsolationLevel.Chaos)]
+    /// public HttpResponseMessage Put(int id, Model model)
+    /// </code>
+    /// </example>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class AutoManageTransactionAttribute : ActionFilterAttribute
     {

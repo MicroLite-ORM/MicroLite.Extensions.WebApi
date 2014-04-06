@@ -110,6 +110,7 @@
       <Link>MicroLite.snk</Link>
     </None>
     <None Include="packages.config" />
+    <None Include="_Controllers.cd" />
     <None Include="_Filters.cd" />
   </ItemGroup>
   <ItemGroup>
