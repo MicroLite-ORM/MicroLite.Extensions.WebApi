@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<AssembliesMetrics>
-  <Assembly Assembly="MicroLite.Extensions.WebApi v3.0.0.0" NTypes="22" NAbstractTypes="4" NILInstructionInAsm="2038" NbLinesOfCodeInAsm="238" NbLinesOfCommentInAsm="471" PercentageCommentInAsm="66" PercentageCoverageInAsm="-" AfferentCoupling="0" EfferentCoupling="112" RelationalCohesion="1.23" Instability="1" Abstractness="0.18" DistFrMainSeq="0.13" NormDistFrMainSeq="0.18" />
-</AssembliesMetrics>
