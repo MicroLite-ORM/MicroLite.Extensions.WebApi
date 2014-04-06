@@ -91,24 +91,24 @@
     <Compile Include="MicroLiteApiController.cs" />
     <Compile Include="MicroLiteApiController{T}.cs" />
     <Compile Include="MicroLiteReadOnlyApiController.cs" />
-    <Compile Include="Filters\MicroLiteSessionAttribute.cs" />
+    <Compile Include="MicroLiteSessionAttribute.cs" />
     <Compile Include="OData\InlineCountCollection{T}.cs" />
     <Compile Include="OData\MicroLiteODataApiController{T}.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Filters\ValidateModelNotNullAttribute.cs" />
-    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="ValidateModelNotNullAttribute.cs" />
+    <Compile Include="ValidateModelStateAttribute.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensions.cs" />
     <Compile Include="OData\Binders\FilterBinder.cs" />
     <Compile Include="OData\Binders\ODataQueryOptionsExtensions.cs" />
     <Compile Include="OData\Binders\OrderByBinder.cs" />
     <Compile Include="OData\Binders\SelectBinder.cs" />
-    <Compile Include="WebApiConfigurationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">
       <Link>MicroLite.snk</Link>
     </None>
     <None Include="packages.config" />
+    <None Include="_Filters.cd" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

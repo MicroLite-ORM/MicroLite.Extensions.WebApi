@@ -89,10 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationExtensionsTests.cs" />
-    <Compile Include="Filters\ValidateModelNotNullAttributeTests.cs" />
-    <Compile Include="Filters\ValidateModelStateAttributeTests.cs" />
+    <Compile Include="ValidateModelNotNullAttributeTests.cs" />
+    <Compile Include="ValidateModelStateAttributeTests.cs" />
     <Compile Include="MicroLiteApiController{T}Tests.cs" />
-    <Compile Include="Filters\MicroLiteSessionAttributeTests.cs" />
+    <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensionsTests.cs" />
     <Compile Include="OData\Binders\ODataQueryOptionExtensionsTests.cs" />
     <Compile Include="OData\InlineCountCollectionTests.cs" />
@@ -103,7 +103,6 @@
     <Compile Include="OData\Binders\SelectBinderTests.cs" />
     <Compile Include="TestEntities\Customer.cs" />
     <Compile Include="TestEntities\CustomerStatus.cs" />
-    <Compile Include="WebApiConfigurationSettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">

@@ -1,11 +1,11 @@
-﻿namespace MicroLite.Extensions.WebApi.Tests.Filters
+﻿namespace MicroLite.Extensions.WebApi.Tests
 {
     using System;
     using System.Data;
     using System.Web.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-    using MicroLite.Extensions.WebApi.Filters;
+    using MicroLite.Extensions.WebApi;
     using MicroLite.Infrastructure.Web;
     using Moq;
     using Xunit;

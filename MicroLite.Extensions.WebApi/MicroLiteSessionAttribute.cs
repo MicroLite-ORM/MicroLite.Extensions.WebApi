@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace MicroLite.Extensions.WebApi.Filters
+namespace MicroLite.Extensions.WebApi
 {
     using System;
     using System.Collections.Generic;
