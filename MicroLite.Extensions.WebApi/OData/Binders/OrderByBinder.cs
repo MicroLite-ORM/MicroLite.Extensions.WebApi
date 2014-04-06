@@ -49,7 +49,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             {
                 foreach (var property in orderByQuery.Properties)
                 {
-                    var column = objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == property.Name);
+                    var column = objectInfo.TableInfo.GetColumnInfoForProperty(property.Name);
 
                     if (column == null)
                     {

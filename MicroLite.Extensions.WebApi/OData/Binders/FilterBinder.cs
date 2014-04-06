@@ -159,7 +159,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             private void BindPropertyAccessQueryNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
             {
-                var column = this.objectInfo.TableInfo.Columns.SingleOrDefault(c => c.PropertyInfo.Name == singleValuePropertyAccessNode.PropertyName);
+                var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
 
                 if (column == null)
                 {
