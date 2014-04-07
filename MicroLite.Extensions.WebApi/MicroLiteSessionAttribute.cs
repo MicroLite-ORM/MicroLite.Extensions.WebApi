@@ -30,7 +30,7 @@ namespace MicroLite.Extensions.WebApi
     /// <code>
     /// static void Register(HttpConfiguration config)
     /// {
-    ///     config.Filters.Add(new MicroLiteSessionAttribute());
+    ///     config.Filters.Add(new MicroLiteSessionAttribute("ConnectionName"));
     /// }
     /// </code>
     /// </example>
@@ -47,19 +47,16 @@ namespace MicroLite.Extensions.WebApi
         private readonly string connectionName;
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="MicroLiteSessionAttribute"/> class.
-        /// </summary>
-        public MicroLiteSessionAttribute()
-            : this(null)
-        {
-        }
-
-        /// <summary>s
-        /// Initialises a new instance of the <see cref="MicroLiteSessionAttribute"/> class.
+        /// Initialises a new instance of the <see cref="MicroLiteSessionAttribute"/> class for the specified connection name.
         /// </summary>
         /// <param name="connectionName">Name of the connection to manage the session for.</param>
         public MicroLiteSessionAttribute(string connectionName)
         {
+            if (connectionName == null)
+            {
+                throw new ArgumentNullException("connectionName");
+            }
+
             this.connectionName = connectionName;
         }
 
@@ -148,11 +145,6 @@ namespace MicroLite.Extensions.WebApi
             if (SessionFactories == null)
             {
                 throw new MicroLiteException(Messages.NoSessionFactoriesSet);
-            }
-
-            if (this.connectionName == null && SessionFactories.Count() > 1)
-            {
-                throw new MicroLiteException(Messages.NoConnectionNameMultipleSessionFactories);
             }
 
             var sessionFactory =

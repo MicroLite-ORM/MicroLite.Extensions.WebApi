@@ -33,7 +33,7 @@
                     }
                 };
 
-                var attribute = new MicroLiteSessionAttribute();
+                var attribute = new MicroLiteSessionAttribute("Northwind");
                 attribute.OnActionExecuted(context);
             }
 
@@ -66,7 +66,7 @@
                     }
                 };
 
-                var attribute = new MicroLiteSessionAttribute();
+                var attribute = new MicroLiteSessionAttribute("Northwind");
                 attribute.OnActionExecuted(context);
             }
 
@@ -92,7 +92,7 @@
                     }
                 };
 
-                var attribute = new MicroLiteSessionAttribute();
+                var attribute = new MicroLiteSessionAttribute("Northwind");
 
                 var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
 
@@ -127,33 +127,6 @@
             }
         }
 
-        public class WhenCallingOnActionExecuting_MultipleSessionFactoriesRegistered_AndThereIsNoConnectionNameSet
-        {
-            [Fact]
-            public void AMicroLiteExceptionIsThrown()
-            {
-                MicroLiteSessionAttribute.SessionFactories = new[]
-                {
-                    new Mock<ISessionFactory>().Object,
-                    new Mock<ISessionFactory>().Object
-                };
-
-                var context = new HttpActionContext
-                {
-                    ControllerContext = new HttpControllerContext
-                    {
-                        Controller = new Mock<MicroLiteApiController>().Object
-                    }
-                };
-
-                var attribute = new MicroLiteSessionAttribute();
-
-                var exception = Assert.Throws<MicroLiteException>(() => attribute.OnActionExecuting(context));
-
-                Assert.Equal(Messages.NoConnectionNameMultipleSessionFactories, exception.Message);
-            }
-        }
-
         public class WhenCallingOnActionExecuting_WithAMicroLiteApiController
         {
             private readonly Mock<MicroLiteApiController> mockController = new Mock<MicroLiteApiController>();
@@ -162,6 +135,7 @@
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController()
             {
+                this.mockSessionFactory.Setup(x => x.ConnectionName).Returns("Northwind");
                 this.mockSessionFactory.Setup(x => x.OpenSession()).Returns(this.mockSession.Object);
 
                 MicroLiteSessionAttribute.SessionFactories = new[]
@@ -177,7 +151,7 @@
                     }
                 };
 
-                var attribute = new MicroLiteSessionAttribute();
+                var attribute = new MicroLiteSessionAttribute("Northwind");
                 attribute.OnActionExecuting(context);
             }
 
@@ -202,6 +176,7 @@
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController()
             {
+                this.mockSessionFactory.Setup(x => x.ConnectionName).Returns("Northwind");
                 this.mockSessionFactory.Setup(x => x.OpenReadOnlySession()).Returns(this.mockSession.Object);
 
                 MicroLiteSessionAttribute.SessionFactories = new[]
@@ -217,7 +192,7 @@
                     }
                 };
 
-                var attribute = new MicroLiteSessionAttribute();
+                var attribute = new MicroLiteSessionAttribute("Northwind");
                 attribute.OnActionExecuting(context);
             }
 
@@ -231,17 +206,6 @@
             public void TheSessionShouldBeSetOnTheController()
             {
                 Assert.Equal(this.mockSession.Object, this.mockController.Object.Session);
-            }
-        }
-
-        public class WhenConstructedUsingTheDefaultConstructor
-        {
-            private readonly MicroLiteSessionAttribute attribute = new MicroLiteSessionAttribute();
-
-            [Fact]
-            public void TheConnectionNamePropertyShouldBeNull()
-            {
-                Assert.Null(this.attribute.ConnectionName);
             }
         }
 
