@@ -126,22 +126,10 @@
   <data name="LoadingExtension" xml:space="preserve">
     <value>MicroLite: Loading the extension for ASP.NET WebApi</value>
   </data>
-  <data name="NoConnectionNameMultipleSessionFactories" xml:space="preserve">
-    <value>MicroLite has been configured for multiple connections, therefore the connection name must be specified in the MicroLiteSessionAttribute (e.g. [MicroLiteSession("MyConnection")]).</value>
-  </data>
   <data name="NoSessionFactoriesSet" xml:space="preserve">
     <value>Unable to find the session factory, check that Configure.Extensions().WithWebApi() has been called in your application start up.</value>
   </data>
   <data name="NoSessionFactoryFoundForConnectionName" xml:space="preserve">
-    <value>MicroLite has not been configured for the connection named {0}, either the connection name in the MicroLiteSessionAttribute is incorrect or Configure.Fluently().ForConnection({0}) has not been called.</value>
-  </data>
-  <data name="RegisteringMicroLiteSessionAttribute" xml:space="preserve">
-    <value>Loading a default instance of MicroLiteSessionAttribute in the specified HttpConfiguration.Filters</value>
-  </data>
-  <data name="RegisteringValidateModelNotNullAttribute" xml:space="preserve">
-    <value>Loading a ValidateModelNotNullAttribute in the specified HttpConfiguration.Filters</value>
-  </data>
-  <data name="RegisteringValidateModelStateAttribute" xml:space="preserve">
-    <value>Loading a ValidateModelStateAttribute in the specified HttpConfiguration.Filters</value>
+    <value>MicroLite has not been configured for the connection named {0}, either the connection name in the MicroLiteSessionAttribute is incorrect or Configure.Fluently().ForConnection("{0}").CreateSessionFactory() has not been called.</value>
   </data>
 </root>

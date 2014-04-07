@@ -88,15 +88,6 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MicroLite has been configured for multiple connections, therefore the connection name must be specified in the MicroLiteSessionAttribute (e.g. [MicroLiteSession(&quot;MyConnection&quot;)])..
-        /// </summary>
-        internal static string NoConnectionNameMultipleSessionFactories {
-            get {
-                return ResourceManager.GetString("NoConnectionNameMultipleSessionFactories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unable to find the session factory, check that Configure.Extensions().WithWebApi() has been called in your application start up..
         /// </summary>
         internal static string NoSessionFactoriesSet {
@@ -106,38 +97,11 @@ namespace MicroLite.Extensions.WebApi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MicroLite has not been configured for the connection named {0}, either the connection name in the MicroLiteSessionAttribute is incorrect or Configure.Fluently().ForConnection({0}) has not been called..
+        ///   Looks up a localized string similar to MicroLite has not been configured for the connection named {0}, either the connection name in the MicroLiteSessionAttribute is incorrect or Configure.Fluently().ForConnection(&quot;{0}&quot;).CreateSessionFactory() has not been called..
         /// </summary>
         internal static string NoSessionFactoryFoundForConnectionName {
             get {
                 return ResourceManager.GetString("NoSessionFactoryFoundForConnectionName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading a default instance of MicroLiteSessionAttribute in the specified HttpConfiguration.Filters.
-        /// </summary>
-        internal static string RegisteringMicroLiteSessionAttribute {
-            get {
-                return ResourceManager.GetString("RegisteringMicroLiteSessionAttribute", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading a ValidateModelNotNullAttribute in the specified HttpConfiguration.Filters.
-        /// </summary>
-        internal static string RegisteringValidateModelNotNullAttribute {
-            get {
-                return ResourceManager.GetString("RegisteringValidateModelNotNullAttribute", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading a ValidateModelStateAttribute in the specified HttpConfiguration.Filters.
-        /// </summary>
-        internal static string RegisteringValidateModelStateAttribute {
-            get {
-                return ResourceManager.GetString("RegisteringValidateModelStateAttribute", resourceCulture);
             }
         }
     }
