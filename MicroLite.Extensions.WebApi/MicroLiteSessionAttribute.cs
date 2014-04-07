@@ -114,12 +114,12 @@ namespace MicroLite.Extensions.WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is only called the WebApi framework & the ActionExecutingContext should never be null.")]
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
-
             var controller = actionContext.ControllerContext.Controller as IHaveSession;
 
             if (controller != null)
             {
+                var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
+
                 controller.Session = sessionFactory.OpenSession();
                 return;
             }
@@ -128,6 +128,8 @@ namespace MicroLite.Extensions.WebApi
 
             if (readOnlyController != null)
             {
+                var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
+
                 readOnlyController.Session = sessionFactory.OpenReadOnlySession();
                 return;
             }
