@@ -151,17 +151,18 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-            if (exception == null && session.CurrentTransaction.IsActive)
+            var transaction = session.CurrentTransaction;
+
+            if (exception == null && transaction.IsActive)
             {
-                session.CurrentTransaction.Commit();
-                return;
+                transaction.Commit();
+            }
+            else if (exception != null && !transaction.WasRolledBack)
+            {
+                transaction.Rollback();
             }
 
-            if (exception != null && !session.CurrentTransaction.WasRolledBack)
-            {
-                session.CurrentTransaction.Rollback();
-                return;
-            }
+            transaction.Dispose();
         }
     }
 }
