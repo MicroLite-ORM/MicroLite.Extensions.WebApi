@@ -14,7 +14,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>Micro ORM Framework POCO Database ASP.NET WebApi OData</tags>
     <dependencies>
-      <dependency id="MicroLite" version="5.0.0-beta2" />
+      <dependency id="MicroLite" version="5.0.0-beta3" />
       <dependency id="Microsoft.AspNet.WebApi.Client" version="4.0.20710" />
       <dependency id="Net.Http.WebApi.OData" version="2.0.0-beta" />
     </dependencies>
