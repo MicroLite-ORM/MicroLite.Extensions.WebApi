@@ -90,12 +90,16 @@ namespace MicroLite.Extensions.WebApi
         /// Called by the ASP.NET WebApi framework after the action method executes.
         /// </summary>
         /// <param name="actionExecutedContext">The action executed context.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is only called the MVC framework & the ActionExecutingContext should never be null.")]
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             if (!this.AutoManageTransaction)
             {
                 return;
+            }
+
+            if (actionExecutedContext == null)
+            {
+                throw new ArgumentNullException("actionExecutedContext");
             }
 
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveSession;
@@ -119,12 +123,16 @@ namespace MicroLite.Extensions.WebApi
         /// Called by the ASP.NET WebApi framework before the action method executes.
         /// </summary>
         /// <param name="actionContext">The action context.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is only called the MVC framework & the ActionExecutingContext should never be null.")]
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             if (!this.AutoManageTransaction)
             {
                 return;
+            }
+
+            if (actionContext == null)
+            {
+                throw new ArgumentNullException("actionContext");
             }
 
             var controller = actionContext.ControllerContext.Controller as IHaveSession;

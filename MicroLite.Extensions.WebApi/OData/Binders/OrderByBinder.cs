@@ -31,7 +31,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="objectInfo">The IObjectInfo for the type to bind the order by list for.</param>
         /// <param name="orderBySqlBuilder">The order by SQL builder.</param>
         /// <returns>The SqlBuilder after the order by clause has been added.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
         public static IOrderBy BindOrderBy(OrderByQueryOption orderByQuery, IObjectInfo objectInfo, IOrderBy orderBySqlBuilder)
         {
             if (objectInfo == null)

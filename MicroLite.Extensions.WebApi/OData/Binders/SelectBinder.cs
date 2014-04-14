@@ -30,7 +30,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="selectQueryOption">The select query option.</param>
         /// <param name="objectInfo">The IObjectInfo for the type to bind the select list for.</param>
         /// <returns>The SqlBuilder after the select and from clauses have been added.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Work in progress, might not be required in the long run but for now we need the type not an instance.")]
         public static IWhereOrOrderBy BindSelect(SelectQueryOption selectQueryOption, IObjectInfo objectInfo)
         {
             if (objectInfo == null)
