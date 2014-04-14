@@ -51,6 +51,12 @@
             {
                 this.mockTransaction.Verify(x => x.Dispose(), Times.Once());
             }
+
+            [Fact]
+            public void TheTransactionIsNotRolledBack()
+            {
+                this.mockTransaction.Verify(x => x.Rollback(), Times.Never());
+            }
         }
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse
@@ -140,6 +146,12 @@
             {
                 this.mockTransaction.Verify(x => x.Commit(), Times.Never());
             }
+
+            [Fact]
+            public void TheTransactionIsNotRolledBack()
+            {
+                this.mockTransaction.Verify(x => x.Rollback(), Times.Never());
+            }
         }
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoCurrentTransaction
@@ -205,6 +217,12 @@
             }
 
             [Fact]
+            public void TheTransactionIsNotCommitted()
+            {
+                this.mockTransaction.Verify(x => x.Commit(), Times.Never());
+            }
+
+            [Fact]
             public void TheTransactionIsNotRolledBackAgain()
             {
                 this.mockTransaction.Verify(x => x.Rollback(), Times.Never());
@@ -244,6 +262,12 @@
             public void TheTransactionIsDisposed()
             {
                 this.mockTransaction.Verify(x => x.Dispose(), Times.Once());
+            }
+
+            [Fact]
+            public void TheTransactionIsNotCommitted()
+            {
+                this.mockTransaction.Verify(x => x.Commit(), Times.Never());
             }
 
             [Fact]
@@ -291,6 +315,12 @@
             public void TheTransactionIsDisposed()
             {
                 this.mockTransaction.Verify(x => x.Dispose(), Times.Once());
+            }
+
+            [Fact]
+            public void TheTransactionIsNotRolledBack()
+            {
+                this.mockTransaction.Verify(x => x.Rollback(), Times.Never());
             }
         }
 
@@ -381,6 +411,12 @@
             {
                 this.mockTransaction.Verify(x => x.Commit(), Times.Never());
             }
+
+            [Fact]
+            public void TheTransactionIsNotRolledBack()
+            {
+                this.mockTransaction.Verify(x => x.Rollback(), Times.Never());
+            }
         }
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoCurrentTransaction
@@ -446,6 +482,12 @@
             }
 
             [Fact]
+            public void TheTransactionIsNotCommitted()
+            {
+                this.mockTransaction.Verify(x => x.Commit(), Times.Never());
+            }
+
+            [Fact]
             public void TheTransactionIsNotRolledBackAgain()
             {
                 this.mockTransaction.Verify(x => x.Rollback(), Times.Never());
@@ -485,6 +527,12 @@
             public void TheTransactionIsDisposed()
             {
                 this.mockTransaction.Verify(x => x.Dispose(), Times.Once());
+            }
+
+            [Fact]
+            public void TheTransactionIsNotCommitted()
+            {
+                this.mockTransaction.Verify(x => x.Commit(), Times.Never());
             }
 
             [Fact]
