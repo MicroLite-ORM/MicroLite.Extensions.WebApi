@@ -176,7 +176,7 @@
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack()
             {
-                this.mockTransaction.Setup(x => x.WasRolledBack).Returns(true);
+                this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
                 var controller = new Mock<MicroLiteApiController>().Object;
@@ -218,7 +218,7 @@
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack()
             {
-                this.mockTransaction.Setup(x => x.WasRolledBack).Returns(false);
+                this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
                 var controller = new Mock<MicroLiteApiController>().Object;
@@ -417,7 +417,7 @@
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack()
             {
-                this.mockTransaction.Setup(x => x.WasRolledBack).Returns(true);
+                this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
                 var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
@@ -459,7 +459,7 @@
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack()
             {
-                this.mockTransaction.Setup(x => x.WasRolledBack).Returns(false);
+                this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
                 var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
