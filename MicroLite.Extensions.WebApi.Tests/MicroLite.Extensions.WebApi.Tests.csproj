@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MicroLite">
-      <HintPath>..\packages\MicroLite.5.0.0-beta3\lib\net40-client\MicroLite.dll</HintPath>
+      <HintPath>..\packages\MicroLite.5.0.0-rc\lib\net40-client\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
