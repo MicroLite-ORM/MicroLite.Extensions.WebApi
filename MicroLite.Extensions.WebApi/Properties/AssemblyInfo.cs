@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MicroLite.Extensions.WebApi")]
-[assembly: AssemblyDescription("MicroLite ORM Framework extension to integrate with ASP.NET WebApi")]
+[assembly: AssemblyDescription("MicroLite.Extensions.WebApi is an extension to the MicroLite ORM Framework which allows integration with ASP.NET WebApi 4 or later.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MicroLite")]
 [assembly: AssemblyProduct("MicroLite.Extensions.WebApi")]
