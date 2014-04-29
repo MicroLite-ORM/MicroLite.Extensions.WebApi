@@ -166,4 +166,7 @@ Check out the [WebApi](http://microliteorm.wordpress.com/tag/webapi/) posts on t
 
 _Supported .NET Framework Versions_
 
-The NuGet Package contains binaries compiled against 4.0 and 4.5.
+The NuGet Package contains binaries compiled against:
+
+* .NET 4.0 (Full)
+* .NET 4.5
