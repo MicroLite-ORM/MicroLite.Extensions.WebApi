@@ -31,6 +31,19 @@ namespace MicroLite.Extensions.WebApi.OData
         /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
         /// </summary>
         protected MicroLiteODataApiController()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
+        /// </summary>
+        /// <param name="session">The ISession for the current HTTP request.</param>
+        /// <remarks>
+        /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
+        /// </remarks>
+        protected MicroLiteODataApiController(ISession session)
+            : base(session)
         {
             this.ValidationSettings = new ODataValidationSettings
             {

@@ -31,6 +31,19 @@ namespace MicroLite.Extensions.WebApi
         /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class.
         /// </summary>
         protected MicroLiteApiController()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class with an ISession.
+        /// </summary>
+        /// <param name="session">The ISession for the current HTTP request.</param>
+        /// <remarks>
+        /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
+        /// </remarks>
+        protected MicroLiteApiController(ISession session)
+            : base(session)
         {
             this.GetEntityResourceUri = (TId id) =>
             {

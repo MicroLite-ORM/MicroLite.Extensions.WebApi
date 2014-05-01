@@ -20,13 +20,42 @@ namespace MicroLite.Extensions.WebApi
     /// </summary>
     public abstract class MicroLiteApiController : ApiController, IHaveSession
     {
+        private ISession session;
+
+        /// <summary>
+        /// Initialises a new instance of the MicroLiteApiController class.
+        /// </summary>
+        protected MicroLiteApiController()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the MicroLiteApiController class with an ISession.
+        /// </summary>
+        /// <param name="session">The ISession for the current HTTP request.</param>
+        /// <remarks>
+        /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
+        /// </remarks>
+        protected MicroLiteApiController(ISession session)
+        {
+            this.session = session;
+        }
+
         /// <summary>
         /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
         /// </summary>
         public ISession Session
         {
-            get;
-            set;
+            get
+            {
+                return this.session;
+            }
+
+            set
+            {
+                this.session = value;
+            }
         }
     }
 }

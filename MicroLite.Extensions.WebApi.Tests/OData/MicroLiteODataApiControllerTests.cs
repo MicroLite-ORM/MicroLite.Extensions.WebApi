@@ -188,6 +188,45 @@
             }
         }
 
+        public class WhenConstructedUsingTheDefaultConstructor
+        {
+            private readonly MicroLiteODataApiController<Customer, int> controller;
+
+            public WhenConstructedUsingTheDefaultConstructor()
+            {
+                var mockController = new Mock<MicroLiteODataApiController<Customer, int>>();
+                mockController.CallBase = true;
+
+                this.controller = mockController.Object;
+            }
+
+            [Fact]
+            public void TheSessionIsNull()
+            {
+                Assert.Null(this.controller.Session);
+            }
+        }
+
+        public class WhenConstructedWithAnISession
+        {
+            private readonly MicroLiteODataApiController<Customer, int> controller;
+            private readonly ISession session = new Mock<ISession>().Object;
+
+            public WhenConstructedWithAnISession()
+            {
+                var mockController = new Mock<MicroLiteODataApiController<Customer, int>>(this.session);
+                mockController.CallBase = true;
+
+                this.controller = mockController.Object;
+            }
+
+            [Fact]
+            public void TheSessionIsSet()
+            {
+                Assert.Equal(this.session, this.controller.Session);
+            }
+        }
+
         public class WhenFormatQueryOptionIsSpecified
         {
             private readonly CustomerController controller = new CustomerController();

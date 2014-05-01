@@ -266,6 +266,45 @@
             }
         }
 
+        public class WhenConstructedUsingTheDefaultConstructor
+        {
+            private readonly MicroLiteApiController<Customer, int> controller;
+
+            public WhenConstructedUsingTheDefaultConstructor()
+            {
+                var mockController = new Mock<MicroLiteApiController<Customer, int>>();
+                mockController.CallBase = true;
+
+                this.controller = mockController.Object;
+            }
+
+            [Fact]
+            public void TheSessionIsNull()
+            {
+                Assert.Null(this.controller.Session);
+            }
+        }
+
+        public class WhenConstructedWithAnISession
+        {
+            private readonly MicroLiteApiController<Customer, int> controller;
+            private readonly ISession session = new Mock<ISession>().Object;
+
+            public WhenConstructedWithAnISession()
+            {
+                var mockController = new Mock<MicroLiteApiController<Customer, int>>(this.session);
+                mockController.CallBase = true;
+
+                this.controller = mockController.Object;
+            }
+
+            [Fact]
+            public void TheSessionIsSet()
+            {
+                Assert.Equal(this.session, this.controller.Session);
+            }
+        }
+
         private class CustomerController : MicroLiteApiController<Customer, int>
         {
             public CustomerController()
