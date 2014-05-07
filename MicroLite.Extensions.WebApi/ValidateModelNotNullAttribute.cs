@@ -45,7 +45,7 @@ namespace MicroLite.Extensions.WebApi
     /// public HttpResponseMessage Put(int id, Model model)
     /// </code>
     /// </example>
-    [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     public sealed class ValidateModelNotNullAttribute : ActionFilterAttribute
     {
         private static readonly Func<Dictionary<string, object>, bool> ContainsNull = args => args.ContainsValue(null);

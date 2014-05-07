@@ -44,7 +44,7 @@ namespace MicroLite.Extensions.WebApi
     /// public HttpResponseMessage Put(int id, Model model)
     /// </code>
     /// </example>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     public sealed class ValidateModelStateAttribute : ActionFilterAttribute
     {
         /// <summary>
