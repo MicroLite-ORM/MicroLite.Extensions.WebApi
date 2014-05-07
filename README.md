@@ -1,7 +1,7 @@
 MicroLite.Extensions.WebApi
 ===========================
 
-_MicroLite.Extensions.WebApi_ is an extension to the MicroLite ORM Framework which allows integration with ASP.NET WebApi 4 or later.
+_MicroLite.Extensions.WebApi_ is an extension to the MicroLite ORM Framework which allows integration with ASP.NET WebApi.
 
 It is easy to use MicroLite with ASP.NET WebApi, simply supply your controller with an `ISession` or `IReadOnlySession` and use it in your controller actions. However, using the WebApi extension for MicroLite makes it even easier and contains some useful extras.
 
@@ -11,7 +11,7 @@ In order to use the WebApi extension for the MicroLite ORM framework, you need t
 
 ## Configuring the Extension
 
-Register the action filters for the behaviour you want in your `WebApiConfig` in the App_Start folder:
+Register the action filters for the behaviour you want in your `WebApiConfig` in the App_Start folder of your project:
 
     public static void Register(HttpConfiguration config)
     {
@@ -67,28 +67,21 @@ Lastly, implement `IHaveSession` or `IHaveReadOnlySession` - either directly or 
 
 The `ValidateModelNotNullAttribute` will throw an `ArgumentNullException` if the model in a request is null, it saves having to write `if (model == null) { throw new ArgumentNullException("model"); }` at the start of every action.
 
-You may not want the attribute to apply to a certain controller or action, therefore the `ValidateModelNotNullAttribute` has a `SkipValidation` property (false by default) which allows you to opt out individual controllers or actions.
+You may not want the attribute to apply to a certain action, therefore the `ValidateModelNotNullAttribute` has a `SkipValidation` property (false by default) which allows you to opt out individual actions.
 
-    [ValidateModelNotNull(SkipValidation = true)] // will affect all methods in the controller
-    public class CustomerController : MicroLiteApiController { ... }
-
-    [ValidateModelNotNull(SkipValidation = true)] // will only affect individual methods
-    public ActionResult Edit(int id, Model model) { ... }
+    [ValidateModelNotNull(SkipValidation = true)] // will only affect the action it is applied to
+    public HttpResponseMessage Edit(int id, Model model) { ... }
 
 ### ValidateModelStateAttribute
 
-The `ValidateModelStateAttribute` validates the model state in a request and redirects to the view if it is invalid, it saves having to wrap all your methods with `if (ModelState.IsValid())`.
+The `ValidateModelStateAttribute` validates the model state in a request and returns a HTTP 400 Bad Request if it is invalid, it saves having to wrap all your methods with `if (ModelState.IsValid())`.
 
-There are times when you may want to return a different model to the view than the one posted to the controller so it is easy to opt out at either action or controller level:
-
-    [ValidateModelState(SkipValidation = true)] // will affect all methods in the controller
-    public class CustomerController : MicroLiteApiController { ... }
+There are times when you may want to opt out individual actions:
 
     [ValidateModelState(SkipValidation = true)] // will only affect individual methods
-    public ActionResult Edit(int id, Model model) { ... }
+    public HttpResponseMessage Edit(int id, Model model) { ... }
 
 ### MicroLiteSessionAttribute
-
 
 The `MicroLiteSessionAttribute` will ensure that an `ISession` or `IReadOnlySession` is opened and assigned to your controller if it inherits from `MicroLiteApiController`/`MicroLiteReadOnlyApiController` or implements `IHaveSession`/`IHaveReadOnlySession` prior to an action being called. It will then ensure that the session is disposed of after the action has been called. When constructed, it requires the name of the connection the session should be opened for.
 
@@ -98,14 +91,13 @@ NOTE: If you use an IOC container to manage sessions, then you do not need to us
 
 The `AutoManageTransactionAttribute` will ensure that a transaction is begun for the session provided to a controller if it inherits from `MicroLiteApiController`/`MicroLiteReadOnlyApiController` or implements `IHaveSession`/`IHaveReadOnlySession` prior to an action being called. It will then ensure that the transaction is either rolled back or committed depending on whether the action results in an exception being thrown or not.
 
-
 There are times when you may want to manually manage the transaction so it is easy to opt out at either action or controller level:
 
     [AutoManageTransaction(AutoManageTransaction = false)] // will affect all methods in the controller
     public class CustomerController : MicroLiteApiController { ... }
 
     [AutoManageTransaction(AutoManageTransaction = false)] // will only affect individual methods
-    public ActionResult Edit(int id, Model model) { ... }
+    public HttpResponseMessage Edit(int id, Model model) { ... }
 
 ## Controllers
 
@@ -164,9 +156,14 @@ Again, this is an opt-in. Check the [OData Support](http://microliteorm.wordpres
 
 Check out the [WebApi](http://microliteorm.wordpress.com/tag/webapi/) posts on the MicroLite Blog for further information.
 
-_Supported .NET Framework Versions_
+## Supported .NET Framework Versions
 
 The NuGet Package contains binaries compiled against:
 
 * .NET 4.0 (Full)
 * .NET 4.5
+
+## Supported ASP.NET WebApi Versions
+
+* ASP.NET WebApi 4 onwards
+* WebHost or SelfHost
