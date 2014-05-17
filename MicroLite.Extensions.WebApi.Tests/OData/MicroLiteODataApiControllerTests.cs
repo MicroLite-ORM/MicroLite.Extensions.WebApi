@@ -116,6 +116,12 @@
             }
 
             [Fact]
+            public void SubstringFunctionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Substring, AllowedFunctions.Substring);
+            }
+
+            [Fact]
             public void SubstringOfFunctionIsAllowed()
             {
                 Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.SubstringOf, AllowedFunctions.SubstringOf);

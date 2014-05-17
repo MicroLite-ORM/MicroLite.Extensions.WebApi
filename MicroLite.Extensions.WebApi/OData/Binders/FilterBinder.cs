@@ -205,10 +205,16 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         break;
 
                     case "replace":
-                        this.predicateBuilder.Append("REPLACE(");
+                    case "substring":
+                        this.predicateBuilder.Append(singleValueFunctionCallNode.Name.ToUpperInvariant() + "(");
                         this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[1]).LiteralText);
-                        this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[2]).LiteralText);
+                        this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[1]).Value);
+
+                        if (arguments.Count > 2)
+                        {
+                            this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[2]).Value);
+                        }
+
                         this.predicateBuilder.Append(")");
                         break;
 

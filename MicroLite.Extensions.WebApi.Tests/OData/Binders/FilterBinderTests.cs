@@ -793,6 +793,98 @@
             }
         }
 
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartAndLength
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartAndLength()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=substring(Name, 1, 2) eq 'oh'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void ArgumentOneShouldBeTheValueToBeLength()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments[1]);
+            }
+
+            [Fact]
+            public void ArgumentTwoShouldBeTheValueToFind()
+            {
+                Assert.Equal("oh", this.sqlQuery.Arguments[2]);
+            }
+
+            [Fact]
+            public void ArgumentZeroShouldBeTheValueToBeStartIndex()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments[0]);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(SUBSTRING(Name, ?, ?) = ?)", 1, 2, "oh")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe3ArgumentValue()
+            {
+                Assert.Equal(3, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartOnly
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartOnly()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=substring(Name, 1) eq 'ohnSmith'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void ArgumentOneShouldBeTheValueToFind()
+            {
+                Assert.Equal("ohnSmith", this.sqlQuery.Arguments[1]);
+            }
+
+            [Fact]
+            public void ArgumentZeroShouldBeTheValueToBeStartIndex()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments[0]);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(SUBSTRING(Name, ?) = ?)", 1, "ohnSmith")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValue()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyToLower
         {
             private readonly SqlQuery sqlQuery;
