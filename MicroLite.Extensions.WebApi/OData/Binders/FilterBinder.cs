@@ -190,31 +190,16 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         break;
 
                     case "toupper":
-                        this.predicateBuilder.Append("UPPER(");
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(")");
-                        break;
-
                     case "tolower":
-                        this.predicateBuilder.Append("LOWER(");
+                        this.predicateBuilder.Append(singleValueFunctionCallNode.Name.Substring(2).ToUpperInvariant() + "(");
                         this.Bind(arguments[0]);
                         this.predicateBuilder.Append(")");
                         break;
 
                     case "year":
-                        this.predicateBuilder.Append("YEAR(");
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(")");
-                        break;
-
                     case "month":
-                        this.predicateBuilder.Append("MONTH(");
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(")");
-                        break;
-
                     case "day":
-                        this.predicateBuilder.Append("DAY(");
+                        this.predicateBuilder.Append(singleValueFunctionCallNode.Name.ToUpperInvariant() + "(");
                         this.Bind(arguments[0]);
                         this.predicateBuilder.Append(")");
                         break;
