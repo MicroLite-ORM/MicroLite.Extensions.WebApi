@@ -10,6 +10,12 @@
             set;
         }
 
+        public DateTime DateOfBirth
+        {
+            get;
+            set;
+        }
+
         public string Forename
         {
             get;

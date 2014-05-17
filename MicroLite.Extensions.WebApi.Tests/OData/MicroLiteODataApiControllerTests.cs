@@ -134,9 +134,9 @@
             }
 
             [Fact]
-            public void YearFunctionIsNotAllowed()
+            public void YearFunctionIsAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year, AllowedFunctions.Year);
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year, AllowedFunctions.Year);
             }
         }
 

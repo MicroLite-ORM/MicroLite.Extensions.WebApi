@@ -51,7 +51,8 @@ namespace MicroLite.Extensions.WebApi.OData
                     | AllowedFunctions.StartsWith
                     | AllowedFunctions.SubstringOf
                     | AllowedFunctions.ToLower
-                    | AllowedFunctions.ToUpper,
+                    | AllowedFunctions.ToUpper
+                    | AllowedFunctions.Year,
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
                     | AllowedQueryOptions.InlineCount
