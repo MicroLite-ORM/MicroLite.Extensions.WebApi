@@ -32,9 +32,9 @@
             private readonly CustomerController controller = new CustomerController();
 
             [Fact]
-            public void DayFunctionIsNotAllowed()
+            public void DayFunctionIsAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Day, AllowedFunctions.Day);
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Day, AllowedFunctions.Day);
             }
 
             [Fact]

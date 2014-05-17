@@ -47,7 +47,8 @@ namespace MicroLite.Extensions.WebApi.OData
         {
             this.ValidationSettings = new ODataValidationSettings
             {
-                AllowedFunctions = AllowedFunctions.EndsWith
+                AllowedFunctions = AllowedFunctions.Day
+                    | AllowedFunctions.EndsWith
                     | AllowedFunctions.Month
                     | AllowedFunctions.StartsWith
                     | AllowedFunctions.SubstringOf

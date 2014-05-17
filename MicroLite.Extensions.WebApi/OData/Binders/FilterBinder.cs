@@ -213,6 +213,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         this.predicateBuilder.Append(")");
                         break;
 
+                    case "day":
+                        this.predicateBuilder.Append("DAY(");
+                        this.Bind(arguments[0]);
+                        this.predicateBuilder.Append(")");
+                        break;
+
                     default:
                         throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
                 }
