@@ -32,6 +32,12 @@
             private readonly CustomerController controller = new CustomerController();
 
             [Fact]
+            public void CeilingFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling, AllowedFunctions.Ceiling);
+            }
+
+            [Fact]
             public void DayFunctionIsAllowed()
             {
                 Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Day, AllowedFunctions.Day);
@@ -56,9 +62,27 @@
             }
 
             [Fact]
+            public void FloorFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Floor, AllowedFunctions.Floor);
+            }
+
+            [Fact]
             public void FormatCountQueryOptionIsAllowed()
             {
                 Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Format, AllowedQueryOptions.Format);
+            }
+
+            [Fact]
+            public void HourFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Hour, AllowedFunctions.Hour);
+            }
+
+            [Fact]
+            public void IndexOfFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.IndexOf, AllowedFunctions.IndexOf);
             }
 
             [Fact]
@@ -71,6 +95,12 @@
             public void MaxTopIsSetTo50()
             {
                 Assert.Equal(50, controller.ValidationSettings.MaxTop);
+            }
+
+            [Fact]
+            public void MinuteFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Minute, AllowedFunctions.Minute);
             }
 
             [Fact]
@@ -89,6 +119,18 @@
             public void ReplaceFunctionIsAllowed()
             {
                 Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Replace, AllowedFunctions.Replace);
+            }
+
+            [Fact]
+            public void RoundFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Round, AllowedFunctions.Round);
+            }
+
+            [Fact]
+            public void SecondFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Second, AllowedFunctions.Second);
             }
 
             [Fact]
