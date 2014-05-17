@@ -74,9 +74,9 @@
             }
 
             [Fact]
-            public void MonthFunctionIsNotAllowed()
+            public void MonthFunctionIsAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Month, AllowedFunctions.Month);
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Month, AllowedFunctions.Month);
             }
 
             [Fact]
