@@ -670,6 +670,55 @@
             }
         }
 
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyReplace
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyReplace()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=replace(Name, ' ', '') eq 'JohnSmith'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void ArgumentOneShouldBeTheReplacementValue()
+            {
+                Assert.Equal("", this.sqlQuery.Arguments[1]);
+            }
+
+            [Fact]
+            public void ArgumentTwoShouldBeTheValueToFind()
+            {
+                Assert.Equal("JohnSmith", this.sqlQuery.Arguments[2]);
+            }
+
+            [Fact]
+            public void ArgumentZeroShouldBeTheValueToBeReplaced()
+            {
+                Assert.Equal(" ", this.sqlQuery.Arguments[0]);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(REPLACE(Name, ?, ?) = ?)", "JohnSmith")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe3ArgumentValue()
+            {
+                Assert.Equal(3, this.sqlQuery.Arguments.Count);
+            }
+        }
+
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyStartsWith
         {
             private readonly SqlQuery sqlQuery;

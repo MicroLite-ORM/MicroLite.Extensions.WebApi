@@ -204,6 +204,14 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         this.predicateBuilder.Append(")");
                         break;
 
+                    case "replace":
+                        this.predicateBuilder.Append("REPLACE(");
+                        this.Bind(arguments[0]);
+                        this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[1]).LiteralText);
+                        this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[2]).LiteralText);
+                        this.predicateBuilder.Append(")");
+                        break;
+
                     default:
                         throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
                 }

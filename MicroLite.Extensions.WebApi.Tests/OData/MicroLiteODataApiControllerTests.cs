@@ -86,6 +86,12 @@
             }
 
             [Fact]
+            public void ReplaceFunctionIsAllowed()
+            {
+                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Replace, AllowedFunctions.Replace);
+            }
+
+            [Fact]
             public void SelectQueryOptionIsAllowed()
             {
                 Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Select, AllowedQueryOptions.Select);

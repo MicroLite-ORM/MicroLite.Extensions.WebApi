@@ -50,6 +50,7 @@ namespace MicroLite.Extensions.WebApi.OData
                 AllowedFunctions = AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
                     | AllowedFunctions.Month
+                    | AllowedFunctions.Replace
                     | AllowedFunctions.StartsWith
                     | AllowedFunctions.SubstringOf
                     | AllowedFunctions.ToLower
