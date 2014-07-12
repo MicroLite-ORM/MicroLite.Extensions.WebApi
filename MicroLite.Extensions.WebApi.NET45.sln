@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi", "MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.NET40.csproj", "{48714FD3-E87A-4A49-B8FB-2644BD1C577B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi", "MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.NET45.csproj", "{48714FD3-E87A-4A49-B8FB-2644BD1C577B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6EEBEA4E-86B0-4D6B-976A-373CD80B2302}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6EEBEA
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi.Tests", "MicroLite.Extensions.WebApi.Tests\MicroLite.Extensions.WebApi.Tests.NET40.csproj", "{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi.Tests", "MicroLite.Extensions.WebApi.Tests\MicroLite.Extensions.WebApi.Tests.NET45.csproj", "{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
