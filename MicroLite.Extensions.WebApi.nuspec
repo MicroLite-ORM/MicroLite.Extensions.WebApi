@@ -15,8 +15,9 @@
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
       <dependency id="MicroLite" version="5.0.0" />
-      <dependency id="Microsoft.AspNet.WebApi.Client" version="4.0.20710" />
-      <dependency id="Net.Http.WebApi.OData" version="2.1.1" />
+      <dependency id="Microsoft.AspNet.WebApi.Client" version="4.0.30506" />
+      <dependency id="Microsoft.Net.Http" version="2.2.22" />
+      <dependency id="Net.Http.WebApi.OData" version="2.1.2" />
     </dependencies>
   </metadata>
   <files>
