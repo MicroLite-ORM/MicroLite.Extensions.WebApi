@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NDepend AppName="MicroLite.Extensions.WebApi" Platform="DotNet">
-  <OutputDir KeepXmlFiles="False">C:\Source\GitHub\MicroLite.Extensions.WebApi\NDependOut1</OutputDir>
+  <OutputDir KeepXmlFiles="False">C:\Source\GitHub\MicroLite.Extensions.WebApi\NDependOut</OutputDir>
   <Assemblies>
     <Name>MicroLite.Extensions.WebApi</Name>
   </Assemblies>
