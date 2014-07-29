@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MicroLite.Extensions.WebApi.Tests</RootNamespace>
+    <AssemblyName>MicroLite.Extensions.WebApi.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_4_0</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET_4_0</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\MicroLite.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MicroLite, Version=5.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MicroLite.5.0.0\lib\net40-client\MicroLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Http.WebApi.OData, Version=2.2.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Net.Http.WebApi.OData.2.2.0\lib\net40\Net.Http.WebApi.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\AutoManageTransactionAttributeTests.cs">
+      <Link>AutoManageTransactionAttributeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\MicroLiteApiControllerTests.cs">
+      <Link>MicroLiteApiControllerTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\MicroLiteApiController{T}Tests.cs">
+      <Link>MicroLiteApiController{T}Tests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\MicroLiteReadOnlyApiControllerTests.cs">
+      <Link>MicroLiteReadOnlyApiControllerTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\MicroLiteSessionAttributeTests.cs">
+      <Link>MicroLiteSessionAttributeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\BinaryOperatorKindExtensionsTests.cs">
+      <Link>OData\Binders\BinaryOperatorKindExtensionsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\FilterBinderTests.cs">
+      <Link>OData\Binders\FilterBinderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\ODataQueryOptionExtensionsTests.cs">
+      <Link>OData\Binders\ODataQueryOptionExtensionsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\OrderByBinderTests.cs">
+      <Link>OData\Binders\OrderByBinderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\SelectBinderTests.cs">
+      <Link>OData\Binders\SelectBinderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\InlineCountCollectionTests.cs">
+      <Link>OData\InlineCountCollectionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\MicroLiteODataApiControllerTests.cs">
+      <Link>OData\MicroLiteODataApiControllerTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\Customer.cs">
+      <Link>TestEntities\Customer.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\CustomerStatus.cs">
+      <Link>TestEntities\CustomerStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\ValidateModelNotNullAttributeTests.cs">
+      <Link>ValidateModelNotNullAttributeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\ValidateModelStateAttributeTests.cs">
+      <Link>ValidateModelStateAttributeTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\WebApiConfigurationExtensionsTests.cs">
+      <Link>WebApiConfigurationExtensionsTests.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\MicroLite.snk">
+      <Link>MicroLite.snk</Link>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MicroLite.Extensions.WebApi-net40\MicroLite.Extensions.WebApi.NET40.csproj">
+      <Project>{48714fd3-e87a-4a49-b8fb-2644bd1c577b}</Project>
+      <Name>MicroLite.Extensions.WebApi.NET40</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

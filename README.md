@@ -160,10 +160,10 @@ Check out the [WebApi](http://microliteorm.wordpress.com/tag/webapi/) posts on t
 
 The NuGet Package contains binaries compiled against:
 
-* .NET 4.0 (Full)
-* .NET 4.5
+* .NET 4.0 (Full) and Microsoft.AspNet.WebApi.Core 4.0.20710
+* .NET 4.5 and Microsoft.AspNet.WebApi.Core 5.0
 
-## Supported ASP.NET WebApi Versions
+## Supported ASP.NET WebApi Hosts
 
-* ASP.NET WebApi 4 onwards
-* WebHost or SelfHost
+* WebHost (IIS)
+* SelfHost (OWIN)
