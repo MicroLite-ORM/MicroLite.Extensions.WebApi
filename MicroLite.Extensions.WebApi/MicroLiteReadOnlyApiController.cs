@@ -33,7 +33,7 @@ namespace MicroLite.Extensions.WebApi
         /// <summary>
         /// Initialises a new instance of the MicroLiteReadOnlyApiController class with an IReadOnlySession.
         /// </summary>
-        /// <param name="session">The ISession for the current HTTP request.</param>
+        /// <param name="session">The IReadOnlySession for the current HTTP request.</param>
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an IReadOnlySession via an IOC container.
         /// </remarks>
