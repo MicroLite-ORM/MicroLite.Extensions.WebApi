@@ -995,5 +995,220 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
+
+        public class WhenCallingBindFilterQueryOptionWithPropertyAddValueEquals
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithPropertyAddValueEquals()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Invoices?$filter=Quantity add 10 eq 15'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal(10, this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal(15, this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Invoice))
+                    .Where("((Quantity + ?) = ?)", 10, 15)
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithPropertyDivideValueEquals
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithPropertyDivideValueEquals()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Invoices?$filter=Quantity div 10 eq 15'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal(10, this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal(15, this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Invoice))
+                    .Where("((Quantity / ?) = ?)", 10, 15)
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithPropertyModuloValueEquals
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithPropertyModuloValueEquals()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Invoices?$filter=Quantity mod 10 eq 15'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal(10, this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal(15, this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Invoice))
+                    .Where("((Quantity % ?) = ?)", 10, 15)
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithPropertyMultiplyValueEquals
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithPropertyMultiplyValueEquals()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Invoices?$filter=Quantity mul 10 eq 15'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal(10, this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal(15, this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Invoice))
+                    .Where("((Quantity * ?) = ?)", 10, 15)
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithPropertySubtractValueEquals
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithPropertySubtractValueEquals()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Invoices?$filter=Quantity sub 10 eq 15'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal(10, this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal(15, this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Invoice))
+                    .Where("((Quantity - ?) = ?)", 10, 15)
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
     }
 }

@@ -11,7 +11,6 @@
     using Moq;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
-    using Net.Http.WebApi.OData.Query.Validation;
     using Xunit;
 
     public class MicroLiteODataApiControllerTests

@@ -13,7 +13,7 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using Net.Http.WebApi.OData;
-    using Net.Http.WebApi.OData.Query.Expression;
+    using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class BinaryOperatorKindExtensions
     {
@@ -21,8 +21,14 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             switch (binaryOperator)
             {
+                case BinaryOperatorKind.Add:
+                    return "+";
+
                 case BinaryOperatorKind.And:
                     return "AND";
+
+                case BinaryOperatorKind.Divide:
+                    return "/";
 
                 case BinaryOperatorKind.Equal:
                     return "=";
@@ -39,11 +45,20 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 case BinaryOperatorKind.LessThanOrEqual:
                     return "<=";
 
+                case BinaryOperatorKind.Modulo:
+                    return "%";
+
+                case BinaryOperatorKind.Multiply:
+                    return "*";
+
                 case BinaryOperatorKind.NotEqual:
                     return "<>";
 
                 case BinaryOperatorKind.Or:
                     return "OR";
+
+                case BinaryOperatorKind.Subtract:
+                    return "-";
 
                 default:
                     throw new ODataException("The operator '" + binaryOperator.ToString() + "' is not supported");

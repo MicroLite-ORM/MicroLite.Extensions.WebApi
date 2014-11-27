@@ -17,7 +17,7 @@ namespace MicroLite.Extensions.WebApi.OData
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.OData.Binders;
     using Net.Http.WebApi.OData.Query;
-    using Net.Http.WebApi.OData.Query.Validation;
+    using Net.Http.WebApi.OData.Query.Validators;
 
     /// <summary>
     /// A controller which adds support for OData queries to the standard <see cref="MicroLiteApiController&lt;TEntity, TId&gt;"/>.
@@ -53,6 +53,7 @@ namespace MicroLite.Extensions.WebApi.OData
         {
             this.ValidationSettings = new ODataValidationSettings
             {
+                AllowedArithmeticOperators = AllowedArithmeticOperators.All,
                 AllowedFunctions = AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
                     | AllowedFunctions.Month
@@ -63,6 +64,7 @@ namespace MicroLite.Extensions.WebApi.OData
                     | AllowedFunctions.ToLower
                     | AllowedFunctions.ToUpper
                     | AllowedFunctions.Year,
+                AllowedLogicalOperators = AllowedLogicalOperators.All,
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
                     | AllowedQueryOptions.InlineCount

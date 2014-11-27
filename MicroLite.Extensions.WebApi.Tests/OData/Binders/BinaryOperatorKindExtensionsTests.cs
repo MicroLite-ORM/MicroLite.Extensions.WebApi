@@ -2,7 +2,7 @@
 {
     using MicroLite.Extensions.WebApi.OData.Binders;
     using Net.Http.WebApi.OData;
-    using Net.Http.WebApi.OData.Query.Expression;
+    using Net.Http.WebApi.OData.Query.Expressions;
     using Xunit;
 
     public class BinaryOperatorKindExtensionsTests
@@ -17,6 +17,12 @@
         public void ToSqlOperatorReturnsEqualsForBinaryOperatorKindEqual()
         {
             Assert.Equal("=", BinaryOperatorKind.Equal.ToSqlOperator());
+        }
+
+        [Fact]
+        public void ToSqlOperatorReturnsForwardSlashForBinaryOperatorKindDivide()
+        {
+            Assert.Equal("/", BinaryOperatorKind.Divide.ToSqlOperator());
         }
 
         [Fact]
@@ -44,6 +50,12 @@
         }
 
         [Fact]
+        public void ToSqlOperatorReturnsMinusForBinaryOperatorKindSubtract()
+        {
+            Assert.Equal("-", BinaryOperatorKind.Subtract.ToSqlOperator());
+        }
+
+        [Fact]
         public void ToSqlOperatorReturnsNotEqualForBinaryOperatorKindNotEqual()
         {
             Assert.Equal("<>", BinaryOperatorKind.NotEqual.ToSqlOperator());
@@ -53,6 +65,24 @@
         public void ToSqlOperatorReturnsOrForBinaryOperatorKindOr()
         {
             Assert.Equal("OR", BinaryOperatorKind.Or.ToSqlOperator());
+        }
+
+        [Fact]
+        public void ToSqlOperatorReturnsPercentForBinaryOperatorKindModulo()
+        {
+            Assert.Equal("%", BinaryOperatorKind.Modulo.ToSqlOperator());
+        }
+
+        [Fact]
+        public void ToSqlOperatorReturnsPlusForBinaryOperatorKindAdd()
+        {
+            Assert.Equal("+", BinaryOperatorKind.Add.ToSqlOperator());
+        }
+
+        [Fact]
+        public void ToSqlOperatorReturnsStarForBinaryOperatorKindMultiply()
+        {
+            Assert.Equal("*", BinaryOperatorKind.Multiply.ToSqlOperator());
         }
 
         [Fact]
