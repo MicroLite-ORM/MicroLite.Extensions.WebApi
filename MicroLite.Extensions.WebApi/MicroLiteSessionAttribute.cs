@@ -91,7 +91,11 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionExecutedContext");
             }
 
+#if NET_4_0
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveSession;
+#else
+            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
+#endif
 
             if (controller != null)
             {
@@ -99,7 +103,11 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
+#if NET_4_0
             var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveReadOnlySession;
+#else
+            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
+#endif
 
             if (readOnlyController != null)
             {
@@ -119,28 +127,50 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionContext");
             }
 
+#if NET_4_0
             var controller = actionContext.ControllerContext.Controller as IHaveSession;
+#else
+            var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
+#endif
 
             if (controller != null)
             {
                 var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
 
+#if NET_4_0
                 controller.Session = sessionFactory.OpenSession();
+#else
+                controller.Session = sessionFactory.OpenAsyncSession();
+#endif
                 return;
             }
 
+#if NET_4_0
             var readOnlyController = actionContext.ControllerContext.Controller as IHaveReadOnlySession;
+#else
+            var readOnlyController = actionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
+#endif
 
             if (readOnlyController != null)
             {
                 var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
 
+#if NET_4_0
                 readOnlyController.Session = sessionFactory.OpenReadOnlySession();
+#else
+                readOnlyController.Session = sessionFactory.OpenAsyncReadOnlySession();
+#endif
                 return;
             }
         }
 
+#if NET_4_0
+
         private static void OnActionExecuted(IReadOnlySession session)
+#else
+
+        private static void OnActionExecuted(IAsyncReadOnlySession session)
+#endif
         {
             if (session != null)
             {

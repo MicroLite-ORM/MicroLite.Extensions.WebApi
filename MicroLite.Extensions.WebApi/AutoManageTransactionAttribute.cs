@@ -102,7 +102,11 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionExecutedContext");
             }
 
+#if NET_4_0
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveSession;
+#else
+            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
+#endif
 
             if (controller != null)
             {
@@ -110,7 +114,11 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
+#if NET_4_0
             var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveReadOnlySession;
+#else
+            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
+#endif
 
             if (readOnlyController != null)
             {
@@ -135,15 +143,22 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionContext");
             }
 
+#if NET_4_0
             var controller = actionContext.ControllerContext.Controller as IHaveSession;
-
+#else
+            var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
+#endif
             if (controller != null)
             {
                 controller.Session.BeginTransaction(this.IsolationLevel);
                 return;
             }
 
+#if NET_4_0
             var readOnlyController = actionContext.ControllerContext.Controller as IHaveReadOnlySession;
+#else
+            var readOnlyController = actionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
+#endif
 
             if (readOnlyController != null)
             {
@@ -152,7 +167,13 @@ namespace MicroLite.Extensions.WebApi
             }
         }
 
+#if NET_4_0
+
         private static void OnActionExecuted(IReadOnlySession session, Exception exception)
+#else
+
+        private static void OnActionExecuted(IAsyncReadOnlySession session, Exception exception)
+#endif
         {
             if (session.CurrentTransaction == null)
             {

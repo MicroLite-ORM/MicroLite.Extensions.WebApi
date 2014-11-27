@@ -49,25 +49,25 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 5, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 5, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheFourthQueryValue()
             {
-                Assert.Equal("%Hayes%", this.sqlQuery.Arguments[3]);
+                Assert.Equal("%Hayes%", this.sqlQuery.Arguments[3].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheSecondQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 6, 12), this.sqlQuery.Arguments[1]);
+                Assert.Equal(new DateTime(2013, 6, 12), this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheThirdQueryValue()
             {
-                Assert.Equal("A/0113334", this.sqlQuery.Arguments[2]);
+                Assert.Equal("A/0113334", this.sqlQuery.Arguments[2].Value);
             }
 
             [Fact]
@@ -104,19 +104,19 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0]);
+                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheSecondQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[1]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheThirdQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[2]);
+                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[2].Value);
             }
 
             [Fact]
@@ -153,19 +153,19 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0]);
+                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheSecondQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[1]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheThirdQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[2]);
+                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[2].Value);
             }
 
             [Fact]
@@ -202,13 +202,13 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheSecondQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[1]);
+                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
@@ -245,13 +245,13 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
             public void TheArgumentsShouldContainTheSecondQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[1]);
+                Assert.Equal(new DateTime(2013, 4, 30), this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
@@ -288,7 +288,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal(22, this.sqlQuery.Arguments[0]);
+                Assert.Equal(22, this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -325,7 +325,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal("%Bloggs", this.sqlQuery.Arguments[0]);
+                Assert.Equal("%Bloggs", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -362,7 +362,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0]);
+                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -431,7 +431,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -468,7 +468,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -505,7 +505,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -542,7 +542,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0]);
+                Assert.Equal(new DateTime(2013, 4, 1), this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -579,7 +579,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal(6, this.sqlQuery.Arguments[0]);
+                Assert.Equal(6, this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -616,7 +616,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0]);
+                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -685,19 +685,19 @@
             [Fact]
             public void ArgumentOneShouldBeTheReplacementValue()
             {
-                Assert.Equal("", this.sqlQuery.Arguments[1]);
+                Assert.Equal("", this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
             public void ArgumentTwoShouldBeTheValueToFind()
             {
-                Assert.Equal("JohnSmith", this.sqlQuery.Arguments[2]);
+                Assert.Equal("JohnSmith", this.sqlQuery.Arguments[2].Value);
             }
 
             [Fact]
             public void ArgumentZeroShouldBeTheValueToBeReplaced()
             {
-                Assert.Equal(" ", this.sqlQuery.Arguments[0]);
+                Assert.Equal(" ", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -734,7 +734,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal("Fred%", this.sqlQuery.Arguments[0]);
+                Assert.Equal("Fred%", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -771,7 +771,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal("%Bloggs%", this.sqlQuery.Arguments[0]);
+                Assert.Equal("%Bloggs%", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -808,19 +808,19 @@
             [Fact]
             public void ArgumentOneShouldBeTheValueToBeLength()
             {
-                Assert.Equal(2, this.sqlQuery.Arguments[1]);
+                Assert.Equal(2, this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
             public void ArgumentTwoShouldBeTheValueToFind()
             {
-                Assert.Equal("oh", this.sqlQuery.Arguments[2]);
+                Assert.Equal("oh", this.sqlQuery.Arguments[2].Value);
             }
 
             [Fact]
             public void ArgumentZeroShouldBeTheValueToBeStartIndex()
             {
-                Assert.Equal(1, this.sqlQuery.Arguments[0]);
+                Assert.Equal(1, this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -857,13 +857,13 @@
             [Fact]
             public void ArgumentOneShouldBeTheValueToFind()
             {
-                Assert.Equal("ohnSmith", this.sqlQuery.Arguments[1]);
+                Assert.Equal("ohnSmith", this.sqlQuery.Arguments[1].Value);
             }
 
             [Fact]
             public void ArgumentZeroShouldBeTheValueToBeStartIndex()
             {
-                Assert.Equal(1, this.sqlQuery.Arguments[0]);
+                Assert.Equal(1, this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -900,7 +900,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal("fred bloggs", this.sqlQuery.Arguments[0]);
+                Assert.Equal("fred bloggs", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -937,7 +937,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal("FRED BLOGGS", this.sqlQuery.Arguments[0]);
+                Assert.Equal("FRED BLOGGS", this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -974,7 +974,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheFirstQueryValue()
             {
-                Assert.Equal(1971, this.sqlQuery.Arguments[0]);
+                Assert.Equal(1971, this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]

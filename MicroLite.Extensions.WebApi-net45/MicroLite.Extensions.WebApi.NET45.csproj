@@ -50,7 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MicroLite">
-      <HintPath>..\packages\MicroLite.5.0.0\lib\net45\MicroLite.dll</HintPath>
+      <HintPath>..\packages\MicroLite.6.0.0-rc\lib\net45\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Net.Http.WebApi.OData">
       <HintPath>..\packages\Net.Http.WebApi.OData.2.2.1\lib\net45\Net.Http.WebApi.OData.dll</HintPath>

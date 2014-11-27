@@ -13,7 +13,11 @@
     {
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController
         {
+#if NET_4_0
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
+#else
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+#endif
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController()
             {
@@ -46,7 +50,11 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController
         {
+#if NET_4_0
             private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
+#else
+            private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
+#endif
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController()
             {
@@ -130,13 +138,21 @@
         public class WhenCallingOnActionExecuting_WithAMicroLiteApiController
         {
             private readonly Mock<MicroLiteApiController> mockController = new Mock<MicroLiteApiController>();
+#if NET_4_0
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
+#else
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+#endif
             private readonly Mock<ISessionFactory> mockSessionFactory = new Mock<ISessionFactory>();
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController()
             {
                 this.mockSessionFactory.Setup(x => x.ConnectionName).Returns("Northwind");
+#if NET_4_0
                 this.mockSessionFactory.Setup(x => x.OpenSession()).Returns(this.mockSession.Object);
+#else
+                this.mockSessionFactory.Setup(x => x.OpenAsyncSession()).Returns(this.mockSession.Object);
+#endif
 
                 MicroLiteSessionAttribute.SessionFactories = new[]
                 {
@@ -158,7 +174,11 @@
             [Fact]
             public void ASessionShouldBeOpened()
             {
+#if NET_4_0
                 this.mockSessionFactory.Verify(x => x.OpenSession(), Times.Once());
+#else
+                this.mockSessionFactory.Verify(x => x.OpenAsyncSession(), Times.Once());
+#endif
             }
 
             [Fact]
@@ -171,13 +191,21 @@
         public class WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController
         {
             private readonly Mock<MicroLiteReadOnlyApiController> mockController = new Mock<MicroLiteReadOnlyApiController>();
+#if NET_4_0
             private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
+#else
+            private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
+#endif
             private readonly Mock<ISessionFactory> mockSessionFactory = new Mock<ISessionFactory>();
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController()
             {
                 this.mockSessionFactory.Setup(x => x.ConnectionName).Returns("Northwind");
+#if NET_4_0
                 this.mockSessionFactory.Setup(x => x.OpenReadOnlySession()).Returns(this.mockSession.Object);
+#else
+                this.mockSessionFactory.Setup(x => x.OpenAsyncReadOnlySession()).Returns(this.mockSession.Object);
+#endif
 
                 MicroLiteSessionAttribute.SessionFactories = new[]
                 {
@@ -199,7 +227,11 @@
             [Fact]
             public void AReadOnlySessionShouldBeOpened()
             {
+#if NET_4_0
                 this.mockSessionFactory.Verify(x => x.OpenReadOnlySession(), Times.Once());
+#else
+                this.mockSessionFactory.Verify(x => x.OpenAsyncReadOnlySession(), Times.Once());
+#endif
             }
 
             [Fact]
