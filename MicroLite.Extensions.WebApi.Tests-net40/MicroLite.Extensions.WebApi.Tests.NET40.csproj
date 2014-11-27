@@ -122,6 +122,9 @@
     <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\CustomerStatus.cs">
       <Link>TestEntities\CustomerStatus.cs</Link>
     </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\Invoice.cs">
+      <Link>TestEntities\Invoice.cs</Link>
+    </Compile>
     <Compile Include="..\MicroLite.Extensions.WebApi.Tests\ValidateModelNotNullAttributeTests.cs">
       <Link>ValidateModelNotNullAttributeTests.cs</Link>
     </Compile>
