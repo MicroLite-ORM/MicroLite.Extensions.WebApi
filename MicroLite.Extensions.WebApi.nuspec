@@ -15,12 +15,12 @@
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
       <group targetFramework="net40">
-        <dependency id="MicroLite" version="6.0.0-rc" />
+        <dependency id="MicroLite" version="6.0.0" />
         <dependency id="Microsoft.AspNet.WebApi.Core" version="[4.0.20710.0,5.0)" />
         <dependency id="Net.Http.WebApi.OData" version="3.0.0" />
       </group>
       <group targetFramework="net45">
-        <dependency id="MicroLite" version="6.0.0-rc" />
+        <dependency id="MicroLite" version="6.0.0" />
         <dependency id="Microsoft.AspNet.WebApi.Core" version="5.0" />
         <dependency id="Net.Http.WebApi.OData" version="3.0.0" />
       </group>
