@@ -32,11 +32,12 @@
     <ProjectSummary>MicroLite.Extensions.WebApi</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="MicroLite.Configuration" isDocumented="True">Contains classes to extend the configuration of MicroLite ORM</NamespaceSummaryItem>
-<NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="MicroLite.Extensions.WebApi" isDocumented="True">The root namespace, contains the main interfaces and classes required to use MicroLite.Extensions.WebApi</NamespaceSummaryItem>
-<NamespaceSummaryItem name="MicroLite.Extensions.WebApi.OData" isDocumented="True">Contains classes and interfaces required to add OData support</NamespaceSummaryItem>
-<NamespaceSummaryItem name="MicroLite.Extensions.WebApi.OData.Binders" isDocumented="True">Contains the classes used to bind an OData query to a MicroLite SqlQuery</NamespaceSummaryItem></NamespaceSummaries>
-    <BuildAssemblerVerbosity>AllMessages</BuildAssemblerVerbosity>
+      <NamespaceSummaryItem name="(global)" isDocumented="False" />
+      <NamespaceSummaryItem name="MicroLite.Extensions.WebApi" isDocumented="True">The root namespace, contains the main interfaces and classes required to use MicroLite.Extensions.WebApi</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="MicroLite.Extensions.WebApi.OData" isDocumented="True">Contains classes and interfaces required to add OData support</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="MicroLite.Extensions.WebApi.OData.Binders" isDocumented="True">Contains the classes used to bind an OData query to a MicroLite SqlQuery</NamespaceSummaryItem>
+    </NamespaceSummaries>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <MissingTags>None</MissingTags>
     <NamingMethod>MemberName</NamingMethod>
     <IndentHtml>False</IndentHtml>
