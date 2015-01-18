@@ -37,63 +37,93 @@
             private readonly CustomerController controller = new CustomerController();
 
             [Fact]
+            public void AllArithmeticOperatorsAreAllowed()
+            {
+                Assert.Equal(AllowedArithmeticOperators.All, controller.ValidationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.All);
+            }
+
+            [Fact]
+            public void AllLogicalOperatorsAreAllowed()
+            {
+                Assert.Equal(AllowedLogicalOperators.All, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.All);
+            }
+
+            [Fact]
+            public void TrimFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
+            }
+
+            [Fact]
+            public void ConcatFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(AllowedFunctions.Concat, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Concat);
+            }
+
+            [Fact]
+            public void LengthFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(AllowedFunctions.Length, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Length);
+            }
+
+            [Fact]
             public void CeilingFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling, AllowedFunctions.Ceiling);
+                Assert.NotEqual(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
             }
 
             [Fact]
             public void DayFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Day, AllowedFunctions.Day);
+                Assert.Equal(AllowedFunctions.Day, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Day);
             }
 
             [Fact]
             public void EndsWithFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.EndsWith, AllowedFunctions.EndsWith);
+                Assert.Equal(AllowedFunctions.EndsWith, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.EndsWith);
             }
 
             [Fact]
             public void ExpandQueryOptionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Expand, AllowedQueryOptions.Expand);
+                Assert.NotEqual(AllowedQueryOptions.Expand, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Expand);
             }
 
             [Fact]
             public void FilterQueryOptionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter, AllowedQueryOptions.Filter);
+                Assert.Equal(AllowedQueryOptions.Filter, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Filter);
             }
 
             [Fact]
             public void FloorFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Floor, AllowedFunctions.Floor);
+                Assert.NotEqual(AllowedFunctions.Floor, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Floor);
             }
 
             [Fact]
             public void FormatCountQueryOptionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Format, AllowedQueryOptions.Format);
+                Assert.Equal(AllowedQueryOptions.Format, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Format);
             }
 
             [Fact]
             public void HourFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Hour, AllowedFunctions.Hour);
+                Assert.NotEqual(AllowedFunctions.Hour, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Hour);
             }
 
             [Fact]
             public void IndexOfFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.IndexOf, AllowedFunctions.IndexOf);
+                Assert.NotEqual(AllowedFunctions.IndexOf, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.IndexOf);
             }
 
             [Fact]
             public void InlineCountQueryOptionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount, AllowedQueryOptions.InlineCount);
+                Assert.Equal(AllowedQueryOptions.InlineCount, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount);
             }
 
             [Fact]
@@ -105,79 +135,79 @@
             [Fact]
             public void MinuteFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Minute, AllowedFunctions.Minute);
+                Assert.NotEqual(AllowedFunctions.Minute, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Minute);
             }
 
             [Fact]
             public void MonthFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Month, AllowedFunctions.Month);
+                Assert.Equal(AllowedFunctions.Month, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Month);
             }
 
             [Fact]
             public void OrderByQueryOptionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy, AllowedQueryOptions.OrderBy);
+                Assert.Equal(AllowedQueryOptions.OrderBy, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.OrderBy);
             }
 
             [Fact]
             public void ReplaceFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Replace, AllowedFunctions.Replace);
+                Assert.Equal(AllowedFunctions.Replace, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Replace);
             }
 
             [Fact]
             public void RoundFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Round, AllowedFunctions.Round);
+                Assert.NotEqual(AllowedFunctions.Round, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Round);
             }
 
             [Fact]
             public void SecondFunctionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Second, AllowedFunctions.Second);
+                Assert.NotEqual(AllowedFunctions.Second, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Second);
             }
 
             [Fact]
             public void SelectQueryOptionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Select, AllowedQueryOptions.Select);
+                Assert.Equal(AllowedQueryOptions.Select, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Select);
             }
 
             [Fact]
             public void SkipQueryOptionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip, AllowedQueryOptions.Skip);
+                Assert.Equal(AllowedQueryOptions.Skip, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Skip);
             }
 
             [Fact]
             public void SkipTokenQueryOptionIsNotAllowed()
             {
-                Assert.NotEqual(controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.SkipToken, AllowedQueryOptions.SkipToken);
+                Assert.NotEqual(AllowedQueryOptions.SkipToken, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.SkipToken);
             }
 
             [Fact]
             public void StartsWithFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.StartsWith, AllowedFunctions.StartsWith);
+                Assert.Equal(AllowedFunctions.StartsWith, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.StartsWith);
             }
 
             [Fact]
             public void SubstringFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Substring, AllowedFunctions.Substring);
+                Assert.Equal(AllowedFunctions.Substring, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Substring);
             }
 
             [Fact]
             public void SubstringOfFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.SubstringOf, AllowedFunctions.SubstringOf);
+                Assert.Equal(AllowedFunctions.SubstringOf, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.SubstringOf);
             }
 
             [Fact]
             public void ToLowerFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToLower, AllowedFunctions.ToLower);
+                Assert.Equal(AllowedFunctions.ToLower, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToLower);
             }
 
             [Fact]
@@ -189,13 +219,13 @@
             [Fact]
             public void ToUpperFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToUpper, AllowedFunctions.ToUpper);
+                Assert.Equal(AllowedFunctions.ToUpper, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.ToUpper);
             }
 
             [Fact]
             public void YearFunctionIsAllowed()
             {
-                Assert.Equal(controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year, AllowedFunctions.Year);
+                Assert.Equal(AllowedFunctions.Year, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year);
             }
         }
 
