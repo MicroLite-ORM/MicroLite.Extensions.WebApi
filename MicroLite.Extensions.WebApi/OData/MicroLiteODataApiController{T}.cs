@@ -16,6 +16,7 @@ namespace MicroLite.Extensions.WebApi.OData
     using System.Net;
     using System.Net.Http;
     using MicroLite.Extensions.WebApi.OData.Binders;
+    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
 

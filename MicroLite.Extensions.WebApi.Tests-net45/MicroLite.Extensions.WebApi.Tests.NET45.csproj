@@ -49,9 +49,9 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Net.Http.WebApi.OData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+    <Reference Include="Net.Http.WebApi.OData, Version=3.1.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Net.Http.WebApi.OData.3.0.0\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+      <HintPath>..\packages\Net.Http.WebApi.OData.3.1.0-beta2\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -104,8 +104,8 @@
     <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\SelectBinderTests.cs">
       <Link>OData\Binders\SelectBinderTests.cs</Link>
     </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\InlineCountCollectionTests.cs">
-      <Link>OData\InlineCountCollectionTests.cs</Link>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\Binders\UnaryOperatorKindExtensionsTests.cs">
+      <Link>OData\Binders\UnaryOperatorKindExtensionsTests.cs</Link>
     </Compile>
     <Compile Include="..\MicroLite.Extensions.WebApi.Tests\OData\MicroLiteODataApiControllerTests.cs">
       <Link>OData\MicroLiteODataApiControllerTests.cs</Link>

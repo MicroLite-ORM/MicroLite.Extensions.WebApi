@@ -17,9 +17,9 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
     internal static class BinaryOperatorKindExtensions
     {
-        internal static string ToSqlOperator(this BinaryOperatorKind binaryOperator)
+        internal static string ToSqlOperator(this BinaryOperatorKind binaryOperatorKind)
         {
-            switch (binaryOperator)
+            switch (binaryOperatorKind)
             {
                 case BinaryOperatorKind.Add:
                     return "+";
@@ -61,7 +61,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     return "-";
 
                 default:
-                    throw new ODataException("The operator '" + binaryOperator.ToString() + "' is not supported");
+                    throw new ODataException("The operator '" + binaryOperatorKind.ToString() + "' is not supported");
             }
         }
     }

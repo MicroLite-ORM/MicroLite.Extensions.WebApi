@@ -26,8 +26,18 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     /// <summary>
     /// The binder class which can append the $filter by query option.
     /// </summary>
-    public static class FilterBinder
+    public sealed class FilterBinder : AbstractFilterBinder
     {
+        private static readonly string[] ParameterisedFunctions = new[] { "startswith", "endswith", "substringof" };
+        private readonly IObjectInfo objectInfo;
+        private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
+        private readonly SqlCharacters sqlCharacters = SqlCharacters.Current;
+
+        private FilterBinder(IObjectInfo objectInfo)
+        {
+            this.objectInfo = objectInfo;
+        }
+
         /// <summary>
         /// Binds the filter query option to the sql builder.
         /// </summary>
@@ -49,181 +59,160 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             if (filterQuery != null)
             {
-                var filterBinder = new FilterBinderImpl(objectInfo);
+                var filterBinder = new FilterBinder(objectInfo);
                 filterBinder.BindFilter(filterQuery, selectFromSqlBuilder);
             }
 
             return selectFromSqlBuilder;
         }
 
-        private sealed class FilterBinderImpl
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" />.
+        /// </summary>
+        /// <param name="binaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" /> to bind.</param>
+        protected override void BindBinaryOperatorNode(BinaryOperatorNode binaryOperatorNode)
         {
-            private static readonly string[] ParameterisedFunctions = new[] { "startswith", "endswith", "substringof" };
-            private readonly IObjectInfo objectInfo;
-            private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
-            private readonly SqlCharacters sqlCharacters = SqlCharacters.Current;
+            this.predicateBuilder.Append("(");
 
-            internal FilterBinderImpl(IObjectInfo objectInfo)
+            this.Bind(binaryOperatorNode.Left);
+
+            if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall
+                || (binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall && !ParameterisedFunctions.Contains(((SingleValueFunctionCallNode)binaryOperatorNode.Left).Name)))
             {
-                this.objectInfo = objectInfo;
-            }
-
-            internal IAndOrOrderBy BindFilter(FilterQueryOption filterQuery, IWhereOrOrderBy selectFromSqlBuilder)
-            {
-                this.BindFilter(filterQuery);
-
-                var where = this.predicateBuilder.ApplyTo(selectFromSqlBuilder);
-
-                return where;
-            }
-
-            private void Bind(QueryNode node)
-            {
-                var singleValueNode = node as SingleValueNode;
-
-                if (singleValueNode == null)
+                if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
+                    && ((ConstantNode)binaryOperatorNode.Right).Value == null)
                 {
-                    throw new NotSupportedException();
-                }
-
-                switch (node.Kind)
-                {
-                    case QueryNodeKind.BinaryOperator:
-                        this.BindBinaryOperatorNode(node as BinaryOperatorNode);
-                        break;
-
-                    case QueryNodeKind.Constant:
-                        this.BindConstantNode(node as ConstantNode);
-                        break;
-
-                    case QueryNodeKind.SingleValuePropertyAccess:
-                        this.BindPropertyAccessQueryNode(node as SingleValuePropertyAccessNode);
-                        break;
-
-                    case QueryNodeKind.SingleValueFunctionCall:
-                        this.BindSingleValueFunctionCallNode(node as SingleValueFunctionCallNode);
-                        break;
-
-                    default:
-                        throw new NotSupportedException("Nodes of type '" + node.Kind + "' are not supported");
-                }
-            }
-
-            private void BindBinaryOperatorNode(BinaryOperatorNode binaryOperatorNode)
-            {
-                this.predicateBuilder.Append("(");
-
-                this.Bind(binaryOperatorNode.Left);
-
-                if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall
-                    || (binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall && !ParameterisedFunctions.Contains(((SingleValueFunctionCallNode)binaryOperatorNode.Left).Name)))
-                {
-                    if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                        && ((ConstantNode)binaryOperatorNode.Right).Value == null)
+                    if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
                     {
-                        if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
-                        {
-                            this.predicateBuilder.Append(" IS ");
-                        }
-                        else if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.NotEqual)
-                        {
-                            this.predicateBuilder.Append(" IS NOT ");
-                        }
+                        this.predicateBuilder.Append(" IS ");
                     }
-                    else
+                    else if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.NotEqual)
                     {
-                        this.predicateBuilder.Append(" " + binaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
+                        this.predicateBuilder.Append(" IS NOT ");
                     }
-
-                    this.Bind(binaryOperatorNode.Right);
-                }
-
-                this.predicateBuilder.Append(")");
-            }
-
-            private void BindConstantNode(ConstantNode constantNode)
-            {
-                if (constantNode.Value == null)
-                {
-                    this.predicateBuilder.Append("NULL");
                 }
                 else
                 {
-                    this.predicateBuilder.Append(this.sqlCharacters.GetParameterName(0), constantNode.Value);
-                }
-            }
-
-            private void BindFilter(FilterQueryOption filterQuery)
-            {
-                this.Bind(filterQuery.Expression);
-            }
-
-            private void BindPropertyAccessQueryNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
-            {
-                var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
-
-                if (column == null)
-                {
-                    throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, this.objectInfo.ForType.Name, singleValuePropertyAccessNode.PropertyName));
+                    this.predicateBuilder.Append(" " + binaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
                 }
 
-                this.predicateBuilder.Append(column.ColumnName);
+                this.Bind(binaryOperatorNode.Right);
             }
 
-            private void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode)
+            this.predicateBuilder.Append(")");
+        }
+
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" />.
+        /// </summary>
+        /// <param name="constantNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" /> to bind.</param>
+        protected override void BindConstantNode(ConstantNode constantNode)
+        {
+            if (constantNode.Value == null)
             {
-                var arguments = singleValueFunctionCallNode.Arguments;
+                this.predicateBuilder.Append("NULL");
+            }
+            else
+            {
+                this.predicateBuilder.Append(this.sqlCharacters.GetParameterName(0), constantNode.Value);
+            }
+        }
 
-                switch (singleValueFunctionCallNode.Name)
-                {
-                    case "endswith":
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[1]).LiteralText);
-                        break;
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" />.
+        /// </summary>
+        /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
+        protected override void BindPropertyAccessQueryNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
+        {
+            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
 
-                    case "startswith":
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[1]).LiteralText + this.sqlCharacters.LikeWildcard);
-                        break;
+            if (column == null)
+            {
+                throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, this.objectInfo.ForType.Name, singleValuePropertyAccessNode.PropertyName));
+            }
 
-                    case "substringof":
-                        this.Bind(arguments[1]);
-                        this.predicateBuilder.Append(" LIKE " + this.sqlCharacters.GetParameterName(0), this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).LiteralText + this.sqlCharacters.LikeWildcard);
-                        break;
+            this.predicateBuilder.Append(column.ColumnName);
+        }
 
-                    case "toupper":
-                    case "tolower":
-                        this.predicateBuilder.Append(singleValueFunctionCallNode.Name.Substring(2).ToUpperInvariant() + "(");
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(")");
-                        break;
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" />.
+        /// </summary>
+        /// <param name="singleValueFunctionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" /> to bind.</param>
+        protected override void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode)
+        {
+            var arguments = singleValueFunctionCallNode.Arguments;
 
-                    case "year":
-                    case "month":
-                    case "day":
-                        this.predicateBuilder.Append(singleValueFunctionCallNode.Name.ToUpperInvariant() + "(");
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(")");
-                        break;
+            switch (singleValueFunctionCallNode.Name)
+            {
+                case "day":
+                case "month":
+                case "replace":
+                case "substring":
+                case "tolower":
+                case "toupper":
+                case "year":
+                    var name = singleValueFunctionCallNode.Name.StartsWith("to", StringComparison.Ordinal)
+                        ? singleValueFunctionCallNode.Name.Substring(2)
+                        : singleValueFunctionCallNode.Name;
 
-                    case "replace":
-                    case "substring":
-                        this.predicateBuilder.Append(singleValueFunctionCallNode.Name.ToUpperInvariant() + "(");
-                        this.Bind(arguments[0]);
-                        this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[1]).Value);
+                    this.predicateBuilder.Append(name.ToUpperInvariant() + "(");
 
-                        if (arguments.Count > 2)
+                    for (int i = 0; i < arguments.Count; i++)
+                    {
+                        this.Bind(arguments[i]);
+
+                        if (i < arguments.Count - 1)
                         {
-                            this.predicateBuilder.Append(", " + this.sqlCharacters.GetParameterName(0), ((ConstantNode)arguments[2]).Value);
+                            this.predicateBuilder.Append(", ");
                         }
+                    }
 
-                        this.predicateBuilder.Append(")");
-                        break;
+                    this.predicateBuilder.Append(")");
+                    break;
 
-                    default:
-                        throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
-                }
+                case "endswith":
+                    this.Bind(arguments[0]);
+                    this.predicateBuilder.Append(
+                        " LIKE " + this.sqlCharacters.GetParameterName(0),
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[1]).LiteralText);
+                    break;
+
+                case "startswith":
+                    this.Bind(arguments[0]);
+                    this.predicateBuilder.Append(
+                        " LIKE " + this.sqlCharacters.GetParameterName(0),
+                        ((ConstantNode)arguments[1]).LiteralText + this.sqlCharacters.LikeWildcard);
+                    break;
+
+                case "substringof":
+                    this.Bind(arguments[1]);
+                    this.predicateBuilder.Append(
+                        " LIKE " + this.sqlCharacters.GetParameterName(0),
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).LiteralText + this.sqlCharacters.LikeWildcard);
+                    break;
+
+                default:
+                    throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
             }
+        }
+
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" />.
+        /// </summary>
+        /// <param name="unaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" /> to bind.</param>
+        protected override void BindUnaryOperator(UnaryOperatorNode unaryOperatorNode)
+        {
+            this.predicateBuilder.Append(unaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
+            this.Bind(unaryOperatorNode.Operand);
+        }
+
+        private IAndOrOrderBy BindFilter(FilterQueryOption filterQuery, IWhereOrOrderBy selectFromSqlBuilder)
+        {
+            this.Bind(filterQuery.Expression);
+
+            var where = this.predicateBuilder.ApplyTo(selectFromSqlBuilder);
+
+            return where;
         }
     }
 }

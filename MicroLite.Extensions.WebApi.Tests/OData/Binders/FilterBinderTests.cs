@@ -75,7 +75,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Created >= ?) AND ((Created <= ?) AND ((Reference = ?) AND (Name LIKE ?))))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "%Hayes")
+                    .Where("((((Created >= ?) AND (Created <= ?)) AND (Reference = ?)) AND (Name LIKE ?))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "%Hayes")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -124,7 +124,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Name = ?) AND ((Created > ?) AND (Created < ?)))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
+                    .Where("(((Name = ?) AND (Created > ?)) AND (Created < ?))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -173,7 +173,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((Name = ?) AND ((Created > ?) OR (Created < ?)))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
+                    .Where("(((Name = ?) AND (Created > ?)) OR (Created < ?))", "Fred Bloggs", new DateTime(2013, 4, 1), new DateTime(2013, 4, 30))
                     .ToSqlQuery()
                     .CommandText;
 
@@ -315,6 +315,43 @@
             private readonly SqlQuery sqlQuery;
 
             public WhenCallingBindFilterQueryOptionWithASinglePropertyEndsWith()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=endswith(Name, 'Bloggs')"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheQueryValue()
+            {
+                Assert.Equal("%Bloggs", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("Name LIKE ?", "%Bloggs")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe1ArgumentValue()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyEndsWithEqTrue
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyEndsWithEqTrue()
             {
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=endswith(Name, 'Bloggs') eq true"));
@@ -726,6 +763,43 @@
             public WhenCallingBindFilterQueryOptionWithASinglePropertyStartsWith()
             {
                 var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=startswith(Name, 'Fred')"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheQueryValue()
+            {
+                Assert.Equal("Fred%", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("Name LIKE ?", "Fred%")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe1ArgumentValue()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyStartsWithEqTrue
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyStartsWithEqTrue()
+            {
+                var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=startswith(Name, 'Fred') eq true"));
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -763,7 +837,7 @@
             public WhenCallingBindFilterQueryOptionWithASinglePropertySubStringOf()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=substringof(Name, 'Bloggs') eq true"));
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=substringof('Bloggs', Name) eq true"));
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -983,6 +1057,43 @@
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
                     .Where("(YEAR(DateOfBirth) = ?)", 1971)
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe1ArgumentValue()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithNotSinglePropertyEqual
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithNotSinglePropertyEqual()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=not Name eq 'Fred Bloggs'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheQueryValue()
+            {
+                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("NOT (Name = ?)", "Fred Bloggs")
                     .ToSqlQuery()
                     .CommandText;
 

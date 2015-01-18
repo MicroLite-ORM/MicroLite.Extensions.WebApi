@@ -53,9 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MicroLite.6.1.0\lib\net45\MicroLite.dll</HintPath>
     </Reference>
-    <Reference Include="Net.Http.WebApi.OData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+    <Reference Include="Net.Http.WebApi.OData, Version=3.1.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Net.Http.WebApi.OData.3.0.0\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+      <HintPath>..\packages\Net.Http.WebApi.OData.3.1.0-beta2\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -112,8 +112,8 @@
     <Compile Include="..\MicroLite.Extensions.WebApi\OData\Binders\SelectBinder.cs">
       <Link>OData\Binders\SelectBinder.cs</Link>
     </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi\OData\InlineCountCollection{T}.cs">
-      <Link>OData\InlineCountCollection{T}.cs</Link>
+    <Compile Include="..\MicroLite.Extensions.WebApi\OData\Binders\UnaryOperatorKindExtensions.cs">
+      <Link>OData\Binders\UnaryOperatorKindExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MicroLite.Extensions.WebApi\OData\MicroLiteODataApiController{T}.cs">
       <Link>OData\MicroLiteODataApiController{T}.cs</Link>
