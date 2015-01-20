@@ -64,6 +64,7 @@ namespace MicroLite.Extensions.WebApi.OData
                     | AllowedFunctions.SubstringOf
                     | AllowedFunctions.ToLower
                     | AllowedFunctions.ToUpper
+                    | AllowedFunctions.Trim
                     | AllowedFunctions.Year,
                 AllowedLogicalOperators = AllowedLogicalOperators.All,
                 AllowedQueryOptions = AllowedQueryOptions.Filter

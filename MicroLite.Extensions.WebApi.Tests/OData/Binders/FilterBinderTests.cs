@@ -1033,6 +1033,43 @@
             }
         }
 
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyTrim
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyTrim()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=trim(Name) eq 'FRED BLOGGS'"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal("FRED BLOGGS", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(LTRIM(RTRIM(Name)) = ?)", "FRED BLOGGS")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe1ArgumentValue()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments.Count);
+            }
+        }
+
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyYear
         {
             private readonly SqlQuery sqlQuery;

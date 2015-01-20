@@ -49,9 +49,9 @@
             }
 
             [Fact]
-            public void TrimFunctionIsNotAllowed()
+            public void TrimFunctionIsAllowed()
             {
-                Assert.NotEqual(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
+                Assert.Equal(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
             }
 
             [Fact]

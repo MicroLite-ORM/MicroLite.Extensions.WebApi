@@ -191,6 +191,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).LiteralText + this.sqlCharacters.LikeWildcard);
                     break;
 
+                case "trim":
+                    this.predicateBuilder.Append("LTRIM(RTRIM(");
+                    this.Bind(arguments[0]);
+                    this.predicateBuilder.Append("))");
+                    break;
+
                 default:
                     throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
             }
