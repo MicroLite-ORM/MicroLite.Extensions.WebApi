@@ -72,6 +72,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="binaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" /> to bind.</param>
         protected override void BindBinaryOperatorNode(BinaryOperatorNode binaryOperatorNode)
         {
+            if (binaryOperatorNode == null)
+            {
+                throw new ArgumentNullException("binaryOperatorNode");
+            }
+
             this.predicateBuilder.Append("(");
 
             this.Bind(binaryOperatorNode.Left);
@@ -108,6 +113,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="constantNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" /> to bind.</param>
         protected override void BindConstantNode(ConstantNode constantNode)
         {
+            if (constantNode == null)
+            {
+                throw new ArgumentNullException("constantNode");
+            }
+
             if (constantNode.Value == null)
             {
                 this.predicateBuilder.Append("NULL");
@@ -124,6 +134,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="singleValueFunctionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" /> to bind.</param>
         protected override void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode)
         {
+            if (singleValueFunctionCallNode == null)
+            {
+                throw new ArgumentNullException("singleValueFunctionCallNode");
+            }
+
             var arguments = singleValueFunctionCallNode.Arguments;
 
             switch (singleValueFunctionCallNode.Name)
@@ -195,6 +210,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
         protected override void BindSingleValuePropertyAccessNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
         {
+            if (singleValuePropertyAccessNode == null)
+            {
+                throw new ArgumentNullException("singleValuePropertyAccessNode");
+            }
+
             var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
 
             if (column == null)
@@ -211,6 +231,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="unaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" /> to bind.</param>
         protected override void BindUnaryOperatorNode(UnaryOperatorNode unaryOperatorNode)
         {
+            if (unaryOperatorNode == null)
+            {
+                throw new ArgumentNullException("unaryOperatorNode");
+            }
+
             this.predicateBuilder.Append(unaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
             this.Bind(unaryOperatorNode.Operand);
         }
