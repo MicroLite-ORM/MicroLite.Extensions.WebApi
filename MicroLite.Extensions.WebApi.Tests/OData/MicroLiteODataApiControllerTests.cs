@@ -67,9 +67,9 @@
             }
 
             [Fact]
-            public void CeilingFunctionIsNotAllowed()
+            public void CeilingFunctionIsAllowed()
             {
-                Assert.NotEqual(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
+                Assert.Equal(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
             }
 
             [Fact]

@@ -55,7 +55,8 @@ namespace MicroLite.Extensions.WebApi.OData
             this.ValidationSettings = new ODataValidationSettings
             {
                 AllowedArithmeticOperators = AllowedArithmeticOperators.All,
-                AllowedFunctions = AllowedFunctions.Day
+                AllowedFunctions = AllowedFunctions.Ceiling
+                    | AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
                     | AllowedFunctions.Month
                     | AllowedFunctions.Replace

@@ -144,6 +144,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             switch (singleValueFunctionCallNode.Name)
             {
+                case "ceiling":
                 case "day":
                 case "month":
                 case "replace":
