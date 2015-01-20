@@ -157,9 +157,9 @@
             }
 
             [Fact]
-            public void RoundFunctionIsNotAllowed()
+            public void RoundFunctionIsAllowed()
             {
-                Assert.NotEqual(AllowedFunctions.Round, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Round);
+                Assert.Equal(AllowedFunctions.Round, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Round);
             }
 
             [Fact]
