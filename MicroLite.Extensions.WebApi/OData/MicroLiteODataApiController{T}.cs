@@ -58,6 +58,7 @@ namespace MicroLite.Extensions.WebApi.OData
                 AllowedFunctions = AllowedFunctions.Ceiling
                     | AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
+                    | AllowedFunctions.Floor
                     | AllowedFunctions.Month
                     | AllowedFunctions.Replace
                     | AllowedFunctions.StartsWith

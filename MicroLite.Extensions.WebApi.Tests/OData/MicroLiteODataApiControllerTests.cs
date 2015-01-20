@@ -97,9 +97,9 @@
             }
 
             [Fact]
-            public void FloorFunctionIsNotAllowed()
+            public void FloorFunctionIsAllowed()
             {
-                Assert.NotEqual(AllowedFunctions.Floor, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Floor);
+                Assert.Equal(AllowedFunctions.Floor, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Floor);
             }
 
             [Fact]
