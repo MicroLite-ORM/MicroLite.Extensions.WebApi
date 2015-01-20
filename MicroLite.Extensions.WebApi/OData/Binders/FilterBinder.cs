@@ -119,22 +119,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         }
 
         /// <summary>
-        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" />.
-        /// </summary>
-        /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
-        protected override void BindPropertyAccessQueryNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
-        {
-            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
-
-            if (column == null)
-            {
-                throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, this.objectInfo.ForType.Name, singleValuePropertyAccessNode.PropertyName));
-            }
-
-            this.predicateBuilder.Append(column.ColumnName);
-        }
-
-        /// <summary>
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" />.
         /// </summary>
         /// <param name="singleValueFunctionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" /> to bind.</param>
@@ -206,10 +190,26 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         }
 
         /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" />.
+        /// </summary>
+        /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
+        protected override void BindSingleValuePropertyAccessNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
+        {
+            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
+
+            if (column == null)
+            {
+                throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, this.objectInfo.ForType.Name, singleValuePropertyAccessNode.PropertyName));
+            }
+
+            this.predicateBuilder.Append(column.ColumnName);
+        }
+
+        /// <summary>
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" />.
         /// </summary>
         /// <param name="unaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" /> to bind.</param>
-        protected override void BindUnaryOperator(UnaryOperatorNode unaryOperatorNode)
+        protected override void BindUnaryOperatorNode(UnaryOperatorNode unaryOperatorNode)
         {
             this.predicateBuilder.Append(unaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
             this.Bind(unaryOperatorNode.Operand);
