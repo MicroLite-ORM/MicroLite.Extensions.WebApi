@@ -53,9 +53,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MicroLite.6.1.0\lib\net45\MicroLite.dll</HintPath>
     </Reference>
-    <Reference Include="Net.Http.WebApi.OData, Version=3.1.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Net.Http.WebApi.OData.3.1.0-beta3\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+    <Reference Include="Net.Http.WebApi.OData">
+      <HintPath>..\packages\Net.Http.WebApi.OData.3.1.0\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
