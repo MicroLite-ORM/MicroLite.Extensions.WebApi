@@ -1,6 +1,8 @@
 MicroLite.Extensions.WebApi
 ===========================
 
+[![NuGet version](https://badge.fury.io/nu/MicroLite.Extensions.WebApi.svg)](http://badge.fury.io/nu/MicroLite.Extensions.WebApi)
+
 _MicroLite.Extensions.WebApi_ is an extension to the MicroLite ORM Framework which allows integration with ASP.NET WebApi.
 
 It is easy to use MicroLite with ASP.NET WebApi, simply supply your controller with an (`IAsyncSession` or `IAsyncReadOnlySession` .NET 4.5 + WebApi 2) / (`ISession` or `IReadOnlySession` .NET 4.0 + WebApi) and use it in your controller actions. However, using the WebApi extension for MicroLite makes it even easier and contains some useful extras.
