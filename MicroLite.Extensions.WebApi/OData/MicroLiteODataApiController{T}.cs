@@ -135,7 +135,7 @@ namespace MicroLite.Extensions.WebApi.OData
 
             if (queryOptions.InlineCount != null && queryOptions.InlineCount.InlineCount == InlineCount.AllPages)
             {
-                response = this.Request.CreateResponse(HttpStatusCode.OK, new InlineCountCollection<dynamic>(paged.Results, paged.TotalResults));
+                response = this.Request.CreateResponse(HttpStatusCode.OK, new InlineCount<dynamic>(paged.Results, paged.TotalResults));
             }
             else
             {

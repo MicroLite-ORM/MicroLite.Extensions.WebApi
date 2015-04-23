@@ -423,9 +423,9 @@
             }
 
             [Fact]
-            public void TheResponseIsAnInlineCountCollection()
+            public void TheResponseIsAnInlineCount()
             {
-                Assert.IsType<InlineCountCollection<dynamic>>(((ObjectContent)this.response.Content).Value);
+                Assert.IsType<InlineCount<dynamic>>(((ObjectContent)this.response.Content).Value);
             }
         }
 
