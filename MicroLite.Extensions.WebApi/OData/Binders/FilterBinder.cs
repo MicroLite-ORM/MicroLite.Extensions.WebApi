@@ -176,21 +176,21 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     this.Bind(arguments[0]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[1]).LiteralText);
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[1]).Value);
                     break;
 
                 case "startswith":
                     this.Bind(arguments[0]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        ((ConstantNode)arguments[1]).LiteralText + this.sqlCharacters.LikeWildcard);
+                        ((ConstantNode)arguments[1]).Value + this.sqlCharacters.LikeWildcard);
                     break;
 
                 case "substringof":
                     this.Bind(arguments[1]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).LiteralText + this.sqlCharacters.LikeWildcard);
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).Value + this.sqlCharacters.LikeWildcard);
                     break;
 
                 case "trim":
