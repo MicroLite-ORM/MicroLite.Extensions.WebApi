@@ -183,9 +183,9 @@
             public WhenCallingPost()
             {
 #if NET_4_0
-                this.mockSession.Setup(x => x.Insert(It.IsAny<object>()))
+                this.mockSession.Setup(x => x.Insert(It.IsNotNull<Customer>()))
 #else
-                this.mockSession.Setup(x => x.InsertAsync(It.IsAny<object>())).Returns(System.Threading.Tasks.Task.FromResult(0))
+                this.mockSession.Setup(x => x.InsertAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(0))
 #endif
 .Callback((object o) =>
                     {
@@ -279,10 +279,10 @@
             {
 #if NET_4_0
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
-                this.mockSession.Setup(x => x.Update(It.IsAny<object>())).Returns(false);
+                this.mockSession.Setup(x => x.Update(It.IsNotNull<Customer>())).Returns(false);
 #else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
-                this.mockSession.Setup(x => x.UpdateAsync(It.IsAny<object>())).Returns(System.Threading.Tasks.Task.FromResult(false));
+                this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(false));
 #endif
 
                 this.controller.Request = new HttpRequestMessage();
@@ -328,10 +328,10 @@
             {
 #if NET_4_0
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
-                this.mockSession.Setup(x => x.Update(It.IsAny<object>())).Returns(true);
+                this.mockSession.Setup(x => x.Update(It.IsNotNull<Customer>())).Returns(true);
 #else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
-                this.mockSession.Setup(x => x.UpdateAsync(It.IsAny<object>())).Returns(System.Threading.Tasks.Task.FromResult(true));
+                this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(true));
 #endif
 
                 this.controller.Request = new HttpRequestMessage();

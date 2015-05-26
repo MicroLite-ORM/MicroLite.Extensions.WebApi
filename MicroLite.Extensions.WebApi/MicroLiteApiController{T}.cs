@@ -204,7 +204,7 @@ namespace MicroLite.Extensions.WebApi
 #if NET_4_0
                 var updated = this.Session.Update(entity);
 #else
-                var updated = await this.Session.UpdateAsync(id);
+                var updated = await this.Session.UpdateAsync(entity);
 #endif
 
                 if (!updated)
