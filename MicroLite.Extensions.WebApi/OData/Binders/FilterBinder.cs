@@ -85,7 +85,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 || (binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall && !ParameterisedFunctions.Contains(((SingleValueFunctionCallNode)binaryOperatorNode.Left).Name)))
             {
                 if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                    && ((ConstantNode)binaryOperatorNode.Right).Value == null)
+                    && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmType.Null)
                 {
                     if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
                     {
@@ -118,7 +118,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException("constantNode");
             }
 
-            if (constantNode.Value == null)
+            if (constantNode.EdmType == EdmType.Null)
             {
                 this.predicateBuilder.Append("NULL");
             }
@@ -139,7 +139,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException("singleValueFunctionCallNode");
             }
 
-            var arguments = singleValueFunctionCallNode.Arguments;
+            var parameters = singleValueFunctionCallNode.Parameters;
 
             switch (singleValueFunctionCallNode.Name)
             {
@@ -159,11 +159,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
                     this.predicateBuilder.Append(name.ToUpperInvariant() + "(");
 
-                    for (int i = 0; i < arguments.Count; i++)
+                    for (int i = 0; i < parameters.Count; i++)
                     {
-                        this.Bind(arguments[i]);
+                        this.Bind(parameters[i]);
 
-                        if (i < arguments.Count - 1)
+                        if (i < parameters.Count - 1)
                         {
                             this.predicateBuilder.Append(", ");
                         }
@@ -173,29 +173,29 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     break;
 
                 case "endswith":
-                    this.Bind(arguments[0]);
+                    this.Bind(parameters[0]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[1]).Value);
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[1]).Value);
                     break;
 
                 case "startswith":
-                    this.Bind(arguments[0]);
+                    this.Bind(parameters[0]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        ((ConstantNode)arguments[1]).Value + this.sqlCharacters.LikeWildcard);
+                        ((ConstantNode)parameters[1]).Value + this.sqlCharacters.LikeWildcard);
                     break;
 
                 case "substringof":
-                    this.Bind(arguments[1]);
+                    this.Bind(parameters[1]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        this.sqlCharacters.LikeWildcard + ((ConstantNode)arguments[0]).Value + this.sqlCharacters.LikeWildcard);
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[0]).Value + this.sqlCharacters.LikeWildcard);
                     break;
 
                 case "trim":
                     this.predicateBuilder.Append("LTRIM(RTRIM(");
-                    this.Bind(arguments[0]);
+                    this.Bind(parameters[0]);
                     this.predicateBuilder.Append("))");
                     break;
 
