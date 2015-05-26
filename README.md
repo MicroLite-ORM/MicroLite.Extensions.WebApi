@@ -11,7 +11,7 @@ It is easy to use MicroLite with ASP.NET WebApi, simply supply your controller w
 
 The NuGet Package contains binaries compiled against:
 
-* .NET 4.0 (Full) and Microsoft.AspNet.WebApi.Core (4.0.20710)
+* .NET 4.0 (Client Profile) and Microsoft.AspNet.WebApi.Core (4.0.20710)
 * .NET 4.5 and Microsoft.AspNet.WebApi.Core 2 (5.0)
 
 ## Supported ASP.NET WebApi Hosts
