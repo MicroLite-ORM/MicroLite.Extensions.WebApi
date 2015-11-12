@@ -14,7 +14,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
     using System.Globalization;
-    using System.Linq;
     using MicroLite.Builder;
     using MicroLite.Builder.Syntax.Read;
     using MicroLite.Characters;
@@ -28,7 +27,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     /// </summary>
     public sealed class FilterBinder : AbstractFilterBinder
     {
-        private static readonly string[] ParameterisedFunctions = new[] { "startswith", "endswith", "substringof" };
         private readonly IObjectInfo objectInfo;
         private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
         private readonly SqlCharacters sqlCharacters = SqlCharacters.Current;
@@ -81,8 +79,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             this.Bind(binaryOperatorNode.Left);
 
-            if (binaryOperatorNode.Left.Kind != QueryNodeKind.SingleValueFunctionCall
-                || (binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall && !ParameterisedFunctions.Contains(((SingleValueFunctionCallNode)binaryOperatorNode.Left).Name)))
+            // ignore 'eq true' or 'eq false' for method calls
+            if (!(binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall
+                && binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal
+                && binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
+                && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmType.Boolean))
             {
                 if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
                     && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmType.Null)
