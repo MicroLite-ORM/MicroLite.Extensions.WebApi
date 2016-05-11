@@ -89,6 +89,92 @@
             }
         }
 
+        public class WhenCallingApplyToWithAGroupedFunctionAndFunction
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingApplyToWithAGroupedFunctionAndFunction()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=(endswith(Name, 'son') and endswith(Name, 'nes')))"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal("%son", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal("%nes", this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(Name LIKE ? AND Name LIKE ?)", "%son", "%nes")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingApplyToWithAGroupedFunctionOrFunction
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingApplyToWithAGroupedFunctionOrFunction()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=(endswith(Name, 'son') or endswith(Name, 'nes')))"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheFirstQueryValue()
+            {
+                Assert.Equal("%son", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheSecondQueryValue()
+            {
+                Assert.Equal("%nes", this.sqlQuery.Arguments[1].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(Name LIKE ? OR Name LIKE ?)", "%son", "%nes")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe2ArgumentValues()
+            {
+                Assert.Equal(2, this.sqlQuery.Arguments.Count);
+            }
+        }
+
         public class WhenCallingBindFilterQueryOptionWithAPropertyEqualsAndGreaterThanAndLessThan
         {
             private readonly SqlQuery sqlQuery;
