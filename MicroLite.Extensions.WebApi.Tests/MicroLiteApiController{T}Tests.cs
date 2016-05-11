@@ -15,7 +15,7 @@
         {
             private readonly CustomerController controller = new CustomerController();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -24,7 +24,7 @@
 
             public WhenCallingDeleteAndAnEntityIsDeleted()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Advanced.Delete(typeof(Customer), this.identifier)).Returns(true);
 #else
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(true));
@@ -32,7 +32,7 @@
 
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Delete(this.identifier);
 #else
                 this.response = this.controller.Delete(this.identifier).Result;
@@ -50,7 +50,7 @@
         {
             private readonly CustomerController controller = new CustomerController();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -59,7 +59,7 @@
 
             public WhenCallingDeleteAndAnEntityIsNotDeleted()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Advanced.Delete(typeof(Customer), this.identifier)).Returns(false);
 #else
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(false));
@@ -68,7 +68,7 @@
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Delete(this.identifier);
 #else
                 this.response = this.controller.Delete(this.identifier).Result;
@@ -86,7 +86,7 @@
         {
             private readonly CustomerController controller = new CustomerController();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -95,7 +95,7 @@
 
             public WhenCallingGetAndAnEntityIsNotReturned()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns((Customer)null);
 #else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
@@ -104,7 +104,7 @@
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Get(this.identifier);
 #else
                 this.response = this.controller.Get(this.identifier).Result;
@@ -129,7 +129,7 @@
             private readonly CustomerController controller = new CustomerController();
             private readonly Customer customer = new Customer();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -138,7 +138,7 @@
 
             public WhenCallingGetAndAnEntityIsReturned()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(this.customer);
 #else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(this.customer));
@@ -148,7 +148,7 @@
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Get(this.identifier);
 #else
                 this.response = this.controller.Get(this.identifier).Result;
@@ -173,7 +173,7 @@
             private readonly CustomerController controller = new CustomerController();
             private readonly Customer customer = new Customer();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -182,7 +182,7 @@
 
             public WhenCallingPost()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Insert(It.IsNotNull<Customer>()))
 #else
                 this.mockSession.Setup(x => x.InsertAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(0))
@@ -196,7 +196,7 @@
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Post(this.customer);
 #else
                 this.response = this.controller.Post(this.customer).Result;
@@ -226,7 +226,7 @@
         {
             private readonly CustomerController controller = new CustomerController();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -235,7 +235,7 @@
 
             public WhenCallingPutAndAnEntityIsNotReturned()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns((Customer)null);
 #else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
@@ -244,7 +244,7 @@
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Put(this.identifier, new Customer());
 #else
                 this.response = this.controller.Put(this.identifier, new Customer()).Result;
@@ -268,7 +268,7 @@
         {
             private readonly CustomerController controller = new CustomerController();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -277,7 +277,7 @@
 
             public WhenCallingPutAndAnEntityIsNotUpdated()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
                 this.mockSession.Setup(x => x.Update(It.IsNotNull<Customer>())).Returns(false);
 #else
@@ -288,7 +288,7 @@
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Put(this.identifier, new Customer());
 #else
                 this.response = this.controller.Put(this.identifier, new Customer()).Result;
@@ -312,7 +312,7 @@
         {
             private readonly CustomerController controller = new CustomerController();
             private readonly int identifier = 12345;
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -326,7 +326,7 @@
 
             public WhenCallingPutAndAnEntityIsUpdated()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
                 this.mockSession.Setup(x => x.Update(It.IsNotNull<Customer>())).Returns(true);
 #else
@@ -337,7 +337,7 @@
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Put(this.identifier, this.updatedCustomer);
 #else
                 this.response = this.controller.Put(this.identifier, this.updatedCustomer).Result;
@@ -385,7 +385,7 @@
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteApiController<Customer, int> controller;
-#if NET_4_0
+#if NET40
             private readonly ISession session = new Mock<ISession>().Object;
 #else
             private readonly IAsyncSession session = new Mock<IAsyncSession>().Object;
@@ -416,7 +416,7 @@
                 };
             }
 
-#if NET_4_0
+#if NET40
             public HttpResponseMessage Delete(int id)
             {
                 return this.DeleteEntityResponse(id);

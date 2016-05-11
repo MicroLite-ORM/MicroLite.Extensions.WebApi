@@ -42,7 +42,7 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-#if NET_4_0
+#if NET40
 
         protected MicroLiteApiController(ISession session)
 #else
@@ -81,7 +81,7 @@ namespace MicroLite.Extensions.WebApi
         /// 204 (No Content) if the entity is deleted successfully,
         /// or 404 (Not Found) if there is no entity with the specified Id.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1034_Delete_an_Entity]]></remarks>
-#if NET_4_0
+#if NET40
         protected virtual HttpResponseMessage DeleteEntityResponse(TId id)
 #else
 
@@ -90,7 +90,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-#if NET_4_0
+#if NET40
             var deleted = this.Session.Advanced.Delete(ObjectInfo.ForType, id);
 #else
             var deleted = await this.Session.Advanced.DeleteAsync(ObjectInfo.ForType, id);
@@ -115,7 +115,7 @@ namespace MicroLite.Extensions.WebApi
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result
         /// 404 (Not Found) if no entity exists with the specified Identifier or
         /// 200 (OK) if an entity is found.</returns>
-#if NET_4_0
+#if NET40
         protected virtual HttpResponseMessage GetEntityResponse(TId id)
 #else
 
@@ -123,7 +123,7 @@ namespace MicroLite.Extensions.WebApi
 #endif
         {
             HttpResponseMessage response;
-#if NET_4_0
+#if NET40
             var entity = this.Session.Single<TEntity>(id);
 #else
             var entity = await this.Session.SingleAsync<TEntity>(id);
@@ -148,13 +148,13 @@ namespace MicroLite.Extensions.WebApi
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result 201 (Created) if the entity is successfully created.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1032_Create_an_Entity]]></remarks>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The method is returning the response, the framework will be responsible for its disposal")]
-#if NET_4_0
+#if NET40
         protected virtual HttpResponseMessage PostEntityResponse(TEntity entity)
 #else
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> PostEntityResponseAsync(TEntity entity)
 #endif
         {
-#if NET_4_0
+#if NET40
             this.Session.Insert(entity);
 #else
             await this.Session.InsertAsync(entity);
@@ -178,7 +178,7 @@ namespace MicroLite.Extensions.WebApi
         /// 304 (Not Modified) if there were no changes or
         /// 204 (NoContent) if the entity was updated successfully.</returns>
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1033_Update_an_Entity]]></remarks>
-#if NET_4_0
+#if NET40
         protected virtual HttpResponseMessage PutEntityResponse(TId id, TEntity entity)
 #else
 
@@ -187,7 +187,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-#if NET_4_0
+#if NET40
             var existing = this.Session.Single<TEntity>(id);
 #else
             var existing = await this.Session.SingleAsync<TEntity>(id);
@@ -201,7 +201,7 @@ namespace MicroLite.Extensions.WebApi
             {
                 ObjectInfo.SetIdentifierValue(entity, id);
 
-#if NET_4_0
+#if NET40
                 var updated = this.Session.Update(entity);
 #else
                 var updated = await this.Session.UpdateAsync(entity);

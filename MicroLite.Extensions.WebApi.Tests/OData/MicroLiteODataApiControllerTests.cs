@@ -22,7 +22,7 @@
 
             var controller = new CustomerController();
 
-#if NET_4_0
+#if NET40
             var exception = Assert.Throws<ODataException>(() => controller.Get(queryOptions));
             Assert.Contains("$skip", exception.Message);
 #else
@@ -232,7 +232,7 @@
         public class WhenAValidSkipValueIsSpecified
         {
             private readonly CustomerController controller = new CustomerController();
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -241,7 +241,7 @@
 
             public WhenAValidSkipValueIsSpecified()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 50, 0));
 #else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
@@ -257,7 +257,7 @@
             [Fact]
             public void ItIsUsedInThePagedQuery()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Verify(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(this.queryOptions.Skip.Value, 50)));
 #else
                 this.mockSession.Verify(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(this.queryOptions.Skip.Value, 50)));
@@ -268,7 +268,7 @@
         public class WhenAValidTopValueIsSpecified
         {
             private readonly CustomerController controller = new CustomerController();
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -277,7 +277,7 @@
 
             public WhenAValidTopValueIsSpecified()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 15, 0));
 #else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 15, 0)));
@@ -293,7 +293,7 @@
             [Fact]
             public void ItIsUsedInThePagedQuery()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Verify(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(0, this.queryOptions.Top.Value)));
 #else
                 this.mockSession.Verify(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(0, this.queryOptions.Top.Value)));
@@ -323,7 +323,7 @@
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteODataApiController<Customer, int> controller;
-#if NET_4_0
+#if NET40
             private readonly ISession session = new Mock<ISession>().Object;
 #else
             private readonly IAsyncSession session = new Mock<IAsyncSession>().Object;
@@ -347,7 +347,7 @@
         public class WhenFormatQueryOptionIsSpecified
         {
             private readonly CustomerController controller = new CustomerController();
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -357,7 +357,7 @@
 
             public WhenFormatQueryOptionIsSpecified()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 50, 0));
 #else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
@@ -366,7 +366,7 @@
                 this.controller.Request = this.queryOptions.Request;
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Get(this.queryOptions);
 #else
                 this.response = this.controller.Get(this.queryOptions).Result;
@@ -389,7 +389,7 @@
         public class WhenInlineCountAllPagesIsSpecified
         {
             private readonly CustomerController controller = new CustomerController();
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -399,7 +399,7 @@
 
             public WhenInlineCountAllPagesIsSpecified()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 50, 0));
 #else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
@@ -409,7 +409,7 @@
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Get(this.queryOptions);
 #else
                 this.response = this.controller.Get(this.queryOptions).Result;
@@ -432,7 +432,7 @@
         public class WhenInlineCountIsNotSpecified
         {
             private readonly CustomerController controller = new CustomerController();
-#if NET_4_0
+#if NET40
             private readonly Mock<ISession> mockSession = new Mock<ISession>();
 #else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -442,7 +442,7 @@
 
             public WhenInlineCountIsNotSpecified()
             {
-#if NET_4_0
+#if NET40
                 this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new List<object>(), 50, 0));
 #else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new List<object>(), 50, 0)));
@@ -452,7 +452,7 @@
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
 
-#if NET_4_0
+#if NET40
                 this.response = this.controller.Get(this.queryOptions);
 #else
                 this.response = this.controller.Get(this.queryOptions).Result;
@@ -481,7 +481,7 @@
 
                 var queryOptions = default(ODataQueryOptions);
 
-#if NET_4_0
+#if NET40
                 var exception = Assert.Throws<ArgumentNullException>(() => controller.Get(queryOptions));
                 Assert.Equal("queryOptions", exception.ParamName);
 #else
@@ -510,7 +510,7 @@
                 }
             }
 
-#if NET_4_0
+#if NET40
 
             public HttpResponseMessage Get(ODataQueryOptions queryOptions)
             {

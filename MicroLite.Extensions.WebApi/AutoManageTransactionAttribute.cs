@@ -102,7 +102,7 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionExecutedContext");
             }
 
-#if NET_4_0
+#if NET40
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveSession;
 #else
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
@@ -114,7 +114,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-#if NET_4_0
+#if NET40
             var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveReadOnlySession;
 #else
             var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
@@ -143,7 +143,7 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionContext");
             }
 
-#if NET_4_0
+#if NET40
             var controller = actionContext.ControllerContext.Controller as IHaveSession;
 #else
             var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
@@ -154,7 +154,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-#if NET_4_0
+#if NET40
             var readOnlyController = actionContext.ControllerContext.Controller as IHaveReadOnlySession;
 #else
             var readOnlyController = actionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
@@ -167,7 +167,7 @@ namespace MicroLite.Extensions.WebApi
             }
         }
 
-#if NET_4_0
+#if NET40
 
         private static void OnActionExecuted(IReadOnlySession session, Exception exception)
 #else

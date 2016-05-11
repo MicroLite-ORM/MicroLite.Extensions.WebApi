@@ -43,7 +43,7 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-#if NET_4_0
+#if NET40
 
         protected MicroLiteODataApiController(ISession session)
 #else
@@ -108,7 +108,7 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <param name="queryOptions">The query options.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The whole point to this method is that it returns the object!")]
-#if NET_4_0
+#if NET40
         protected virtual HttpResponseMessage GetEntityResponse(ODataQueryOptions queryOptions)
 #else
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> GetEntityResponseAsync(ODataQueryOptions queryOptions)
@@ -125,7 +125,7 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var skip = queryOptions.Skip != null ? queryOptions.Skip.Value : 0;
             var top = queryOptions.Top != null ? queryOptions.Top.Value : this.ValidationSettings.MaxTop;
-#if NET_4_0
+#if NET40
             var paged = this.Session.Paged<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 #else
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));

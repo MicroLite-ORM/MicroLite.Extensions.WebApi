@@ -19,13 +19,13 @@ namespace MicroLite.Extensions.WebApi
     /// Provides access to a MicroLite ISession in addition to the base ASP.NET WebApi controller.
     /// </summary>
     public abstract class MicroLiteApiController : ApiController,
-#if NET_4_0
+#if NET40
  IHaveSession
 #else
  IHaveAsyncSession
 #endif
     {
-#if NET_4_0
+#if NET40
         private ISession session;
 #else
         private IAsyncSession session;
@@ -46,7 +46,7 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-#if NET_4_0
+#if NET40
 
         protected MicroLiteApiController(ISession session)
 #else
@@ -60,7 +60,7 @@ namespace MicroLite.Extensions.WebApi
         /// <summary>
         /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
         /// </summary>
-#if NET_4_0
+#if NET40
 
         public ISession Session
 #else
