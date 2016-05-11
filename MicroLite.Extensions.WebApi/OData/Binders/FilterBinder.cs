@@ -41,11 +41,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <summary>
         /// Binds the filter query option to the sql builder.
         /// </summary>
-        /// <param name="filterQuery">The filter query.</param>
+        /// <param name="filterQueryOption">The filter query.</param>
         /// <param name="objectInfo">The IObjectInfo for the type to bind the filter list for.</param>
         /// <param name="selectFromSqlBuilder">The select from SQL builder.</param>
         /// <returns>The SqlBuilder after the where clause has been added.</returns>
-        public static IOrderBy BindFilter(FilterQueryOption filterQuery, IObjectInfo objectInfo, IWhereOrOrderBy selectFromSqlBuilder)
+        public static IOrderBy BindFilter(FilterQueryOption filterQueryOption, IObjectInfo objectInfo, IWhereOrOrderBy selectFromSqlBuilder)
         {
             if (objectInfo == null)
             {
@@ -57,10 +57,10 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException("selectFromSqlBuilder");
             }
 
-            if (filterQuery != null)
+            if (filterQueryOption != null)
             {
                 var filterBinder = new FilterBinder(objectInfo);
-                filterBinder.BindFilter(filterQuery, selectFromSqlBuilder);
+                filterBinder.BindFilter(filterQueryOption, selectFromSqlBuilder);
             }
 
             return selectFromSqlBuilder;

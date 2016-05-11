@@ -46,8 +46,9 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             var columnNames = new string[selectQueryOption.Properties.Count];
             int columnCount = 0;
 
-            foreach (var property in selectQueryOption.Properties)
+            for (int i = 0; i < selectQueryOption.Properties.Count; i++)
             {
+                var property = selectQueryOption.Properties[i];
                 var column = objectInfo.TableInfo.GetColumnInfoForProperty(property);
 
                 if (column == null)
