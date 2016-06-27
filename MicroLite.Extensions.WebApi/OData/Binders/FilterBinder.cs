@@ -178,6 +178,13 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     this.predicateBuilder.Append(")");
                     break;
 
+                case "contains":
+                    this.Bind(parameters[0]);
+                    this.predicateBuilder.Append(
+                        " LIKE " + this.sqlCharacters.GetParameterName(0),
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[1]).Value + this.sqlCharacters.LikeWildcard);
+                    break;
+
                 case "endswith":
                     this.Bind(parameters[0]);
                     this.predicateBuilder.Append(

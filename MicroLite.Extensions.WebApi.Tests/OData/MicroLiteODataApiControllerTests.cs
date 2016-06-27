@@ -55,6 +55,12 @@
             }
 
             [Fact]
+            public void ContainsFunctionIsAllowed()
+            {
+                Assert.Equal(AllowedFunctions.Contains, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Contains);
+            }
+
+            [Fact]
             public void ConcatFunctionIsNotAllowed()
             {
                 Assert.NotEqual(AllowedFunctions.Concat, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Concat);

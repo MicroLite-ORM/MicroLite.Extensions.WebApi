@@ -56,6 +56,7 @@ namespace MicroLite.Extensions.WebApi.OData
             {
                 AllowedArithmeticOperators = AllowedArithmeticOperators.All,
                 AllowedFunctions = AllowedFunctions.Ceiling
+                    | AllowedFunctions.Contains
                     | AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
                     | AllowedFunctions.Floor
