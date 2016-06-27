@@ -49,8 +49,8 @@
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Net.Http.WebApi.OData, Version=3.3.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net.Http.WebApi.OData.3.3.0\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+    <Reference Include="Net.Http.WebApi.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+      <HintPath>..\packages\Net.Http.WebApi.OData.4.0.0-alpha\lib\net46\Net.Http.WebApi.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">

@@ -72,7 +72,7 @@ namespace MicroLite.Extensions.WebApi.OData
                 AllowedLogicalOperators = AllowedLogicalOperators.All,
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
-                    | AllowedQueryOptions.InlineCount
+                    | AllowedQueryOptions.Count
                     | AllowedQueryOptions.OrderBy
                     | AllowedQueryOptions.Select
                     | AllowedQueryOptions.Skip
@@ -133,7 +133,7 @@ namespace MicroLite.Extensions.WebApi.OData
 
             HttpResponseMessage response;
 
-            if (queryOptions.InlineCount != null && queryOptions.InlineCount.InlineCount == InlineCount.AllPages)
+            if (queryOptions.Count)
             {
                 response = this.Request.CreateResponse(HttpStatusCode.OK, new InlineCount<dynamic>(paged.Results, paged.TotalResults));
             }
