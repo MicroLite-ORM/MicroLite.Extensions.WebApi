@@ -7,29 +7,6 @@
 
     public class WebApiConfigurationExtensionsTests
     {
-        public class WhenCallingWithWebApi : IDisposable
-        {
-            public WhenCallingWithWebApi()
-            {
-                MicroLiteSessionAttribute.SessionFactories = null;
-
-                var configureExtensions = Mock.Of<IConfigureExtensions>();
-
-                configureExtensions.WithWebApi();
-            }
-
-            public void Dispose()
-            {
-                MicroLiteSessionAttribute.SessionFactories = null;
-            }
-
-            [Fact]
-            public void TheSessionFactoriesShouldBeSetOnTheMicroLiteSessionAttribute()
-            {
-                Assert.NotNull(MicroLiteSessionAttribute.SessionFactories);
-            }
-        }
-
         public class WhenCallingWithWebApi_AndConfigureExtensionsIsNull
         {
             [Fact]

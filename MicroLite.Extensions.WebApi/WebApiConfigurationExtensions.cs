@@ -50,9 +50,7 @@ namespace MicroLite.Configuration
             {
                 Log.Info(Messages.LoadingExtension);
             }
-
-            MicroLiteSessionAttribute.SessionFactories = Configure.SessionFactories;
-
+            
             return configureExtensions;
         }
     }

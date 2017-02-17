@@ -84,7 +84,6 @@
     <Compile Include="MicroLiteApiController.cs" />
     <Compile Include="MicroLiteApiController{T}.cs" />
     <Compile Include="MicroLiteReadOnlyApiController.cs" />
-    <Compile Include="MicroLiteSessionAttribute.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensions.cs" />
     <Compile Include="OData\Binders\FilterBinder.cs" />
     <Compile Include="OData\Binders\ODataQueryOptionsExtensions.cs" />

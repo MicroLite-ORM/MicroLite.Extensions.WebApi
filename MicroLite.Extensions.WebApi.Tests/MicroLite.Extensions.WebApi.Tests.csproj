@@ -77,7 +77,6 @@
     <Compile Include="MicroLiteApiControllerTests.cs" />
     <Compile Include="MicroLiteApiController{T}Tests.cs" />
     <Compile Include="MicroLiteReadOnlyApiControllerTests.cs" />
-    <Compile Include="MicroLiteSessionAttributeTests.cs" />
     <Compile Include="OData\Binders\BinaryOperatorKindExtensionsTests.cs" />
     <Compile Include="OData\Binders\FilterBinderTests.cs" />
     <Compile Include="OData\Binders\ODataQueryOptionExtensionsTests.cs" />
