@@ -94,7 +94,6 @@
     <Compile Include="TableInfoExtensions.cs" />
     <Compile Include="ValidateModelNotNullAttribute.cs" />
     <Compile Include="ValidateModelStateAttribute.cs" />
-    <Compile Include="WebApiConfigurationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

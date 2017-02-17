@@ -89,7 +89,6 @@
     <Compile Include="TestEntities\Invoice.cs" />
     <Compile Include="ValidateModelNotNullAttributeTests.cs" />
     <Compile Include="ValidateModelStateAttributeTests.cs" />
-    <Compile Include="WebApiConfigurationExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
