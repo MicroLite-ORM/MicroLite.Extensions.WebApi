@@ -35,7 +35,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (objectInfo == null)
             {
-                throw new ArgumentNullException("objectInfo");
+                throw new ArgumentNullException(nameof(objectInfo));
             }
 
             if (selectQueryOption == null || (selectQueryOption.Properties.Count == 1 && selectQueryOption.Properties[0] == "*"))

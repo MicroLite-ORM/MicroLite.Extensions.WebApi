@@ -106,7 +106,7 @@ namespace MicroLite.Extensions.WebApi.OData
         {
             if (queryOptions == null)
             {
-                throw new ArgumentNullException("queryOptions");
+                throw new ArgumentNullException(nameof(queryOptions));
             }
 
             queryOptions.Validate(this.ValidationSettings);

@@ -20,8 +20,6 @@ namespace MicroLite.Extensions.WebApi
     /// </summary>
     public abstract class MicroLiteReadOnlyApiController : ApiController, IHaveAsyncReadOnlySession
     {
-        private IAsyncReadOnlySession session;
-
         /// <summary>
         /// Initialises a new instance of the MicroLiteReadOnlyApiController class.
         /// </summary>
@@ -39,7 +37,7 @@ namespace MicroLite.Extensions.WebApi
         /// </remarks>
         protected MicroLiteReadOnlyApiController(IAsyncReadOnlySession session)
         {
-            this.session = session;
+            this.Session = session;
         }
 
         /// <summary>
@@ -47,15 +45,8 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         public IAsyncReadOnlySession Session
         {
-            get
-            {
-                return this.session;
-            }
-
-            set
-            {
-                this.session = value;
-            }
+            get;
+            set;
         }
     }
 }

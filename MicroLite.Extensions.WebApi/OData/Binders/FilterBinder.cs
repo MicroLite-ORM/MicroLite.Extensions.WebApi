@@ -47,12 +47,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (objectInfo == null)
             {
-                throw new ArgumentNullException("objectInfo");
+                throw new ArgumentNullException(nameof(objectInfo));
             }
 
             if (selectFromSqlBuilder == null)
             {
-                throw new ArgumentNullException("selectFromSqlBuilder");
+                throw new ArgumentNullException(nameof(selectFromSqlBuilder));
             }
 
             if (filterQueryOption != null)
@@ -72,7 +72,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (binaryOperatorNode == null)
             {
-                throw new ArgumentNullException("binaryOperatorNode");
+                throw new ArgumentNullException(nameof(binaryOperatorNode));
             }
 
             this.predicateBuilder.Append("(");
@@ -116,7 +116,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (constantNode == null)
             {
-                throw new ArgumentNullException("constantNode");
+                throw new ArgumentNullException(nameof(constantNode));
             }
 
             if (constantNode.EdmType == EdmType.Null)
@@ -137,7 +137,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (singleValueFunctionCallNode == null)
             {
-                throw new ArgumentNullException("singleValueFunctionCallNode");
+                throw new ArgumentNullException(nameof(singleValueFunctionCallNode));
             }
 
             var parameters = singleValueFunctionCallNode.Parameters;
@@ -213,7 +213,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (singleValuePropertyAccessNode == null)
             {
-                throw new ArgumentNullException("singleValuePropertyAccessNode");
+                throw new ArgumentNullException(nameof(singleValuePropertyAccessNode));
             }
 
             var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
@@ -234,7 +234,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (unaryOperatorNode == null)
             {
-                throw new ArgumentNullException("unaryOperatorNode");
+                throw new ArgumentNullException(nameof(unaryOperatorNode));
             }
 
             this.predicateBuilder.Append(unaryOperatorNode.OperatorKind.ToSqlOperator() + " ");

@@ -41,7 +41,7 @@ namespace MicroLite.Configuration
         {
             if (configureExtensions == null)
             {
-                throw new ArgumentNullException("configureExtensions");
+                throw new ArgumentNullException(nameof(configureExtensions));
             }
 
             System.Diagnostics.Trace.TraceInformation(Messages.LoadingExtension);

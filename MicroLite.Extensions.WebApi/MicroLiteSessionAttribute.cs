@@ -44,8 +44,6 @@ namespace MicroLite.Extensions.WebApi
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class MicroLiteSessionAttribute : ActionFilterAttribute
     {
-        private readonly string connectionName;
-
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteSessionAttribute"/> class for the specified connection name.
         /// </summary>
@@ -54,10 +52,10 @@ namespace MicroLite.Extensions.WebApi
         {
             if (connectionName == null)
             {
-                throw new ArgumentNullException("connectionName");
+                throw new ArgumentNullException(nameof(connectionName));
             }
 
-            this.connectionName = connectionName;
+            this.ConnectionName = connectionName;
         }
 
         /// <summary>
@@ -65,10 +63,7 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         public string ConnectionName
         {
-            get
-            {
-                return this.connectionName;
-            }
+            get;
         }
 
         /// <summary>
@@ -88,7 +83,7 @@ namespace MicroLite.Extensions.WebApi
         {
             if (actionExecutedContext == null)
             {
-                throw new ArgumentNullException("actionExecutedContext");
+                throw new ArgumentNullException(nameof(actionExecutedContext));
             }
 
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
@@ -116,7 +111,7 @@ namespace MicroLite.Extensions.WebApi
         {
             if (actionContext == null)
             {
-                throw new ArgumentNullException("actionContext");
+                throw new ArgumentNullException(nameof(actionContext));
             }
 
             var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
@@ -144,10 +139,7 @@ namespace MicroLite.Extensions.WebApi
 
         private static void OnActionExecuted(IAsyncReadOnlySession session)
         {
-            if (session != null)
-            {
-                session.Dispose();
-            }
+            session?.Dispose();
         }
 
         private ISessionFactory FindSessionFactoryForSpecifiedConnection()
@@ -158,11 +150,11 @@ namespace MicroLite.Extensions.WebApi
             }
 
             var sessionFactory =
-                SessionFactories.SingleOrDefault(x => this.connectionName == null || x.ConnectionName == this.connectionName);
+                SessionFactories.SingleOrDefault(x => this.ConnectionName == null || x.ConnectionName == this.ConnectionName);
 
             if (sessionFactory == null)
             {
-                throw new MicroLiteException(string.Format(CultureInfo.InvariantCulture, Messages.NoSessionFactoryFoundForConnectionName, this.connectionName));
+                throw new MicroLiteException(string.Format(CultureInfo.InvariantCulture, Messages.NoSessionFactoryFoundForConnectionName, this.ConnectionName));
             }
 
             return sessionFactory;

@@ -60,8 +60,6 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         public AutoManageTransactionAttribute()
         {
-            this.AutoManageTransaction = true;
-            this.IsolationLevel = IsolationLevel.ReadCommitted;
         }
 
         /// <summary>
@@ -71,20 +69,12 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// Allows an individual controller or action to opt-out if an instance of the attribute is registered in the global filters collection.
         /// </remarks>
-        public bool AutoManageTransaction
-        {
-            get;
-            set;
-        }
+        public bool AutoManageTransaction { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the isolation level to be used when a transaction is started.
         /// </summary>
-        public IsolationLevel IsolationLevel
-        {
-            get;
-            set;
-        }
+        public IsolationLevel IsolationLevel { get; set; } = IsolationLevel.ReadCommitted;
 
         /// <summary>
         /// Called by the ASP.NET WebApi framework after the action method executes.
@@ -99,7 +89,7 @@ namespace MicroLite.Extensions.WebApi
 
             if (actionExecutedContext == null)
             {
-                throw new ArgumentNullException("actionExecutedContext");
+                throw new ArgumentNullException(nameof(actionExecutedContext));
             }
 
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
@@ -132,7 +122,7 @@ namespace MicroLite.Extensions.WebApi
 
             if (actionContext == null)
             {
-                throw new ArgumentNullException("actionContext");
+                throw new ArgumentNullException(nameof(actionContext));
             }
 
             var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
@@ -151,7 +141,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
         }
-        
+
         private static void OnActionExecuted(IAsyncReadOnlySession session, Exception exception)
         {
             if (session.CurrentTransaction == null)
