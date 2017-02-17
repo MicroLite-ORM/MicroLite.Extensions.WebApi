@@ -26,15 +26,7 @@ namespace MicroLite.Extensions.WebApi
         where TEntity : class, new()
     {
         private static readonly IObjectInfo ObjectInfo = MicroLite.Mapping.ObjectInfo.For(typeof(TEntity));
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class.
-        /// </summary>
-        protected MicroLiteApiController()
-            : this(null)
-        {
-        }
-
+        
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class with an ISession.
         /// </summary>

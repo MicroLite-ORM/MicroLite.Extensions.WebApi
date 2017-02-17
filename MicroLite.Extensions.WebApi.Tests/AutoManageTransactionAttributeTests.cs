@@ -23,8 +23,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -70,8 +69,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -119,8 +117,7 @@
                 this.mockTransaction.Setup(x => x.Commit()).Throws<InvalidOperationException>();
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -167,8 +164,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -211,8 +207,7 @@
             [Fact]
             public void OnActionExecutedDoesNotThrowAnException()
             {
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -241,8 +236,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -289,8 +283,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -337,8 +330,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -384,8 +376,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -433,8 +424,7 @@
                 this.mockTransaction.Setup(x => x.Commit()).Throws<InvalidOperationException>();
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -481,8 +471,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -525,8 +514,7 @@
             [Fact]
             public void OnActionExecutedDoesNotThrowAnException()
             {
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -555,8 +543,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -603,8 +590,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -647,8 +633,7 @@
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController()
             {
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {
@@ -675,8 +660,7 @@
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse()
             {
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {
@@ -704,8 +688,7 @@
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController()
             {
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {
@@ -732,8 +715,7 @@
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse()
             {
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {

@@ -13,7 +13,7 @@
     {
         public class WhenCallingDeleteAndAnEntityIsDeleted
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
             private readonly HttpResponseMessage response;
@@ -21,9 +21,9 @@
             public WhenCallingDeleteAndAnEntityIsDeleted()
             {
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(true));
-
+ 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Delete(this.identifier).Result;
             }
@@ -37,7 +37,7 @@
 
         public class WhenCallingDeleteAndAnEntityIsNotDeleted
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
             private readonly HttpResponseMessage response;
@@ -46,8 +46,8 @@
             {
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(false));
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Delete(this.identifier).Result;
             }
@@ -61,7 +61,7 @@
 
         public class WhenCallingGetAndAnEntityIsNotReturned
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
             private readonly HttpResponseMessage response;
@@ -70,8 +70,8 @@
             {
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Get(this.identifier).Result;
             }
@@ -91,7 +91,7 @@
 
         public class WhenCallingGetAndAnEntityIsReturned
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly Customer customer = new Customer();
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -101,9 +101,9 @@
             {
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(this.customer));
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Get(this.identifier).Result;
             }
@@ -123,7 +123,7 @@
 
         public class WhenCallingPost
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly Customer customer = new Customer();
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
@@ -137,9 +137,9 @@
                         ((Customer)o).Id = this.identifier;
                     });
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Post(this.customer).Result;
             }
@@ -165,7 +165,7 @@
 
         public class WhenCallingPutAndAnEntityIsNotReturned
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
             private readonly HttpResponseMessage response;
@@ -174,8 +174,8 @@
             {
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Put(this.identifier, new Customer()).Result;
             }
@@ -195,7 +195,7 @@
 
         public class WhenCallingPutAndAnEntityIsNotUpdated
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
             private readonly HttpResponseMessage response;
@@ -205,8 +205,8 @@
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
                 this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(false));
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Put(this.identifier, new Customer()).Result;
             }
@@ -226,7 +226,7 @@
 
         public class WhenCallingPutAndAnEntityIsUpdated
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
             private readonly HttpResponseMessage response;
@@ -241,8 +241,8 @@
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
                 this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(true));
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Put(this.identifier, this.updatedCustomer).Result;
             }
@@ -265,26 +265,7 @@
                 Assert.Equal(this.identifier, this.updatedCustomer.Id);
             }
         }
-
-        public class WhenConstructedUsingTheDefaultConstructor
-        {
-            private readonly MicroLiteApiController<Customer, int> controller;
-
-            public WhenConstructedUsingTheDefaultConstructor()
-            {
-                var mockController = new Mock<MicroLiteApiController<Customer, int>>();
-                mockController.CallBase = true;
-
-                this.controller = mockController.Object;
-            }
-
-            [Fact]
-            public void TheSessionIsNull()
-            {
-                Assert.Null(this.controller.Session);
-            }
-        }
-
+        
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteApiController<Customer, int> controller;
@@ -307,7 +288,8 @@
 
         private class CustomerController : MicroLiteApiController<Customer, int>
         {
-            public CustomerController()
+            public CustomerController(IAsyncSession session)
+                : base(session)
             {
                 this.GetEntityResourceUri = (int id) =>
                 {

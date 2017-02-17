@@ -12,6 +12,7 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi
 {
+    using System;
     using System.Web.Http;
     using MicroLite.Infrastructure;
 
@@ -21,14 +22,6 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteApiController : ApiController, IHaveAsyncSession
     {
         /// <summary>
-        /// Initialises a new instance of the MicroLiteApiController class.
-        /// </summary>
-        protected MicroLiteApiController()
-            : this(null)
-        {
-        }
-
-        /// <summary>
         /// Initialises a new instance of the MicroLiteApiController class with an ISession.
         /// </summary>
         /// <param name="session">The ISession for the current HTTP request.</param>
@@ -37,6 +30,11 @@ namespace MicroLite.Extensions.WebApi
         /// </remarks>
         protected MicroLiteApiController(IAsyncSession session)
         {
+            if (session == null)
+            {
+                throw new ArgumentNullException(nameof(session));
+            }
+
             this.Session = session;
         }
 
