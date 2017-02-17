@@ -30,11 +30,7 @@
         public class WhenConstructedWithAnIReadOnlySession
         {
             private readonly MicroLiteReadOnlyApiController controller;
-#if NET40
-            private readonly IReadOnlySession session = new Mock<IReadOnlySession>().Object;
-#else
             private readonly IAsyncReadOnlySession session = new Mock<IAsyncReadOnlySession>().Object;
-#endif
 
             public WhenConstructedWithAnIReadOnlySession()
             {

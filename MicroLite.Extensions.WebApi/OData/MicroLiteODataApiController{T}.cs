@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteODataApiController{T}.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,13 +43,7 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-#if NET40
-
-        protected MicroLiteODataApiController(ISession session)
-#else
-
         protected MicroLiteODataApiController(IAsyncSession session)
-#endif
             : base(session)
         {
             this.ValidationSettings = new ODataValidationSettings
@@ -108,11 +102,7 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <param name="queryOptions">The query options.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The whole point to this method is that it returns the object!")]
-#if NET40
-        protected virtual HttpResponseMessage GetEntityResponse(ODataQueryOptions queryOptions)
-#else
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> GetEntityResponseAsync(ODataQueryOptions queryOptions)
-#endif
         {
             if (queryOptions == null)
             {
@@ -125,11 +115,8 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var skip = queryOptions.Skip != null ? queryOptions.Skip.Value : 0;
             var top = queryOptions.Top != null ? queryOptions.Top.Value : this.ValidationSettings.MaxTop;
-#if NET40
-            var paged = this.Session.Paged<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
-#else
+
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
-#endif
 
             HttpResponseMessage response;
 

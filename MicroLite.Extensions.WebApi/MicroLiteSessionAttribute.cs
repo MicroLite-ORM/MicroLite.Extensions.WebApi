@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteSessionAttribute.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -91,11 +91,7 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionExecutedContext");
             }
 
-#if NET40
-            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveSession;
-#else
             var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
-#endif
 
             if (controller != null)
             {
@@ -103,11 +99,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-#if NET40
-            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveReadOnlySession;
-#else
             var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
-#endif
 
             if (readOnlyController != null)
             {
@@ -127,50 +119,30 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException("actionContext");
             }
 
-#if NET40
-            var controller = actionContext.ControllerContext.Controller as IHaveSession;
-#else
             var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
-#endif
 
             if (controller != null)
             {
                 var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
 
-#if NET40
-                controller.Session = sessionFactory.OpenSession();
-#else
                 controller.Session = sessionFactory.OpenAsyncSession();
-#endif
+
                 return;
             }
 
-#if NET40
-            var readOnlyController = actionContext.ControllerContext.Controller as IHaveReadOnlySession;
-#else
             var readOnlyController = actionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
-#endif
 
             if (readOnlyController != null)
             {
                 var sessionFactory = this.FindSessionFactoryForSpecifiedConnection();
 
-#if NET40
-                readOnlyController.Session = sessionFactory.OpenReadOnlySession();
-#else
                 readOnlyController.Session = sessionFactory.OpenAsyncReadOnlySession();
-#endif
+
                 return;
             }
         }
 
-#if NET40
-
-        private static void OnActionExecuted(IReadOnlySession session)
-#else
-
         private static void OnActionExecuted(IAsyncReadOnlySession session)
-#endif
         {
             if (session != null)
             {
