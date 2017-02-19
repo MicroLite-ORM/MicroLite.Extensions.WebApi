@@ -25,7 +25,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     /// <summary>
     /// The binder class which can append the $filter by query option.
     /// </summary>
-    public sealed class FilterBinder : AbstractFilterBinder
+    public sealed class FilterBinder : Net.Http.WebApi.OData.Query.Binders.AbstractFilterBinder
     {
         private readonly IObjectInfo objectInfo;
         private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
@@ -68,7 +68,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" />.
         /// </summary>
         /// <param name="binaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" /> to bind.</param>
-        protected override void BindBinaryOperatorNode(BinaryOperatorNode binaryOperatorNode)
+        protected override void Bind(BinaryOperatorNode binaryOperatorNode)
         {
             if (binaryOperatorNode == null)
             {
@@ -112,7 +112,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" />.
         /// </summary>
         /// <param name="constantNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" /> to bind.</param>
-        protected override void BindConstantNode(ConstantNode constantNode)
+        protected override void Bind(ConstantNode constantNode)
         {
             if (constantNode == null)
             {
@@ -133,7 +133,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" />.
         /// </summary>
         /// <param name="singleValueFunctionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" /> to bind.</param>
-        protected override void BindSingleValueFunctionCallNode(SingleValueFunctionCallNode singleValueFunctionCallNode)
+        protected override void Bind(SingleValueFunctionCallNode singleValueFunctionCallNode)
         {
             if (singleValueFunctionCallNode == null)
             {
@@ -209,7 +209,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" />.
         /// </summary>
         /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
-        protected override void BindSingleValuePropertyAccessNode(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
+        protected override void Bind(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
         {
             if (singleValuePropertyAccessNode == null)
             {
@@ -230,7 +230,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" />.
         /// </summary>
         /// <param name="unaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" /> to bind.</param>
-        protected override void BindUnaryOperatorNode(UnaryOperatorNode unaryOperatorNode)
+        protected override void Bind(UnaryOperatorNode unaryOperatorNode)
         {
             if (unaryOperatorNode == null)
             {
