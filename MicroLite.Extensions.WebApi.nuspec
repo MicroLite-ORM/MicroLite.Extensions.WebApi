@@ -10,34 +10,18 @@
     <language>en-GB</language>
     <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
     <licenseUrl>http://microliteorm.wordpress.com/license/</licenseUrl>
-    <copyright>Copyright 2012 - 2015 Project Contributors</copyright>
+    <copyright>Copyright 2012 - 2017 Project Contributors</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
-      <group targetFramework="net40">
-        <dependency id="MicroLite" version="[6.2,7.0)" />
-        <dependency id="Microsoft.AspNet.WebApi.Core" version="[4.0.30506.0,5.0)" />
-        <dependency id="Net.Http.WebApi.OData" version="4.0.0-alpha" />
-      </group>
-      <group targetFramework="net45">
-        <dependency id="MicroLite" version="[6.2,7.0)" />
-        <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2,6.0)" />
-        <dependency id="Net.Http.WebApi.OData" version="4.0.0-alpha" />
-      </group>
-      <group targetFramework="net46">
-        <dependency id="MicroLite" version="[6.2,7.0)" />
-        <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2,6.0)" />
-        <dependency id="Net.Http.WebApi.OData" version="4.0.0-alpha" />
-      </group>
+      <dependency id="MicroLite" version="[6.3,7.0)" />
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.3,6.0)" />
+      <dependency id="Net.Http.WebApi.OData" version="3.4.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="..\build\4.0\MicroLite.Extensions.WebApi.dll" target="lib\net40-client" />
-    <file src="..\build\4.0\MicroLite.Extensions.WebApi.xml" target="lib\net40-client" />
     <file src="..\build\4.5\MicroLite.Extensions.WebApi.dll" target="lib\net45" />
     <file src="..\build\4.5\MicroLite.Extensions.WebApi.xml" target="lib\net45" />
-    <file src="..\build\4.6\MicroLite.Extensions.WebApi.dll" target="lib\net46" />
-    <file src="..\build\4.6\MicroLite.Extensions.WebApi.xml" target="lib\net46" />
     <file src="..\build\help\MicroLite.Extensions.WebApi.chm" target="" />
   </files>
 </package>

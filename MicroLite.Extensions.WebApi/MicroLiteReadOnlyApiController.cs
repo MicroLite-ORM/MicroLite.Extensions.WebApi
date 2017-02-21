@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteReadOnlyApiController.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,33 +12,15 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi
 {
+    using System;
     using System.Web.Http;
     using MicroLite.Infrastructure;
 
     /// <summary>
     /// Provides access to a MicroLite IReadOnlySession in addition to the base ASP.NET WebApi controller.
     /// </summary>
-    public abstract class MicroLiteReadOnlyApiController : ApiController,
-#if NET40
- IHaveReadOnlySession
-#else
- IHaveAsyncReadOnlySession
-#endif
+    public abstract class MicroLiteReadOnlyApiController : ApiController, IHaveAsyncReadOnlySession
     {
-#if NET40
-        private IReadOnlySession session;
-#else
-        private IAsyncReadOnlySession session;
-#endif
-
-        /// <summary>
-        /// Initialises a new instance of the MicroLiteReadOnlyApiController class.
-        /// </summary>
-        protected MicroLiteReadOnlyApiController()
-            : this(null)
-        {
-        }
-
         /// <summary>
         /// Initialises a new instance of the MicroLiteReadOnlyApiController class with an IReadOnlySession.
         /// </summary>
@@ -46,37 +28,23 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an IReadOnlySession via an IOC container.
         /// </remarks>
-#if NET40
-
-        protected MicroLiteReadOnlyApiController(IReadOnlySession session)
-#else
-
         protected MicroLiteReadOnlyApiController(IAsyncReadOnlySession session)
-#endif
         {
-            this.session = session;
+            if (session == null)
+            {
+                throw new ArgumentNullException(nameof(session));
+            }
+
+            this.Session = session;
         }
 
         /// <summary>
         /// Gets or sets the <see cref="IReadOnlySession"/> for the current HTTP request.
         /// </summary>
-#if NET40
-
-        public IReadOnlySession Session
-#else
-
         public IAsyncReadOnlySession Session
-#endif
         {
-            get
-            {
-                return this.session;
-            }
-
-            set
-            {
-                this.session = value;
-            }
+            get;
+            set;
         }
     }
 }

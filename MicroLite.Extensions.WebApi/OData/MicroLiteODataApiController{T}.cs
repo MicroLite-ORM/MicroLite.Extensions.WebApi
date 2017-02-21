@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteODataApiController{T}.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,32 +31,17 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
         /// </summary>
-        protected MicroLiteODataApiController()
-            : this(null)
-        {
-        }
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
-        /// </summary>
         /// <param name="session">The ISession for the current HTTP request.</param>
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-#if NET40
-
-        protected MicroLiteODataApiController(ISession session)
-#else
-
         protected MicroLiteODataApiController(IAsyncSession session)
-#endif
             : base(session)
         {
             this.ValidationSettings = new ODataValidationSettings
             {
                 AllowedArithmeticOperators = AllowedArithmeticOperators.All,
                 AllowedFunctions = AllowedFunctions.Ceiling
-                    | AllowedFunctions.Contains
                     | AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
                     | AllowedFunctions.Floor
@@ -73,7 +58,7 @@ namespace MicroLite.Extensions.WebApi.OData
                 AllowedLogicalOperators = AllowedLogicalOperators.All,
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
-                    | AllowedQueryOptions.Count
+                    | AllowedQueryOptions.InlineCount
                     | AllowedQueryOptions.OrderBy
                     | AllowedQueryOptions.Select
                     | AllowedQueryOptions.Skip
@@ -109,15 +94,11 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <param name="queryOptions">The query options.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The whole point to this method is that it returns the object!")]
-#if NET40
-        protected virtual HttpResponseMessage GetEntityResponse(ODataQueryOptions queryOptions)
-#else
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> GetEntityResponseAsync(ODataQueryOptions queryOptions)
-#endif
         {
             if (queryOptions == null)
             {
-                throw new ArgumentNullException("queryOptions");
+                throw new ArgumentNullException(nameof(queryOptions));
             }
 
             queryOptions.Validate(this.ValidationSettings);
@@ -126,15 +107,12 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var skip = queryOptions.Skip != null ? queryOptions.Skip.Value : 0;
             var top = queryOptions.Top != null ? queryOptions.Top.Value : this.ValidationSettings.MaxTop;
-#if NET40
-            var paged = this.Session.Paged<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
-#else
+
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
-#endif
 
             HttpResponseMessage response;
 
-            if (queryOptions.Count)
+            if (queryOptions.InlineCount != null && queryOptions.InlineCount.InlineCount == InlineCount.AllPages)
             {
                 response = this.Request.CreateResponse(HttpStatusCode.OK, new InlineCount<dynamic>(paged.Results, paged.TotalResults));
             }

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteApiController.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,33 +12,15 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi
 {
+    using System;
     using System.Web.Http;
     using MicroLite.Infrastructure;
 
     /// <summary>
     /// Provides access to a MicroLite ISession in addition to the base ASP.NET WebApi controller.
     /// </summary>
-    public abstract class MicroLiteApiController : ApiController,
-#if NET40
- IHaveSession
-#else
- IHaveAsyncSession
-#endif
+    public abstract class MicroLiteApiController : ApiController, IHaveAsyncSession
     {
-#if NET40
-        private ISession session;
-#else
-        private IAsyncSession session;
-#endif
-
-        /// <summary>
-        /// Initialises a new instance of the MicroLiteApiController class.
-        /// </summary>
-        protected MicroLiteApiController()
-            : this(null)
-        {
-        }
-
         /// <summary>
         /// Initialises a new instance of the MicroLiteApiController class with an ISession.
         /// </summary>
@@ -46,37 +28,23 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-#if NET40
-
-        protected MicroLiteApiController(ISession session)
-#else
-
         protected MicroLiteApiController(IAsyncSession session)
-#endif
         {
-            this.session = session;
+            if (session == null)
+            {
+                throw new ArgumentNullException(nameof(session));
+            }
+
+            this.Session = session;
         }
 
         /// <summary>
         /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
         /// </summary>
-#if NET40
-
-        public ISession Session
-#else
-
         public IAsyncSession Session
-#endif
         {
-            get
-            {
-                return this.session;
-            }
-
-            set
-            {
-                this.session = value;
-            }
+            get;
+            set;
         }
     }
 }

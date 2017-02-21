@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="FilterBinder.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,13 +20,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     using MicroLite.Mapping;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
-    using Net.Http.WebApi.OData.Query.Binders;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     /// <summary>
     /// The binder class which can append the $filter by query option.
     /// </summary>
-    public sealed class FilterBinder : AbstractFilterBinder
+    public sealed class FilterBinder : Net.Http.WebApi.OData.Query.Binders.AbstractFilterBinder
     {
         private readonly IObjectInfo objectInfo;
         private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
@@ -48,12 +47,12 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (objectInfo == null)
             {
-                throw new ArgumentNullException("objectInfo");
+                throw new ArgumentNullException(nameof(objectInfo));
             }
 
             if (selectFromSqlBuilder == null)
             {
-                throw new ArgumentNullException("selectFromSqlBuilder");
+                throw new ArgumentNullException(nameof(selectFromSqlBuilder));
             }
 
             if (filterQueryOption != null)
@@ -69,12 +68,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" />.
         /// </summary>
         /// <param name="binaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.BinaryOperatorNode" /> to bind.</param>
-        /// <exception cref="ArgumentNullException">binaryOperatorNode is null</exception>
         protected override void Bind(BinaryOperatorNode binaryOperatorNode)
         {
             if (binaryOperatorNode == null)
             {
-                throw new ArgumentNullException("binaryOperatorNode");
+                throw new ArgumentNullException(nameof(binaryOperatorNode));
             }
 
             this.predicateBuilder.Append("(");
@@ -114,12 +112,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" />.
         /// </summary>
         /// <param name="constantNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.ConstantNode" /> to bind.</param>
-        /// <exception cref="ArgumentNullException">constantNode is null</exception>
         protected override void Bind(ConstantNode constantNode)
         {
             if (constantNode == null)
             {
-                throw new ArgumentNullException("constantNode");
+                throw new ArgumentNullException(nameof(constantNode));
             }
 
             if (constantNode.EdmType == EdmType.Null)
@@ -136,13 +133,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" />.
         /// </summary>
         /// <param name="singleValueFunctionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" /> to bind.</param>
-        /// <exception cref="ArgumentNullException">singleValueFunctionCallNode is null</exception>
-        /// <exception cref="ODataException">The function ' + singleValueFunctionCallNode.Name + ' is not supported</exception>
         protected override void Bind(SingleValueFunctionCallNode singleValueFunctionCallNode)
         {
             if (singleValueFunctionCallNode == null)
             {
-                throw new ArgumentNullException("singleValueFunctionCallNode");
+                throw new ArgumentNullException(nameof(singleValueFunctionCallNode));
             }
 
             var parameters = singleValueFunctionCallNode.Parameters;
@@ -176,13 +171,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     }
 
                     this.predicateBuilder.Append(")");
-                    break;
-
-                case "contains":
-                    this.Bind(parameters[0]);
-                    this.predicateBuilder.Append(
-                        " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[1]).Value + this.sqlCharacters.LikeWildcard);
                     break;
 
                 case "endswith":
@@ -221,13 +209,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" />.
         /// </summary>
         /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
-        /// <exception cref="ArgumentNullException">singleValuePropertyAccessNode is null</exception>
-        /// <exception cref="ODataException">The column is not mapped.</exception>
         protected override void Bind(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
         {
             if (singleValuePropertyAccessNode == null)
             {
-                throw new ArgumentNullException("singleValuePropertyAccessNode");
+                throw new ArgumentNullException(nameof(singleValuePropertyAccessNode));
             }
 
             var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
@@ -244,12 +230,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" />.
         /// </summary>
         /// <param name="unaryOperatorNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.UnaryOperatorNode" /> to bind.</param>
-        /// <exception cref="ArgumentNullException">unaryOperatorNode is null</exception>
         protected override void Bind(UnaryOperatorNode unaryOperatorNode)
         {
             if (unaryOperatorNode == null)
             {
-                throw new ArgumentNullException("unaryOperatorNode");
+                throw new ArgumentNullException(nameof(unaryOperatorNode));
             }
 
             this.predicateBuilder.Append(unaryOperatorNode.OperatorKind.ToSqlOperator() + " ");

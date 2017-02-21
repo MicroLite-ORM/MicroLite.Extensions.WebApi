@@ -15,11 +15,7 @@
     {
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAnActiveTransaction
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAnActiveTransaction()
@@ -27,8 +23,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -66,11 +61,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse()
@@ -78,8 +69,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -118,11 +108,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndCommittingAnActiveTransactionThrowsAnException
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndCommittingAnActiveTransactionThrowsAnException()
@@ -131,8 +117,7 @@
                 this.mockTransaction.Setup(x => x.Commit()).Throws<InvalidOperationException>();
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -171,11 +156,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoActiveTransaction
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoActiveTransaction()
@@ -183,8 +164,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -222,17 +202,12 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoCurrentTransaction
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
 
             [Fact]
             public void OnActionExecutedDoesNotThrowAnException()
             {
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -253,11 +228,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack()
@@ -265,8 +236,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -305,11 +275,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack()
@@ -317,8 +283,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -357,11 +322,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAnActiveTransaction
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAnActiveTransaction()
@@ -369,8 +330,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -408,11 +368,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse()
@@ -420,8 +376,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -460,11 +415,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndCommittingAnActiveTransactionThrowsAnException
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndCommittingAnActiveTransactionThrowsAnException()
@@ -473,8 +424,7 @@
                 this.mockTransaction.Setup(x => x.Commit()).Throws<InvalidOperationException>();
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -513,11 +463,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoActiveTransaction
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoActiveTransaction()
@@ -525,8 +471,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -564,17 +509,12 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoCurrentTransaction
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
 
             [Fact]
             public void OnActionExecutedDoesNotThrowAnException()
             {
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -595,11 +535,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack()
@@ -607,8 +543,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(false);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -647,11 +582,7 @@
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack
         {
-#if NET40
-            private readonly Mock<IReadOnlySession> mockSession = new Mock<IReadOnlySession>();
-#else
             private readonly Mock<IAsyncReadOnlySession> mockSession = new Mock<IAsyncReadOnlySession>();
-#endif
             private readonly Mock<ITransaction> mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack()
@@ -659,8 +590,7 @@
                 this.mockTransaction.Setup(x => x.IsActive).Returns(true);
                 this.mockSession.Setup(x => x.CurrentTransaction).Returns(this.mockTransaction.Object);
 
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionExecutedContext
                 {
@@ -699,16 +629,11 @@
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteApiController
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController()
             {
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {
@@ -731,16 +656,11 @@
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse()
             {
-                var controller = new Mock<MicroLiteApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {
@@ -764,16 +684,11 @@
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController()
             {
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {
@@ -796,16 +711,11 @@
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse
         {
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse()
             {
-                var controller = new Mock<MicroLiteReadOnlyApiController>().Object;
-                controller.Session = this.mockSession.Object;
+                var controller = new Mock<MicroLiteReadOnlyApiController>(this.mockSession.Object).Object;
 
                 var context = new HttpActionContext
                 {

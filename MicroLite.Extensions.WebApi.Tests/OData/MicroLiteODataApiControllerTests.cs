@@ -20,21 +20,16 @@
         {
             var queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=-1"));
 
-            var controller = new CustomerController();
+            var controller = new CustomerController(Mock.Of<IAsyncSession>());
 
-#if NET40
-            var exception = Assert.Throws<ODataException>(() => controller.Get(queryOptions));
-            Assert.Contains("$skip", exception.Message);
-#else
             var exception = Assert.Throws<AggregateException>(() => controller.Get(queryOptions).Result);
             Assert.IsType<ODataException>(exception.InnerException);
             Assert.Contains("$skip", exception.InnerException.Message);
-#endif
         }
 
         public class TheDefaultValidatonSettings
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller = new CustomerController(Mock.Of<IAsyncSession>());
 
             [Fact]
             public void AllArithmeticOperatorsAreAllowed()
@@ -49,15 +44,9 @@
             }
 
             [Fact]
-            public void CeilingFunctionIsAllowed()
+            public void TrimFunctionIsAllowed()
             {
-                Assert.Equal(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
-            }
-
-            [Fact]
-            public void ContainsFunctionIsAllowed()
-            {
-                Assert.Equal(AllowedFunctions.Contains, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Contains);
+                Assert.Equal(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
             }
 
             [Fact]
@@ -67,9 +56,15 @@
             }
 
             [Fact]
-            public void CountQueryOptionIsAllowed()
+            public void LengthFunctionIsNotAllowed()
             {
-                Assert.Equal(AllowedQueryOptions.Count, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Count);
+                Assert.NotEqual(AllowedFunctions.Length, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Length);
+            }
+
+            [Fact]
+            public void CeilingFunctionIsAllowed()
+            {
+                Assert.Equal(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
             }
 
             [Fact]
@@ -121,9 +116,9 @@
             }
 
             [Fact]
-            public void LengthFunctionIsNotAllowed()
+            public void InlineCountQueryOptionIsAllowed()
             {
-                Assert.NotEqual(AllowedFunctions.Length, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Length);
+                Assert.Equal(AllowedQueryOptions.InlineCount, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount);
             }
 
             [Fact]
@@ -223,12 +218,6 @@
             }
 
             [Fact]
-            public void TrimFunctionIsAllowed()
-            {
-                Assert.Equal(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
-            }
-
-            [Fact]
             public void YearFunctionIsAllowed()
             {
                 Assert.Equal(AllowedFunctions.Year, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year);
@@ -237,22 +226,15 @@
 
         public class WhenAValidSkipValueIsSpecified
         {
-            private readonly CustomerController controller = new CustomerController();
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
+            private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=15"));
 
             public WhenAValidSkipValueIsSpecified()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 50, 0));
-#else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
@@ -263,32 +245,21 @@
             [Fact]
             public void ItIsUsedInThePagedQuery()
             {
-#if NET40
-                this.mockSession.Verify(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(this.queryOptions.Skip.Value, 50)));
-#else
                 this.mockSession.Verify(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(this.queryOptions.Skip.Value, 50)));
-#endif
             }
         }
 
         public class WhenAValidTopValueIsSpecified
         {
-            private readonly CustomerController controller = new CustomerController();
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
+            private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=15"));
 
             public WhenAValidTopValueIsSpecified()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 15, 0));
-#else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 15, 0)));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
@@ -299,41 +270,14 @@
             [Fact]
             public void ItIsUsedInThePagedQuery()
             {
-#if NET40
-                this.mockSession.Verify(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(0, this.queryOptions.Top.Value)));
-#else
                 this.mockSession.Verify(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(0, this.queryOptions.Top.Value)));
-#endif
             }
         }
-
-        public class WhenConstructedUsingTheDefaultConstructor
-        {
-            private readonly MicroLiteODataApiController<Customer, int> controller;
-
-            public WhenConstructedUsingTheDefaultConstructor()
-            {
-                var mockController = new Mock<MicroLiteODataApiController<Customer, int>>();
-                mockController.CallBase = true;
-
-                this.controller = mockController.Object;
-            }
-
-            [Fact]
-            public void TheSessionIsNull()
-            {
-                Assert.Null(this.controller.Session);
-            }
-        }
-
+        
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteODataApiController<Customer, int> controller;
-#if NET40
-            private readonly ISession session = new Mock<ISession>().Object;
-#else
             private readonly IAsyncSession session = new Mock<IAsyncSession>().Object;
-#endif
 
             public WhenConstructedWithAnISession()
             {
@@ -350,119 +294,22 @@
             }
         }
 
-        public class WhenCountIsNotSpecified
-        {
-            private readonly CustomerController controller = new CustomerController();
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api"));
-            private readonly HttpResponseMessage response;
-
-            public WhenCountIsNotSpecified()
-            {
-#if NET40
-                this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new List<object>(), 50, 0));
-#else
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new List<object>(), 50, 0)));
-#endif
-
-                this.controller.Request = this.queryOptions.Request;
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
-
-#if NET40
-                this.response = this.controller.Get(this.queryOptions);
-#else
-                this.response = this.controller.Get(this.queryOptions).Result;
-#endif
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
-            }
-
-            [Fact]
-            public void TheResponseIsAnList()
-            {
-                Assert.IsType<List<dynamic>>(((ObjectContent)this.response.Content).Value);
-            }
-        }
-
-        public class WhenCountIsSpecified
-        {
-            private readonly CustomerController controller = new CustomerController();
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$count=true"));
-            private readonly HttpResponseMessage response;
-
-            public WhenCountIsSpecified()
-            {
-#if NET40
-                this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 50, 0));
-#else
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
-#endif
-
-                this.controller.Request = this.queryOptions.Request;
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
-
-#if NET40
-                this.response = this.controller.Get(this.queryOptions);
-#else
-                this.response = this.controller.Get(this.queryOptions).Result;
-#endif
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
-            }
-
-            [Fact]
-            public void TheResponseIsAnInlineCount()
-            {
-                Assert.IsType<InlineCount<dynamic>>(((ObjectContent)this.response.Content).Value);
-            }
-        }
-
         public class WhenFormatQueryOptionIsSpecified
         {
-            private readonly CustomerController controller = new CustomerController();
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
+            private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$format=application/xml"));
             private readonly HttpResponseMessage response;
 
             public WhenFormatQueryOptionIsSpecified()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Paged<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(new PagedResult<dynamic>(0, new object[0], 50, 0));
-#else
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
                 this.controller.Session = this.mockSession.Object;
-#if NET40
-                this.response = this.controller.Get(this.queryOptions);
-#else
                 this.response = this.controller.Get(this.queryOptions).Result;
-#endif
             }
 
             [Fact]
@@ -478,29 +325,89 @@
             }
         }
 
+        public class WhenInlineCountAllPagesIsSpecified
+        {
+            private readonly CustomerController controller;
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages"));
+            private readonly HttpResponseMessage response;
+
+            public WhenInlineCountAllPagesIsSpecified()
+            {
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
+
+                this.controller = new CustomerController(this.mockSession.Object);
+                this.controller.Request = this.queryOptions.Request;
+                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+                this.controller.Session = this.mockSession.Object;
+
+                this.response = this.controller.Get(this.queryOptions).Result;
+            }
+
+            [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+            [Fact]
+            public void TheResponseIsAnInlineCount()
+            {
+                Assert.IsType<InlineCount<dynamic>>(((ObjectContent)this.response.Content).Value);
+            }
+        }
+
+        public class WhenInlineCountIsNotSpecified
+        {
+            private readonly CustomerController controller;
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api"));
+            private readonly HttpResponseMessage response;
+
+            public WhenInlineCountIsNotSpecified()
+            {
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new List<object>(), 50, 0)));
+
+                this.controller = new CustomerController(this.mockSession.Object);
+                this.controller.Request = this.queryOptions.Request;
+                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+                this.controller.Session = this.mockSession.Object;
+
+                this.response = this.controller.Get(this.queryOptions).Result;
+            }
+
+            [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+            [Fact]
+            public void TheResponseIsAnList()
+            {
+                Assert.IsType<List<dynamic>>(((ObjectContent)this.response.Content).Value);
+            }
+        }
+
         public class WhenNullQueryOptionsAreSupplied
         {
             [Fact]
             public void AnArgumentNullExceptionIsThrown()
             {
-                var controller = new CustomerController();
+                var controller = new CustomerController(Mock.Of<IAsyncSession>());
 
                 var queryOptions = default(ODataQueryOptions);
 
-#if NET40
-                var exception = Assert.Throws<ArgumentNullException>(() => controller.Get(queryOptions));
-                Assert.Equal("queryOptions", exception.ParamName);
-#else
                 var exception = Assert.Throws<AggregateException>(() => controller.Get(queryOptions).Result);
                 Assert.IsType<ArgumentNullException>(exception.InnerException);
                 Assert.Contains("queryOptions", exception.InnerException.Message);
-#endif
             }
         }
 
         private class CustomerController : MicroLiteODataApiController<Customer, int>
         {
-            public CustomerController()
+            public CustomerController(IAsyncSession session)
+                : base(session)
             {
                 this.GetEntityResourceUri = (int id) =>
                 {
@@ -516,21 +423,10 @@
                 }
             }
 
-#if NET40
-
-            public HttpResponseMessage Get(ODataQueryOptions queryOptions)
-            {
-                return this.GetEntityResponse(queryOptions);
-            }
-
-#else
-
             public System.Threading.Tasks.Task<HttpResponseMessage> Get(ODataQueryOptions queryOptions)
             {
                 return this.GetEntityResponseAsync(queryOptions);
             }
-
-#endif
         }
     }
 }

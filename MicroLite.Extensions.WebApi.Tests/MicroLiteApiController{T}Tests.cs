@@ -13,30 +13,19 @@
     {
         public class WhenCallingDeleteAndAnEntityIsDeleted
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingDeleteAndAnEntityIsDeleted()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Advanced.Delete(typeof(Customer), this.identifier)).Returns(true);
-#else
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(true));
-#endif
-
+ 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
-#if NET40
-                this.response = this.controller.Delete(this.identifier);
-#else
+
                 this.response = this.controller.Delete(this.identifier).Result;
-#endif
             }
 
             [Fact]
@@ -48,31 +37,19 @@
 
         public class WhenCallingDeleteAndAnEntityIsNotDeleted
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingDeleteAndAnEntityIsNotDeleted()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Advanced.Delete(typeof(Customer), this.identifier)).Returns(false);
-#else
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(false));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Delete(this.identifier);
-#else
                 this.response = this.controller.Delete(this.identifier).Result;
-#endif
             }
 
             [Fact]
@@ -84,31 +61,19 @@
 
         public class WhenCallingGetAndAnEntityIsNotReturned
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingGetAndAnEntityIsNotReturned()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns((Customer)null);
-#else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Get(this.identifier);
-#else
                 this.response = this.controller.Get(this.identifier).Result;
-#endif
             }
 
             [Fact]
@@ -126,33 +91,21 @@
 
         public class WhenCallingGetAndAnEntityIsReturned
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly Customer customer = new Customer();
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingGetAndAnEntityIsReturned()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(this.customer);
-#else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(this.customer));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Get(this.identifier);
-#else
                 this.response = this.controller.Get(this.identifier).Result;
-#endif
             }
 
             [Fact]
@@ -170,37 +123,25 @@
 
         public class WhenCallingPost
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly Customer customer = new Customer();
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingPost()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Insert(It.IsNotNull<Customer>()))
-#else
                 this.mockSession.Setup(x => x.InsertAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(0))
-#endif
 .Callback((object o) =>
                     {
                         ((Customer)o).Id = this.identifier;
                     });
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
                 this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Post(this.customer);
-#else
                 this.response = this.controller.Post(this.customer).Result;
-#endif
             }
 
             [Fact]
@@ -224,31 +165,19 @@
 
         public class WhenCallingPutAndAnEntityIsNotReturned
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingPutAndAnEntityIsNotReturned()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns((Customer)null);
-#else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Put(this.identifier, new Customer());
-#else
                 this.response = this.controller.Put(this.identifier, new Customer()).Result;
-#endif
             }
 
             [Fact]
@@ -266,33 +195,20 @@
 
         public class WhenCallingPutAndAnEntityIsNotUpdated
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             public WhenCallingPutAndAnEntityIsNotUpdated()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
-                this.mockSession.Setup(x => x.Update(It.IsNotNull<Customer>())).Returns(false);
-#else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
                 this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(false));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Put(this.identifier, new Customer());
-#else
                 this.response = this.controller.Put(this.identifier, new Customer()).Result;
-#endif
             }
 
             [Fact]
@@ -310,13 +226,9 @@
 
         public class WhenCallingPutAndAnEntityIsUpdated
         {
-            private readonly CustomerController controller = new CustomerController();
+            private readonly CustomerController controller;
             private readonly int identifier = 12345;
-#if NET40
-            private readonly Mock<ISession> mockSession = new Mock<ISession>();
-#else
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-#endif
             private readonly HttpResponseMessage response;
 
             private readonly Customer updatedCustomer = new Customer
@@ -326,22 +238,13 @@
 
             public WhenCallingPutAndAnEntityIsUpdated()
             {
-#if NET40
-                this.mockSession.Setup(x => x.Single<Customer>(this.identifier)).Returns(new Customer());
-                this.mockSession.Setup(x => x.Update(It.IsNotNull<Customer>())).Returns(true);
-#else
                 this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
                 this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(true));
-#endif
 
+                this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
-                this.controller.Session = this.mockSession.Object;
 
-#if NET40
-                this.response = this.controller.Put(this.identifier, this.updatedCustomer);
-#else
                 this.response = this.controller.Put(this.identifier, this.updatedCustomer).Result;
-#endif
             }
 
             [Fact]
@@ -362,34 +265,11 @@
                 Assert.Equal(this.identifier, this.updatedCustomer.Id);
             }
         }
-
-        public class WhenConstructedUsingTheDefaultConstructor
-        {
-            private readonly MicroLiteApiController<Customer, int> controller;
-
-            public WhenConstructedUsingTheDefaultConstructor()
-            {
-                var mockController = new Mock<MicroLiteApiController<Customer, int>>();
-                mockController.CallBase = true;
-
-                this.controller = mockController.Object;
-            }
-
-            [Fact]
-            public void TheSessionIsNull()
-            {
-                Assert.Null(this.controller.Session);
-            }
-        }
-
+        
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteApiController<Customer, int> controller;
-#if NET40
-            private readonly ISession session = new Mock<ISession>().Object;
-#else
             private readonly IAsyncSession session = new Mock<IAsyncSession>().Object;
-#endif
 
             public WhenConstructedWithAnISession()
             {
@@ -408,35 +288,14 @@
 
         private class CustomerController : MicroLiteApiController<Customer, int>
         {
-            public CustomerController()
+            public CustomerController(IAsyncSession session)
+                : base(session)
             {
                 this.GetEntityResourceUri = (int id) =>
                 {
                     return new Uri("http://localhost/api/Customers/" + id.ToString());
                 };
             }
-
-#if NET40
-            public HttpResponseMessage Delete(int id)
-            {
-                return this.DeleteEntityResponse(id);
-            }
-
-            public HttpResponseMessage Get(int id)
-            {
-                return this.GetEntityResponse(id);
-            }
-
-            public HttpResponseMessage Post(Customer entity)
-            {
-                return this.PostEntityResponse(entity);
-            }
-
-            public HttpResponseMessage Put(int id, Customer entity)
-            {
-                return this.PutEntityResponse(id, entity);
-            }
-#else
 
             public System.Threading.Tasks.Task<HttpResponseMessage> Delete(int id)
             {
@@ -457,8 +316,6 @@
             {
                 return this.PutEntityResponseAsync(id, entity);
             }
-
-#endif
         }
     }
 }

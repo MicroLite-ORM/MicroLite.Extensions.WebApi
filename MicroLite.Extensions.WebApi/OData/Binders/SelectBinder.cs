@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="SelectBinder.cs" company="MicroLite">
-// Copyright 2012 - 2014 Project Contributors
+// Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         {
             if (objectInfo == null)
             {
-                throw new ArgumentNullException("objectInfo");
+                throw new ArgumentNullException(nameof(objectInfo));
             }
 
             if (selectQueryOption == null || (selectQueryOption.Properties.Count == 1 && selectQueryOption.Properties[0] == "*"))

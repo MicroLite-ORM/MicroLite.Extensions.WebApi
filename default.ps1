@@ -1,13 +1,13 @@
 properties {
+  $buildVersion
   $projectName = "MicroLite.Extensions.WebApi"
   $baseDir = Resolve-Path .
   $buildDir = "$baseDir\build"
   $helpDir = "$buildDir\help\"
+  $msbuild = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
 
   $builds = @(
-    @{Name = "NET40"; Constants="NET40"; BuildDir="$buildDir\4.0\"; Framework="v4.0"},
-    @{Name = "NET45"; Constants="NET45"; BuildDir="$buildDir\4.5\"; Framework="v4.5"},
-    @{Name = "NET46"; Constants="NET46"; BuildDir="$buildDir\4.6\"; Framework="v4.6"}
+    @{ Name = "NET45"; Constants="NET45"; BuildDir="$buildDir\4.5\"; Framework="v4.5" }
   )
 }
 
@@ -26,12 +26,12 @@ Task Clean {
 Task Build -Depends Clean {
   foreach ($build in $builds) {
     $name = $build.Name
-    Write-Host "Building $projectName.$name.sln" -ForegroundColor Green
+    Write-Host "Building $projectName.sln" -ForegroundColor Green
 
     $constants = $build.Constants
     $outDir = $build.BuildDir
     $netVer = $build.Framework
-    Exec { msbuild "$projectName.$name.sln" "/target:Clean;Rebuild" "/property:Configuration=Release;WarningLevel=1;DefineConstants=$constants;OutDir=$outDir;TargetFrameworkVersion=$netVer" /verbosity:quiet }
+    &"$msbuild" "$projectName.sln" "/target:Clean;Rebuild" "/property:Configuration=Release;WarningLevel=1;DefineConstants=$constants;OutDir=$outDir;TargetFrameworkVersion=$netVer" /verbosity:quiet
   }
   Write-Host
 }
@@ -39,15 +39,17 @@ Task Build -Depends Clean {
 Task RunTests -Depends Build {
   foreach ($build in $builds) {
     $name = $build.Name
-    Write-Host "Running $projectName.Tests.$name" -ForegroundColor Green
+    Write-Host "Running $projectName.Tests" -ForegroundColor Green
 
     $outDir = $build.BuildDir
-    Exec {  & $baseDir\packages\xunit.runners.1.9.2\tools\xunit.console.clr4.exe "$outDir\$projectName.Tests.dll" }
+    Exec { & $baseDir\packages\xunit.runners.1.9.2\tools\xunit.console.clr4.exe "$outDir\$projectName.Tests.dll" }
   }
   Write-Host
 }
 
-Task BuildHelp -Depends RunTests {  
-  Write-Host "Building $projectName.shfbproj" -ForegroundColor Green
-  Exec { msbuild "$projectName.shfbproj" }  
+Task BuildHelp -Depends RunTests {
+  if ($buildVersion) {
+    Write-Host "Building $projectName.shfbproj" -ForegroundColor Green
+    Exec { msbuild "$projectName.shfbproj" }
+  }
 }

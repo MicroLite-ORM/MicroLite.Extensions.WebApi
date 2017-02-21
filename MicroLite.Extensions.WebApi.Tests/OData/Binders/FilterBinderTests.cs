@@ -396,43 +396,6 @@
             }
         }
 
-        public class WhenCallingBindFilterQueryOptionWithASinglePropertyContains
-        {
-            private readonly SqlQuery sqlQuery;
-
-            public WhenCallingBindFilterQueryOptionWithASinglePropertyContains()
-            {
-                var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=contains(Name,'Bloggs')"));
-
-                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
-            }
-
-            [Fact]
-            public void TheArgumentsShouldContainTheQueryValue()
-            {
-                Assert.Equal("%Bloggs%", this.sqlQuery.Arguments[0].Value);
-            }
-
-            [Fact]
-            public void TheCommandTextShouldContainTheWhereClause()
-            {
-                var expected = SqlBuilder.Select("*")
-                    .From(typeof(Customer))
-                    .Where("Name LIKE ?", "%Bloggs%")
-                    .ToSqlQuery()
-                    .CommandText;
-
-                Assert.Equal(expected, this.sqlQuery.CommandText);
-            }
-
-            [Fact]
-            public void ThereShouldBe1ArgumentValue()
-            {
-                Assert.Equal(1, this.sqlQuery.Arguments.Count);
-            }
-        }
-
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyDay
         {
             private readonly SqlQuery sqlQuery;
