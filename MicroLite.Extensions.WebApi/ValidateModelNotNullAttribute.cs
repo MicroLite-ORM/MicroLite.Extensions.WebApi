@@ -78,7 +78,7 @@ namespace MicroLite.Extensions.WebApi
             {
                 actionContext.Response = actionContext.Request.CreateErrorResponse(
                     HttpStatusCode.BadRequest,
-                    Messages.ArgumentMustNotBeNull);
+                    "The argument must not be null");
             }
         }
     }

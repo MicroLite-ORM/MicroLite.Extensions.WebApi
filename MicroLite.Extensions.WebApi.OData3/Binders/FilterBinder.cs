@@ -14,10 +14,10 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
     using System.Globalization;
-    using MicroLite.Builder;
-    using MicroLite.Builder.Syntax.Read;
-    using MicroLite.Characters;
-    using MicroLite.Mapping;
+    using Builder;
+    using Builder.Syntax.Read;
+    using Characters;
+    using Mapping;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Expressions;
@@ -220,7 +220,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             if (column == null)
             {
-                throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, this.objectInfo.ForType.Name, singleValuePropertyAccessNode.PropertyName));
+                throw new ODataException($"The type {this.objectInfo.ForType.Name} does not have a property called {singleValuePropertyAccessNode.PropertyName}");
             }
 
             this.predicateBuilder.Append(column.ColumnName);

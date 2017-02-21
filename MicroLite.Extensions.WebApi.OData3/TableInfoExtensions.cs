@@ -10,7 +10,7 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
-namespace MicroLite.Extensions.WebApi
+namespace MicroLite.Extensions.WebApi.OData
 {
     using MicroLite.Mapping;
 

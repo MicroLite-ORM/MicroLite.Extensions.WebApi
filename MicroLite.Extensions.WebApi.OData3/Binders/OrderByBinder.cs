@@ -52,7 +52,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
                     if (column == null)
                     {
-                        throw new ODataException(string.Format(CultureInfo.InvariantCulture, Messages.InvalidPropertyName, objectInfo.ForType.Name, property.Name));
+                        throw new ODataException($"The type {objectInfo.ForType.Name} does not have a property called {property.Name}");
                     }
 
                     var columnName = column.ColumnName;

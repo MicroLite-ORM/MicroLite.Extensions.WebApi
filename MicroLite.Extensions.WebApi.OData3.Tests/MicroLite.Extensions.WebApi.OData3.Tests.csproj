@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81CB1C81-A802-4E10-9424-BBAAEAE3A1F3}</ProjectGuid>
+    <ProjectGuid>{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MicroLite.Extensions.WebApi.Tests</RootNamespace>
-    <AssemblyName>MicroLite.Extensions.WebApi.Tests</AssemblyName>
+    <RootNamespace>MicroLite.Extensions.WebApi.OData3.Tests</RootNamespace>
+    <AssemblyName>MicroLite.Extensions.WebApi.OData3.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -47,6 +47,10 @@
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Net.Http.WebApi.OData, Version=3.4.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+      <HintPath>..\packages\Net.Http.WebApi.OData.3.4.0\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -64,33 +68,44 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="xunit">
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoManageTransactionAttributeTests.cs" />
-    <Compile Include="MicroLiteApiControllerTests.cs" />
-    <Compile Include="MicroLiteApiController{T}Tests.cs" />
-    <Compile Include="MicroLiteReadOnlyApiControllerTests.cs" />
-    <Compile Include="TestEntities\Customer.cs" />
-    <Compile Include="TestEntities\CustomerStatus.cs" />
-    <Compile Include="TestEntities\Invoice.cs" />
-    <Compile Include="ValidateModelNotNullAttributeTests.cs" />
-    <Compile Include="ValidateModelStateAttributeTests.cs" />
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\Customer.cs">
+      <Link>TestEntities\Customer.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\CustomerStatus.cs">
+      <Link>TestEntities\CustomerStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\Invoice.cs">
+      <Link>TestEntities\Invoice.cs</Link>
+    </Compile>
+    <Compile Include="Binders\BinaryOperatorKindExtensionsTests.cs" />
+    <Compile Include="Binders\FilterBinderTests.cs" />
+    <Compile Include="Binders\ODataQueryOptionExtensionsTests.cs" />
+    <Compile Include="Binders\OrderByBinderTests.cs" />
+    <Compile Include="Binders\SelectBinderTests.cs" />
+    <Compile Include="Binders\UnaryOperatorKindExtensionsTests.cs" />
+    <Compile Include="MicroLiteODataApiControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MicroLite.snk">
       <Link>MicroLite.snk</Link>
     </None>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MicroLite.Extensions.WebApi.OData3\MicroLite.Extensions.WebApi.OData3.csproj">
+      <Project>{05e061cc-54d7-4b30-b933-f8f54d18ba0b}</Project>
+      <Name>MicroLite.Extensions.WebApi.OData3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">
       <Project>{48714fd3-e87a-4a49-b8fb-2644bd1c577b}</Project>
-      <Name>MicroLite.Extensions.WebApi.NET45</Name>
+      <Name>MicroLite.Extensions.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,7 +33,7 @@
             var exception = Assert.Throws<ODataException>(
                 () => SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))));
 
-            Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
+            Assert.Equal("The type Customer does not have a property called FirstName", exception.Message);
         }
 
         public class WhenCallingBindSelectQueryOptionAndNoPropertiesHaveBeenSpecified

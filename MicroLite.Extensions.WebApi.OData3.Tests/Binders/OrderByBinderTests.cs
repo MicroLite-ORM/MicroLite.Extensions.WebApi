@@ -35,7 +35,7 @@
             var exception = Assert.Throws<ODataException>(
                 () => OrderByBinder.BindOrderBy(new OrderByQueryOption("$orderby=FirstName"), ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
-            Assert.Equal(string.Format(Messages.InvalidPropertyName, "Customer", "FirstName"), exception.Message);
+            Assert.Equal("The type Customer does not have a property called FirstName", exception.Message);
         }
 
         public class WhenCallingBindOrderBy
