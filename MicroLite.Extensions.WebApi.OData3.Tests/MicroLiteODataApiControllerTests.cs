@@ -44,27 +44,15 @@
             }
 
             [Fact]
-            public void TrimFunctionIsAllowed()
+            public void CeilingFunctionIsAllowed()
             {
-                Assert.Equal(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
+                Assert.Equal(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
             }
 
             [Fact]
             public void ConcatFunctionIsNotAllowed()
             {
                 Assert.NotEqual(AllowedFunctions.Concat, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Concat);
-            }
-
-            [Fact]
-            public void LengthFunctionIsNotAllowed()
-            {
-                Assert.NotEqual(AllowedFunctions.Length, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Length);
-            }
-
-            [Fact]
-            public void CeilingFunctionIsAllowed()
-            {
-                Assert.Equal(AllowedFunctions.Ceiling, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Ceiling);
             }
 
             [Fact]
@@ -119,6 +107,12 @@
             public void InlineCountQueryOptionIsAllowed()
             {
                 Assert.Equal(AllowedQueryOptions.InlineCount, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount);
+            }
+
+            [Fact]
+            public void LengthFunctionIsNotAllowed()
+            {
+                Assert.NotEqual(AllowedFunctions.Length, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Length);
             }
 
             [Fact]
@@ -218,6 +212,12 @@
             }
 
             [Fact]
+            public void TrimFunctionIsAllowed()
+            {
+                Assert.Equal(AllowedFunctions.Trim, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Trim);
+            }
+
+            [Fact]
             public void YearFunctionIsAllowed()
             {
                 Assert.Equal(AllowedFunctions.Year, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Year);
@@ -273,7 +273,7 @@
                 this.mockSession.Verify(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), PagingOptions.SkipTake(0, this.queryOptions.Top.Value)));
             }
         }
-        
+
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteODataApiController<Customer, int> controller;
