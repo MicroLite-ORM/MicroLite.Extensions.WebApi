@@ -49,6 +49,10 @@
       <HintPath>..\packages\MicroLite.6.3.1\lib\net45\MicroLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Net.Http.WebApi.OData, Version=3.4.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
+      <HintPath>..\packages\Net.Http.WebApi.OData.3.4.0\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -69,6 +73,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\BinaryOperatorKindExtensions.cs">
+      <Link>Binders\BinaryOperatorKindExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\FilterBinder.cs">
+      <Link>Binders\FilterBinder.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\ODataQueryOptionsExtensions.cs">
+      <Link>Binders\ODataQueryOptionsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\OrderByBinder.cs">
+      <Link>Binders\OrderByBinder.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\SelectBinder.cs">
+      <Link>Binders\SelectBinder.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\UnaryOperatorKindExtensions.cs">
+      <Link>Binders\UnaryOperatorKindExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\MicroLiteODataApiController{T}.cs">
+      <Link>MicroLiteODataApiController{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\TableInfoExtensions.cs">
+      <Link>TableInfoExtensions.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
