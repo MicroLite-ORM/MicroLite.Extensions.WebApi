@@ -7,7 +7,7 @@
     <ProjectGuid>{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MicroLite.Extensions.WebApi.OData3.Tests</RootNamespace>
+    <RootNamespace>MicroLite.Extensions.WebApi.OData.Tests</RootNamespace>
     <AssemblyName>MicroLite.Extensions.WebApi.OData3.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

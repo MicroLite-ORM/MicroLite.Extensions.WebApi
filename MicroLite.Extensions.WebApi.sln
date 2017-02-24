@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi.OData3.Tests", "MicroLite.Extensions.WebApi.OData3.Tests\MicroLite.Extensions.WebApi.OData3.Tests.csproj", "{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi.OData4", "MicroLite.Extensions.WebApi.OData4\MicroLite.Extensions.WebApi.OData4.csproj", "{F8281CC1-9DA4-4FEC-A9A8-469C209C559C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroLite.Extensions.WebApi.OData4.Tests", "MicroLite.Extensions.WebApi.OData4.Tests\MicroLite.Extensions.WebApi.OData4.Tests.csproj", "{11A18A49-E46C-4C19-BCC1-C1BC513930C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8281CC1-9DA4-4FEC-A9A8-469C209C559C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8281CC1-9DA4-4FEC-A9A8-469C209C559C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8281CC1-9DA4-4FEC-A9A8-469C209C559C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8281CC1-9DA4-4FEC-A9A8-469C209C559C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A18A49-E46C-4C19-BCC1-C1BC513930C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A18A49-E46C-4C19-BCC1-C1BC513930C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A18A49-E46C-4C19-BCC1-C1BC513930C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A18A49-E46C-4C19-BCC1-C1BC513930C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
