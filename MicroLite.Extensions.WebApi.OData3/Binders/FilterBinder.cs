@@ -13,19 +13,19 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
-    using System.Globalization;
     using Builder;
     using Builder.Syntax.Read;
     using Characters;
     using Mapping;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
+    using Net.Http.WebApi.OData.Query.Binders;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     /// <summary>
     /// The binder class which can append the $filter by query option.
     /// </summary>
-    public sealed class FilterBinder : Net.Http.WebApi.OData.Query.Binders.AbstractFilterBinder
+    public sealed class FilterBinder : AbstractFilterBinder
     {
         private readonly IObjectInfo objectInfo;
         private readonly RawWhereBuilder predicateBuilder = new RawWhereBuilder();
@@ -80,7 +80,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             this.Bind(binaryOperatorNode.Left);
 
             // ignore 'eq true' or 'eq false' for method calls
-            if (!(binaryOperatorNode.Left.Kind == QueryNodeKind.SingleValueFunctionCall
+            if (!(binaryOperatorNode.Left.Kind == QueryNodeKind.FunctionCall
                 && binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal
                 && binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
                 && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmType.Boolean))
@@ -130,19 +130,19 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         }
 
         /// <summary>
-        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" />.
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.FunctionCallNode" />.
         /// </summary>
-        /// <param name="singleValueFunctionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValueFunctionCallNode" /> to bind.</param>
-        protected override void Bind(SingleValueFunctionCallNode singleValueFunctionCallNode)
+        /// <param name="functionCallNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.FunctionCallNode" /> to bind.</param>
+        protected override void Bind(FunctionCallNode functionCallNode)
         {
-            if (singleValueFunctionCallNode == null)
+            if (functionCallNode == null)
             {
-                throw new ArgumentNullException(nameof(singleValueFunctionCallNode));
+                throw new ArgumentNullException(nameof(functionCallNode));
             }
 
-            var parameters = singleValueFunctionCallNode.Parameters;
+            var parameters = functionCallNode.Parameters;
 
-            switch (singleValueFunctionCallNode.Name)
+            switch (functionCallNode.Name)
             {
                 case "ceiling":
                 case "day":
@@ -154,9 +154,9 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 case "tolower":
                 case "toupper":
                 case "year":
-                    var name = singleValueFunctionCallNode.Name.StartsWith("to", StringComparison.Ordinal)
-                        ? singleValueFunctionCallNode.Name.Substring(2)
-                        : singleValueFunctionCallNode.Name;
+                    var name = functionCallNode.Name.StartsWith("to", StringComparison.Ordinal)
+                        ? functionCallNode.Name.Substring(2)
+                        : functionCallNode.Name;
 
                     this.predicateBuilder.Append(name.ToUpperInvariant() + "(");
 
@@ -201,26 +201,26 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     break;
 
                 default:
-                    throw new ODataException("The function '" + singleValueFunctionCallNode.Name + "' is not supported");
+                    throw new ODataException("The function '" + functionCallNode.Name + "' is not supported");
             }
         }
 
         /// <summary>
-        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" />.
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.Expressions.PropertyAccessNode" />.
         /// </summary>
-        /// <param name="singleValuePropertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.SingleValuePropertyAccessNode" /> to bind.</param>
-        protected override void Bind(SingleValuePropertyAccessNode singleValuePropertyAccessNode)
+        /// <param name="propertyAccessNode">The <see cref="T:Net.Http.WebApi.OData.Query.Expressions.PropertyAccessNode" /> to bind.</param>
+        protected override void Bind(PropertyAccessNode propertyAccessNode)
         {
-            if (singleValuePropertyAccessNode == null)
+            if (propertyAccessNode == null)
             {
-                throw new ArgumentNullException(nameof(singleValuePropertyAccessNode));
+                throw new ArgumentNullException(nameof(propertyAccessNode));
             }
 
-            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(singleValuePropertyAccessNode.PropertyName);
+            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(propertyAccessNode.PropertyName);
 
             if (column == null)
             {
-                throw new ODataException($"The type {this.objectInfo.ForType.Name} does not have a property called {singleValuePropertyAccessNode.PropertyName}");
+                throw new ODataException($"The type {this.objectInfo.ForType.Name} does not have a property called {propertyAccessNode.PropertyName}");
             }
 
             this.predicateBuilder.Append(column.ColumnName);
