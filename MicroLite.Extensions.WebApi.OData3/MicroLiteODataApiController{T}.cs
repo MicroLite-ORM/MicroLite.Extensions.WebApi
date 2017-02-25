@@ -50,19 +50,27 @@ namespace MicroLite.Extensions.WebApi.OData
                     | AllowedFunctions.Round
                     | AllowedFunctions.StartsWith
                     | AllowedFunctions.Substring
-                    | AllowedFunctions.SubstringOf
                     | AllowedFunctions.ToLower
                     | AllowedFunctions.ToUpper
                     | AllowedFunctions.Trim
-                    | AllowedFunctions.Year,
+                    | AllowedFunctions.Year
+#if ODATA3
+                    | AllowedFunctions.SubstringOf,
+#else
+                    | AllowedFunctions.Contains,
+#endif
                 AllowedLogicalOperators = AllowedLogicalOperators.All,
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
-                    | AllowedQueryOptions.InlineCount
                     | AllowedQueryOptions.OrderBy
                     | AllowedQueryOptions.Select
                     | AllowedQueryOptions.Skip
-                    | AllowedQueryOptions.Top,
+                    | AllowedQueryOptions.Top
+#if ODATA3
+                    | AllowedQueryOptions.InlineCount,
+#else
+                    | AllowedQueryOptions.Count,
+#endif
                 MaxTop = 50
             };
         }
@@ -105,14 +113,18 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var sqlQuery = this.CreateSqlQuery(queryOptions);
 
-            var skip = queryOptions.Skip != null ? queryOptions.Skip.Value : 0;
-            var top = queryOptions.Top != null ? queryOptions.Top.Value : this.ValidationSettings.MaxTop;
+            var skip = queryOptions.Skip?.Value ?? 0;
+            var top = queryOptions.Top?.Value ?? this.ValidationSettings.MaxTop;
 
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 
             HttpResponseMessage response;
 
-            if (queryOptions.InlineCount != null && queryOptions.InlineCount.InlineCount == InlineCount.AllPages)
+#if ODATA3
+            if (queryOptions.InlineCount?.InlineCount == InlineCount.AllPages)
+#else
+            if (queryOptions.Count)
+#endif
             {
                 response = this.Request.CreateResponse(HttpStatusCode.OK, new InlineCount<dynamic>(paged.Results, paged.TotalResults));
             }

@@ -41,7 +41,7 @@
             public WhenCallingApplyToWithAComplexQuery()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A/0113334' and substringof('Hayes', Name) eq true"));
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A/0113334' and startswith(Name, 'Hayes') eq true"));
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -55,7 +55,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheFourthQueryValue()
             {
-                Assert.Equal("%Hayes%", this.sqlQuery.Arguments[3].Value);
+                Assert.Equal("Hayes%", this.sqlQuery.Arguments[3].Value);
             }
 
             [Fact]
@@ -75,7 +75,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((((Created >= ?) AND (Created <= ?)) AND (Reference = ?)) AND (Name LIKE ?))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "%Hayes")
+                    .Where("((((Created >= ?) AND (Created <= ?)) AND (Reference = ?)) AND (Name LIKE ?))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "Hayes%")
                     .ToSqlQuery()
                     .CommandText;
 
@@ -395,6 +395,47 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
+
+#if !ODATA3
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyContains
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyContains()
+            {
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=contains(Name, 'Bloggs')"));
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheQueryValue()
+            {
+                Assert.Equal("%Bloggs%", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("Name LIKE ?", "%Bloggs%")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe1ArgumentValue()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+#endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyDay
         {
@@ -1027,6 +1068,7 @@
             }
         }
 
+#if ODATA3
         public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringOf
         {
             private readonly SqlQuery sqlQuery;
@@ -1063,6 +1105,7 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
+#endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartAndLength
         {

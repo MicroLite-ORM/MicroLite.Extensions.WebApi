@@ -55,6 +55,22 @@
                 Assert.NotEqual(AllowedFunctions.Concat, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Concat);
             }
 
+#if !ODATA3
+
+            [Fact]
+            public void ContainsFunctionIsAllowed()
+            {
+                Assert.Equal(AllowedFunctions.Contains, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Contains);
+            }
+
+            [Fact]
+            public void CountQueryOptionIsAllowed()
+            {
+                Assert.Equal(AllowedQueryOptions.Count, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Count);
+            }
+
+#endif
+
             [Fact]
             public void DayFunctionIsAllowed()
             {
@@ -103,11 +119,15 @@
                 Assert.NotEqual(AllowedFunctions.IndexOf, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.IndexOf);
             }
 
+#if ODATA3
+
             [Fact]
             public void InlineCountQueryOptionIsAllowed()
             {
                 Assert.Equal(AllowedQueryOptions.InlineCount, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount);
             }
+
+#endif
 
             [Fact]
             public void LengthFunctionIsNotAllowed()
@@ -187,11 +207,15 @@
                 Assert.Equal(AllowedFunctions.Substring, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Substring);
             }
 
+#if ODATA3
+
             [Fact]
             public void SubstringOfFunctionIsAllowed()
             {
                 Assert.Equal(AllowedFunctions.SubstringOf, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.SubstringOf);
             }
+
+#endif
 
             [Fact]
             public void ToLowerFunctionIsAllowed()
@@ -294,6 +318,74 @@
             }
         }
 
+#if !ODATA3
+
+        public class WhenCountIsNotSpecified
+        {
+            private readonly CustomerController controller;
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api"));
+            private readonly HttpResponseMessage response;
+
+            public WhenCountIsNotSpecified()
+            {
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new List<object>(), 50, 0)));
+
+                this.controller = new CustomerController(this.mockSession.Object);
+                this.controller.Request = this.queryOptions.Request;
+                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+                this.controller.Session = this.mockSession.Object;
+
+                this.response = this.controller.Get(this.queryOptions).Result;
+            }
+
+            [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+            [Fact]
+            public void TheResponseIsAnList()
+            {
+                Assert.IsType<List<dynamic>>(((ObjectContent)this.response.Content).Value);
+            }
+        }
+
+        public class WhenCountTrueIsSpecified
+        {
+            private readonly CustomerController controller;
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$count=true"));
+            private readonly HttpResponseMessage response;
+
+            public WhenCountTrueIsSpecified()
+            {
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
+
+                this.controller = new CustomerController(this.mockSession.Object);
+                this.controller.Request = this.queryOptions.Request;
+                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+                this.controller.Session = this.mockSession.Object;
+
+                this.response = this.controller.Get(this.queryOptions).Result;
+            }
+
+            [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+            [Fact]
+            public void TheResponseIsAnInlineCount()
+            {
+                Assert.IsType<InlineCount<dynamic>>(((ObjectContent)this.response.Content).Value);
+            }
+        }
+
+#endif
+
         public class WhenFormatQueryOptionIsSpecified
         {
             private readonly CustomerController controller;
@@ -324,6 +416,8 @@
                 Assert.Equal(this.queryOptions.Format.MediaTypeHeaderValue, response.Content.Headers.ContentType);
             }
         }
+
+#if ODATA3
 
         public class WhenInlineCountAllPagesIsSpecified
         {
@@ -388,6 +482,8 @@
                 Assert.IsType<List<dynamic>>(((ObjectContent)this.response.Content).Value);
             }
         }
+
+#endif
 
         public class WhenNullQueryOptionsAreSupplied
         {

@@ -187,18 +187,26 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                         ((ConstantNode)parameters[1]).Value + this.sqlCharacters.LikeWildcard);
                     break;
 
+                case "trim":
+                    this.predicateBuilder.Append("LTRIM(RTRIM(");
+                    this.Bind(parameters[0]);
+                    this.predicateBuilder.Append("))");
+                    break;
+#if ODATA3
                 case "substringof":
                     this.Bind(parameters[1]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
                         this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[0]).Value + this.sqlCharacters.LikeWildcard);
                     break;
-
-                case "trim":
-                    this.predicateBuilder.Append("LTRIM(RTRIM(");
+#else
+                case "contains":
                     this.Bind(parameters[0]);
-                    this.predicateBuilder.Append("))");
+                    this.predicateBuilder.Append(
+                        " LIKE " + this.sqlCharacters.GetParameterName(0),
+                        this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[1]).Value + this.sqlCharacters.LikeWildcard);
                     break;
+#endif
 
                 default:
                     throw new ODataException("The function '" + functionCallNode.Name + "' is not supported");
