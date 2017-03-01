@@ -5,7 +5,6 @@
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using MicroLite.Mapping;
-    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -30,12 +29,12 @@
         }
 
         [Fact]
-        public void BindOrderByThrowsODataExceptionForUnspportedPropertyName()
+        public void BindOrderByThrowsInvalidOperationExceptionForUnspportedPropertyName()
         {
-            var exception = Assert.Throws<ODataException>(
+            var exception = Assert.Throws<InvalidOperationException>(
                 () => OrderByBinder.BindOrderBy(new OrderByQueryOption("$orderby=FirstName"), ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
-            Assert.Equal("The type Customer does not have a property called FirstName", exception.Message);
+            Assert.Equal("The type 'Customer' does not contain a property named 'FirstName'", exception.Message);
         }
 
         public class WhenCallingBindOrderBy

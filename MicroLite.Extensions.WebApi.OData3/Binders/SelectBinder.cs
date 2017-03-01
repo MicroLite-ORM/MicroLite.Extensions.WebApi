@@ -13,11 +13,9 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
-    using System.Globalization;
-    using MicroLite.Builder;
-    using MicroLite.Builder.Syntax.Read;
-    using MicroLite.Mapping;
-    using Net.Http.WebApi.OData;
+    using Builder;
+    using Builder.Syntax.Read;
+    using Mapping;
     using Net.Http.WebApi.OData.Query;
 
     /// <summary>
@@ -31,14 +29,14 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// <param name="selectQueryOption">The select query option.</param>
         /// <param name="objectInfo">The IObjectInfo for the type to bind the select list for.</param>
         /// <returns>The SqlBuilder after the select and from clauses have been added.</returns>
-        public static IWhereOrOrderBy BindSelect(SelectQueryOption selectQueryOption, IObjectInfo objectInfo)
+        public static IWhereOrOrderBy BindSelect(SelectExpandQueryOption selectQueryOption, IObjectInfo objectInfo)
         {
             if (objectInfo == null)
             {
                 throw new ArgumentNullException(nameof(objectInfo));
             }
 
-            if (selectQueryOption == null || (selectQueryOption.Properties.Count == 1 && selectQueryOption.Properties[0] == "*"))
+            if (selectQueryOption == null || (selectQueryOption.Properties.Count == 1 && selectQueryOption.Properties[0].Name == "*"))
             {
                 return SqlBuilder.Select("*").From(objectInfo.ForType);
             }
@@ -49,11 +47,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             for (int i = 0; i < selectQueryOption.Properties.Count; i++)
             {
                 var property = selectQueryOption.Properties[i];
-                var column = objectInfo.TableInfo.GetColumnInfoForProperty(property);
+                var column = objectInfo.TableInfo.GetColumnInfoForProperty(property.Name);
 
                 if (column == null)
                 {
-                    throw new ODataException($"The type {objectInfo.ForType.Name} does not have a property called {property}");
+                    throw new InvalidOperationException($"The type '{objectInfo.ForType.Name}' does not contain a property named '{property.Name}'");
                 }
 
                 columnNames[columnCount++] = column.ColumnName;

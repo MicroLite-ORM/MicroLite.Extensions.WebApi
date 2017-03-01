@@ -6,7 +6,6 @@
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using MicroLite.Mapping;
-    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -25,15 +24,15 @@
         }
 
         [Fact]
-        public void BindSelectQueryOptionThrowsODataExceptionForUnspportedPropertyName()
+        public void BindSelectQueryOptionThrowsInvalidOperationExceptionForUnspportedPropertyName()
         {
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$select=FirstName"));
 
-            var exception = Assert.Throws<ODataException>(
+            var exception = Assert.Throws<InvalidOperationException>(
                 () => SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))));
 
-            Assert.Equal("The type Customer does not have a property called FirstName", exception.Message);
+            Assert.Equal("The type 'Customer' does not contain a property named 'FirstName'", exception.Message);
         }
 
         public class WhenCallingBindSelectQueryOptionAndNoPropertiesHaveBeenSpecified

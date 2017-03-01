@@ -13,10 +13,8 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
-    using System.Globalization;
     using MicroLite.Builder.Syntax.Read;
     using MicroLite.Mapping;
-    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
 
     /// <summary>
@@ -47,17 +45,17 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             {
                 for (int i = 0; i < orderByQueryOption.Properties.Count; i++)
                 {
-                    var property = orderByQueryOption.Properties[i];
-                    var column = objectInfo.TableInfo.GetColumnInfoForProperty(property.Name);
+                    var orderByProperty = orderByQueryOption.Properties[i];
+                    var column = objectInfo.TableInfo.GetColumnInfoForProperty(orderByProperty.Property.Name);
 
                     if (column == null)
                     {
-                        throw new ODataException($"The type {objectInfo.ForType.Name} does not have a property called {property.Name}");
+                        throw new InvalidOperationException($"The type '{objectInfo.ForType.Name}' does not contain a property named '{orderByProperty.Property.Name}'");
                     }
 
                     var columnName = column.ColumnName;
 
-                    if (property.Direction == OrderByDirection.Ascending)
+                    if (orderByProperty.Direction == OrderByDirection.Ascending)
                     {
                         orderBySqlBuilder.OrderByAscending(columnName);
                     }

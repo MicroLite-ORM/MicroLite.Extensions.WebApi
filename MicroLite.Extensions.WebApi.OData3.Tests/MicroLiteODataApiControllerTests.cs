@@ -24,8 +24,8 @@
             var controller = new CustomerController(Mock.Of<IAsyncSession>());
 
             var exception = Assert.Throws<AggregateException>(() => controller.Get(queryOptions).Result);
-            Assert.IsType<ODataException>(exception.InnerException);
-            Assert.Contains("$skip", exception.InnerException.Message);
+            Assert.IsType<HttpResponseException>(exception.InnerException);
+            Assert.Equal(HttpStatusCode.BadRequest, ((HttpResponseException)exception.InnerException).Response.StatusCode);
         }
 
         public class TheDefaultValidatonSettings
@@ -341,16 +341,16 @@
             }
 
             [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+            [Fact]
             public void TheODataVersionHeaderIsSet()
             {
                 Assert.True(response.Headers.Contains("OData-Version"));
                 Assert.Equal("4.0", response.Headers.GetValues("OData-Version").Single());
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
             }
 
             [Fact]
@@ -380,16 +380,16 @@
             }
 
             [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+            [Fact]
             public void TheODataVersionHeaderIsSet()
             {
                 Assert.True(response.Headers.Contains("OData-Version"));
                 Assert.Equal("4.0", response.Headers.GetValues("OData-Version").Single());
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
             }
 
             [Fact]

@@ -12,7 +12,7 @@
 // -----------------------------------------------------------------------
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
-    using Net.Http.WebApi.OData;
+    using System;
     using Net.Http.WebApi.OData.Query.Expressions;
 
     internal static class BinaryOperatorKindExtensions
@@ -61,7 +61,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     return "-";
 
                 default:
-                    throw new ODataException("The operator '" + binaryOperatorKind.ToString() + "' is not supported");
+                    throw new NotImplementedException($"The operator '{binaryOperatorKind}' is not implemented by this service");
             }
         }
     }

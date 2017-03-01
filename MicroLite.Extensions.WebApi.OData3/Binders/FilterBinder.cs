@@ -17,7 +17,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     using Builder.Syntax.Read;
     using Characters;
     using Mapping;
-    using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Binders;
     using Net.Http.WebApi.OData.Query.Expressions;
@@ -83,10 +83,10 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             if (!(binaryOperatorNode.Left.Kind == QueryNodeKind.FunctionCall
                 && binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal
                 && binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmType.Boolean))
+                && ((ConstantNode)binaryOperatorNode.Right).EdmPrimativeType == EdmPrimativeType.Boolean))
             {
                 if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                    && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmType.Null)
+                    && ((ConstantNode)binaryOperatorNode.Right).EdmPrimativeType == EdmPrimativeType.Null)
                 {
                     if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
                     {
@@ -119,7 +119,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException(nameof(constantNode));
             }
 
-            if (constantNode.EdmType == EdmType.Null)
+            if (constantNode.EdmPrimativeType == EdmPrimativeType.Null)
             {
                 this.predicateBuilder.Append("NULL");
             }
@@ -209,7 +209,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 #endif
 
                 default:
-                    throw new ODataException("The function '" + functionCallNode.Name + "' is not supported");
+                    throw new NotImplementedException($"The function '{functionCallNode.Name}' is not implemented by this service");
             }
         }
 
@@ -224,11 +224,11 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException(nameof(propertyAccessNode));
             }
 
-            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(propertyAccessNode.PropertyName);
+            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(propertyAccessNode.Property.Name);
 
             if (column == null)
             {
-                throw new ODataException($"The type {this.objectInfo.ForType.Name} does not have a property called {propertyAccessNode.PropertyName}");
+                throw new InvalidOperationException($"The type '{this.objectInfo.ForType.Name}' does not contain a property named '{propertyAccessNode.Property.Name}'");
             }
 
             this.predicateBuilder.Append(column.ColumnName);

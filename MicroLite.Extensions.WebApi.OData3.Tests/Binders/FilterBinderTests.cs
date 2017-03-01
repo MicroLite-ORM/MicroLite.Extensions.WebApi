@@ -6,32 +6,31 @@
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using MicroLite.Mapping;
-    using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
     public class FilterBinderTests
     {
         [Fact]
-        public void BindFilterThrowsODataExceptionForUnspportedFunctionName()
-        {
-            var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=indexof(Name, 'ayes') eq 1"));
-
-            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
-
-            Assert.Equal("The function 'indexof' is not supported", exception.Message);
-        }
-
-        [Fact]
-        public void BindFilterThrowsODataExceptionForUnspportedPropertyName()
+        public void BindFilterThrowsInvalidOperationExceptionForUnspportedPropertyName()
         {
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=FirstName eq 'Fred'"));
 
-            var exception = Assert.Throws<ODataException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
+            var exception = Assert.Throws<InvalidOperationException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
-            Assert.Equal("The type Customer does not have a property called FirstName", exception.Message);
+            Assert.Equal("The type 'Customer' does not contain a property named 'FirstName'", exception.Message);
+        }
+
+        [Fact]
+        public void BindFilterThrowsNotImplementedExceptionForUnspportedFunctionName()
+        {
+            var queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=indexof(Name, 'ayes') eq 1"));
+
+            var exception = Assert.Throws<NotImplementedException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
+
+            Assert.Equal("The function 'indexof' is not implemented by this service", exception.Message);
         }
 
         public class WhenCallingApplyToWithAComplexQuery
@@ -41,7 +40,12 @@
             public WhenCallingApplyToWithAComplexQuery()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A/0113334' and startswith(Name, 'Hayes') eq true"));
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A/0113334' and startswith(Name, 'Hayes') eq true"));
+#else
+                        "http://localhost/api/Customers?$filter=Created ge 2013-05-01 and Created le 2013-06-12 and Reference eq 'A/0113334' and startswith(Name, 'Hayes') eq true"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -182,7 +186,12 @@
             public WhenCallingBindFilterQueryOptionWithAPropertyEqualsAndGreaterThanAndLessThan()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"));
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"));
+#else
+                        "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt 2013-04-01 and Created lt 2013-04-30"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -231,7 +240,12 @@
             public WhenCallingBindFilterQueryOptionWithAPropertyEqualsAndGreaterThanOrLessThan()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"));
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"));
+#else
+                        "http://localhost/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt 2013-04-01 or Created lt 2013-04-30"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -280,7 +294,12 @@
             public WhenCallingBindFilterQueryOptionWithAPropertyGreaterThanAndLessThan()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"));
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"));
+#else
+                       "http://localhost/api/Customers?$filter=Created gt 2013-04-01 and Created lt 2013-04-30"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -323,7 +342,12 @@
             public WhenCallingBindFilterQueryOptionWithAPropertyGreaterThanOrLessThan()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"));
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"));
+#else
+                        "http://localhost/api/Customers?$filter=Created gt 2013-04-01 or Created lt 2013-04-30"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -661,7 +685,14 @@
             public WhenCallingBindFilterQueryOptionWithASinglePropertyGreaterThan()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01'"));
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
+
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created gt datetime'2013-04-01'"));
+#else
+                        "http://localhost/api/Customers?$filter=Created gt 2013-04-01"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -698,8 +729,12 @@
             public WhenCallingBindFilterQueryOptionWithASinglePropertyGreaterThanOrEqual()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created ge datetime'2013-04-01'"));
-
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created ge datetime'2013-04-01'"));
+#else
+                        "http://localhost/api/Customers?$filter=Created ge 2013-04-01"));
+#endif
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
@@ -735,7 +770,12 @@
             public WhenCallingBindFilterQueryOptionWithASinglePropertyLessThan()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created lt datetime'2013-04-01'"));
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created lt datetime'2013-04-01'"));
+#else
+                        "http://localhost/api/Customers?$filter=Created lt 2013-04-01"));
+#endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -772,8 +812,12 @@
             public WhenCallingBindFilterQueryOptionWithASinglePropertyLessThanOrEqual()
             {
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$filter=Created le datetime'2013-04-01'"));
-
+                    new HttpRequestMessage(HttpMethod.Get,
+#if ODATA3
+                        "http://localhost/api/Customers?$filter=Created le datetime'2013-04-01'"));
+#else
+                        "http://localhost/api/Customers?$filter=Created le 2013-04-01"));
+#endif
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
 
@@ -1069,6 +1113,7 @@
         }
 
 #if ODATA3
+
         public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringOf
         {
             private readonly SqlQuery sqlQuery;
@@ -1105,6 +1150,7 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
+
 #endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartAndLength
