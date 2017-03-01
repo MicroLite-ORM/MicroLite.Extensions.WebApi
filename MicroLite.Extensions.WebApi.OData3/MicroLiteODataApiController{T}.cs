@@ -15,7 +15,8 @@ namespace MicroLite.Extensions.WebApi.OData
     using System;
     using System.Net;
     using System.Net.Http;
-    using MicroLite.Extensions.WebApi.OData.Binders;
+    using System.Threading.Tasks;
+    using Binders;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -102,7 +103,7 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <param name="queryOptions">The query options.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The whole point to this method is that it returns the object!")]
-        protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> GetEntityResponseAsync(ODataQueryOptions queryOptions)
+        protected virtual async Task<HttpResponseMessage> GetEntityResponseAsync(ODataQueryOptions queryOptions)
         {
             if (queryOptions == null)
             {
@@ -137,6 +138,12 @@ namespace MicroLite.Extensions.WebApi.OData
             {
                 response.Content.Headers.ContentType = queryOptions.Format.MediaTypeHeaderValue;
             }
+
+#if ODATA3
+            response.Headers.Add("DataServiceVersion", "3.0");
+#elif ODATA4
+            response.Headers.Add("OData-Version", "4.0");
+#endif
 
             return response;
         }

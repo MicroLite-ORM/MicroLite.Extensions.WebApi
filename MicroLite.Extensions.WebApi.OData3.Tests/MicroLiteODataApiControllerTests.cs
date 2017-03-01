@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
@@ -340,6 +341,13 @@
             }
 
             [Fact]
+            public void TheODataVersionHeaderIsSet()
+            {
+                Assert.True(response.Headers.Contains("OData-Version"));
+                Assert.Equal("4.0", response.Headers.GetValues("OData-Version").Single());
+            }
+
+            [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
             {
                 Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
@@ -369,6 +377,13 @@
                 this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Get(this.queryOptions).Result;
+            }
+
+            [Fact]
+            public void TheODataVersionHeaderIsSet()
+            {
+                Assert.True(response.Headers.Contains("OData-Version"));
+                Assert.Equal("4.0", response.Headers.GetValues("OData-Version").Single());
             }
 
             [Fact]
@@ -439,6 +454,13 @@
             }
 
             [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(response.Headers.Contains("DataServiceVersion"));
+                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
+            }
+
+            [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
             {
                 Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
@@ -468,6 +490,13 @@
                 this.controller.Session = this.mockSession.Object;
 
                 this.response = this.controller.Get(this.queryOptions).Result;
+            }
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(response.Headers.Contains("DataServiceVersion"));
+                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
             }
 
             [Fact]
