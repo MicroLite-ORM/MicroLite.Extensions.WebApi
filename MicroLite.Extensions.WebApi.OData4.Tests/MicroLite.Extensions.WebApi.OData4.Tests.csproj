@@ -48,7 +48,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Net.Http.WebApi.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net.Http.WebApi.OData.4.0.0-alpha6\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
+      <HintPath>..\packages\Net.Http.WebApi.OData.4.0.0-alpha7\lib\net45\Net.Http.WebApi.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

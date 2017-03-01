@@ -83,10 +83,10 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             if (!(binaryOperatorNode.Left.Kind == QueryNodeKind.FunctionCall
                 && binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal
                 && binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                && ((ConstantNode)binaryOperatorNode.Right).EdmPrimativeType == EdmPrimativeType.Boolean))
+                && ((ConstantNode)binaryOperatorNode.Right).EdmPrimitiveType == EdmPrimitiveType.Boolean))
             {
                 if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                    && ((ConstantNode)binaryOperatorNode.Right).EdmPrimativeType == EdmPrimativeType.Null)
+                    && ((ConstantNode)binaryOperatorNode.Right).EdmPrimitiveType == EdmPrimitiveType.Null)
                 {
                     if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
                     {
@@ -119,7 +119,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException(nameof(constantNode));
             }
 
-            if (constantNode.EdmPrimativeType == EdmPrimativeType.Null)
+            if (constantNode.EdmPrimitiveType == EdmPrimitiveType.Null)
             {
                 this.predicateBuilder.Append("NULL");
             }
