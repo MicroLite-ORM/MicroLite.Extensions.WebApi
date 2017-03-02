@@ -6,7 +6,11 @@
     <authors>Trevor Pilley and MicroLite Project Contributors</authors>
     <owners>Trevor Pilley</owners>
     <description>An extension for the MicroLite ORM Framework to integrate with ASP.NET WebApi.</description>
-    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.
+
+OData query support has been moved into a separate library, you can now choose from:
+- OData 3.0: https://www.nuget.org/packages/MicroLite.Extensions.WebApi.OData3
+- OData 4.0: https://www.nuget.org/packages/MicroLite.Extensions.WebApi.OData4</releaseNotes>
     <language>en-GB</language>
     <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
     <licenseUrl>http://microliteorm.wordpress.com/license/</licenseUrl>

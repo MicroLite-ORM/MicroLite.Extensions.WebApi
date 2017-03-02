@@ -6,7 +6,18 @@
     <authors>Trevor Pilley and MicroLite Project Contributors</authors>
     <owners>Trevor Pilley</owners>
     <description>An extension for the MicroLite ORM Framework to add OData 3.0 query support to MicroLite.Extensions.WebApi.</description>
-    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.
+
+Net.Http.WebApi.OData 3.5.0 changes:
+- Removed types/members obsoleted in 3.4.x and earlier
+- Expression QueryNode objects refactored (partly for performance, partly to simplify)
+- Improved validation
+- Fixed parsing of DateTimeOffset
+- Correctly returning HTTP 400 and HTTP 501 where appropriate instead of ODataException which resulted in HTTP 500
+- SelectQueryOption and ExpandQueryOption merged into SelectExpandQueryOption since they have the same implementation
+- Introduction of EdmProperty which is used in SelectExpandQueryOption, OrderByProperty, PropertyAccessNode
+- The InlineCount&lt;T&gt; class was still returning OData 2.0 format { "__count":0, "results":[] }, updated to OData 3.0 format { "odata.count":0, "value":[] } replaced by PagedResult&lt;T&gt; class
+</releaseNotes>
     <language>en-GB</language>
     <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
     <licenseUrl>http://microliteorm.wordpress.com/license/</licenseUrl>
