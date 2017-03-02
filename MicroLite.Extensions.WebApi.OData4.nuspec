@@ -35,7 +35,7 @@ Net.Http.WebApi.OData 4.0.0 changes:
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
       <dependency id="MicroLite.Extensions.WebApi" version="[6.6.0-alpha,7.0.0)" />
-      <dependency id="Net.Http.WebApi.OData" version="4.0.0-alpha9" />
+      <dependency id="Net.Http.WebApi.OData" version="[4.0.0-alpha9,5.0.0)" />
     </dependencies>
   </metadata>
   <files>
