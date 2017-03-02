@@ -257,7 +257,7 @@
 
             public WhenAValidSkipValueIsSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
@@ -282,7 +282,7 @@
 
             public WhenAValidTopValueIsSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 15, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 15, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
@@ -330,7 +330,7 @@
 
             public WhenCountIsNotSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new List<object>(), 50, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new List<object>(), 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
@@ -369,7 +369,7 @@
 
             public WhenCountTrueIsSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
@@ -393,9 +393,9 @@
             }
 
             [Fact]
-            public void TheResponseIsAnInlineCount()
+            public void TheResponseIsAPagedResult()
             {
-                Assert.IsType<InlineCount<dynamic>>(((ObjectContent)this.response.Content).Value);
+                Assert.IsType<PagedResult<dynamic>>(((ObjectContent)this.response.Content).Value);
             }
         }
 
@@ -410,7 +410,7 @@
 
             public WhenFormatQueryOptionIsSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
@@ -443,7 +443,7 @@
 
             public WhenInlineCountAllPagesIsSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new object[0], 50, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
@@ -467,9 +467,9 @@
             }
 
             [Fact]
-            public void TheResponseIsAnInlineCount()
+            public void TheResponseIsAPagedResult()
             {
-                Assert.IsType<InlineCount<dynamic>>(((ObjectContent)this.response.Content).Value);
+                Assert.IsType<PagedResult<dynamic>>(((ObjectContent)this.response.Content).Value);
             }
         }
 
@@ -482,7 +482,7 @@
 
             public WhenInlineCountIsNotSpecified()
             {
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(0, new List<object>(), 50, 0)));
+                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new List<object>(), 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = this.queryOptions.Request;
