@@ -3,16 +3,17 @@ param(
   [bool]$push
 )
 
-$projectName = "MicroLite.Extensions.WebApi"
+$projects = @(
+    @{ Name = "MicroLite.Extensions.WebApi" },
+    @{ Name = "MicroLite.Extensions.WebApi.OData3" },
+    @{ Name = "MicroLite.Extensions.WebApi.OData4" }
+)
 
 $scriptPath = Split-Path $MyInvocation.InvocationName
 $buildDir = "$scriptPath\build"
 $nuGetExe = "$scriptPath\tools\NuGet.exe"
-$nuSpec = "$scriptPath\$projectName.nuspec"
-$nuGetPackage = "$buildDir\$projectName.$version.nupkg"
 
-function UpdateAssemblyInfoFiles ([string] $buildVersion, [string] $commit)
-{
+function UpdateAssemblyInfoFiles ([string] $buildVersion, [string] $commit) {
 	$assemblyVersionPattern = 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
 	$fileVersionPattern = 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
 	$infoVersionPattern = 'AssemblyInformationalVersion\("[0-9]+(\.([0-9]+|\*)){1,3}(.*)"\)'
@@ -32,8 +33,7 @@ function UpdateAssemblyInfoFiles ([string] $buildVersion, [string] $commit)
 	}
 }
 
-if ($version)
-{
+if ($version) {
 	$gitDir = $scriptPath + "\.git"
 	$commit = git --git-dir $gitDir rev-list HEAD --count
 
@@ -47,14 +47,18 @@ Invoke-psake (Join-Path $scriptPath default.ps1) -parameters @{"buildVersion"="$
 
 Remove-Module psake -ErrorAction SilentlyContinue
 
-if ($version)
-{
-	Write-Host "Pack $nuSpec -> $nuGetPackage" -ForegroundColor Green
-	& $nuGetExe Pack $nuSpec -Version $version -OutputDirectory $buildDir -BasePath $buildDir
+if ($version) {
+    foreach ($project in $projects) {
+        $name = $project.Name
+        $nuSpec = "$scriptPath\$name.nuspec"
+        $nuGetPackage = "$buildDir\$name.$version.nupkg"
 
-	if($push)
-	{
-		Write-Host "Push $nuGetPackage -> http://nuget.org" -ForegroundColor Green
-		& $nuGetExe Push $nuGetPackage
-	}
+	    Write-Host "Pack $nuSpec -> $nuGetPackage" -ForegroundColor Green
+	    & $nuGetExe Pack $nuSpec -Version $version -OutputDirectory $buildDir -BasePath $buildDir
+
+	    if($push) {
+	        Write-Host "Push $nuGetPackage -> http://nuget.org" -ForegroundColor Green
+		    & $nuGetExe Push $nuGetPackage
+	    }
+    }
 }

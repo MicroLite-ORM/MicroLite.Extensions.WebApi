@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE;ODATA3</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MicroLite.Extensions.WebApi.OData.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\MicroLite.Extensions.WebApi.OData3.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\MicroLite.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE;ODATA3</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MicroLite.Extensions.WebApi.OData.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\MicroLite.Extensions.WebApi.OData3.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\MicroLite.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
