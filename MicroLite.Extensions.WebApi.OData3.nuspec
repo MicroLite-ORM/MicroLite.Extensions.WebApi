@@ -13,6 +13,8 @@ Net.Http.WebApi.OData 3.5.0 changes:
 - Expression QueryNode objects refactored (partly for performance, partly to simplify)
 - Improved validation
 - Fixed parsing of DateTimeOffset
+- Decimal (+/-) without digit before decimal point
+- Double (+/-) with exponent
 - Correctly returning HTTP 400 and HTTP 501 where appropriate instead of ODataException which resulted in HTTP 500
 - SelectQueryOption and ExpandQueryOption merged into SelectExpandQueryOption since they have the same implementation
 - Introduction of EdmProperty which is used in SelectExpandQueryOption, OrderByProperty, PropertyAccessNode
@@ -26,7 +28,7 @@ Net.Http.WebApi.OData 3.5.0 changes:
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
       <dependency id="MicroLite.Extensions.WebApi" version="[6.6.0-alpha,7.0.0)" />
-      <dependency id="Net.Http.WebApi.OData" version="[3.5.0-alpha4,4.0.0)" />
+      <dependency id="Net.Http.WebApi.OData" version="[3.5.0-alpha5,4.0.0)" />
     </dependencies>
   </metadata>
   <files>

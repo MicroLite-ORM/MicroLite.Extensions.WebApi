@@ -127,23 +127,17 @@ namespace MicroLite.Extensions.WebApi.OData
             if (queryOptions.Count)
 #endif
             {
-                response = this.Request.CreateResponse(HttpStatusCode.OK, new PagedResult<dynamic>(paged.Results, paged.TotalResults));
+                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new PagedResult<dynamic>(paged.Results, paged.TotalResults));
             }
             else
             {
-                response = this.Request.CreateResponse(HttpStatusCode.OK, paged.Results);
+                response = this.Request.CreateODataResponse(HttpStatusCode.OK, paged.Results);
             }
 
             if (queryOptions.Format != null)
             {
                 response.Content.Headers.ContentType = queryOptions.Format.MediaTypeHeaderValue;
             }
-
-#if ODATA3
-            response.Headers.Add("DataServiceVersion", "3.0");
-#elif ODATA4
-            response.Headers.Add("OData-Version", "4.0");
-#endif
 
             return response;
         }

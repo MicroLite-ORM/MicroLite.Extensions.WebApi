@@ -42,9 +42,9 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get,
 #if ODATA3
-                        "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A/0113334' and startswith(Name, 'Hayes') eq true"));
+                        "http://localhost/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A0113334' and startswith(Name, 'Hayes') eq true"));
 #else
-                        "http://localhost/api/Customers?$filter=Created ge 2013-05-01 and Created le 2013-06-12 and Reference eq 'A/0113334' and startswith(Name, 'Hayes') eq true"));
+                        "http://localhost/api/Customers?$filter=Created ge 2013-05-01 and Created le 2013-06-12 and Reference eq 'A0113334' and startswith(Name, 'Hayes') eq true"));
 #endif
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -71,7 +71,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheThirdQueryValue()
             {
-                Assert.Equal("A/0113334", this.sqlQuery.Arguments[2].Value);
+                Assert.Equal("A0113334", this.sqlQuery.Arguments[2].Value);
             }
 
             [Fact]
@@ -79,7 +79,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("((((Created >= ?) AND (Created <= ?)) AND (Reference = ?)) AND (Name LIKE ?))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A/0113334", "Hayes%")
+                    .Where("((((Created >= ?) AND (Created <= ?)) AND (Reference = ?)) AND (Name LIKE ?))", new DateTime(2013, 5, 1), new DateTime(2013, 6, 12), "A0113334", "Hayes%")
                     .ToSqlQuery()
                     .CommandText;
 
