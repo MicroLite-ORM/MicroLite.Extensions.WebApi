@@ -6,29 +6,7 @@
     <authors>Trevor Pilley and MicroLite Project Contributors</authors>
     <owners>Trevor Pilley</owners>
     <description>An extension for the MicroLite ORM Framework to add OData 4.0 query support to MicroLite.Extensions.WebApi.</description>
-    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.
-
-Net.Http.WebApi.OData 4.0.0 changes:
-- Removed types/members obsoleted in 3.4.x and earlier
-- Expression QueryNode objects refactored (partly for performance, partly to simplify)
-- Improved validation
-- Fixed parsing of DateTimeOffset
-- Decimal (+/-) without digit before decimal point
-- Double (+/-) with exponent
-- Correctly returning HTTP 400 and HTTP 501 where appropriate instead of ODataException which resulted in HTTP 500
-- SelectQueryOption and ExpandQueryOption merged into SelectExpandQueryOption since they have the same implementation
-- Introduction of EdmProperty which is used in SelectExpandQueryOption, OrderByProperty, PropertyAccessNode
-- The InlineCount&lt;T&gt; class was still returning OData 2.0 format { "__count":0, "results":[] }, updated to OData 4.0 format { "@odata.count":0, "value":[] } replaced by PagedResult&lt;T&gt; class
-- SubStringOf removed
-- Contains added
-- DateTime &amp; Time removed
-- Date and TimeOfDay added (don't require prefixing)
-- DateTimeOffset parsing improved, also doesn't require prefix
-- Guid doesn't require prefix
-- $inlinecount=allpages replaced by $count=true
-- Added $search query option
-- Added FractionalSeconds, Now, MinDateTime and MaxDateTime functions
-</releaseNotes>
+    <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.</releaseNotes>
     <language>en-GB</language>
     <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
     <licenseUrl>http://microliteorm.wordpress.com/license/</licenseUrl>
@@ -37,7 +15,7 @@ Net.Http.WebApi.OData 4.0.0 changes:
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
       <dependency id="MicroLite.Extensions.WebApi" version="[6.6.0-alpha,7.0.0)" />
-      <dependency id="Net.Http.WebApi.OData" version="[4.0.0-alpha10,5.0.0)" />
+      <dependency id="Net.Http.WebApi.OData" version="[4.0.0-alpha11,5.0.0)" />
     </dependencies>
   </metadata>
   <files>
