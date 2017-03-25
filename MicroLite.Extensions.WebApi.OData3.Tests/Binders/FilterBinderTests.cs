@@ -599,16 +599,18 @@
             }
         }
 
-        public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqual
+#if ODATA4
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqualEnum
         {
             private readonly SqlQuery sqlQuery;
 
-            public WhenCallingBindFilterQueryOptionWithASinglePropertyEqual()
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyEqualEnum()
             {
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs'"),
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Status eq MicroLite.Extensions.WebApi.Tests.TestEntities.CustomerStatus'Active'"),
                     EntityDataModel.Current.Collections["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -617,7 +619,7 @@
             [Fact]
             public void TheArgumentsShouldContainTheQueryValue()
             {
-                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
+                Assert.Equal(CustomerStatus.Active, this.sqlQuery.Arguments[0].Value);
             }
 
             [Fact]
@@ -625,7 +627,7 @@
             {
                 var expected = SqlBuilder.Select("*")
                     .From(typeof(Customer))
-                    .Where("(Name = ?)", "Fred Bloggs")
+                    .Where("(CustomerStatusId = ?)", CustomerStatus.Active)
                     .ToSqlQuery()
                     .CommandText;
 
@@ -638,6 +640,8 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
+
+#endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqualNull
         {
@@ -671,6 +675,46 @@
             public void ThereShouldBeNoArgumentValues()
             {
                 Assert.Equal(0, this.sqlQuery.Arguments.Count);
+            }
+        }
+
+        public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqualString
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindFilterQueryOptionWithASinglePropertyEqualString()
+            {
+                TestHelper.EnsureEDM();
+
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs'"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
+                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheArgumentsShouldContainTheQueryValue()
+            {
+                Assert.Equal("Fred Bloggs", this.sqlQuery.Arguments[0].Value);
+            }
+
+            [Fact]
+            public void TheCommandTextShouldContainTheWhereClause()
+            {
+                var expected = SqlBuilder.Select("*")
+                    .From(typeof(Customer))
+                    .Where("(Name = ?)", "Fred Bloggs")
+                    .ToSqlQuery()
+                    .CommandText;
+
+                Assert.Equal(expected, this.sqlQuery.CommandText);
+            }
+
+            [Fact]
+            public void ThereShouldBe1ArgumentValue()
+            {
+                Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
 
