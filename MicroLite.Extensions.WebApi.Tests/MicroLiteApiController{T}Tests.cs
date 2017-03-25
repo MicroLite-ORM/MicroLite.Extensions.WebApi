@@ -21,7 +21,7 @@
             public WhenCallingDeleteAndAnEntityIsDeleted()
             {
                 this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(true));
- 
+
                 this.controller = new CustomerController(this.mockSession.Object);
                 this.controller.Request = new HttpRequestMessage();
 
@@ -153,7 +153,7 @@
             [Fact]
             public void TheHttpResponseMessageShouldContainTheUriForTheEntity()
             {
-                Assert.Equal(new Uri("http://localhost/api/Customers/12345"), this.response.Headers.Location);
+                Assert.Equal(new Uri("http://services.microlite.org/api/Customers/12345"), this.response.Headers.Location);
             }
 
             [Fact]
@@ -265,7 +265,7 @@
                 Assert.Equal(this.identifier, this.updatedCustomer.Id);
             }
         }
-        
+
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteApiController<Customer, int> controller;
@@ -293,7 +293,7 @@
             {
                 this.GetEntityResourceUri = (int id) =>
                 {
-                    return new Uri("http://localhost/api/Customers/" + id.ToString());
+                    return new Uri("http://services.microlite.org/api/Customers/" + id.ToString());
                 };
             }
 

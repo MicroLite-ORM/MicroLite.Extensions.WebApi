@@ -41,27 +41,28 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
         /// </summary>
         /// <param name="filterQueryOption">The filter query.</param>
         /// <param name="objectInfo">The IObjectInfo for the type to bind the filter list for.</param>
-        /// <param name="selectFromSqlBuilder">The select from SQL builder.</param>
+        /// <param name="whereSqlBuilder">The select from SQL builder.</param>
         /// <returns>The SqlBuilder after the where clause has been added.</returns>
-        public static IOrderBy BindFilter(FilterQueryOption filterQueryOption, IObjectInfo objectInfo, IWhereOrOrderBy selectFromSqlBuilder)
+        public static IOrderBy BindFilter(FilterQueryOption filterQueryOption, IObjectInfo objectInfo, IWhereOrOrderBy whereSqlBuilder)
         {
             if (objectInfo == null)
             {
                 throw new ArgumentNullException(nameof(objectInfo));
             }
 
-            if (selectFromSqlBuilder == null)
+            if (whereSqlBuilder == null)
             {
-                throw new ArgumentNullException(nameof(selectFromSqlBuilder));
+                throw new ArgumentNullException(nameof(whereSqlBuilder));
             }
 
             if (filterQueryOption != null)
             {
                 var filterBinder = new FilterBinder(objectInfo);
-                filterBinder.BindFilter(filterQueryOption, selectFromSqlBuilder);
+                filterBinder.Bind(filterQueryOption);
+                filterBinder.predicateBuilder.ApplyTo(whereSqlBuilder);
             }
 
-            return selectFromSqlBuilder;
+            return whereSqlBuilder;
         }
 
         /// <summary>
@@ -83,10 +84,10 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
             if (!(binaryOperatorNode.Left.Kind == QueryNodeKind.FunctionCall
                 && binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal
                 && binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                && ((ConstantNode)binaryOperatorNode.Right).EdmPrimitiveType == EdmPrimitiveType.Boolean))
+                && ((ConstantNode)binaryOperatorNode.Right).EdmType == EdmPrimitiveType.Boolean))
             {
                 if (binaryOperatorNode.Right.Kind == QueryNodeKind.Constant
-                    && ((ConstantNode)binaryOperatorNode.Right).EdmPrimitiveType == EdmPrimitiveType.Null)
+                    && ((ConstantNode)binaryOperatorNode.Right).EdmType == null)
                 {
                     if (binaryOperatorNode.OperatorKind == BinaryOperatorKind.Equal)
                     {
@@ -119,7 +120,7 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException(nameof(constantNode));
             }
 
-            if (constantNode.EdmPrimitiveType == EdmPrimitiveType.Null)
+            if (constantNode.EdmType == null)
             {
                 this.predicateBuilder.Append("NULL");
             }
@@ -247,15 +248,6 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             this.predicateBuilder.Append(unaryOperatorNode.OperatorKind.ToSqlOperator() + " ");
             this.Bind(unaryOperatorNode.Operand);
-        }
-
-        private IAndOrOrderBy BindFilter(FilterQueryOption filterQuery, IWhereOrOrderBy selectFromSqlBuilder)
-        {
-            this.Bind(filterQuery.Expression);
-
-            var where = this.predicateBuilder.ApplyTo(selectFromSqlBuilder);
-
-            return where;
         }
     }
 }

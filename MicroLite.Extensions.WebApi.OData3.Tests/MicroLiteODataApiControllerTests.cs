@@ -11,6 +11,7 @@
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using Moq;
     using Net.Http.WebApi.OData;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
@@ -19,7 +20,11 @@
         [Fact]
         public void WhenCallingGetEntityResponseTheODataQueryOptionsAreValidated()
         {
-            var queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=-1"));
+            TestHelper.EnsureEDM();
+
+            var queryOptions = new ODataQueryOptions(
+                new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$skip=-1"),
+                EntityDataModel.Current.Collections["Customers"]);
 
             var controller = new CustomerController(Mock.Of<IAsyncSession>());
 
@@ -253,10 +258,16 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$skip=15"));
+            private readonly ODataQueryOptions queryOptions;
 
             public WhenAValidSkipValueIsSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$skip=15"),
+                EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -278,10 +289,16 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$top=15"));
+            private readonly ODataQueryOptions queryOptions;
 
             public WhenAValidTopValueIsSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$top=15"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 15, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -325,11 +342,17 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api"));
+            private readonly ODataQueryOptions queryOptions;
             private readonly HttpResponseMessage response;
 
             public WhenCountIsNotSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new List<object>(), 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -364,11 +387,17 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$count=true"));
+            private readonly ODataQueryOptions queryOptions;
             private readonly HttpResponseMessage response;
 
             public WhenCountTrueIsSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$count=true"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -405,11 +434,17 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$format=application/xml"));
+            private readonly ODataQueryOptions queryOptions;
             private readonly HttpResponseMessage response;
 
             public WhenFormatQueryOptionIsSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$format=application/xml"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -438,11 +473,17 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api?$inlinecount=allpages"));
+            private readonly ODataQueryOptions queryOptions;
             private readonly HttpResponseMessage response;
 
             public WhenInlineCountAllPagesIsSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$inlinecount=allpages"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -477,11 +518,17 @@
         {
             private readonly CustomerController controller;
             private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions = new ODataQueryOptions(new HttpRequestMessage(HttpMethod.Get, "http://localhost/api"));
+            private readonly ODataQueryOptions queryOptions;
             private readonly HttpResponseMessage response;
 
             public WhenInlineCountIsNotSpecified()
             {
+                TestHelper.EnsureEDM();
+
+                this.queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
+                    EntityDataModel.Current.Collections["Customers"]);
+
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new List<object>(), 50, 0)));
 
                 this.controller = new CustomerController(this.mockSession.Object);
@@ -536,7 +583,7 @@
             {
                 this.GetEntityResourceUri = (int id) =>
                 {
-                    return new Uri("http://localhost/api/Customers/" + id.ToString());
+                    return new Uri("http://services.microlite.org/api/Customers/" + id.ToString());
                 };
             }
 

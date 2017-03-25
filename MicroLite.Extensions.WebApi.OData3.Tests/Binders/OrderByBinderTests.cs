@@ -6,16 +6,23 @@
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using MicroLite.Mapping;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
     public class OrderByBinderTests
     {
+        public OrderByBinderTests()
+        {
+            TestHelper.EnsureEDM();
+        }
+
         [Fact]
         public void BindOrderByThrowsArgumentNullExceptionForNullObjectInfo()
         {
             var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$orderby=FirstName"));
+                new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Name"),
+                EntityDataModel.Current.Collections["Customers"]);
 
             var exception = Assert.Throws<ArgumentNullException>(
                 () => OrderByBinder.BindOrderBy(queryOptions.OrderBy, null, SqlBuilder.Select("*").From(typeof(Customer))));
@@ -27,24 +34,13 @@
         public void BindOrderByThrowsArgumentNullExceptionForNullOrderBySqlBuilder()
         {
             var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$orderby=FirstName"));
+                new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Name"),
+                EntityDataModel.Current.Collections["Customers"]);
 
             var exception = Assert.Throws<ArgumentNullException>(
                 () => OrderByBinder.BindOrderBy(queryOptions.OrderBy, ObjectInfo.For(typeof(Customer)), null));
 
             Assert.Equal("orderBySqlBuilder", exception.ParamName);
-        }
-
-        [Fact]
-        public void BindOrderByThrowsInvalidOperationExceptionForUnspportedPropertyName()
-        {
-            var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$orderby=FirstName"));
-
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => OrderByBinder.BindOrderBy(queryOptions.OrderBy, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
-
-            Assert.Equal("The type 'Customer' does not contain a property named 'FirstName'", exception.Message);
         }
 
         public class WhenCallingBindOrderBy
@@ -53,8 +49,15 @@
 
             public WhenCallingBindOrderBy()
             {
+                TestHelper.EnsureEDM();
+
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$orderby=Status desc,Name"));
+#if ODATA3
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=StatusId desc,Name"),
+#else
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Status desc,Name"),
+#endif
+                    EntityDataModel.Current.Collections["Customers"]);
 
                 this.sqlQuery = OrderByBinder.BindOrderBy(
                     queryOptions.OrderBy,
@@ -68,7 +71,11 @@
                 var expected = SqlBuilder
                     .Select("*")
                     .From(typeof(Customer))
+#if ODATA3
+                    .OrderByDescending("StatusId")
+#else
                     .OrderByDescending("CustomerStatusId")
+#endif
                     .OrderByAscending("Name")
                     .ToSqlQuery();
 

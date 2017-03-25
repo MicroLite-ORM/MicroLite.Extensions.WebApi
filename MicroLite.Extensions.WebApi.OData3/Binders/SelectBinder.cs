@@ -16,13 +16,25 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
     using Builder;
     using Builder.Syntax.Read;
     using Mapping;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
+    using Net.Http.WebApi.OData.Query.Binders;
 
     /// <summary>
     /// The binder class which can append the $select query option.
     /// </summary>
-    public static class SelectBinder
+    public sealed class SelectBinder : AbstractSelectExpandBinder
     {
+        private readonly string[] columnNames;
+        private readonly IObjectInfo objectInfo;
+        private int columnCount;
+
+        private SelectBinder(IObjectInfo objectInfo, string[] columnNames)
+        {
+            this.objectInfo = objectInfo;
+            this.columnNames = columnNames;
+        }
+
         /// <summary>
         /// Binds the select query option to the SqlBuilder.
         /// </summary>
@@ -36,28 +48,33 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 throw new ArgumentNullException(nameof(objectInfo));
             }
 
-            if (selectQueryOption == null || (selectQueryOption.Properties.Count == 1 && selectQueryOption.Properties[0].Name == "*"))
+            if (selectQueryOption == null)
             {
                 return SqlBuilder.Select("*").From(objectInfo.ForType);
             }
 
             var columnNames = new string[selectQueryOption.Properties.Count];
-            int columnCount = 0;
 
-            for (int i = 0; i < selectQueryOption.Properties.Count; i++)
-            {
-                var property = selectQueryOption.Properties[i];
-                var column = objectInfo.TableInfo.GetColumnInfoForProperty(property.Name);
-
-                if (column == null)
-                {
-                    throw new InvalidOperationException($"The type '{objectInfo.ForType.Name}' does not contain a property named '{property.Name}'");
-                }
-
-                columnNames[columnCount++] = column.ColumnName;
-            }
+            var selectBinder = new SelectBinder(objectInfo, columnNames);
+            selectBinder.Bind(selectQueryOption);
 
             return SqlBuilder.Select(columnNames).From(objectInfo.ForType);
+        }
+
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Model.EdmProperty" />.
+        /// </summary>
+        /// <param name="edmProperty">The <see cref="T:Net.Http.WebApi.OData.Model.EdmProperty" /> to bind.</param>
+        protected override void Bind(EdmProperty edmProperty)
+        {
+            if (edmProperty == null)
+            {
+                throw new ArgumentNullException(nameof(edmProperty));
+            }
+
+            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(edmProperty.Name);
+
+            this.columnNames[this.columnCount++] = column.ColumnName;
         }
     }
 }

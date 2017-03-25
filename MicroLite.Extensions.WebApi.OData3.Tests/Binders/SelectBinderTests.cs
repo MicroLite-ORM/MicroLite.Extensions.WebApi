@@ -6,33 +6,28 @@
     using MicroLite.Extensions.WebApi.OData.Binders;
     using MicroLite.Extensions.WebApi.Tests.TestEntities;
     using MicroLite.Mapping;
+    using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
     using Xunit;
 
     public class SelectBinderTests
     {
+        public SelectBinderTests()
+        {
+            TestHelper.EnsureEDM();
+        }
+
         [Fact]
         public void BindBindSelectThrowsArgumentNullExceptionForNullObjectInfo()
         {
             var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers"));
+                new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
+                EntityDataModel.Current.Collections["Customers"]);
 
             var exception = Assert.Throws<ArgumentNullException>(
                 () => SelectBinder.BindSelect(queryOptions.Select, null));
 
             Assert.Equal("objectInfo", exception.ParamName);
-        }
-
-        [Fact]
-        public void BindSelectQueryOptionThrowsInvalidOperationExceptionForUnspportedPropertyName()
-        {
-            var queryOptions = new ODataQueryOptions(
-                new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/Customers?$select=FirstName"));
-
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))));
-
-            Assert.Equal("The type 'Customer' does not contain a property named 'FirstName'", exception.Message);
         }
 
         public class WhenCallingBindSelectQueryOptionAndNoPropertiesHaveBeenSpecified
@@ -41,11 +36,11 @@
 
             public WhenCallingBindSelectQueryOptionAndNoPropertiesHaveBeenSpecified()
             {
-                var httpRequestMessage = new HttpRequestMessage(
-                       HttpMethod.Get,
-                       "http://localhost/api");
+                TestHelper.EnsureEDM();
 
-                var queryOptions = new ODataQueryOptions(httpRequestMessage);
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
+                    EntityDataModel.Current.Collections["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
@@ -65,11 +60,15 @@
 
             public WhenCallingBindSelectQueryOptionAndSpecificPropertiesHaveBeenSpecified()
             {
-                var httpRequestMessage = new HttpRequestMessage(
-                       HttpMethod.Get,
-                       "http://localhost/api?$select=Name,Status");
+                TestHelper.EnsureEDM();
 
-                var queryOptions = new ODataQueryOptions(httpRequestMessage);
+                var queryOptions = new ODataQueryOptions(
+#if ODATA3
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=Name,DateOfBirth,StatusId"),
+#else
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=Name,DateOfBirth,Status"),
+#endif
+                    EntityDataModel.Current.Collections["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
@@ -77,8 +76,11 @@
             [Fact]
             public void TheColumnNamesForTheSpecifiedPropertiesShouldBeTheOnlyOnesInTheSelectList()
             {
-                var expected = SqlBuilder.Select("Name", "CustomerStatusId").From(typeof(Customer)).ToSqlQuery();
-
+#if ODATA3
+                var expected = SqlBuilder.Select("Name", "DateOfBirth", "StatusId").From(typeof(Customer)).ToSqlQuery();
+#else
+                var expected = SqlBuilder.Select("Name", "DateOfBirth", "CustomerStatusId").From(typeof(Customer)).ToSqlQuery();
+#endif
                 Assert.Equal(expected, this.sqlQuery);
             }
         }
@@ -89,11 +91,11 @@
 
             public WhenCallingBindSelectQueryOptionAndStarHasBeenSpecified()
             {
-                var httpRequestMessage = new HttpRequestMessage(
-                       HttpMethod.Get,
-                       "http://localhost/api?$select=*");
+                TestHelper.EnsureEDM();
 
-                var queryOptions = new ODataQueryOptions(httpRequestMessage);
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=*"),
+                    EntityDataModel.Current.Collections["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }

@@ -13,15 +13,25 @@
 namespace MicroLite.Extensions.WebApi.OData.Binders
 {
     using System;
-    using MicroLite.Builder.Syntax.Read;
-    using MicroLite.Mapping;
+    using Builder.Syntax.Read;
+    using Mapping;
     using Net.Http.WebApi.OData.Query;
+    using Net.Http.WebApi.OData.Query.Binders;
 
     /// <summary>
     /// The binder class which can append the $order by query option.
     /// </summary>
-    public static class OrderByBinder
+    public sealed class OrderByBinder : AbstractOrderByBinder
     {
+        private readonly IObjectInfo objectInfo;
+        private readonly IOrderBy orderBySqlBuilder;
+
+        private OrderByBinder(IObjectInfo objectInfo, IOrderBy orderBySqlBuilder)
+        {
+            this.objectInfo = objectInfo;
+            this.orderBySqlBuilder = orderBySqlBuilder;
+        }
+
         /// <summary>
         /// Binds the order by query option to the sql builder.
         /// </summary>
@@ -43,30 +53,36 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
 
             if (orderByQueryOption != null)
             {
-                for (int i = 0; i < orderByQueryOption.Properties.Count; i++)
-                {
-                    var orderByProperty = orderByQueryOption.Properties[i];
-                    var column = objectInfo.TableInfo.GetColumnInfoForProperty(orderByProperty.Property.Name);
-
-                    if (column == null)
-                    {
-                        throw new InvalidOperationException($"The type '{objectInfo.ForType.Name}' does not contain a property named '{orderByProperty.Property.Name}'");
-                    }
-
-                    var columnName = column.ColumnName;
-
-                    if (orderByProperty.Direction == OrderByDirection.Ascending)
-                    {
-                        orderBySqlBuilder.OrderByAscending(columnName);
-                    }
-                    else
-                    {
-                        orderBySqlBuilder.OrderByDescending(columnName);
-                    }
-                }
+                var orderByBinder = new OrderByBinder(objectInfo, orderBySqlBuilder);
+                orderByBinder.Bind(orderByQueryOption);
             }
 
             return orderBySqlBuilder;
+        }
+
+        /// <summary>
+        /// Binds the specified <see cref="T:Net.Http.WebApi.OData.Query.OrderByProperty" />.
+        /// </summary>
+        /// <param name="orderByProperty">The <see cref="T:Net.Http.WebApi.OData.Query.OrderByProperty" /> to bind.</param>
+        protected override void Bind(OrderByProperty orderByProperty)
+        {
+            if (orderByProperty == null)
+            {
+                throw new ArgumentNullException(nameof(orderByProperty));
+            }
+
+            var column = this.objectInfo.TableInfo.GetColumnInfoForProperty(orderByProperty.Property.Name);
+
+            var columnName = column.ColumnName;
+
+            if (orderByProperty.Direction == OrderByDirection.Ascending)
+            {
+                this.orderBySqlBuilder.OrderByAscending(columnName);
+            }
+            else
+            {
+                this.orderBySqlBuilder.OrderByDescending(columnName);
+            }
         }
     }
 }

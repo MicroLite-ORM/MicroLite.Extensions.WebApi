@@ -92,7 +92,7 @@ namespace MicroLite.Extensions.WebApi.OData
         /// <returns>The SqlQuery to execute.</returns>
         protected virtual SqlQuery CreateSqlQuery(ODataQueryOptions queryOptions)
         {
-            var sqlQuery = queryOptions.CreateSqlQuery<TEntity>();
+            var sqlQuery = queryOptions.CreateSqlQuery();
 
             return sqlQuery;
         }
@@ -114,8 +114,8 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var sqlQuery = this.CreateSqlQuery(queryOptions);
 
-            var skip = queryOptions.Skip?.Value ?? 0;
-            var top = queryOptions.Top?.Value ?? this.ValidationSettings.MaxTop;
+            var skip = queryOptions.Skip ?? 0;
+            var top = queryOptions.Top ?? this.ValidationSettings.MaxTop;
 
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 
