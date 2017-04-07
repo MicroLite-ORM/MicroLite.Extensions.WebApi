@@ -24,7 +24,7 @@
 
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$skip=-1"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var controller = new CustomerController(Mock.Of<IAsyncSession>());
 
@@ -43,11 +43,30 @@
                 Assert.Equal(AllowedArithmeticOperators.All, controller.ValidationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.All);
             }
 
+#if ODATA3
+
             [Fact]
             public void AllLogicalOperatorsAreAllowed()
             {
                 Assert.Equal(AllowedLogicalOperators.All, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.All);
             }
+#else
+
+            [Fact]
+            public void AllLogicalOperatorsAreAllowed_ExceptHas()
+            {
+                Assert.Equal(AllowedLogicalOperators.And, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.And);
+                Assert.Equal(AllowedLogicalOperators.Equal, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Equal);
+                Assert.Equal(AllowedLogicalOperators.GreaterThan, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThan);
+                Assert.Equal(AllowedLogicalOperators.GreaterThanOrEqual, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.GreaterThanOrEqual);
+                Assert.NotEqual(AllowedLogicalOperators.Has, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Has);
+                Assert.Equal(AllowedLogicalOperators.LessThan, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThan);
+                Assert.Equal(AllowedLogicalOperators.LessThanOrEqual, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.LessThanOrEqual);
+                Assert.Equal(AllowedLogicalOperators.NotEqual, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.NotEqual);
+                Assert.Equal(AllowedLogicalOperators.Or, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Or);
+            }
+
+#endif
 
             [Fact]
             public void CeilingFunctionIsAllowed()
@@ -266,7 +285,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$skip=15"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
@@ -297,7 +316,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$top=15"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 15, 0)));
 
@@ -351,7 +370,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new List<object>(), 50, 0)));
 
@@ -396,7 +415,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$count=true"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
@@ -443,7 +462,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$format=application/xml"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
@@ -482,7 +501,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$inlinecount=allpages"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new object[0], 50, 0)));
 
@@ -527,7 +546,7 @@
 
                 this.queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new MicroLite.PagedResult<dynamic>(0, new List<object>(), 50, 0)));
 

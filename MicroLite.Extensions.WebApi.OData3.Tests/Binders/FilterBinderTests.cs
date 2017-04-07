@@ -19,7 +19,7 @@
 
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=indexof(Name, 'ayes') eq 1"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var exception = Assert.Throws<NotImplementedException>(() => FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))));
 
@@ -41,7 +41,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Created ge 2013-05-01 and Created le 2013-06-12 and Reference eq 'A0113334' and startswith(Name, 'Hayes') eq true"),
 #endif
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -99,7 +99,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=(endswith(Name, 'son') and endswith(Name, 'nes')))"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -145,7 +145,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=(endswith(Name, 'son') or endswith(Name, 'nes')))"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -196,7 +196,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt 2013-04-01 and Created lt 2013-04-30"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -253,7 +253,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt 2013-04-01 or Created lt 2013-04-30"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -310,7 +310,7 @@
 #else
                        "http://services.microlite.org/api/Customers?$filter=Created gt 2013-04-01 and Created lt 2013-04-30"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -361,7 +361,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Created gt 2013-04-01 or Created lt 2013-04-30"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -407,7 +407,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=ceiling(Id) eq 32"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -447,7 +447,7 @@
             {
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=contains(Name, 'Bloggs')"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -489,7 +489,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=day(DateOfBirth) eq 22"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -529,7 +529,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=endswith(Name, 'Bloggs')"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -569,7 +569,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=endswith(Name, 'Bloggs') eq true"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -611,7 +611,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Status eq MicroLite.Extensions.WebApi.Tests.TestEntities.CustomerStatus'Active'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -653,7 +653,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Name eq null"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -688,7 +688,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -728,7 +728,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=floor(Id) eq 32"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -775,7 +775,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Created gt 2013-04-01"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -820,7 +820,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Created ge 2013-04-01"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -865,7 +865,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Created lt 2013-04-01"),
 #endif
-                  EntityDataModel.Current.Collections["Customers"]);
+                  EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -910,7 +910,7 @@
 #else
                         "http://services.microlite.org/api/Customers?$filter=Created le 2013-04-01"),
 #endif
-                  EntityDataModel.Current.Collections["Customers"]);
+                  EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -950,7 +950,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=month(DateOfBirth) eq 6"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -990,7 +990,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Name ne 'Fred Bloggs'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1030,7 +1030,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Name ne null"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1065,7 +1065,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=replace(Name, ' ', '') eq 'JohnSmith'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1117,7 +1117,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=round(Id) eq 32"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1157,7 +1157,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=startswith(Name, 'Fred')"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1197,7 +1197,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=startswith(Name, 'Fred') eq true"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1239,7 +1239,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=substringof('Bloggs', Name) eq true"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1281,7 +1281,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=substring(Name, 1, 2) eq 'oh'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1333,7 +1333,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=substring(Name, 1) eq 'ohnSmith'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1379,7 +1379,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=tolower(Name) eq 'fred bloggs'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1419,7 +1419,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=toupper(Name) eq 'FRED BLOGGS'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1459,7 +1459,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=trim(Name) eq 'FRED BLOGGS'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1499,7 +1499,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=year(DateOfBirth) eq 1971"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1539,7 +1539,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=not Name eq 'Fred Bloggs'"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
             }
@@ -1579,7 +1579,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Invoices?$filter=Quantity add 10 eq 15'"),
-                    EntityDataModel.Current.Collections["Invoices"]);
+                    EntityDataModel.Current.EntitySets["Invoices"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
             }
@@ -1625,7 +1625,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Invoices?$filter=Quantity div 10 eq 15'"),
-                    EntityDataModel.Current.Collections["Invoices"]);
+                    EntityDataModel.Current.EntitySets["Invoices"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
             }
@@ -1671,7 +1671,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Invoices?$filter=Quantity mod 10 eq 15'"),
-                    EntityDataModel.Current.Collections["Invoices"]);
+                    EntityDataModel.Current.EntitySets["Invoices"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
             }
@@ -1717,7 +1717,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Invoices?$filter=Quantity mul 10 eq 15'"),
-                    EntityDataModel.Current.Collections["Invoices"]);
+                    EntityDataModel.Current.EntitySets["Invoices"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
             }
@@ -1763,7 +1763,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Invoices?$filter=Quantity sub 10 eq 15'"),
-                    EntityDataModel.Current.Collections["Invoices"]);
+                    EntityDataModel.Current.EntitySets["Invoices"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Invoice)), SqlBuilder.Select("*").From(typeof(Invoice))).ToSqlQuery();
             }

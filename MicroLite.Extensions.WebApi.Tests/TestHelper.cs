@@ -10,8 +10,8 @@
             if (EntityDataModel.Current == null)
             {
                 var entityDataModelBuilder = new EntityDataModelBuilder();
-                entityDataModelBuilder.RegisterCollection<Customer>("Customers");
-                entityDataModelBuilder.RegisterCollection<Invoice>("Invoices");
+                entityDataModelBuilder.RegisterEntitySet<Customer>("Customers");
+                entityDataModelBuilder.RegisterEntitySet<Invoice>("Invoices");
 
                 entityDataModelBuilder.BuildModel();
             }

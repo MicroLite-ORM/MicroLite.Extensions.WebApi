@@ -60,7 +60,11 @@ namespace MicroLite.Extensions.WebApi.OData
 #else
                     | AllowedFunctions.Contains,
 #endif
+#if ODATA3
                 AllowedLogicalOperators = AllowedLogicalOperators.All,
+#else
+                AllowedLogicalOperators = AllowedLogicalOperators.All & ~AllowedLogicalOperators.Has,
+#endif
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
                     | AllowedQueryOptions.OrderBy

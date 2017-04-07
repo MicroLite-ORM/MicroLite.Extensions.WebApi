@@ -22,7 +22,7 @@
         {
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var exception = Assert.Throws<ArgumentNullException>(
                 () => SelectBinder.BindSelect(queryOptions.Select, null));
@@ -40,7 +40,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
@@ -68,7 +68,7 @@
 #else
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=Name,DateOfBirth,Status"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }
@@ -95,7 +95,7 @@
 
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=*"),
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
             }

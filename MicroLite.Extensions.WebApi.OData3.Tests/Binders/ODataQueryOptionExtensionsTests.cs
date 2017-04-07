@@ -17,7 +17,7 @@
 
             var option = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=Forename,Surname&$filter=Forename eq 'John'&$orderby=Surname"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var sqlQuery = option.CreateSqlQuery();
 
@@ -33,7 +33,7 @@
 
             var option = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=Forename eq 'John'&$orderby=Surname"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var sqlQuery = option.CreateSqlQuery();
 

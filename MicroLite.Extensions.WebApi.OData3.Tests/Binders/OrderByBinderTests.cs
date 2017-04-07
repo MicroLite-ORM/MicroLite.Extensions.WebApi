@@ -22,7 +22,7 @@
         {
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Name"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var exception = Assert.Throws<ArgumentNullException>(
                 () => OrderByBinder.BindOrderBy(queryOptions.OrderBy, null, SqlBuilder.Select("*").From(typeof(Customer))));
@@ -35,7 +35,7 @@
         {
             var queryOptions = new ODataQueryOptions(
                 new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Name"),
-                EntityDataModel.Current.Collections["Customers"]);
+                EntityDataModel.Current.EntitySets["Customers"]);
 
             var exception = Assert.Throws<ArgumentNullException>(
                 () => OrderByBinder.BindOrderBy(queryOptions.OrderBy, ObjectInfo.For(typeof(Customer)), null));
@@ -57,7 +57,7 @@
 #else
                     new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Status desc,Name"),
 #endif
-                    EntityDataModel.Current.Collections["Customers"]);
+                    EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = OrderByBinder.BindOrderBy(
                     queryOptions.OrderBy,
