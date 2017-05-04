@@ -50,6 +50,7 @@
             {
                 Assert.Equal(AllowedLogicalOperators.All, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.All);
             }
+
 #else
 
             [Fact]
@@ -396,9 +397,9 @@
             }
 
             [Fact]
-            public void TheResponseIsAnList()
+            public void TheResponseIsAResult()
             {
-                Assert.IsType<List<dynamic>>(((ObjectContent)this.response.Content).Value);
+                Assert.IsType<Result<dynamic>>(((ObjectContent)this.response.Content).Value);
             }
         }
 
@@ -572,9 +573,9 @@
             }
 
             [Fact]
-            public void TheResponseIsAnList()
+            public void TheResponseIsAResult()
             {
-                Assert.IsType<List<dynamic>>(((ObjectContent)this.response.Content).Value);
+                Assert.IsType<Result<dynamic>>(((ObjectContent)this.response.Content).Value);
             }
         }
 

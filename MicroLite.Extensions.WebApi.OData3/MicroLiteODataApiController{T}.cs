@@ -135,7 +135,7 @@ namespace MicroLite.Extensions.WebApi.OData
             }
             else
             {
-                response = this.Request.CreateODataResponse(HttpStatusCode.OK, paged.Results);
+                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new Result<dynamic>(paged.Results));
             }
 
             if (queryOptions.Format != null)
