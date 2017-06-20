@@ -124,6 +124,7 @@ namespace MicroLite.Extensions.WebApi.OData
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 
             HttpResponseMessage response;
+            Uri nextLink = paged.MoreResultsAvailable ? queryOptions.NextLink(skip, top) : null;
 
 #if ODATA3
             if (queryOptions.InlineCount?.InlineCount == InlineCount.AllPages)
@@ -131,11 +132,11 @@ namespace MicroLite.Extensions.WebApi.OData
             if (queryOptions.Count)
 #endif
             {
-                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new PagedResult<dynamic>(paged.Results, paged.TotalResults));
+                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, paged.Results, paged.TotalResults, nextLink));
             }
             else
             {
-                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new Result<dynamic>(paged.Results));
+                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, paged.Results, null, nextLink));
             }
 
             if (queryOptions.Format != null)
