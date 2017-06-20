@@ -15,7 +15,7 @@ namespace MicroLite.Extensions.WebApi
     using System;
     using System.Net;
     using System.Net.Http;
-    using MicroLite.Mapping;
+    using Mapping;
 
     /// <summary>
     /// Provides opt-in CRUD operations in addition to the base ASP.NET WebApi controller.
@@ -25,7 +25,7 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteApiController<TEntity, TId> : MicroLiteApiController
         where TEntity : class, new()
     {
-        private static readonly IObjectInfo ObjectInfo = MicroLite.Mapping.ObjectInfo.For(typeof(TEntity));
+        private static readonly IObjectInfo EntityObjectInfo = Mapping.ObjectInfo.For(typeof(TEntity));
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class with an ISession.
@@ -60,6 +60,11 @@ namespace MicroLite.Extensions.WebApi
         }
 
         /// <summary>
+        /// Gets the object information for the entity.
+        /// </summary>
+        protected IObjectInfo ObjectInfo => EntityObjectInfo;
+
+        /// <summary>
         /// Deletes the <typeparamref name="TEntity"/> with the specified id.
         /// </summary>
         /// <param name="id">The id of the <typeparamref name="TEntity"/> to be deleted.</param>
@@ -71,7 +76,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-            var deleted = await this.Session.Advanced.DeleteAsync(ObjectInfo.ForType, id);
+            var deleted = await this.Session.Advanced.DeleteAsync(this.ObjectInfo.ForType, id);
 
             if (!deleted)
             {
@@ -121,7 +126,7 @@ namespace MicroLite.Extensions.WebApi
         {
             await this.Session.InsertAsync(entity);
 
-            var identifier = (TId)ObjectInfo.GetIdentifierValue(entity);
+            var identifier = (TId)this.ObjectInfo.GetIdentifierValue(entity);
 
             var response = this.Request.CreateResponse(HttpStatusCode.Created, entity);
             response.Headers.Location = this.GetEntityResourceUri(identifier);
@@ -151,7 +156,7 @@ namespace MicroLite.Extensions.WebApi
             }
             else
             {
-                ObjectInfo.SetIdentifierValue(entity, id);
+                this.ObjectInfo.SetIdentifierValue(entity, id);
 
                 var updated = await this.Session.UpdateAsync(entity);
 

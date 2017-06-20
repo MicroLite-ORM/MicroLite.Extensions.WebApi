@@ -336,6 +336,63 @@
             }
         }
 
+        public class WhenCallingGetEntityCount
+        {
+            private readonly HttpContent content;
+            private readonly CustomerController controller;
+            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage response;
+
+            public WhenCallingGetEntityCount()
+            {
+                TestHelper.EnsureEDM();
+
+                this.mockSession.Setup(x => x.Advanced.ExecuteScalarAsync<long>(It.IsAny<SqlQuery>())).Returns(System.Threading.Tasks.Task.FromResult(150L));
+
+                this.controller = new CustomerController(this.mockSession.Object);
+                this.controller.Request = new HttpRequestMessage();
+                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+
+                this.response = this.controller.Count().Result;
+                this.content = this.response.Content;
+            }
+
+#if ODATA3
+
+            [Fact]
+            public void TheDataServiceVersionHeaderIsSet()
+            {
+                Assert.True(response.Headers.Contains("DataServiceVersion"));
+                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
+            }
+
+#endif
+
+            [Fact]
+            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
+            {
+                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+            }
+
+#if ODATA4
+
+            [Fact]
+            public void TheODataVersionHeaderIsSet()
+            {
+                Assert.True(response.Headers.Contains("OData-Version"));
+                Assert.Equal("4.0", response.Headers.GetValues("OData-Version").Single());
+            }
+
+#endif
+
+            [Fact]
+            public void TheResponseContent_IsObjectContent_WithLongValue()
+            {
+                Assert.IsType<long>(((ObjectContent)this.response.Content).Value);
+                Assert.Equal(150L, ((ObjectContent)this.response.Content).Value);
+            }
+        }
+
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteODataApiController<Customer, int> controller;
@@ -1001,18 +1058,13 @@
                 };
             }
 
-            public new ODataValidationSettings ValidationSettings
-            {
-                get
-                {
-                    return base.ValidationSettings;
-                }
-            }
+            public new ODataValidationSettings ValidationSettings => base.ValidationSettings;
+
+            public System.Threading.Tasks.Task<HttpResponseMessage> Count()
+                => this.GetCountResponseAsync();
 
             public System.Threading.Tasks.Task<HttpResponseMessage> Get(ODataQueryOptions queryOptions)
-            {
-                return this.GetEntityResponseAsync(queryOptions);
-            }
+                => this.GetEntityResponseAsync(queryOptions);
         }
     }
 }

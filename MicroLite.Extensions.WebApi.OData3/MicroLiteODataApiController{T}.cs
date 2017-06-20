@@ -17,6 +17,7 @@ namespace MicroLite.Extensions.WebApi.OData
     using System.Net.Http;
     using System.Threading.Tasks;
     using Binders;
+    using Builder;
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Query;
     using Net.Http.WebApi.OData.Query.Validators;
@@ -29,6 +30,8 @@ namespace MicroLite.Extensions.WebApi.OData
     public abstract class MicroLiteODataApiController<TEntity, TId> : MicroLiteApiController<TEntity, TId>
         where TEntity : class, new()
     {
+        private static SqlQuery entityCountQuery;
+
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteODataApiController{TEntity, TId}"/> class.
         /// </summary>
@@ -99,6 +102,26 @@ namespace MicroLite.Extensions.WebApi.OData
             var sqlQuery = queryOptions.CreateSqlQuery();
 
             return sqlQuery;
+        }
+
+        /// <summary>
+        /// Gets the entity count response.
+        /// </summary>
+        /// <returns>The an <see cref="HttpResponseMessage"/> containing the entity count.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "It will be a Web API method")]
+        protected virtual async Task<HttpResponseMessage> GetCountResponseAsync()
+        {
+            if (entityCountQuery == null)
+            {
+                entityCountQuery = SqlBuilder.Select()
+                    .Count(ObjectInfo.TableInfo.IdentifierColumn.ColumnName)
+                    .From(typeof(TEntity))
+                    .ToSqlQuery();
+            }
+
+            var count = await this.Session.Advanced.ExecuteScalarAsync<long>(entityCountQuery);
+
+            return this.Request.CreateODataResponse(HttpStatusCode.OK, count);
         }
 
         /// <summary>
