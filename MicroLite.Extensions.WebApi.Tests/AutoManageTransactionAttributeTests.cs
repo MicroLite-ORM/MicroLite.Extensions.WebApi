@@ -222,7 +222,7 @@
 
                 var attribute = new AutoManageTransactionAttribute();
 
-                Assert.DoesNotThrow(() => attribute.OnActionExecuted(context));
+                attribute.OnActionExecuted(context);
             }
         }
 
@@ -529,7 +529,7 @@
 
                 var attribute = new AutoManageTransactionAttribute();
 
-                Assert.DoesNotThrow(() => attribute.OnActionExecuted(context));
+                attribute.OnActionExecuted(context);
             }
         }
 
