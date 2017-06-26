@@ -19,7 +19,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData4.dll" target="lib\net45" />
-    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData4.xml" target="lib\net45" />
+    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData.dll" target="lib\net45" />
+    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData.xml" target="lib\net45" />
   </files>
 </package>
