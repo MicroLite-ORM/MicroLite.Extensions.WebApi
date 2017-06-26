@@ -35,12 +35,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created ge datetime'2013-05-01' and Created le datetime'2013-06-12' and Reference eq 'A0113334' and startswith(Name, 'Hayes') eq true"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Created ge 2013-05-01 and Created le 2013-06-12 and Reference eq 'A0113334' and startswith(Name, 'Hayes') eq true"),
-#endif
                 EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -190,12 +187,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt 2013-04-01 and Created lt 2013-04-30"),
-#endif
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -247,12 +241,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Name eq 'Fred Bloggs' and Created gt 2013-04-01 or Created lt 2013-04-30"),
-#endif
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -304,12 +295,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created gt datetime'2013-04-01' and Created lt datetime'2013-04-30'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                        "http://services.microlite.org/api/Customers?$filter=Created gt 2013-04-01 and Created lt 2013-04-30"),
-#endif
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -355,12 +343,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created gt datetime'2013-04-01' or Created lt datetime'2013-04-30'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Created gt 2013-04-01 or Created lt 2013-04-30"),
-#endif
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -437,8 +422,6 @@
             }
         }
 
-#if !ODATA3
-
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyContains
         {
             private readonly SqlQuery sqlQuery;
@@ -476,8 +459,6 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
-
-#endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyDay
         {
@@ -599,8 +580,6 @@
             }
         }
 
-#if ODATA4
-
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqualEnum
         {
             private readonly SqlQuery sqlQuery;
@@ -640,8 +619,6 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
-
-#endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertyEqualNull
         {
@@ -769,12 +746,7 @@
                 var queryOptions = new ODataQueryOptions(
                     new HttpRequestMessage(
                         HttpMethod.Get,
-
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created gt datetime'2013-04-01'"),
-#else
                         "http://services.microlite.org/api/Customers?$filter=Created gt 2013-04-01"),
-#endif
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -814,12 +786,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created ge datetime'2013-04-01'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Created ge 2013-04-01"),
-#endif
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -859,12 +828,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created lt datetime'2013-04-01'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Created lt 2013-04-01"),
-#endif
                   EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -904,12 +870,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get,
-#if ODATA3
-                        "http://services.microlite.org/api/Customers?$filter=Created le datetime'2013-04-01'"),
-#else
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
                         "http://services.microlite.org/api/Customers?$filter=Created le 2013-04-01"),
-#endif
                   EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
@@ -1226,50 +1189,6 @@
                 Assert.Equal(1, this.sqlQuery.Arguments.Count);
             }
         }
-
-#if ODATA3
-
-        public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringOf
-        {
-            private readonly SqlQuery sqlQuery;
-
-            public WhenCallingBindFilterQueryOptionWithASinglePropertySubStringOf()
-            {
-                TestHelper.EnsureEDM();
-
-                var queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$filter=substringof('Bloggs', Name) eq true"),
-                    EntityDataModel.Current.EntitySets["Customers"]);
-
-                this.sqlQuery = FilterBinder.BindFilter(queryOptions.Filter, ObjectInfo.For(typeof(Customer)), SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
-            }
-
-            [Fact]
-            public void TheArgumentsShouldContainTheQueryValue()
-            {
-                Assert.Equal("%Bloggs%", this.sqlQuery.Arguments[0].Value);
-            }
-
-            [Fact]
-            public void TheCommandTextShouldContainTheWhereClause()
-            {
-                var expected = SqlBuilder.Select("*")
-                    .From(typeof(Customer))
-                    .Where("(Name LIKE ?)", "%Bloggs%")
-                    .ToSqlQuery()
-                    .CommandText;
-
-                Assert.Equal(expected, this.sqlQuery.CommandText);
-            }
-
-            [Fact]
-            public void ThereShouldBe1ArgumentValue()
-            {
-                Assert.Equal(1, this.sqlQuery.Arguments.Count);
-            }
-        }
-
-#endif
 
         public class WhenCallingBindFilterQueryOptionWithASinglePropertySubStringWithStartAndLength
         {

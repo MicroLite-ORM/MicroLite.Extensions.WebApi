@@ -43,16 +43,6 @@
                 Assert.Equal(AllowedArithmeticOperators.All, controller.ValidationSettings.AllowedArithmeticOperators & AllowedArithmeticOperators.All);
             }
 
-#if ODATA3
-
-            [Fact]
-            public void AllLogicalOperatorsAreAllowed()
-            {
-                Assert.Equal(AllowedLogicalOperators.All, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.All);
-            }
-
-#else
-
             [Fact]
             public void AllLogicalOperatorsAreAllowed_ExceptHas()
             {
@@ -67,8 +57,6 @@
                 Assert.Equal(AllowedLogicalOperators.Or, controller.ValidationSettings.AllowedLogicalOperators & AllowedLogicalOperators.Or);
             }
 
-#endif
-
             [Fact]
             public void CeilingFunctionIsAllowed()
             {
@@ -81,8 +69,6 @@
                 Assert.NotEqual(AllowedFunctions.Concat, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Concat);
             }
 
-#if !ODATA3
-
             [Fact]
             public void ContainsFunctionIsAllowed()
             {
@@ -94,8 +80,6 @@
             {
                 Assert.Equal(AllowedQueryOptions.Count, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.Count);
             }
-
-#endif
 
             [Fact]
             public void DayFunctionIsAllowed()
@@ -144,16 +128,6 @@
             {
                 Assert.NotEqual(AllowedFunctions.IndexOf, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.IndexOf);
             }
-
-#if ODATA3
-
-            [Fact]
-            public void InlineCountQueryOptionIsAllowed()
-            {
-                Assert.Equal(AllowedQueryOptions.InlineCount, controller.ValidationSettings.AllowedQueryOptions & AllowedQueryOptions.InlineCount);
-            }
-
-#endif
 
             [Fact]
             public void LengthFunctionIsNotAllowed()
@@ -232,16 +206,6 @@
             {
                 Assert.Equal(AllowedFunctions.Substring, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.Substring);
             }
-
-#if ODATA3
-
-            [Fact]
-            public void SubstringOfFunctionIsAllowed()
-            {
-                Assert.Equal(AllowedFunctions.SubstringOf, controller.ValidationSettings.AllowedFunctions & AllowedFunctions.SubstringOf);
-            }
-
-#endif
 
             [Fact]
             public void ToLowerFunctionIsAllowed()
@@ -357,24 +321,11 @@
                 this.content = this.response.Content;
             }
 
-#if ODATA3
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(response.Headers.Contains("DataServiceVersion"));
-                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
-            }
-
-#endif
-
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
             {
                 Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
             }
-
-#if ODATA4
 
             [Fact]
             public void TheODataVersionHeaderIsSet()
@@ -382,8 +333,6 @@
                 Assert.True(response.Headers.Contains("OData-Version"));
                 Assert.Equal("4.0", response.Headers.GetValues("OData-Version").Single());
             }
-
-#endif
 
             [Fact]
             public void TheResponseContent_IsObjectContent_WithLongValue()
@@ -412,8 +361,6 @@
                 Assert.Equal(this.session, this.controller.Session);
             }
         }
-
-#if !ODATA3
 
         public class WhenCountIsNotSpecified
         {
@@ -702,8 +649,6 @@
             }
         }
 
-#endif
-
         public class WhenFormatQueryOptionIsSpecified
         {
             private readonly CustomerController controller;
@@ -740,297 +685,6 @@
                 Assert.Equal(this.queryOptions.Format.MediaTypeHeaderValue, response.Content.Headers.ContentType);
             }
         }
-
-#if ODATA3
-
-        public class WhenInlineCountAllPagesIsSpecified
-        {
-            private readonly HttpContent content;
-            private readonly CustomerController controller;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions;
-            private readonly HttpResponseMessage response;
-
-            public WhenInlineCountAllPagesIsSpecified()
-            {
-                TestHelper.EnsureEDM();
-
-                this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$inlinecount=allpages"),
-                    EntityDataModel.Current.EntitySets["Customers"]);
-
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(1, new object[0], 50, 0)));
-
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = this.queryOptions.Request;
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
-
-                this.response = this.controller.Get(this.queryOptions).Result;
-                this.content = this.response.Content;
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(response.Headers.Contains("DataServiceVersion"));
-                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_ContextIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.Context);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_CountIsSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.NotNull(odataContent.Count);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_NextLinkIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.NextLink);
-            }
-
-            [Fact]
-            public void TheResponseContent_IsObjectContent_WithODataResponseContentValue()
-            {
-                Assert.IsType<ODataResponseContent>(((ObjectContent)this.response.Content).Value);
-            }
-        }
-
-        public class WhenInlineCountAllPagesIsSpecified_AndMoreResultsAreAvailable
-        {
-            private readonly HttpContent content;
-            private readonly CustomerController controller;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions;
-            private readonly HttpResponseMessage response;
-
-            public WhenInlineCountAllPagesIsSpecified_AndMoreResultsAreAvailable()
-            {
-                TestHelper.EnsureEDM();
-
-                this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$inlinecount=allpages"),
-                    EntityDataModel.Current.EntitySets["Customers"]);
-
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(1, new object[0], 50, 100)));
-
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = this.queryOptions.Request;
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
-
-                this.response = this.controller.Get(this.queryOptions).Result;
-                this.content = this.response.Content;
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(response.Headers.Contains("DataServiceVersion"));
-                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_ContextIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.Context);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_CountIsSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.NotNull(odataContent.Count);
-                Assert.Equal(100, odataContent.Count); // Matches PagedResult<T>.TotalResults
-            }
-
-            [Fact]
-            public void TheODataResponseContent_NextLinkIsSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.NotNull(odataContent.NextLink);
-                Assert.Equal(new Uri("http://services.microlite.org/api/Customers?$skip=50&$inlinecount=allpages"), odataContent.NextLink);
-            }
-
-            [Fact]
-            public void TheResponseContent_IsObjectContent_WithODataResponseContentValue()
-            {
-                Assert.IsType<ODataResponseContent>(((ObjectContent)this.response.Content).Value);
-            }
-        }
-
-        public class WhenInlineCountIsNotSpecified
-        {
-            private readonly HttpContent content;
-            private readonly CustomerController controller;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions;
-            private readonly HttpResponseMessage response;
-
-            public WhenInlineCountIsNotSpecified()
-            {
-                TestHelper.EnsureEDM();
-
-                this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
-                    EntityDataModel.Current.EntitySets["Customers"]);
-
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(1, new List<object>(), 50, 0)));
-
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = this.queryOptions.Request;
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
-
-                this.response = this.controller.Get(this.queryOptions).Result;
-                this.content = this.response.Content;
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(response.Headers.Contains("DataServiceVersion"));
-                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_ContextIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.Context);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_CountIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.Count);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_NextLinkIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.NextLink);
-            }
-
-            [Fact]
-            public void TheResponseContent_IsObjectContent_WithODataResponseContentValue()
-            {
-                Assert.IsType<ODataResponseContent>(((ObjectContent)this.response.Content).Value);
-            }
-        }
-
-        public class WhenInlineCountIsNotSpecified_AndMoreResultsAreAvailable
-        {
-            private readonly HttpContent content;
-            private readonly CustomerController controller;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly ODataQueryOptions queryOptions;
-            private readonly HttpResponseMessage response;
-
-            public WhenInlineCountIsNotSpecified_AndMoreResultsAreAvailable()
-            {
-                TestHelper.EnsureEDM();
-
-                this.queryOptions = new ODataQueryOptions(
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers"),
-                    EntityDataModel.Current.EntitySets["Customers"]);
-
-                this.mockSession.Setup(x => x.PagedAsync<dynamic>(It.IsAny<SqlQuery>(), It.IsAny<PagingOptions>())).Returns(System.Threading.Tasks.Task.FromResult(new PagedResult<dynamic>(1, new List<object>(), 50, 100)));
-
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = this.queryOptions.Request;
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-                this.controller.Session = this.mockSession.Object;
-
-                this.response = this.controller.Get(this.queryOptions).Result;
-                this.content = this.response.Content;
-            }
-
-            [Fact]
-            public void TheDataServiceVersionHeaderIsSet()
-            {
-                Assert.True(response.Headers.Contains("DataServiceVersion"));
-                Assert.Equal("3.0", response.Headers.GetValues("DataServiceVersion").Single());
-            }
-
-            [Fact]
-            public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
-            {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_ContextIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.Context);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_CountIsNotSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.Null(odataContent.Count);
-            }
-
-            [Fact]
-            public void TheODataResponseContent_NextLinkIsSet()
-            {
-                var odataContent = (ODataResponseContent)((ObjectContent)this.response.Content).Value;
-
-                Assert.NotNull(odataContent.NextLink);
-                Assert.Equal(new Uri("http://services.microlite.org/api/Customers?$skip=50"), odataContent.NextLink);
-            }
-
-            [Fact]
-            public void TheResponseContent_IsObjectContent_WithODataResponseContentValue()
-            {
-                Assert.IsType<ODataResponseContent>(((ObjectContent)this.response.Content).Value);
-            }
-        }
-
-#endif
 
         public class WhenNullQueryOptionsAreSupplied
         {

@@ -193,21 +193,13 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                     this.Bind(parameters[0]);
                     this.predicateBuilder.Append("))");
                     break;
-#if ODATA3
-                case "substringof":
-                    this.Bind(parameters[1]);
-                    this.predicateBuilder.Append(
-                        " LIKE " + this.sqlCharacters.GetParameterName(0),
-                        this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[0]).Value + this.sqlCharacters.LikeWildcard);
-                    break;
-#else
+
                 case "contains":
                     this.Bind(parameters[0]);
                     this.predicateBuilder.Append(
                         " LIKE " + this.sqlCharacters.GetParameterName(0),
                         this.sqlCharacters.LikeWildcard + ((ConstantNode)parameters[1]).Value + this.sqlCharacters.LikeWildcard);
                     break;
-#endif
 
                 default:
                     throw new NotImplementedException($"The function '{functionCallNode.Name}' is not implemented by this service");

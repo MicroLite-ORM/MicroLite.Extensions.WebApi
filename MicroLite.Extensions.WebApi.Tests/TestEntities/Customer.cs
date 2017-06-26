@@ -40,23 +40,11 @@
             set;
         }
 
-#if ODATA3
-
-        public int StatusId
-        {
-            get;
-            set;
-        }
-
-#else
-
         public CustomerStatus Status
         {
             get;
             set;
         }
-
-#endif
 
         public string Surname
         {

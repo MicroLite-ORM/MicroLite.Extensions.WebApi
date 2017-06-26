@@ -58,27 +58,15 @@ namespace MicroLite.Extensions.WebApi.OData
                     | AllowedFunctions.ToUpper
                     | AllowedFunctions.Trim
                     | AllowedFunctions.Year
-#if ODATA3
-                    | AllowedFunctions.SubstringOf,
-#else
                     | AllowedFunctions.Contains,
-#endif
-#if ODATA3
-                AllowedLogicalOperators = AllowedLogicalOperators.All,
-#else
                 AllowedLogicalOperators = AllowedLogicalOperators.All & ~AllowedLogicalOperators.Has,
-#endif
                 AllowedQueryOptions = AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
                     | AllowedQueryOptions.OrderBy
                     | AllowedQueryOptions.Select
                     | AllowedQueryOptions.Skip
                     | AllowedQueryOptions.Top
-#if ODATA3
-                    | AllowedQueryOptions.InlineCount,
-#else
                     | AllowedQueryOptions.Count,
-#endif
                 MaxTop = 50
             };
         }
@@ -147,20 +135,12 @@ namespace MicroLite.Extensions.WebApi.OData
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 
             HttpResponseMessage response;
+            int? count = queryOptions.Count ? paged.TotalResults : default(int?);
             Uri nextLink = paged.MoreResultsAvailable ? queryOptions.NextLink(skip, top) : null;
 
-#if ODATA3
-            if (queryOptions.InlineCount?.InlineCount == InlineCount.AllPages)
-#else
-            if (queryOptions.Count)
-#endif
-            {
-                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, paged.Results, paged.TotalResults, nextLink));
-            }
-            else
-            {
-                response = this.Request.CreateODataResponse(HttpStatusCode.OK, new ODataResponseContent(null, paged.Results, null, nextLink));
-            }
+            response = this.Request.CreateODataResponse(
+                HttpStatusCode.OK,
+                new ODataResponseContent(null, paged.Results, count, nextLink));
 
             if (queryOptions.Format != null)
             {

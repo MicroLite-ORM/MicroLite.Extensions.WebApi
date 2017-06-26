@@ -1,42 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8281CC1-9DA4-4FEC-A9A8-469C209C559C}</ProjectGuid>
+    <ProjectGuid>{363AE9F6-4CCE-460A-8D86-6A958DDEECD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MicroLite.Extensions.WebApi.OData</RootNamespace>
-    <AssemblyName>MicroLite.Extensions.WebApi.OData4</AssemblyName>
+    <RootNamespace>MicroLite.Extensions.WebApi.OData.Tests</RootNamespace>
+    <AssemblyName>MicroLite.Extensions.WebApi.OData.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
     <TargetFrameworkProfile />
-    <CodeAnalysisCulture>en-GB</CodeAnalysisCulture>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;ODATA4</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MicroLite.Extensions.WebApi.OData4.XML</DocumentationFile>
-    <CodeAnalysisRuleSet>..\MicroLite.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;ODATA4</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MicroLite.Extensions.WebApi.OData4.XML</DocumentationFile>
-    <CodeAnalysisRuleSet>..\MicroLite.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -47,6 +44,10 @@
   <ItemGroup>
     <Reference Include="MicroLite, Version=6.3.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
       <HintPath>..\packages\MicroLite.6.3.1\lib\net45\MicroLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.2.1402.2112, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Net.Http.WebApi.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=d54bd485d668c081, processorArchitecture=MSIL">
@@ -70,33 +71,31 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml" />
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\BinaryOperatorKindExtensions.cs">
-      <Link>Binders\BinaryOperatorKindExtensions.cs</Link>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\Customer.cs">
+      <Link>TestEntities\Customer.cs</Link>
     </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\FilterBinder.cs">
-      <Link>Binders\FilterBinder.cs</Link>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\CustomerStatus.cs">
+      <Link>TestEntities\CustomerStatus.cs</Link>
     </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\ODataQueryOptionsExtensions.cs">
-      <Link>Binders\ODataQueryOptionsExtensions.cs</Link>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestEntities\Invoice.cs">
+      <Link>TestEntities\Invoice.cs</Link>
     </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\OrderByBinder.cs">
-      <Link>Binders\OrderByBinder.cs</Link>
+    <Compile Include="..\MicroLite.Extensions.WebApi.Tests\TestHelper.cs">
+      <Link>TestHelper.cs</Link>
     </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\SelectBinder.cs">
-      <Link>Binders\SelectBinder.cs</Link>
-    </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\Binders\UnaryOperatorKindExtensions.cs">
-      <Link>Binders\UnaryOperatorKindExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\MicroLiteODataApiController{T}.cs">
-      <Link>MicroLiteODataApiController{T}.cs</Link>
-    </Compile>
-    <Compile Include="..\MicroLite.Extensions.WebApi.OData3\TableInfoExtensions.cs">
-      <Link>TableInfoExtensions.cs</Link>
-    </Compile>
+    <Compile Include="Binders\BinaryOperatorKindExtensionsTests.cs" />
+    <Compile Include="Binders\FilterBinderTests.cs" />
+    <Compile Include="Binders\ODataQueryOptionExtensionsTests.cs" />
+    <Compile Include="Binders\OrderByBinderTests.cs" />
+    <Compile Include="Binders\SelectBinderTests.cs" />
+    <Compile Include="Binders\UnaryOperatorKindExtensionsTests.cs" />
+    <Compile Include="MicroLiteODataApiControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,18 +105,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\MicroLite.Extensions.WebApi.OData\MicroLite.Extensions.WebApi.OData.csproj">
+      <Project>{05e061cc-54d7-4b30-b933-f8f54d18ba0b}</Project>
+      <Name>MicroLite.Extensions.WebApi.OData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MicroLite.Extensions.WebApi\MicroLite.Extensions.WebApi.csproj">
       <Project>{48714fd3-e87a-4a49-b8fb-2644bd1c577b}</Project>
       <Name>MicroLite.Extensions.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ProgramFiles)\MSBuild\StyleCop\v4.7\StyleCop.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

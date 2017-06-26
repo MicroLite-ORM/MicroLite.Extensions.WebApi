@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>MicroLite.Extensions.WebApi.OData3</id>
+    <id>MicroLite.Extensions.WebApi.OData</id>
     <version>0.0.0</version>
     <authors>Trevor Pilley and MicroLite Project Contributors</authors>
     <owners>Trevor Pilley</owners>
-    <description>An extension for the MicroLite ORM Framework to add OData 3.0 query support to MicroLite.Extensions.WebApi.</description>
+    <description>An extension for the MicroLite ORM Framework to add OData 4.0 query support to MicroLite.Extensions.WebApi.</description>
     <releaseNotes>See https://github.com/TrevorPilley/MicroLite.Extensions.WebApi/releases for a summary of changes made in this release of the package.</releaseNotes>
     <language>en-GB</language>
     <projectUrl>http://microliteorm.wordpress.com/</projectUrl>
@@ -15,11 +15,11 @@
     <tags>ASP.NET WebApi OData MicroORM ORM POCO Database</tags>
     <dependencies>
       <dependency id="MicroLite.Extensions.WebApi" version="[6.6.0-beta4,7.0.0)" />
-      <dependency id="Net.Http.WebApi.OData" version="[3.5.0-beta10,4.0.0)" />
+      <dependency id="Net.Http.WebApi.OData" version="[4.0.0-beta10,5.0.0)" />
     </dependencies>
   </metadata>
   <files>
-    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData3.dll" target="lib\net45" />
-    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData3.xml" target="lib\net45" />
+    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData4.dll" target="lib\net45" />
+    <file src="..\build\4.5\MicroLite.Extensions.WebApi.OData4.xml" target="lib\net45" />
   </files>
 </package>

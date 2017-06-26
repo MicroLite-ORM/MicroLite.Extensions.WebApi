@@ -52,11 +52,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-#if ODATA3
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=StatusId desc,Name"),
-#else
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$orderby=Status desc,Name"),
-#endif
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
+                        "http://services.microlite.org/api/Customers?$orderby=Status desc,Name"),
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = OrderByBinder.BindOrderBy(
@@ -71,11 +69,7 @@
                 var expected = SqlBuilder
                     .Select("*")
                     .From(typeof(Customer))
-#if ODATA3
-                    .OrderByDescending("StatusId")
-#else
                     .OrderByDescending("CustomerStatusId")
-#endif
                     .OrderByAscending("Name")
                     .ToSqlQuery();
 

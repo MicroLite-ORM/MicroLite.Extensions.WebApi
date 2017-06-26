@@ -63,11 +63,9 @@
                 TestHelper.EnsureEDM();
 
                 var queryOptions = new ODataQueryOptions(
-#if ODATA3
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=Name,DateOfBirth,StatusId"),
-#else
-                    new HttpRequestMessage(HttpMethod.Get, "http://services.microlite.org/api/Customers?$select=Name,DateOfBirth,Status"),
-#endif
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
+                        "http://services.microlite.org/api/Customers?$select=Name,DateOfBirth,Status"),
                     EntityDataModel.Current.EntitySets["Customers"]);
 
                 this.sqlQuery = SelectBinder.BindSelect(queryOptions.Select, ObjectInfo.For(typeof(Customer))).ToSqlQuery();
@@ -76,11 +74,8 @@
             [Fact]
             public void TheColumnNamesForTheSpecifiedPropertiesShouldBeTheOnlyOnesInTheSelectList()
             {
-#if ODATA3
-                var expected = SqlBuilder.Select("Name", "DateOfBirth", "StatusId").From(typeof(Customer)).ToSqlQuery();
-#else
                 var expected = SqlBuilder.Select("Name", "DateOfBirth", "CustomerStatusId").From(typeof(Customer)).ToSqlQuery();
-#endif
+
                 Assert.Equal(expected, this.sqlQuery);
             }
         }

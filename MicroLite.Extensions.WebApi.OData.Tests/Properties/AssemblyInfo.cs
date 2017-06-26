@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MicroLite.Extensions.WebApi.OData3.Tests")]
+[assembly: AssemblyTitle("MicroLite.Extensions.WebApi.OData.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MicroLite.Extensions.WebApi.OData3.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("MicroLite.Extensions.WebApi.OData.Tests")]
+[assembly: AssemblyCopyright("Copyright 2012 - 2017 Project Contributors all rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
