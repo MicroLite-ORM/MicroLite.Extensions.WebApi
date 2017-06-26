@@ -43,11 +43,11 @@
             Assert.Equal("orderBySqlBuilder", exception.ParamName);
         }
 
-        public class WhenCallingBindOrderBy
+        public class WhenCallingBindOrderBy_WithAnOrderByQueryOption
         {
             private readonly SqlQuery sqlQuery;
 
-            public WhenCallingBindOrderBy()
+            public WhenCallingBindOrderBy_WithAnOrderByQueryOption()
             {
                 TestHelper.EnsureEDM();
 
@@ -71,6 +71,39 @@
                     .From(typeof(Customer))
                     .OrderByDescending("CustomerStatusId")
                     .OrderByAscending("Name")
+                    .ToSqlQuery();
+
+                Assert.Equal(expected, this.sqlQuery);
+            }
+        }
+
+        public class WhenCallingBindOrderBy_WithoutAnOrderByQueryOption
+        {
+            private readonly SqlQuery sqlQuery;
+
+            public WhenCallingBindOrderBy_WithoutAnOrderByQueryOption()
+            {
+                TestHelper.EnsureEDM();
+
+                var queryOptions = new ODataQueryOptions(
+                    new HttpRequestMessage(
+                        HttpMethod.Get,
+                        "http://services.microlite.org/api/Customers"),
+                    EntityDataModel.Current.EntitySets["Customers"]);
+
+                this.sqlQuery = OrderByBinder.BindOrderBy(
+                    queryOptions.OrderBy,
+                    ObjectInfo.For(typeof(Customer)),
+                    SqlBuilder.Select("*").From(typeof(Customer))).ToSqlQuery();
+            }
+
+            [Fact]
+            public void TheQueryShouldBeSortedByTheIdAscending()
+            {
+                var expected = SqlBuilder
+                    .Select("*")
+                    .From(typeof(Customer))
+                    .OrderByAscending("Id")
                     .ToSqlQuery();
 
                 Assert.Equal(expected, this.sqlQuery);

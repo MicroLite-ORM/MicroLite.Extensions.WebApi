@@ -56,6 +56,10 @@ namespace MicroLite.Extensions.WebApi.OData.Binders
                 var orderByBinder = new OrderByBinder(objectInfo, orderBySqlBuilder);
                 orderByBinder.Bind(orderByQueryOption);
             }
+            else
+            {
+                orderBySqlBuilder.OrderByAscending(objectInfo.TableInfo.IdentifierColumn.ColumnName);
+            }
 
             return orderBySqlBuilder;
         }
