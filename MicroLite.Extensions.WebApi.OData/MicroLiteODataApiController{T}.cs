@@ -109,7 +109,7 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var count = await this.Session.Advanced.ExecuteScalarAsync<long>(entityCountQuery);
 
-            return this.Request.CreateODataResponse(HttpStatusCode.OK, count);
+            return this.Request.CreateODataResponse(count.ToString());
         }
 
         /// <summary>

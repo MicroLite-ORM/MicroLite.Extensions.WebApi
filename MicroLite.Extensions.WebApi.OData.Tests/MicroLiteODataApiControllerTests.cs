@@ -13,6 +13,7 @@
     using Net.Http.WebApi.OData;
     using Net.Http.WebApi.OData.Model;
     using Net.Http.WebApi.OData.Query;
+    using Net.Http.WebApi.OData.Query.Validators;
     using Xunit;
 
     public class MicroLiteODataApiControllerTests
@@ -335,10 +336,16 @@
             }
 
             [Fact]
-            public void TheResponseContent_IsObjectContent_WithLongValue()
+            public void TheResponseContent_IsStringContent()
             {
-                Assert.IsType<long>(((ObjectContent)this.response.Content).Value);
-                Assert.Equal(150L, ((ObjectContent)this.response.Content).Value);
+                Assert.IsType<StringContent>(this.response.Content);
+                Assert.Equal("150", ((StringContent)this.response.Content).ReadAsStringAsync().Result);
+            }
+
+            [Fact]
+            public void TheResponseContentType_IsTextPlain()
+            {
+                Assert.Equal("text/plain", response.Content.Headers.ContentType.MediaType);
             }
         }
 
