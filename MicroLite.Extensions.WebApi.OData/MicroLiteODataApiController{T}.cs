@@ -81,7 +81,24 @@ namespace MicroLite.Extensions.WebApi.OData
         }
 
         /// <summary>
-        /// Creates the SQL query to use based upon the values in the specified ODataQueryOptions.
+        /// Creates the SQL query to count the number if entities in the Entity Set.
+        /// </summary>
+        /// <returns>The SqlQuery to execute.</returns>
+        protected virtual SqlQuery CreateCountSqlQuery()
+        {
+            if (entityCountQuery == null)
+            {
+                entityCountQuery = SqlBuilder.Select()
+                    .Count(ObjectInfo.TableInfo.IdentifierColumn.ColumnName)
+                    .From(ObjectInfo.ForType)
+                    .ToSqlQuery();
+            }
+
+            return entityCountQuery;
+        }
+
+        /// <summary>
+        /// Creates the SQL query to query entities in the Entity Set based upon the values in the specified ODataQueryOptions.
         /// </summary>
         /// <param name="queryOptions">The query options.</param>
         /// <returns>The SqlQuery to execute.</returns>
@@ -99,15 +116,9 @@ namespace MicroLite.Extensions.WebApi.OData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "It will be a Web API method")]
         protected virtual async Task<HttpResponseMessage> GetCountResponseAsync()
         {
-            if (entityCountQuery == null)
-            {
-                entityCountQuery = SqlBuilder.Select()
-                    .Count(ObjectInfo.TableInfo.IdentifierColumn.ColumnName)
-                    .From(ObjectInfo.ForType)
-                    .ToSqlQuery();
-            }
+            var sqlQuery = this.CreateCountSqlQuery();
 
-            var count = await this.Session.Advanced.ExecuteScalarAsync<long>(entityCountQuery);
+            var count = await this.Session.Advanced.ExecuteScalarAsync<long>(sqlQuery);
 
             return this.Request.CreateODataResponse(count.ToString());
         }
