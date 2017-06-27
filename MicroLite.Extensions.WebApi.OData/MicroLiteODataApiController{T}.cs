@@ -103,7 +103,7 @@ namespace MicroLite.Extensions.WebApi.OData
             {
                 entityCountQuery = SqlBuilder.Select()
                     .Count(ObjectInfo.TableInfo.IdentifierColumn.ColumnName)
-                    .From(typeof(TEntity))
+                    .From(ObjectInfo.ForType)
                     .ToSqlQuery();
             }
 
@@ -134,13 +134,13 @@ namespace MicroLite.Extensions.WebApi.OData
 
             var paged = await this.Session.PagedAsync<dynamic>(sqlQuery, PagingOptions.SkipTake(skip, top));
 
-            HttpResponseMessage response;
+            Uri context = null;
             int? count = queryOptions.Count ? paged.TotalResults : default(int?);
-            Uri nextLink = paged.MoreResultsAvailable ? queryOptions.NextLink(skip, top) : null;
+            Uri nextLink = paged.MoreResultsAvailable ? queryOptions.NextLink(skip, paged.ResultsPerPage) : null;
 
-            response = this.Request.CreateODataResponse(
-                HttpStatusCode.OK,
-                new ODataResponseContent(null, paged.Results, count, nextLink));
+            var responseContent = new ODataResponseContent(context, paged.Results, count, nextLink);
+
+            var response = this.Request.CreateODataResponse(HttpStatusCode.OK, responseContent);
 
             if (queryOptions.Format != null)
             {
