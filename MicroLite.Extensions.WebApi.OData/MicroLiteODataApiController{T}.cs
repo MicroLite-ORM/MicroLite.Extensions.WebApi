@@ -46,6 +46,7 @@ namespace MicroLite.Extensions.WebApi.OData
             {
                 AllowedArithmeticOperators = AllowedArithmeticOperators.All,
                 AllowedFunctions = AllowedFunctions.Ceiling
+                    | AllowedFunctions.Contains
                     | AllowedFunctions.Day
                     | AllowedFunctions.EndsWith
                     | AllowedFunctions.Floor
@@ -57,16 +58,15 @@ namespace MicroLite.Extensions.WebApi.OData
                     | AllowedFunctions.ToLower
                     | AllowedFunctions.ToUpper
                     | AllowedFunctions.Trim
-                    | AllowedFunctions.Year
-                    | AllowedFunctions.Contains,
+                    | AllowedFunctions.Year,
                 AllowedLogicalOperators = AllowedLogicalOperators.All & ~AllowedLogicalOperators.Has,
-                AllowedQueryOptions = AllowedQueryOptions.Filter
+                AllowedQueryOptions = AllowedQueryOptions.Count
+                    | AllowedQueryOptions.Filter
                     | AllowedQueryOptions.Format
                     | AllowedQueryOptions.OrderBy
                     | AllowedQueryOptions.Select
                     | AllowedQueryOptions.Skip
-                    | AllowedQueryOptions.Top
-                    | AllowedQueryOptions.Count,
+                    | AllowedQueryOptions.Top,
                 MaxTop = 50
             };
         }
