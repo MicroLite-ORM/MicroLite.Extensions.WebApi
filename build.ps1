@@ -4,8 +4,7 @@ param(
 )
 
 $projects = @(
-    @{ Name = "MicroLite.Extensions.WebApi" },
-    @{ Name = "MicroLite.Extensions.WebApi.OData" }
+    @{ Name = "MicroLite.Extensions.WebApi" }
 )
 
 $scriptPath = Split-Path $MyInvocation.InvocationName

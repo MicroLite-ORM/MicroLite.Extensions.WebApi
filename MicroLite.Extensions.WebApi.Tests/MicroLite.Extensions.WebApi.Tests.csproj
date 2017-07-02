@@ -84,7 +84,6 @@
     <Compile Include="MicroLiteReadOnlyApiControllerTests.cs" />
     <Compile Include="TestEntities\Customer.cs" />
     <Compile Include="TestEntities\CustomerStatus.cs" />
-    <Compile Include="TestEntities\Invoice.cs" />
     <Compile Include="ValidateModelNotNullAttributeTests.cs" />
     <Compile Include="ValidateModelStateAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

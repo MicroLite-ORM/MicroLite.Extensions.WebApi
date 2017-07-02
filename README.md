@@ -11,6 +11,8 @@ To find out more, head over to the [Wiki](https://github.com/TrevorPilley/MicroL
 
 Also, check out the [WebApi](http://microliteorm.wordpress.com/tag/WebApi/) tag on the MicroLite Blog.
 
+For OData support, check out the [MicroLite.Extensions.WebApi.OData](https://github.com/TrevorPilley/MicroLite.Extensions.WebApi.OData) add-on.
+
 ## Supported .NET Framework Versions
 
 The NuGet Package contains binaries compiled against:
