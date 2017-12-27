@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ValidateModelNotNullAttribute.cs" company="MicroLite">
+// <copyright file="ValidateModelNotNullAttribute.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");

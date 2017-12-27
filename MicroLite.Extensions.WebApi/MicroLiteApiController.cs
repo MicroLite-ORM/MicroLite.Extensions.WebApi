@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MicroLiteApiController.cs" company="MicroLite">
+// <copyright file="MicroLiteApiController.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteApiController : ApiController, IHaveAsyncSession
     {
         /// <summary>
-        /// Initialises a new instance of the MicroLiteApiController class with an ISession.
+        /// Initialises a new instance of the <see cref="MicroLiteApiController"/> class with an ISession.
         /// </summary>
         /// <param name="session">The ISession for the current HTTP request.</param>
         /// <remarks>

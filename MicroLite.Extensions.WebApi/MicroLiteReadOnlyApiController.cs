@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MicroLiteReadOnlyApiController.cs" company="MicroLite">
+// <copyright file="MicroLiteReadOnlyApiController.cs" company="Project Contributors">
 // Copyright 2012 - 2017 Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteReadOnlyApiController : ApiController, IHaveAsyncReadOnlySession
     {
         /// <summary>
-        /// Initialises a new instance of the MicroLiteReadOnlyApiController class with an IReadOnlySession.
+        /// Initialises a new instance of the <see cref="MicroLiteReadOnlyApiController"/> class with an IReadOnlySession.
         /// </summary>
         /// <param name="session">The IReadOnlySession for the current HTTP request.</param>
         /// <remarks>
