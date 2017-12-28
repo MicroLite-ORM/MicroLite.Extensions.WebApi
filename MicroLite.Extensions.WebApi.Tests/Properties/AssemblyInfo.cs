@@ -6,7 +6,7 @@ using Xunit;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MicroLite.Extensions.WebApi.Tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Unit Tests for the MicroLite.Extensions.WebApi library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MicroLite.Extensions.WebApi.Tests")]
@@ -30,4 +30,4 @@ using Xunit;
 //      Revision
 [assembly: AssemblyVersion("6.6.0.0")]
 [assembly: AssemblyFileVersion("6.6.0.0")]
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+[assembly: CollectionBehavior(DisableTestParallelization = false)]
