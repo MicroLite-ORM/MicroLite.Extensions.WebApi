@@ -16,7 +16,7 @@
             private readonly ValidateModelStateAttribute attribute = new ValidateModelStateAttribute();
 
             [Fact]
-            public void TheResponseShoulNotBeSet()
+            public void TheResponseShouldNotBeSet()
             {
                 var controllerContext = new HttpControllerContext(new HttpConfiguration(), new Mock<IHttpRouteData>().Object, new HttpRequestMessage());
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
