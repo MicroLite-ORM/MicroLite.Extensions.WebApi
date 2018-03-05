@@ -28,6 +28,6 @@ using Xunit;
 //      Minor Version
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("6.6.0.0")]
-[assembly: AssemblyFileVersion("6.6.1.0")]
-[assembly: CollectionBehavior(DisableTestParallelization = false)]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
