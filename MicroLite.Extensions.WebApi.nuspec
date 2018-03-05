@@ -18,7 +18,7 @@ https://www.nuget.org/packages/MicroLite.Extensions.WebApi.OData</releaseNotes>
     <tags>ASP.NET WebApi MicroORM ORM POCO Database</tags>
     <dependencies>
       <dependency id="MicroLite" version="[6.3,7.0)" />
-      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.3,6.0)" />
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.4,6.0)" />
     </dependencies>
   </metadata>
   <files>
