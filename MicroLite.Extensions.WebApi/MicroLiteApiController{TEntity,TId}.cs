@@ -15,7 +15,7 @@ namespace MicroLite.Extensions.WebApi
     using System;
     using System.Net;
     using System.Net.Http;
-    using Mapping;
+    using MicroLite.Mapping;
 
     /// <summary>
     /// Provides opt-in CRUD operations in addition to the base ASP.NET WebApi controller.
@@ -76,7 +76,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-            var deleted = await this.Session.Advanced.DeleteAsync(this.ObjectInfo.ForType, id);
+            var deleted = await this.Session.Advanced.DeleteAsync(this.ObjectInfo.ForType, id).ConfigureAwait(false);
 
             if (!deleted)
             {
@@ -101,7 +101,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-            var entity = await this.Session.SingleAsync<TEntity>(id);
+            var entity = await this.Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
 
             if (entity == null)
             {
@@ -124,7 +124,7 @@ namespace MicroLite.Extensions.WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The method is returning the response, the framework will be responsible for its disposal")]
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> PostEntityResponseAsync(TEntity entity)
         {
-            await this.Session.InsertAsync(entity);
+            await this.Session.InsertAsync(entity).ConfigureAwait(false);
 
             var identifier = (TId)this.ObjectInfo.GetIdentifierValue(entity);
 
@@ -148,7 +148,7 @@ namespace MicroLite.Extensions.WebApi
         {
             HttpResponseMessage response;
 
-            var existing = await this.Session.SingleAsync<TEntity>(id);
+            var existing = await this.Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
 
             if (existing == null)
             {
@@ -158,7 +158,7 @@ namespace MicroLite.Extensions.WebApi
             {
                 this.ObjectInfo.SetIdentifierValue(entity, id);
 
-                var updated = await this.Session.UpdateAsync(entity);
+                var updated = await this.Session.UpdateAsync(entity).ConfigureAwait(false);
 
                 if (!updated)
                 {
