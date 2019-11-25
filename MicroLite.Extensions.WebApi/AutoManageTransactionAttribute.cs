@@ -46,7 +46,7 @@ namespace MicroLite.Extensions.WebApi
     /// </code>
     /// </example>
     /// <example>
-    /// Override the IsolationLevel of the transaction for a specific method (could also be done at controller level)
+    /// Override the IsolationLevel of the transaction for a specific method (could also be done at controller level).
     /// <code>
     /// [AutoManageTransactionAttribute(IsolationLevel = IsolationLevel.Chaos)]
     /// public HttpResponseMessage Put(int id, Model model)
