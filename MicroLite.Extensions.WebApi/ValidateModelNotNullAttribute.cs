@@ -57,11 +57,7 @@ namespace MicroLite.Extensions.WebApi
         /// Allows overriding the default behaviour on an individual action/controller if an instance
         /// is already registered in the global filters.
         /// </remarks>
-        public bool SkipValidation
-        {
-            get;
-            set;
-        }
+        public bool SkipValidation { get; set; }
 
         /// <summary>
         /// Occurs before the action method is invoked.
@@ -76,9 +72,7 @@ namespace MicroLite.Extensions.WebApi
 
             if (actionContext != null && ContainsNull(actionContext.ActionArguments))
             {
-                actionContext.Response = actionContext.Request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    "The argument must not be null");
+                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The argument must not be null");
             }
         }
     }

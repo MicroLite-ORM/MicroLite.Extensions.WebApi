@@ -87,22 +87,18 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-            if (actionExecutedContext == null)
+            if (actionExecutedContext is null)
             {
                 throw new ArgumentNullException(nameof(actionExecutedContext));
             }
 
-            var controller = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncSession;
-
-            if (controller != null)
+            if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveAsyncSession controller)
             {
                 OnActionExecuted(controller.Session, actionExecutedContext.Exception);
                 return;
             }
 
-            var readOnlyController = actionExecutedContext.ActionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
-
-            if (readOnlyController != null)
+            if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveAsyncReadOnlySession readOnlyController)
             {
                 OnActionExecuted(readOnlyController.Session, actionExecutedContext.Exception);
                 return;
@@ -120,22 +116,18 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-            if (actionContext == null)
+            if (actionContext is null)
             {
                 throw new ArgumentNullException(nameof(actionContext));
             }
 
-            var controller = actionContext.ControllerContext.Controller as IHaveAsyncSession;
-
-            if (controller != null)
+            if (actionContext.ControllerContext.Controller is IHaveAsyncSession controller)
             {
                 controller.Session.BeginTransaction(this.IsolationLevel);
                 return;
             }
 
-            var readOnlyController = actionContext.ControllerContext.Controller as IHaveAsyncReadOnlySession;
-
-            if (readOnlyController != null)
+            if (actionContext.ControllerContext.Controller is IHaveAsyncReadOnlySession readOnlyController)
             {
                 readOnlyController.Session.BeginTransaction(this.IsolationLevel);
                 return;
@@ -144,7 +136,7 @@ namespace MicroLite.Extensions.WebApi
 
         private static void OnActionExecuted(IAsyncReadOnlySession session, Exception exception)
         {
-            if (session.CurrentTransaction == null)
+            if (session.CurrentTransaction is null)
             {
                 return;
             }
@@ -153,7 +145,7 @@ namespace MicroLite.Extensions.WebApi
 
             try
             {
-                if (transaction.IsActive && exception == null)
+                if (transaction.IsActive && exception is null)
                 {
                     transaction.Commit();
                 }

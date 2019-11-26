@@ -53,11 +53,7 @@ namespace MicroLite.Extensions.WebApi
         /// <summary>
         /// Gets or sets a function which returns the entity resource URI for the entity with the supplied <typeparamref name="TId"/>.
         /// </summary>
-        protected Func<TId, Uri> GetEntityResourceUri
-        {
-            get;
-            set;
-        }
+        protected Func<TId, Uri> GetEntityResourceUri { get; set; }
 
         /// <summary>
         /// Gets the object information for the entity.
@@ -74,20 +70,9 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1034_Delete_an_Entity]]></remarks>
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> DeleteEntityResponseAsync(TId id)
         {
-            HttpResponseMessage response;
-
             var deleted = await this.Session.Advanced.DeleteAsync(this.ObjectInfo.ForType, id).ConfigureAwait(false);
 
-            if (!deleted)
-            {
-                response = this.Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            else
-            {
-                response = this.Request.CreateResponse(HttpStatusCode.NoContent);
-            }
-
-            return response;
+            return this.Request.CreateResponse(deleted ? HttpStatusCode.NoContent : HttpStatusCode.NotFound);
         }
 
         /// <summary>
@@ -99,20 +84,14 @@ namespace MicroLite.Extensions.WebApi
         /// 200 (OK) if an entity is found.</returns>
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> GetEntityResponseAsync(TId id)
         {
-            HttpResponseMessage response;
-
             var entity = await this.Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
 
-            if (entity == null)
+            if (entity is null)
             {
-                response = this.Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            else
-            {
-                response = this.Request.CreateResponse(HttpStatusCode.OK, entity);
+                return this.Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return response;
+            return this.Request.CreateResponse(HttpStatusCode.OK, entity);
         }
 
         /// <summary>
@@ -146,31 +125,18 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1033_Update_an_Entity]]></remarks>
         protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> PutEntityResponseAsync(TId id, TEntity entity)
         {
-            HttpResponseMessage response;
-
             var existing = await this.Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
 
-            if (existing == null)
+            if (existing is null)
             {
-                response = this.Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            else
-            {
-                this.ObjectInfo.SetIdentifierValue(entity, id);
-
-                var updated = await this.Session.UpdateAsync(entity).ConfigureAwait(false);
-
-                if (!updated)
-                {
-                    response = this.Request.CreateResponse(HttpStatusCode.NotModified);
-                }
-                else
-                {
-                    response = this.Request.CreateResponse(HttpStatusCode.NoContent);
-                }
+                return this.Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return response;
+            this.ObjectInfo.SetIdentifierValue(entity, id);
+
+            var updated = await this.Session.UpdateAsync(entity).ConfigureAwait(false);
+
+            return this.Request.CreateResponse(updated ? HttpStatusCode.NoContent : HttpStatusCode.NotModified);
         }
     }
 }

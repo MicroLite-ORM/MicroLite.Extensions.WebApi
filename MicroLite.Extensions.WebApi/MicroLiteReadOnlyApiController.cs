@@ -30,21 +30,12 @@ namespace MicroLite.Extensions.WebApi
         /// </remarks>
         protected MicroLiteReadOnlyApiController(IAsyncReadOnlySession session)
         {
-            if (session == null)
-            {
-                throw new ArgumentNullException(nameof(session));
-            }
-
-            this.Session = session;
+            this.Session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
         /// <summary>
         /// Gets or sets the <see cref="IReadOnlySession"/> for the current HTTP request.
         /// </summary>
-        public IAsyncReadOnlySession Session
-        {
-            get;
-            set;
-        }
+        public IAsyncReadOnlySession Session { get; set; }
     }
 }

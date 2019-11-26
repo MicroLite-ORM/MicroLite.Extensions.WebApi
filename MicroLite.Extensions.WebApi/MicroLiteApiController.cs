@@ -30,21 +30,12 @@ namespace MicroLite.Extensions.WebApi
         /// </remarks>
         protected MicroLiteApiController(IAsyncSession session)
         {
-            if (session == null)
-            {
-                throw new ArgumentNullException(nameof(session));
-            }
-
-            this.Session = session;
+            this.Session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
         /// <summary>
         /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
         /// </summary>
-        public IAsyncSession Session
-        {
-            get;
-            set;
-        }
+        public IAsyncSession Session { get; set; }
     }
 }
