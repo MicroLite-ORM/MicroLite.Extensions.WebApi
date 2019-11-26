@@ -1,7 +1,7 @@
 MicroLite.Extensions.WebApi
 ===========================
 
-[![NuGet version](https://badge.fury.io/nu/MicroLite.Extensions.WebApi.svg)](http://badge.fury.io/nu/MicroLite.Extensions.WebApi) [![Build Status](https://trevorpilley.visualstudio.com/_apis/public/build/definitions/4cf9ae80-460f-4dc8-a6fd-815e9e58ad35/2/badge)](https://trevorpilley.visualstudio.com/MicroLite.Extensions.WebApi)
+[![NuGet version](https://badge.fury.io/nu/MicroLite.Extensions.WebApi.svg)](http://badge.fury.io/nu/MicroLite.Extensions.WebApi) [![Build Status](https://dev.azure.com/trevorpilley/MicroLite/_apis/build/status/MicroLite.Extensions.WebApi-CI?branchName=master)](https://dev.azure.com/trevorpilley/MicroLite/_build/latest?definitionId=2&branchName=master)
 
 _MicroLite.Extensions.WebApi_ is an extension to the MicroLite ORM Framework which allows integration with ASP.NET WebApi.
 
