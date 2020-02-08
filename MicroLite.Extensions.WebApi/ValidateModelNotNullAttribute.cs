@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ValidateModelNotNullAttribute.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,15 +10,15 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+
 namespace MicroLite.Extensions.WebApi
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Filters;
-
     /// <summary>
     /// An <see cref="ActionFilterAttribute"/> which verifies the parameters passed to the controller action are not null.
     /// </summary>
@@ -48,7 +48,7 @@ namespace MicroLite.Extensions.WebApi
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     public sealed class ValidateModelNotNullAttribute : ActionFilterAttribute
     {
-        private static readonly Func<Dictionary<string, object>, bool> ContainsNull = args => args.ContainsValue(null);
+        private static readonly Func<Dictionary<string, object>, bool> s_containsNull = args => args.ContainsValue(null);
 
         /// <summary>
         /// Gets or sets a value indicating whether to skip validation (false by default).
@@ -65,12 +65,12 @@ namespace MicroLite.Extensions.WebApi
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (this.SkipValidation)
+            if (SkipValidation)
             {
                 return;
             }
 
-            if (actionContext != null && ContainsNull(actionContext.ActionArguments))
+            if (actionContext != null && s_containsNull(actionContext.ActionArguments))
             {
                 actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The argument must not be null");
             }

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteApiController{TEntity,TId}.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,13 +10,14 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using MicroLite.Mapping;
+
 namespace MicroLite.Extensions.WebApi
 {
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using MicroLite.Mapping;
-
     /// <summary>
     /// Provides opt-in CRUD operations in addition to the base ASP.NET WebApi controller.
     /// </summary>
@@ -25,7 +26,7 @@ namespace MicroLite.Extensions.WebApi
     public abstract class MicroLiteApiController<TEntity, TId> : MicroLiteApiController
         where TEntity : class, new()
     {
-        private static readonly IObjectInfo EntityObjectInfo = Mapping.ObjectInfo.For(typeof(TEntity));
+        private static readonly IObjectInfo s_entityObjectInfo = Mapping.ObjectInfo.For(typeof(TEntity));
 
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteApiController{TEntity, TId}"/> class with an ISession.
@@ -37,17 +38,7 @@ namespace MicroLite.Extensions.WebApi
         protected MicroLiteApiController(IAsyncSession session)
             : base(session)
         {
-            this.GetEntityResourceUri = (TId id) =>
-            {
-                var entityUri = this.Url.Link(
-                    "DefaultApi",
-                    new
-                    {
-                        id = id,
-                    });
-
-                return new Uri(entityUri);
-            };
+            GetEntityResourceUri = (TId id) => new Uri(Url.Link("DefaultApi", new { id }));
         }
 
         /// <summary>
@@ -58,7 +49,7 @@ namespace MicroLite.Extensions.WebApi
         /// <summary>
         /// Gets the object information for the entity.
         /// </summary>
-        protected IObjectInfo ObjectInfo => EntityObjectInfo;
+        protected IObjectInfo ObjectInfo => s_entityObjectInfo;
 
         /// <summary>
         /// Deletes the <typeparamref name="TEntity"/> with the specified id.
@@ -67,12 +58,11 @@ namespace MicroLite.Extensions.WebApi
         /// <returns>The an <see cref="HttpResponseMessage"/> with
         /// 204 (No Content) if the entity is deleted successfully,
         /// or 404 (Not Found) if there is no entity with the specified Id.</returns>
-        /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1034_Delete_an_Entity]]></remarks>
-        protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> DeleteEntityResponseAsync(TId id)
+        protected virtual async Task<HttpResponseMessage> DeleteEntityResponseAsync(TId id)
         {
-            var deleted = await this.Session.Advanced.DeleteAsync(this.ObjectInfo.ForType, id).ConfigureAwait(false);
+            bool deleted = await Session.Advanced.DeleteAsync(ObjectInfo.ForType, id).ConfigureAwait(false);
 
-            return this.Request.CreateResponse(deleted ? HttpStatusCode.NoContent : HttpStatusCode.NotFound);
+            return Request.CreateResponse(deleted ? HttpStatusCode.NoContent : HttpStatusCode.NotFound);
         }
 
         /// <summary>
@@ -82,16 +72,16 @@ namespace MicroLite.Extensions.WebApi
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result
         /// 404 (Not Found) if no entity exists with the specified Identifier or
         /// 200 (OK) if an entity is found.</returns>
-        protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> GetEntityResponseAsync(TId id)
+        protected virtual async Task<HttpResponseMessage> GetEntityResponseAsync(TId id)
         {
-            var entity = await this.Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
+            TEntity entity = await Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
 
             if (entity is null)
             {
-                return this.Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return this.Request.CreateResponse(HttpStatusCode.OK, entity);
+            return Request.CreateResponse(HttpStatusCode.OK, entity);
         }
 
         /// <summary>
@@ -99,16 +89,14 @@ namespace MicroLite.Extensions.WebApi
         /// </summary>
         /// <param name="entity">The entity containing the values to be created.</param>
         /// <returns>The an <see cref="HttpResponseMessage"/> with the execution result 201 (Created) if the entity is successfully created.</returns>
-        /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1032_Create_an_Entity]]></remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The method is returning the response, the framework will be responsible for its disposal")]
-        protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> PostEntityResponseAsync(TEntity entity)
+        protected virtual async Task<HttpResponseMessage> PostEntityResponseAsync(TEntity entity)
         {
-            await this.Session.InsertAsync(entity).ConfigureAwait(false);
+            await Session.InsertAsync(entity).ConfigureAwait(false);
 
-            var identifier = (TId)this.ObjectInfo.GetIdentifierValue(entity);
+            var identifier = (TId)ObjectInfo.GetIdentifierValue(entity);
 
-            var response = this.Request.CreateResponse(HttpStatusCode.Created, entity);
-            response.Headers.Location = this.GetEntityResourceUri(identifier);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, entity);
+            response.Headers.Location = GetEntityResourceUri(identifier);
 
             return response;
         }
@@ -122,21 +110,20 @@ namespace MicroLite.Extensions.WebApi
         /// 404 (Not Found) if no entity was found with the specified Id to update,
         /// 304 (Not Modified) if there were no changes or
         /// 204 (NoContent) if the entity was updated successfully.</returns>
-        /// <remarks><![CDATA[http://www.odata.org/documentation/odata-v3-documentation/odata-core/#1033_Update_an_Entity]]></remarks>
-        protected virtual async System.Threading.Tasks.Task<HttpResponseMessage> PutEntityResponseAsync(TId id, TEntity entity)
+        protected virtual async Task<HttpResponseMessage> PutEntityResponseAsync(TId id, TEntity entity)
         {
-            var existing = await this.Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
+            TEntity existing = await Session.SingleAsync<TEntity>(id).ConfigureAwait(false);
 
             if (existing is null)
             {
-                return this.Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            this.ObjectInfo.SetIdentifierValue(entity, id);
+            ObjectInfo.SetIdentifierValue(entity, id);
 
-            var updated = await this.Session.UpdateAsync(entity).ConfigureAwait(false);
+            bool updated = await Session.UpdateAsync(entity).ConfigureAwait(false);
 
-            return this.Request.CreateResponse(updated ? HttpStatusCode.NoContent : HttpStatusCode.NotModified);
+            return Request.CreateResponse(updated ? HttpStatusCode.NoContent : HttpStatusCode.NotModified);
         }
     }
 }

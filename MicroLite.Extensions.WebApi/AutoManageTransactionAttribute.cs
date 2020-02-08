@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="AutoManageTransactionAttribute.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,14 +10,14 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Data;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+using MicroLite.Infrastructure;
+
 namespace MicroLite.Extensions.WebApi
 {
-    using System;
-    using System.Data;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Filters;
-    using MicroLite.Infrastructure;
-
     /// <summary>
     /// An action filter attribute which can be applied to a class or method to automatically begin an <see cref="ITransaction"/>
     /// before an action is executed and either commit or roll it back after the action is executed depending on whether an exception occurred.
@@ -82,7 +82,7 @@ namespace MicroLite.Extensions.WebApi
         /// <param name="actionExecutedContext">The action executed context.</param>
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            if (!this.AutoManageTransaction)
+            if (!AutoManageTransaction)
             {
                 return;
             }
@@ -111,7 +111,7 @@ namespace MicroLite.Extensions.WebApi
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (!this.AutoManageTransaction)
+            if (!AutoManageTransaction)
             {
                 return;
             }
@@ -123,13 +123,13 @@ namespace MicroLite.Extensions.WebApi
 
             if (actionContext.ControllerContext.Controller is IHaveAsyncSession controller)
             {
-                controller.Session.BeginTransaction(this.IsolationLevel);
+                controller.Session.BeginTransaction(IsolationLevel);
                 return;
             }
 
             if (actionContext.ControllerContext.Controller is IHaveAsyncReadOnlySession readOnlyController)
             {
-                readOnlyController.Session.BeginTransaction(this.IsolationLevel);
+                readOnlyController.Session.BeginTransaction(IsolationLevel);
                 return;
             }
         }
@@ -141,7 +141,7 @@ namespace MicroLite.Extensions.WebApi
                 return;
             }
 
-            var transaction = session.CurrentTransaction;
+            ITransaction transaction = session.CurrentTransaction;
 
             try
             {

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="ValidateModelStateAttribute.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,14 +10,14 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+
 namespace MicroLite.Extensions.WebApi
 {
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Filters;
-
     /// <summary>
     /// An <see cref="ActionFilterAttribute"/> which verifies the model state is valid.
     /// </summary>
@@ -62,7 +62,7 @@ namespace MicroLite.Extensions.WebApi
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (this.SkipValidation)
+            if (SkipValidation)
             {
                 return;
             }
