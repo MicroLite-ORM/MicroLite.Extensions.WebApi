@@ -1,19 +1,19 @@
-﻿namespace MicroLite.Extensions.WebApi.Tests
-{
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Routing;
-    using MicroLite.Extensions.WebApi;
-    using Moq;
-    using Xunit;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Routing;
+using MicroLite.Extensions.WebApi;
+using Moq;
+using Xunit;
 
+namespace MicroLite.Extensions.WebApi.Tests
+{
     public class ValidateModelStateAttributeTests
     {
         public class WhenCallingOnActionExecuting_AndTheModelStateDoesNotContainErrors
         {
-            private readonly ValidateModelStateAttribute attribute = new ValidateModelStateAttribute();
+            private readonly ValidateModelStateAttribute _attribute = new ValidateModelStateAttribute();
 
             [Fact]
             public void TheResponseShouldNotBeSet()
@@ -22,7 +22,7 @@
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
                 actionContext.ModelState.Clear();
 
-                attribute.OnActionExecuting(actionContext);
+                _attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);
             }
@@ -30,7 +30,7 @@
 
         public class WhenCallingOnActionExecuting_TheModelStateContainsErrors_AndSkipValidationIsFalse
         {
-            private readonly ValidateModelStateAttribute attribute = new ValidateModelStateAttribute
+            private readonly ValidateModelStateAttribute _attribute = new ValidateModelStateAttribute
             {
                 SkipValidation = false
             };
@@ -42,7 +42,7 @@
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
                 actionContext.ModelState.AddModelError("Foo", "Error");
 
-                attribute.OnActionExecuting(actionContext);
+                _attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.BadRequest, actionContext.Response.StatusCode);
             }
@@ -50,7 +50,7 @@
 
         public class WhenCallingOnActionExecuting_TheModelStateContainsErrors_AndSkipValidationIsTrue
         {
-            private readonly ValidateModelStateAttribute attribute = new ValidateModelStateAttribute
+            private readonly ValidateModelStateAttribute _attribute = new ValidateModelStateAttribute
             {
                 SkipValidation = true
             };
@@ -62,7 +62,7 @@
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
                 actionContext.ModelState.AddModelError("Foo", "Error");
 
-                attribute.OnActionExecuting(actionContext);
+                _attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);
             }

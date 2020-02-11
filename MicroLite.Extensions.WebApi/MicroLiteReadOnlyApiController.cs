@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MicroLiteReadOnlyApiController.cs" company="Project Contributors">
-// Copyright 2012 - 2019 Project Contributors
+// Copyright Project Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,12 +10,12 @@
 //
 // </copyright>
 // -----------------------------------------------------------------------
+using System;
+using System.Web.Http;
+using MicroLite.Infrastructure;
+
 namespace MicroLite.Extensions.WebApi
 {
-    using System;
-    using System.Web.Http;
-    using MicroLite.Infrastructure;
-
     /// <summary>
     /// Provides access to a MicroLite IReadOnlySession in addition to the base ASP.NET WebApi controller.
     /// </summary>
@@ -30,7 +30,7 @@ namespace MicroLite.Extensions.WebApi
         /// </remarks>
         protected MicroLiteReadOnlyApiController(IAsyncReadOnlySession session)
         {
-            this.Session = session ?? throw new ArgumentNullException(nameof(session));
+            Session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
         /// <summary>

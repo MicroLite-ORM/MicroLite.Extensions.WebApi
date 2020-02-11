@@ -1,288 +1,308 @@
-﻿namespace MicroLite.Extensions.WebApi.Tests
-{
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Web.Http.Hosting;
-    using MicroLite.Extensions.WebApi.Tests.TestEntities;
-    using Moq;
-    using Xunit;
+﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Hosting;
+using MicroLite.Extensions.WebApi.Tests.TestEntities;
+using Moq;
+using Xunit;
 
+namespace MicroLite.Extensions.WebApi.Tests
+{
     public class MicroLiteApiController_T_Tests
     {
         public class WhenCallingDeleteAndAnEntityIsDeleted
         {
-            private readonly CustomerController controller;
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingDeleteAndAnEntityIsDeleted()
             {
-                this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(true));
+                _mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), _identifier)).Returns(Task.FromResult(true));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
 
-                this.response = this.controller.Delete(this.identifier).Result;
+                _response = _controller.Delete(_identifier).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeNoContent()
             {
-                Assert.Equal(HttpStatusCode.NoContent, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NoContent, _response.StatusCode);
             }
         }
 
         public class WhenCallingDeleteAndAnEntityIsNotDeleted
         {
-            private readonly CustomerController controller;
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingDeleteAndAnEntityIsNotDeleted()
             {
-                this.mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(false));
+                _mockSession.Setup(x => x.Advanced.DeleteAsync(typeof(Customer), _identifier)).Returns(Task.FromResult(false));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
 
-                this.response = this.controller.Delete(this.identifier).Result;
+                _response = _controller.Delete(_identifier).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeNotFound()
             {
-                Assert.Equal(HttpStatusCode.NotFound, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NotFound, _response.StatusCode);
             }
         }
 
         public class WhenCallingGetAndAnEntityIsNotReturned
         {
-            private readonly CustomerController controller;
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingGetAndAnEntityIsNotReturned()
             {
-                this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
+                _mockSession.Setup(x => x.SingleAsync<Customer>(_identifier)).Returns(Task.FromResult((Customer)null));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
 
-                this.response = this.controller.Get(this.identifier).Result;
+                _response = _controller.Get(_identifier).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeNotFound()
             {
-                Assert.Equal(HttpStatusCode.NotFound, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NotFound, _response.StatusCode);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldNotContainAnyContent()
             {
-                Assert.Null(this.response.Content);
+                Assert.Null(_response.Content);
             }
         }
 
         public class WhenCallingGetAndAnEntityIsReturned
         {
-            private readonly CustomerController controller;
-            private readonly Customer customer = new Customer();
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly Customer _customer = new Customer();
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingGetAndAnEntityIsReturned()
             {
-                this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(this.customer));
+                _mockSession.Setup(x => x.SingleAsync<Customer>(_identifier)).Returns(Task.FromResult(_customer));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
+                _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-                this.response = this.controller.Get(this.identifier).Result;
+                _response = _controller.Get(_identifier).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldContainTheEntity()
             {
-                Assert.Equal(this.customer, ((ObjectContent)this.response.Content).Value);
+                Assert.Equal(_customer, ((ObjectContent)_response.Content).Value);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeOK()
             {
-                Assert.Equal(HttpStatusCode.OK, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.OK, _response.StatusCode);
             }
         }
 
         public class WhenCallingPost
         {
-            private readonly CustomerController controller;
-            private readonly Customer customer = new Customer();
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly Customer _customer = new Customer();
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingPost()
             {
-                this.mockSession.Setup(x => x.InsertAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(0))
-.Callback((object o) =>
+                _mockSession.Setup(x => x.InsertAsync(It.IsNotNull<Customer>()))
+                    .Returns(Task.FromResult(0))
+                    .Callback((object o) =>
                     {
-                        ((Customer)o).Id = this.identifier;
+                        ((Customer)o).Id = _identifier;
                     });
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
-                this.controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
+                _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
-                this.response = this.controller.Post(this.customer).Result;
+                _response = _controller.Post(_customer).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldContainTheEntity()
             {
-                Assert.Equal(this.customer, ((ObjectContent)this.response.Content).Value);
+                Assert.Equal(_customer, ((ObjectContent)_response.Content).Value);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldContainTheUriForTheEntity()
             {
-                Assert.Equal(new Uri("http://services.microlite.org/api/Customers/12345"), this.response.Headers.Location);
+                Assert.Equal(new Uri("http://services.microlite.org/api/Customers/12345"), _response.Headers.Location);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeCreated()
             {
-                Assert.Equal(HttpStatusCode.Created, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.Created, _response.StatusCode);
             }
         }
 
         public class WhenCallingPutAndAnEntityIsNotReturned
         {
-            private readonly CustomerController controller;
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingPutAndAnEntityIsNotReturned()
             {
-                this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult((Customer)null));
+                _mockSession.Setup(x => x.SingleAsync<Customer>(_identifier)).Returns(Task.FromResult((Customer)null));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
 
-                this.response = this.controller.Put(this.identifier, new Customer()).Result;
+                _response = _controller.Put(_identifier, new Customer()).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeNotFound()
             {
-                Assert.Equal(HttpStatusCode.NotFound, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NotFound, _response.StatusCode);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldNotContainAnyContent()
             {
-                Assert.Null(this.response.Content);
+                Assert.Null(_response.Content);
             }
         }
 
         public class WhenCallingPutAndAnEntityIsNotUpdated
         {
-            private readonly CustomerController controller;
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
             public WhenCallingPutAndAnEntityIsNotUpdated()
             {
-                this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
-                this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(false));
+                _mockSession.Setup(x => x.SingleAsync<Customer>(_identifier)).Returns(Task.FromResult(new Customer()));
+                _mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(Task.FromResult(false));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
 
-                this.response = this.controller.Put(this.identifier, new Customer()).Result;
+                _response = _controller.Put(_identifier, new Customer()).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeNotModified()
             {
-                Assert.Equal(HttpStatusCode.NotModified, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NotModified, _response.StatusCode);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldNotContainAnyContent()
             {
-                Assert.Null(this.response.Content);
+                Assert.Null(_response.Content);
             }
         }
 
         public class WhenCallingPutAndAnEntityIsUpdated
         {
-            private readonly CustomerController controller;
-            private readonly int identifier = 12345;
-            private readonly Mock<IAsyncSession> mockSession = new Mock<IAsyncSession>();
-            private readonly HttpResponseMessage response;
+            private readonly CustomerController _controller;
+            private readonly int _identifier = 12345;
+            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly HttpResponseMessage _response;
 
-            private readonly Customer updatedCustomer = new Customer
+            private readonly Customer _updatedCustomer = new Customer
             {
                 Name = "Joe Bloggs"
             };
 
             public WhenCallingPutAndAnEntityIsUpdated()
             {
-                this.mockSession.Setup(x => x.SingleAsync<Customer>(this.identifier)).Returns(System.Threading.Tasks.Task.FromResult(new Customer()));
-                this.mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(System.Threading.Tasks.Task.FromResult(true));
+                _mockSession.Setup(x => x.SingleAsync<Customer>(_identifier)).Returns(Task.FromResult(new Customer()));
+                _mockSession.Setup(x => x.UpdateAsync(It.IsNotNull<Customer>())).Returns(Task.FromResult(true));
 
-                this.controller = new CustomerController(this.mockSession.Object);
-                this.controller.Request = new HttpRequestMessage();
+                _controller = new CustomerController(_mockSession.Object)
+                {
+                    Request = new HttpRequestMessage()
+                };
 
-                this.response = this.controller.Put(this.identifier, this.updatedCustomer).Result;
+                _response = _controller.Put(_identifier, _updatedCustomer).Result;
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldHaveHttpStatusCodeNoContent()
             {
-                Assert.Equal(HttpStatusCode.NoContent, this.response.StatusCode);
+                Assert.Equal(HttpStatusCode.NoContent, _response.StatusCode);
             }
 
             [Fact]
             public void TheHttpResponseMessageShouldNotContainAnyContent()
             {
-                Assert.Null(this.response.Content);
+                Assert.Null(_response.Content);
             }
 
             [Fact]
             public void TheUpdatedCustomerShouldHaveTheIdentifierSet()
             {
-                Assert.Equal(this.identifier, this.updatedCustomer.Id);
+                Assert.Equal(_identifier, _updatedCustomer.Id);
             }
         }
 
         public class WhenConstructedWithAnISession
         {
-            private readonly MicroLiteApiController<Customer, int> controller;
-            private readonly IAsyncSession session = new Mock<IAsyncSession>().Object;
+            private readonly MicroLiteApiController<Customer, int> _controller;
+            private readonly IAsyncSession _session = new Mock<IAsyncSession>().Object;
 
             public WhenConstructedWithAnISession()
             {
-                var mockController = new Mock<MicroLiteApiController<Customer, int>>(this.session);
-                mockController.CallBase = true;
+                var mockController = new Mock<MicroLiteApiController<Customer, int>>(_session)
+                {
+                    CallBase = true
+                };
 
-                this.controller = mockController.Object;
+                _controller = mockController.Object;
             }
 
             [Fact]
             public void TheSessionIsSet()
             {
-                Assert.Equal(this.session, this.controller.Session);
+                Assert.Equal(_session, _controller.Session);
             }
         }
 
@@ -291,31 +311,19 @@
             public CustomerController(IAsyncSession session)
                 : base(session)
             {
-                this.GetEntityResourceUri = (int id) =>
+                GetEntityResourceUri = (int id) =>
                 {
                     return new Uri("http://services.microlite.org/api/Customers/" + id.ToString());
                 };
             }
 
-            public System.Threading.Tasks.Task<HttpResponseMessage> Delete(int id)
-            {
-                return this.DeleteEntityResponseAsync(id);
-            }
+            public Task<HttpResponseMessage> Delete(int id) => DeleteEntityResponseAsync(id);
 
-            public System.Threading.Tasks.Task<HttpResponseMessage> Get(int id)
-            {
-                return this.GetEntityResponseAsync(id);
-            }
+            public Task<HttpResponseMessage> Get(int id) => GetEntityResponseAsync(id);
 
-            public System.Threading.Tasks.Task<HttpResponseMessage> Post(Customer entity)
-            {
-                return this.PostEntityResponseAsync(entity);
-            }
+            public Task<HttpResponseMessage> Post(Customer entity) => PostEntityResponseAsync(entity);
 
-            public System.Threading.Tasks.Task<HttpResponseMessage> Put(int id, Customer entity)
-            {
-                return this.PutEntityResponseAsync(id, entity);
-            }
+            public Task<HttpResponseMessage> Put(int id, Customer entity) => PutEntityResponseAsync(id, entity);
         }
     }
 }

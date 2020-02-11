@@ -1,8 +1,8 @@
-﻿namespace MicroLite.Extensions.WebApi.Tests
-{
-    using Moq;
-    using Xunit;
+﻿using Moq;
+using Xunit;
 
+namespace MicroLite.Extensions.WebApi.Tests
+{
     /// <summary>
     /// Unit Tests for the <see cref="MicroLiteApiController"/> class.
     /// </summary>
@@ -10,21 +10,23 @@
     {
         public class WhenConstructedWithAnISession
         {
-            private readonly MicroLiteApiController controller;
-            private readonly IAsyncSession session = new Mock<IAsyncSession>().Object;
+            private readonly MicroLiteApiController _controller;
+            private readonly IAsyncSession _session = new Mock<IAsyncSession>().Object;
 
             public WhenConstructedWithAnISession()
             {
-                var mockController = new Mock<MicroLiteApiController>(this.session);
-                mockController.CallBase = true;
+                var mockController = new Mock<MicroLiteApiController>(_session)
+                {
+                    CallBase = true
+                };
 
-                this.controller = mockController.Object;
+                _controller = mockController.Object;
             }
 
             [Fact]
             public void TheSessionIsSet()
             {
-                Assert.Equal(this.session, this.controller.Session);
+                Assert.Equal(_session, _controller.Session);
             }
         }
     }

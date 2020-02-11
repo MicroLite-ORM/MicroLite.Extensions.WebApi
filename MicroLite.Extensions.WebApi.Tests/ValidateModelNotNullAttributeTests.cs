@@ -1,19 +1,19 @@
-﻿namespace MicroLite.Extensions.WebApi.Tests
-{
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Routing;
-    using MicroLite.Extensions.WebApi;
-    using Moq;
-    using Xunit;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Routing;
+using MicroLite.Extensions.WebApi;
+using Moq;
+using Xunit;
 
+namespace MicroLite.Extensions.WebApi.Tests
+{
     public class ValidateModelNotNullAttributeTests
     {
         public class WhenCallingOnActionExecuting_AndTheActionArgumentsDoesNotContainNull
         {
-            private readonly ValidateModelNotNullAttribute attribute = new ValidateModelNotNullAttribute();
+            private readonly ValidateModelNotNullAttribute _attribute = new ValidateModelNotNullAttribute();
 
             [Fact]
             public void TheResponseShoulNotBeSet()
@@ -22,7 +22,7 @@
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
                 actionContext.ActionArguments.Add("model", new object());
 
-                attribute.OnActionExecuting(actionContext);
+                _attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);
             }
@@ -30,7 +30,7 @@
 
         public class WhenCallingOnActionExecuting_TheActionArgumentsContainNull_AndSkipValidationIsFalse
         {
-            private readonly ValidateModelNotNullAttribute attribute = new ValidateModelNotNullAttribute
+            private readonly ValidateModelNotNullAttribute _attribute = new ValidateModelNotNullAttribute
             {
                 SkipValidation = false
             };
@@ -42,7 +42,7 @@
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
                 actionContext.ActionArguments.Add("model", null);
 
-                attribute.OnActionExecuting(actionContext);
+                _attribute.OnActionExecuting(actionContext);
 
                 Assert.Equal(HttpStatusCode.BadRequest, actionContext.Response.StatusCode);
             }
@@ -50,7 +50,7 @@
 
         public class WhenCallingOnActionExecuting_TheActionArgumentsContainNull_AndSkipValidationIsTrue
         {
-            private readonly ValidateModelNotNullAttribute attribute = new ValidateModelNotNullAttribute
+            private readonly ValidateModelNotNullAttribute _attribute = new ValidateModelNotNullAttribute
             {
                 SkipValidation = true
             };
@@ -62,7 +62,7 @@
                 var actionContext = new HttpActionContext(controllerContext, new Mock<HttpActionDescriptor>().Object);
                 actionContext.ActionArguments.Add("model", null);
 
-                attribute.OnActionExecuting(actionContext);
+                _attribute.OnActionExecuting(actionContext);
 
                 Assert.Null(actionContext.Response);
             }
