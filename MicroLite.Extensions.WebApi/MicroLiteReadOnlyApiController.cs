@@ -29,9 +29,7 @@ namespace MicroLite.Extensions.WebApi
         /// This constructor allows for an inheriting class to easily inject an IReadOnlySession via an IOC container.
         /// </remarks>
         protected MicroLiteReadOnlyApiController(IAsyncReadOnlySession session)
-        {
-            Session = session ?? throw new ArgumentNullException(nameof(session));
-        }
+            => Session = session ?? throw new ArgumentNullException(nameof(session));
 
         /// <summary>
         /// Gets or sets the <see cref="IReadOnlySession"/> for the current HTTP request.

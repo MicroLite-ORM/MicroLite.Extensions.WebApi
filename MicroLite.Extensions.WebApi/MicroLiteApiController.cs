@@ -29,9 +29,7 @@ namespace MicroLite.Extensions.WebApi
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
         protected MicroLiteApiController(IAsyncSession session)
-        {
-            Session = session ?? throw new ArgumentNullException(nameof(session));
-        }
+            => Session = session ?? throw new ArgumentNullException(nameof(session));
 
         /// <summary>
         /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
