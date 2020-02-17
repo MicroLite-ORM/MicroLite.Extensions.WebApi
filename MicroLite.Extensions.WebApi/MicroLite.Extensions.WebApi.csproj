@@ -30,6 +30,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
@@ -56,10 +57,6 @@
 
   <ItemGroup>
     <None Include="..\MicroLite.snk" Link="MicroLite.snk" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Web" />
   </ItemGroup>
 
 </Project>
