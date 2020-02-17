@@ -1,11 +1,18 @@
-MicroLite.Extensions.WebApi
-===========================
+# MicroLite.Extensions.WebApi
+
+## Status
 
 |Service|Status|
 |-------|------|
-||[![NuGet version](https://badge.fury.io/nu/MicroLite.Extensions.WebApi.svg)](http://badge.fury.io/nu/MicroLite.Extensions.WebApi)|
+|nuget|[![NuGet version](https://badge.fury.io/nu/MicroLite.Extensions.WebApi.svg)](http://badge.fury.io/nu/MicroLite.Extensions.WebApi)|
 |/develop|[![Build Status](https://dev.azure.com/trevorpilley/MicroLite-ORM/_apis/build/status/MicroLite-ORM.MicroLite.Extensions.WebApi?branchName=develop)](https://dev.azure.com/trevorpilley/MicroLite-ORM/_build/latest?definitionId=28&branchName=develop)|
 |/master|[![Build Status](https://dev.azure.com/trevorpilley/MicroLite-ORM/_apis/build/status/MicroLite-ORM.MicroLite.Extensions.WebApi?branchName=master)](https://dev.azure.com/trevorpilley/MicroLite-ORM/_build/latest?definitionId=28&branchName=master)|
+
+## Installation
+
+Install the nuget package `Install-Package MicroLite.Extensions.WebApi`
+
+## Summary
 
 MicroLite.Extensions.WebAp is a .NET 4.5 library which adds an extension for the MicroLite ORM Framework to integrate with ASP.NET WebApi.
 
@@ -17,10 +24,10 @@ Also, check out the [WebApi](http://microliteorm.wordpress.com/tag/WebApi/) tag 
 
 For OData support, check out the [MicroLite.Extensions.WebApi.OData](https://github.com/MicroLite-ORM/MicroLite.Extensions.WebApi.OData) add-on.
 
-### Supported .NET Versions
+## Supported .NET Versions
 
-The NuGet Package contains binaries compiled against:
+The NuGet Package contains binaries compiled against (dependencies indented):
 
 * .NET Framework 4.5
-* - MicroLite 6.3.1
-* - Microsoft.AspNet.WebApi.Core 5.2.7
+  * MicroLite 6.3.1
+  * Microsoft.AspNet.WebApi.Core 5.2.7
