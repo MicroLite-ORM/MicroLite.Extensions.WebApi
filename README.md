@@ -29,5 +29,5 @@ For OData support, check out the [MicroLite.Extensions.WebApi.OData](https://git
 The NuGet Package contains binaries compiled against (dependencies indented):
 
 * .NET Framework 4.5
-  * MicroLite 6.3.1
+  * MicroLite 7.0.0
   * Microsoft.AspNet.WebApi.Core 5.2.7
