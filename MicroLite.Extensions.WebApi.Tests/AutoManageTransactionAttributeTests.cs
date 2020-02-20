@@ -14,7 +14,7 @@ namespace MicroLite.Extensions.WebApi.Tests
     {
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAnActiveTransaction
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAnActiveTransaction()
@@ -60,7 +60,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse()
@@ -109,7 +109,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndCommittingAnActiveTransactionThrowsAnException
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndCommittingAnActiveTransactionThrowsAnException()
@@ -157,7 +157,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoActiveTransaction
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoActiveTransaction()
@@ -203,7 +203,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndNoCurrentTransaction
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
 
             [Fact]
             public void OnActionExecutedDoesNotThrowAnException()
@@ -228,7 +228,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack()
@@ -275,7 +275,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack()
@@ -322,7 +322,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAnActiveTransaction
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAnActiveTransaction()
@@ -368,7 +368,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse()
@@ -417,7 +417,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndCommittingAnActiveTransactionThrowsAnException
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndCommittingAnActiveTransactionThrowsAnException()
@@ -465,7 +465,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoActiveTransaction
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoActiveTransaction()
@@ -511,7 +511,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndNoCurrentTransaction
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
 
             [Fact]
             public void OnActionExecutedDoesNotThrowAnException()
@@ -536,7 +536,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasBeenRolledBack()
@@ -583,7 +583,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack
         {
-            private readonly Mock<IAsyncReadOnlySession> _mockSession = new Mock<IAsyncReadOnlySession>();
+            private readonly Mock<IReadOnlySession> _mockSession = new Mock<IReadOnlySession>();
             private readonly Mock<ITransaction> _mockTransaction = new Mock<ITransaction>();
 
             public WhenCallingOnActionExecuted_WithAMicroLiteReadOnlyApiController_AndTheContextContainsAnException_AndTheTransactionHasNotBeenRolledBack()
@@ -630,7 +630,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteApiController
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController()
             {
@@ -657,7 +657,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
 
             public WhenCallingOnActionExecuting_WithAMicroLiteApiController_AndAutoManageTransactionIsFalse()
             {
@@ -687,7 +687,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController()
             {
@@ -714,7 +714,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         public class WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse
         {
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
 
             public WhenCallingOnActionExecuting_WithAMicroLiteReadOnlyApiController_AndAutoManageTransactionIsFalse()
             {

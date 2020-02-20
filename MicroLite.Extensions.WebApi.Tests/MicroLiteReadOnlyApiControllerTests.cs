@@ -11,7 +11,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         public class WhenConstructedWithAnIReadOnlySession
         {
             private readonly MicroLiteReadOnlyApiController _controller;
-            private readonly IAsyncReadOnlySession _session = new Mock<IAsyncReadOnlySession>().Object;
+            private readonly IReadOnlySession _session = new Mock<IReadOnlySession>().Object;
 
             public WhenConstructedWithAnIReadOnlySession()
             {

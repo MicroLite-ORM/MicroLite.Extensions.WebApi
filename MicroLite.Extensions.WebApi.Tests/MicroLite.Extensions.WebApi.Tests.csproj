@@ -47,7 +47,7 @@
       <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="MicroLite, Version=7.0.0.0, Culture=neutral, PublicKeyToken=08410e6798c4fa37, processorArchitecture=MSIL">
-      <HintPath>..\packages\MicroLite.7.0.0-preview20200219.1\lib\net45\MicroLite.dll</HintPath>
+      <HintPath>..\packages\MicroLite.7.0.0-preview20200220.1\lib\net45\MicroLite.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

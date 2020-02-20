@@ -16,7 +16,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         {
             private readonly CustomerController _controller;
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingDeleteAndAnEntityIsDeleted()
@@ -42,7 +42,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         {
             private readonly CustomerController _controller;
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingDeleteAndAnEntityIsNotDeleted()
@@ -68,7 +68,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         {
             private readonly CustomerController _controller;
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingGetAndAnEntityIsNotReturned()
@@ -101,7 +101,7 @@ namespace MicroLite.Extensions.WebApi.Tests
             private readonly CustomerController _controller;
             private readonly Customer _customer = new Customer();
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingGetAndAnEntityIsReturned()
@@ -135,7 +135,7 @@ namespace MicroLite.Extensions.WebApi.Tests
             private readonly CustomerController _controller;
             private readonly Customer _customer = new Customer();
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingPost()
@@ -179,7 +179,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         {
             private readonly CustomerController _controller;
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingPutAndAnEntityIsNotReturned()
@@ -211,7 +211,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         {
             private readonly CustomerController _controller;
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             public WhenCallingPutAndAnEntityIsNotUpdated()
@@ -244,7 +244,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         {
             private readonly CustomerController _controller;
             private readonly int _identifier = 12345;
-            private readonly Mock<IAsyncSession> _mockSession = new Mock<IAsyncSession>();
+            private readonly Mock<ISession> _mockSession = new Mock<ISession>();
             private readonly HttpResponseMessage _response;
 
             private readonly Customer _updatedCustomer = new Customer
@@ -287,7 +287,7 @@ namespace MicroLite.Extensions.WebApi.Tests
         public class WhenConstructedWithAnISession
         {
             private readonly MicroLiteApiController<Customer, int> _controller;
-            private readonly IAsyncSession _session = new Mock<IAsyncSession>().Object;
+            private readonly ISession _session = new Mock<ISession>().Object;
 
             public WhenConstructedWithAnISession()
             {
@@ -308,7 +308,7 @@ namespace MicroLite.Extensions.WebApi.Tests
 
         private class CustomerController : MicroLiteApiController<Customer, int>
         {
-            public CustomerController(IAsyncSession session)
+            public CustomerController(ISession session)
                 : base(session)
             {
                 GetEntityResourceUri = (int id) =>

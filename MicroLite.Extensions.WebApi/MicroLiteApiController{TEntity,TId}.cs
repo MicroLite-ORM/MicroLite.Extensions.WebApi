@@ -35,7 +35,7 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an ISession via an IOC container.
         /// </remarks>
-        protected MicroLiteApiController(IAsyncSession session)
+        protected MicroLiteApiController(ISession session)
             : base(session) => GetEntityResourceUri = (TId id) => new Uri(Url.Link("DefaultApi", new { id }));
 
         /// <summary>

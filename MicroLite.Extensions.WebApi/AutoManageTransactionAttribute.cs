@@ -92,13 +92,13 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException(nameof(actionExecutedContext));
             }
 
-            if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveAsyncSession controller)
+            if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveSession controller)
             {
                 OnActionExecuted(controller.Session, actionExecutedContext.Exception);
                 return;
             }
 
-            if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveAsyncReadOnlySession readOnlyController)
+            if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveReadOnlySession readOnlyController)
             {
                 OnActionExecuted(readOnlyController.Session, actionExecutedContext.Exception);
                 return;
@@ -121,20 +121,20 @@ namespace MicroLite.Extensions.WebApi
                 throw new ArgumentNullException(nameof(actionContext));
             }
 
-            if (actionContext.ControllerContext.Controller is IHaveAsyncSession controller)
+            if (actionContext.ControllerContext.Controller is IHaveSession controller)
             {
                 controller.Session.BeginTransaction(IsolationLevel);
                 return;
             }
 
-            if (actionContext.ControllerContext.Controller is IHaveAsyncReadOnlySession readOnlyController)
+            if (actionContext.ControllerContext.Controller is IHaveReadOnlySession readOnlyController)
             {
                 readOnlyController.Session.BeginTransaction(IsolationLevel);
                 return;
             }
         }
 
-        private static void OnActionExecuted(IAsyncReadOnlySession session, Exception exception)
+        private static void OnActionExecuted(IReadOnlySession session, Exception exception)
         {
             if (session.CurrentTransaction is null)
             {
