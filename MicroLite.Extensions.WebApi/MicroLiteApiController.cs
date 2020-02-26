@@ -32,8 +32,8 @@ namespace MicroLite.Extensions.WebApi
             => Session = session ?? throw new ArgumentNullException(nameof(session));
 
         /// <summary>
-        /// Gets or sets the <see cref="ISession"/> for the current HTTP request.
+        /// Gets the <see cref="ISession"/> for the current HTTP request.
         /// </summary>
-        public ISession Session { get; set; }
+        public ISession Session { get; }
     }
 }
