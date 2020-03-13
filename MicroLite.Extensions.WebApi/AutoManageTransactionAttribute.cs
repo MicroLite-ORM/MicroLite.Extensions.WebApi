@@ -101,7 +101,6 @@ namespace MicroLite.Extensions.WebApi
             if (actionExecutedContext.ActionContext.ControllerContext.Controller is IHaveReadOnlySession readOnlyController)
             {
                 OnActionExecuted(readOnlyController.Session, actionExecutedContext.Exception);
-                return;
             }
         }
 
@@ -130,7 +129,6 @@ namespace MicroLite.Extensions.WebApi
             if (actionContext.ControllerContext.Controller is IHaveReadOnlySession readOnlyController)
             {
                 readOnlyController.Session.BeginTransaction(IsolationLevel);
-                return;
             }
         }
 
