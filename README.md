@@ -15,7 +15,7 @@ Install the nuget package `Install-Package MicroLite.Extensions.WebApi`
 
 ## Configuration
 
-It is easy to use MicroLite with ASP.NET WebApi, simply supply your controller with a Session `IAsyncSession` or `IAsyncReadOnlySession` and use it in your controller actions. However, using the WebApi extension for MicroLite makes it even easier and contains some useful extras.
+It is easy to use MicroLite with ASP.NET WebApi, simply supply your controller with a Session `ISession` or `IReadOnlySession` and use it in your controller actions. However, using the WebApi extension for MicroLite makes it even easier and contains some useful extras.
 
 ## Supported .NET Versions
 
