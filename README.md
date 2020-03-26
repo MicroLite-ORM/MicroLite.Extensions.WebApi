@@ -6,7 +6,7 @@ MicroLite.Extensions.WebAp is a .NET 4.5 library which adds an extension for the
 
 |Branch|Status|
 |------|------|
-|/develop|![GitHub last commit (branch)](https://img.shields.io/github/last-commit/MicroLite-ORM/MicroLite.Extensions.WebApi/develop) [![Build Status](https://dev.azure.com/trevorpilley/MicroLite-ORM/_apis/build/status/MicroLite-ORM.MicroLite.Extensions.WebApi?branchName=develop)](https://dev.azure.com/trevorpilley/MicroLite-ORM/_build/latest?definitionId=28&branchName=develop) ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/MicroLite)|
+|/develop|![GitHub last commit (branch)](https://img.shields.io/github/last-commit/MicroLite-ORM/MicroLite.Extensions.WebApi/develop) [![Build Status](https://dev.azure.com/trevorpilley/MicroLite-ORM/_apis/build/status/MicroLite-ORM.MicroLite.Extensions.WebApi?branchName=develop)](https://dev.azure.com/trevorpilley/MicroLite-ORM/_build/latest?definitionId=28&branchName=develop) ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/MicroLite.Extensions.WebApi)|
 |/master|![GitHub last commit](https://img.shields.io/github/last-commit/MicroLite-ORM/MicroLite.Extensions.WebApi/master) [![Build Status](https://dev.azure.com/trevorpilley/MicroLite-ORM/_apis/build/status/MicroLite-ORM.MicroLite.Extensions.WebApi?branchName=master)](https://dev.azure.com/trevorpilley/MicroLite-ORM/_build/latest?definitionId=28&branchName=master) ![Nuget](https://img.shields.io/nuget/v/MicroLite.Extensions.WebApi) ![GitHub Release Date](https://img.shields.io/github/release-date/MicroLite-ORM/MicroLite.Extensions.WebApi)|
 
 ## Installation
