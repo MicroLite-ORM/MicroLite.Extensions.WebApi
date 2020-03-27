@@ -19,7 +19,7 @@ namespace MicroLite.Extensions.WebApi
     /// <summary>
     /// Provides access to a MicroLite IReadOnlySession in addition to the base ASP.NET WebApi controller.
     /// </summary>
-    public abstract class MicroLiteReadOnlyApiController : ApiController, IHaveAsyncReadOnlySession
+    public abstract class MicroLiteReadOnlyApiController : ApiController, IHaveReadOnlySession
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="MicroLiteReadOnlyApiController"/> class with an IReadOnlySession.
@@ -28,14 +28,12 @@ namespace MicroLite.Extensions.WebApi
         /// <remarks>
         /// This constructor allows for an inheriting class to easily inject an IReadOnlySession via an IOC container.
         /// </remarks>
-        protected MicroLiteReadOnlyApiController(IAsyncReadOnlySession session)
-        {
-            Session = session ?? throw new ArgumentNullException(nameof(session));
-        }
+        protected MicroLiteReadOnlyApiController(IReadOnlySession session)
+            => Session = session ?? throw new ArgumentNullException(nameof(session));
 
         /// <summary>
-        /// Gets or sets the <see cref="IReadOnlySession"/> for the current HTTP request.
+        /// Gets the <see cref="IReadOnlySession"/> for the current HTTP request.
         /// </summary>
-        public IAsyncReadOnlySession Session { get; set; }
+        public IReadOnlySession Session { get; }
     }
 }

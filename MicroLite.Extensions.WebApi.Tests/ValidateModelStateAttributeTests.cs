@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Routing;
-using MicroLite.Extensions.WebApi;
 using Moq;
 using Xunit;
 
